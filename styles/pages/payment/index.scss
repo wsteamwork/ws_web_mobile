@@ -1,0 +1,152 @@
+@import "./direct.scss";
+
+.paymentSuccess {
+  .content {
+    margin: 3em 0px;
+    text-align: center;
+  }
+
+  .textContent {
+    width: 100%;
+    padding: 8px 0px;
+  }
+}
+
+.paymentInvoice {
+  .parentContainer {
+    min-height: 100vh;
+    background: white;
+  }
+
+  .info {
+    @include xs {
+      order: 1;
+    }
+
+    @include sm {
+      order: 1;
+    }
+  }
+
+  .container {
+    margin-top: 30px;
+
+    @include xs {
+      margin-top: 5px;
+    }
+
+    @include sm {
+      margin-top: 5px;
+    }
+  }
+
+  .bankList {
+    padding: 1rem;
+
+    .divider {
+      margin-top: 15px;
+    }
+
+    .caption {
+      font-size: 0.8rem;
+    }
+
+    .details {
+      background: ghostwhite;
+    }
+
+    .bankList {
+      display: inline;
+      padding: 0.3rem;
+      cursor: pointer;
+    }
+
+    .bankImg {
+      width: 70px;
+      border: 1px solid #ddd;
+      margin-top: 0.3rem;
+
+      &:hover {
+        border: 1px solid $primary;
+      }
+
+      @include xs {
+        width: 50px;
+      }
+    }
+
+    .bankImgFocus {
+      border: 2px solid $primary;
+    }
+
+    .bankImgFocus {
+      border: 2px solid $primary;
+    }
+
+    .ulBank {
+      padding-inline-start: 0px;
+      margin-block-start: 0px;
+      margin-block-end: 0px;
+    }
+
+    .typo {
+      padding-left: 10px;
+    }
+
+    .alignCenter {
+      align-items: center;
+    }
+  }
+
+  .paymentInfo {
+    padding: 1rem;
+
+    .spaceTop {
+      margin-top: 8px;
+    }
+    .fontLow {
+      font-size: 0.9rem;
+    }
+
+    .expandText {
+      color: aqua;
+      float: right;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .noPadding {
+      padding: 0px;
+    }
+
+    .infoRoom {
+      padding: 0.5rem;
+      cursor: pointer;
+
+      &__name {
+        margin-top: 8px;
+
+        > a {
+          font-weight: 600;
+          font-weight: 1rem;
+          cursor: pointer;
+          color: #000;
+        }
+      }
+
+      .imgSize {
+        background-repeat: no-repeat;
+        background-position: center;
+        object-fit: cover;
+        width: 100%;
+        height: 220px;
+        vertical-align: middle;
+      }
+
+      .address {
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+@import "./hostBecome.scss";
+
+.buttonGlobal {
+  -moz-transition: all .4s ease-in-out;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  text-decoration: none;
+  border: 0;
+  text-transform: none !important;
+  background-size: 200% 100% !important;
+
+  @include xs {
+    font-size: 14px !important
+  }
+
+  @include sm {
+    font-size: 15px !important
+  }
+
+  &:hover {
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-position: 100%;
+  }
+}

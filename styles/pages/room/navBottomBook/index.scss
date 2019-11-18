@@ -1,0 +1,50 @@
+.navBottomBook {
+  .toolbar {
+    padding: 0 13px;
+  }
+
+  .container {
+    align-items: center;
+  }
+
+  .barSearch {
+    bottom: 0;
+    top: unset;
+    box-shadow: 0px 2px 3px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .price {
+    font-size: 0.9rem;
+    font-weight: 700;
+
+    // @include sm {
+    //   font-size: 0.8rem;
+    // }
+
+    // @include xs {
+    //   font-size: 0.7rem;
+    // }
+  }
+
+  .perTime {
+    display: block;
+    font-size: 13px;
+
+    @include sm {
+      font-size: 12px;
+    }
+
+    @include xs {
+      font-size: 12px;
+    }
+  }
+
+  &__dialogTitle {
+    text-align: right;
+    padding: 0 !important;
+  }
+
+  &__dialogContent {
+    padding: 0 !important;
+  }
+}

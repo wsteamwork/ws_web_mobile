@@ -1,0 +1,21 @@
+{
+    "feeIncluded":"Fee included in rent price",
+    "otherFee": "Other fee",
+    "currency": "VND",
+    "priceByTerm": "Price by lease term",
+    "priceIncludedFee": "Following fee is included in rent prices",
+    "viewSchedule": "Check availablility",
+    "amenitiesOfRoom": "All amenities included in this accommodation",
+    "amenitiesCommon": "Amenities common",
+    "discover": "Take a tour",
+    "discoverSubTitle": "All information about the apartment is presented to help you have the most intuitive and accurate look",
+    "livingrooms": "Livingroom",
+    "bedrooms": "Bedroom",
+    "bathrooms": "Bathroom",
+    "kitchens": "Kitchen",
+    "furnitures": "Furnitures",
+    "outdoors": "Outdoor",
+    "allImages": "All Photos",
+    "priceBasic": "Each month for 1-2 months term",
+    "notFoundData": "Not found data!"
+}

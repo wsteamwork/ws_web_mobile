@@ -1,0 +1,74 @@
+.hostBecome {
+  margin-top: 64px;
+  padding: 40px;
+  background: radial-gradient(circle farthest-corner at 10% 20%, rgba(253, 193, 104, 1) 0%, rgba(251, 128, 128, 1) 90%);
+
+  @include xs {
+    padding: 20px;
+  }
+
+  .title {
+    @include xs {
+      font-size: 15px;
+    }
+
+    @include sm {
+      font-size: 20px;
+    }
+
+    font-size: 30px;
+    color: white;
+    // padding: 10px 0px;
+  }
+
+  .desc {
+    @include xs {
+      font-size: 13px;
+      padding-top: 10px;
+    }
+
+    @include sm {
+      font-size: 15px;
+      padding-top: 15px;
+    }
+
+    font-size: 17px;
+    color: white;
+    padding-top: 30px;
+  }
+
+  &__image {
+    @include xs {
+      height: 130px;
+      width: auto;
+    }
+
+    @include sm {
+      height: 150px;
+      width: auto;
+    }
+
+    height: 220px;
+    width: 260px;
+  }
+
+  &__button {
+    @include xs {
+      padding: 15px 0px 0px;
+    }
+
+    padding: 30px 0px;
+  }
+
+  &__buttonGlobal {
+    @include xs {
+      height: 37px !important;
+      padding: 5px !important;
+      height: 40px !important;
+    }
+
+    &:hover {
+      background: #000 !important;
+    }
+  }
+}

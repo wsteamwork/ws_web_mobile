@@ -1,0 +1,87 @@
+.imagePromotion {
+  width: 100%;
+  height: 40vh;
+  object-fit: cover;
+}
+
+.promotionDetail {
+  .view1 {
+    margin-top: 30px;
+  }
+
+  .namePromotion {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .timeStart {
+    text-align: right;
+
+    @include xs {
+      text-align: left;
+    }
+
+    @include sm {
+      text-align: left;
+    }
+
+    span {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+
+  .timeEnd {
+    span {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+  }
+
+  .boxCode {
+    padding: 10px 30px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+
+    .title {
+      font-size: 17px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .box {
+      background: #f2f2f2;
+      margin-top: 10px;
+      padding: 3px 8px;
+    }
+
+    .input {
+      border: none;
+    }
+
+    .copy {
+      cursor: pointer;
+      color: $primary;
+    }
+  }
+
+  .view2 {
+    margin-top: 30px;
+
+    .detailsPromotion {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+
+  .view3 {
+    margin-top: 30px;
+
+    .title {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+}

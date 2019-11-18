@@ -1,0 +1,110 @@
+.userBox {
+  height: 100%;
+
+  @include md {
+    padding: 24px !important;
+    border: 1px solid #e4e4e4 !important;
+  }
+
+  @include lg {
+    padding: 24px !important;
+    border: 1px solid #e4e4e4 !important;
+  }
+
+  @include xl {
+    padding: 24px !important;
+    border: 1px solid #e4e4e4 !important;
+  }
+
+  .wrapContent {
+    display: block;
+    width: 100%;
+  }
+
+  .avatar {
+    position: relative;
+    width: 90px;
+    height: 90px;
+
+    @include xs {
+      width: 70px;
+      height: 70px;
+    }
+
+    display: inline-block;
+  }
+
+  .imgAvatar {
+    width: 100%;
+    height: inherit;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .userName {
+    font-size: 24px;
+
+    @include sm {
+      font-size: 20px;
+    }
+
+    @include xs {
+      font-size: 16px;
+    }
+
+    font-weight: 700;
+    line-height: 1.125em;
+    color: #484848;
+  }
+
+  .address {
+    color: #999;
+    margin-top: 6px;
+  }
+
+  .imageFA {
+      margin-right: 16px;
+  }
+
+  .imgCertified {
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+
+    @include xs {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .homeCertified {
+    color: $primary;
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+
+    @include xs {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .boxName {
+    width: 100%;
+    text-align: center;
+  }
+
+  .divider {
+    margin: 24px 0px;
+  }
+
+  .badge {
+    display: flex;
+    align-items: center;
+    margin: 8px 0px;
+  }
+
+  .text {
+    font-size: 16px;
+  }
+}

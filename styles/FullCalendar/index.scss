@@ -1,0 +1,50 @@
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
+
+.fc-view-container{
+  margin: auto;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background: #fff;
+
+  .fc-head-container{
+    border:none;
+  }
+
+  @media (max-width: 959px) {
+    margin: 24px 0 32px;
+  }
+}
+
+.fc-unthemed th{
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #99a1a7;
+  text-align: center;
+  line-height: 50px;
+  font-weight: 500;
+  border:none;
+  @media (max-width: 599px) {
+    font-size: 12px;
+  }
+}
+
+.fc td{
+  &:nth-of-type(7n + 7) {
+    border-right: 0;
+  }
+}
+
+.fc-toolbar h2 {
+  @media (max-width: 599px) {
+    font-size: 16px;
+  }
+}
+
+.fc-button{
+  @media (max-width: 599px) {
+    font-size: 12px;
+  }
+}

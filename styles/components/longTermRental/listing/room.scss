@@ -1,0 +1,30 @@
+.step1-tab2-room {
+  .createListing-title {
+    padding: 20px 0;
+  }
+}
+
+.add-bedroom-container {
+  &__wrapper {
+    border-bottom: 1px solid #dce0e0;
+    border-top: 1px solid #dce0e0;
+    padding: 28px 0;
+    margin: 0 0;
+    .add-room-button {
+      border: 1px solid #aaa;
+      color: #484848;
+      padding: 9px 27px;
+      text-transform: initial;
+      // margin-top: 10px;
+    }
+
+    .add-bedroom-container__counting {
+      text-align: left;
+    }
+
+    .add-bedroom-container__add-room {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

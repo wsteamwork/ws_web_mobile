@@ -1,0 +1,278 @@
+.boxBooking {
+  box-shadow: 0 2px 10px 0 rgba(0,0,0,.1);
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  top:6%;
+  position: sticky;
+
+  @include xs {
+    box-shadow: none;
+    height: 100%;
+  }
+
+  @include sm {
+    box-shadow: none;
+    height: 100%;
+  }
+
+  @include md {
+    box-shadow: none;
+    height: 100%;
+  }
+
+  &__chooseBooking {
+    margin-top: 20px;
+
+    label > span {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+
+  &__padding {
+    padding: 0px 20px;
+  }
+
+  .dayContents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    &__price {
+      font-size: 9px;
+      font-weight: 700;
+    }
+  }
+
+  .datePickerBooking {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    margin-top: 20px;
+
+    &__monthText {
+      font-size: 19px;
+      font-weight: 800;
+    }
+  }
+
+  .priceDetail {
+    border-bottom: 1px solid #ddd;
+
+    &__avg {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 10px 0px;
+    }
+
+    &__priceDay {
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 0px;
+    }
+
+    &__priceHour {
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 10px 0px;
+      border-left: 1px solid #ddd;
+    }
+  }
+
+  .totalPrice {
+    margin-top: 20px;
+    padding: 0px 5px;
+
+    p {
+      font-size: 0.9rem;
+    }
+
+    // &__original {
+    // }
+
+    &__service {
+      padding-top: 5px;
+    }
+
+    &__total {
+      margin-top: 15px;
+      padding: 8px 0px;
+      border-top: 1px solid #ddd;
+
+      p {
+        font-size: 1.3rem;
+      }
+    }
+
+    &__left {
+      text-align: left;
+    }
+
+    &__right {
+      text-align: right;
+    }
+
+    &__tooltip {
+      font-size: 20px;
+    }
+
+    &__error {
+      color: red;
+    }
+  }
+
+  &__buttonSubmit {
+    margin-top: 20px;
+  }
+
+  .cancellationPolicy {
+    margin-top: 15px;
+    padding: 10px 30px;
+    border-top: 1px solid #ddd;
+
+    &__details {
+      text-align: right;
+      cursor: pointer;
+
+      a {
+        color: $success;
+      }
+    }
+  }
+}
+
+.totalPriceRoom {
+  width: 170px;
+
+  &__title {
+    // border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px 0px;
+  }
+
+  &__priceDay {
+    padding: 5px 0px;
+    border-top: 1px solid #ddd;
+  }
+
+  &__textLeft {
+    text-align: left !important;
+  }
+
+  &__textRight {
+    text-align: right !important;
+  }
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  &__widthBig {
+    width: 270px;
+  }
+}
+
+.detailsFeeService {
+  width: 230px;
+
+  &__title {
+    // border-bottom: 1px solid #ddd;
+    text-align: left;
+    padding: 10px 0px;
+  }
+
+  &__priceDay {
+    padding: 5px 0px;
+    border-top: 1px solid #ddd;
+  }
+
+  &__textLeft {
+    text-align: left !important;
+  }
+
+  &__textRight {
+    text-align: right !important;
+  }
+
+  p {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+.selectGuest {
+  margin-top: 20px;
+
+  &__guest {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500;
+  }
+
+  &__input {
+    > div {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+    }
+  }
+}
+
+.selectHours {
+  margin-top: 20px !important;
+
+  &__guest {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500;
+  }
+
+  &__maxHeight {
+    max-width: 300px;
+  }
+
+  &__input {
+    > div {
+      padding: 0px;
+      margin: 0px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      padding-left: 30px;
+    }
+  }
+}
+
+.EmptyRoomCalendar {
+  &__monthText {
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  .dayContents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    &__price {
+      font-size: 9px;
+      font-weight: 700;
+    }
+  }
+}

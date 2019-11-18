@@ -1,0 +1,53 @@
+.SingleDatePicker {
+  width: 100%;
+
+  .SingleDatePickerInput {
+    width: 100%;
+  }
+
+  .DateInput {
+    width: 100%;
+  }
+
+  .DateInput_input__focused {
+    border-bottom: none;
+  }
+
+  .SingleDatePickerInput__withBorder {
+    border-radius: 3px;
+    // border: none;
+  }
+
+  input {
+    padding-left: 30px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.dateSingle {
+//   border: 1px solid #ddd;
+//   border-radius: 
+
+  &__monthText {
+    font-size: 19px;
+    font-weight: 800;
+  }
+
+  .dayContents {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    &__price {
+      font-size: 9px;
+      font-weight: 700;
+    }
+  }
+}
+
+

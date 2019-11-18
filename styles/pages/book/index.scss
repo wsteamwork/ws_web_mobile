@@ -1,0 +1,48 @@
+@import "./bookingInfoDetail/index.scss";
+@import "./bookingCalendar/index.scss";
+
+.book {
+  .container {
+    min-height: 100vh;
+  }
+
+  .marginContainer {
+    margin-top: 20px;
+  }
+
+  .formBooking {
+    .paperCustomSetting {
+      padding: 0px;
+      margin-bottom: 1rem;
+      background: #f2fbf7;
+      box-shadow: none !important;
+    }
+
+    .root {
+      padding: 0px;
+    }
+
+    .paperCustomHot {
+      padding: 0px;
+      margin-bottom: 1rem;
+      background: #fff9f4;
+      box-shadow: none !important;
+    }
+
+    .paperCustomOuter {
+      padding: 15px;
+      margin-bottom: 1rem;
+      background: #f2fbf7;
+      box-shadow: none !important;
+    }
+
+    .paperCustom {
+      padding: 25px;
+      box-shadow: none !important;
+    }
+
+    .dialogContent {
+      padding: 0 16px 16px;
+    }
+  }
+}

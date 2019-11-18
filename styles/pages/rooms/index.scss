@@ -1,0 +1,228 @@
+@import "./chooseRoomGuest.scss";
+@import "./roomType.scss";
+@import "./filterRooms.scss";
+@import "./priceRange.scss";
+@import "./pagination.scss";
+
+.searchRooms {
+  background-color: white;
+  padding: 16px 0px 0px;
+
+  &__overlay {
+    z-index: 101;
+  }
+
+  @include xs {
+    background-color: white;
+  }
+
+  @include sm {
+    background-color: white;
+  }
+
+  &__title {
+    font-size: 18px;
+
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+  }
+}
+
+.displayWebkit {
+  display: -webkit-box !important;
+}
+
+.filterBar {
+  z-index: 1 !important;
+
+  .toolbar {
+    padding: 0;
+    min-height: 50px;
+  }
+}
+
+.filterRooms {
+  background: white;
+  padding: 16px 0px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  transition: all 0.1s ease-in-out !important;
+  z-index: 101;
+
+  @include xs {
+    display: none !important;
+  }
+
+  @include sm {
+    display: none !important;
+  }
+
+  &__priceRange {
+    @include md {
+      display: none !important;
+    }
+  }
+
+  &__bookByHourt {
+    @include md {
+      display: none !important;
+    }
+  }
+}
+
+.mapPaper {
+  cursor: pointer;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 120px;
+  //background: url(../../../static/images/map-vector.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+  background-position: 0px;
+  background-position-y: -421px;
+  background-position-x: -198px;
+  background-size: initial;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-bottom: 24px;
+
+  .watchMapButton {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.mapRoomListing {
+  margin-top: 164px;
+
+  @include mdDown {
+    margin-top: 0px;
+  }
+}
+
+.roomListingInMap {
+  position: relative;
+  width: 840px !important;
+}
+
+.roomListing {
+  // min-height: 100vh;
+  // height: 100vh;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  .headroom-wrapper {
+    transition: all 0.1s ease-in-out !important;
+    transform-origin: top;
+  }
+
+  .headroom {
+    transition: all 0.1s ease-in-out !important;
+  }
+
+  .hideSearchBar {
+    transform: translateY(-66px);
+    transition: all 0.1s ease-in-out !important;
+  }
+
+  .stickyFilter {
+    position: fixed;
+    top: 64px;
+  }
+
+  .mapListing {
+    // height: 85vh;
+    // flex: 1;
+    top: 140px;
+    overflow: hidden;
+    position: fixed !important;
+    display: block !important;
+    right: 0 !important;
+    height: calc(100vh - 139px);
+    width: calc(100% - 840px) !important;
+
+    @include mdDown {
+      flex: 1;
+      width: 100% !important;
+      top: 0;
+      height: 100vh;
+    }
+
+    * {
+      border-radius: 4px !important;
+      font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
+    }
+
+    .arrow_box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      p {
+        background: #fff;
+        padding: 5px 10px;
+        font-weight: 800;
+        font-size: 0.9rem;
+        border-radius: 4px;
+        box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
+
+        &:hover {
+          color: white;
+          background: $primary;
+          cursor: pointer;
+          z-index: 99999;
+        }
+      }
+
+      .arrow_hover {
+        color: white;
+        background: $primary;
+        cursor: pointer;
+        z-index: 99999;
+      }
+    }
+
+    .arrow_box:after,
+    .arrow_box:before {
+      top: 100%;
+      left: 50%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .arrow_box:after {
+      border-color: rgba(255, 255, 255, 0);
+      border-top-color: #fff;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+
+    .arrow_box:before {
+      border-color: rgba(221, 221, 221, 0);
+      border-top-color: #ddd;
+      border-width: 5px;
+      margin-left: -5px;
+    }
+  }
+}
+
+.mapRoom {
+  width: 280px;
+  text-align: left;
+  height: auto;
+}

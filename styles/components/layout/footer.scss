@@ -1,0 +1,134 @@
+$background_footer: #f6f6f6;
+
+.footer {
+  width: 100%;
+  background-color: $background_footer;
+  margin-top: 56px;
+  .itemMobile {
+    padding: 1.5rem 0px 1.5rem 0px;
+  }
+  .firstItem {
+    padding: 40px 0px 20px 0px;
+    width: 100%;
+    background-color: $background_footer;
+  }
+
+  .paper {
+    padding-top: 20px;
+    // color: #999;
+    background-color: $background_footer;
+    @include sm {
+      font-size: 14px;
+    }
+  }
+
+  .rowFooter {
+    background-color: $background_footer;
+  }
+
+  .linksList {
+    background-color: $background_footer;
+    padding: 0 5px;
+  }
+
+  .textCenter {
+    text-align: center;
+  }
+
+  .textLeft {
+    text-align: left;
+    padding-bottom: 20px;
+    @include xs {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+
+  .icon {
+    font-size: 32px;
+  }
+
+  .linksListGroupTitle {
+    @include sm {
+      font-size: 14px;
+    }
+    color: #484848;
+    font-size: 16px;
+    margin-bottom: 0.5rem;
+  }
+
+  .linksListGroupList {
+    @include sm {
+      font-size: 13px;
+    }
+    display: inline-block;
+    list-style: none;
+    margin-top: 0px;
+    padding-left: 0px;
+    font-size: 15px;
+    color: #484848;
+    line-height: 1.7em;
+  }
+
+  .marginPhone {
+    margin-top: 10px;
+  }
+
+  .padding_top {
+    padding: 30px 0px;
+  }
+
+  .iconPhone {
+    // font-size: 1.1em;
+    padding-right: 1em;
+  }
+
+  .textTerms {
+    display: list-item;
+    // color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 15px;
+    list-style: none;
+    margin-top: 0px;
+    line-height: 1.7em;
+    text-decoration: none;
+  }
+
+  .socialNetwork {
+    @include sm {
+      font-size: 13px;
+    }
+    display: -webkit-inline-box;
+    list-style: none;
+    margin-top: 7px;
+    padding-left: 0;
+    font-size: 15px;
+    // color: rgba(255, 255, 255, 0.8) !important;
+    line-height: 1.7em;
+  }
+
+  .imgSocial {
+    background: #444953;
+    border-radius: 20px;
+  }
+
+  .li {
+    cursor: pointer;
+  }
+
+  .secondItem {
+    background-color: $background_footer;
+    margin: 0;
+    width: 100%;
+    border-top: 1px solid #ebebeb;
+  }
+}
+
+.termsAndConditions {
+  .termsOfConditions {
+    padding: 30px 0px;
+
+    * {
+      padding: 10px 0px;
+    }
+  }
+}

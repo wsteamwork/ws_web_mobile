@@ -1,0 +1,48 @@
+.account-title {
+  margin: 0px !important;
+  word-wrap: break-word !important;
+  font-size: 32px !important;
+  font-weight: 800 !important;
+  line-height: 1.125em !important;
+  color: #484848 !important;
+}
+.account-verification-wrapper {
+}
+
+.verification-section {
+  border-bottom: 1px solid #ebebeb;
+}
+.verification-section-wrapper {
+  margin-top: 24px;
+}
+.section-title {
+  margin: 0px;
+  word-wrap: break-word;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.375em;
+  color: #484848;
+}
+
+.verfication-description {
+  margin-top: 8px;
+  margin-bottom: 24px;
+}
+
+.section-edit {
+  color: #ff9800 !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  margin: 0px;
+  padding: 0px;
+}
+
+.section-edot:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,25 @@
+{
+    "cancelBook": {
+        "returnHome": "Return to the home page to continue booking",
+        "cancel": "Cancel Booking",
+        "reason": "Reason for cancellation",
+        "desc1": "Please tell us about the reason for your cancellation to be able to support better service",
+        "desc2": "If you choose 'Other reasons' please let us know the reason why you canceled your booking",
+        "canceled": "Application canceled",
+        "conf": "Confirm cancellation",
+        "success": "Cancel the room successfully!"
+    },
+    "dayPrice": "VND/night",
+    "hourPrice": "VND/4 hours",
+    "facilities": "Facilities",
+    "bedrooms": "Bedroom",
+    "kitchens": "Kitchen",
+    "bathrooms": "Bathroom",
+    "livingrooms": "Livingroom",
+    "common": "Common amenities",
+    "entertainment": "Entertainment",
+    "others": "Others",
+    "outdoors": "Outdoor",
+    "success": "Successfully",
+    "lang": "en"
+}

@@ -1,0 +1,118 @@
+@import "./editProfile/index.scss";
+@import "./bookingProfile/index.scss";
+@import "./dialogBookingDetails/index.scss";
+@import "./dialogReviewDetails/index.scss";
+@import "./account/index.scss";
+
+.menuProfile {
+  padding: 50px 0px;
+
+
+  .tabProfilePc {
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+
+    @include md {
+      display: none;
+    }
+  }
+
+  .NaviBottom {
+    position: fixed;
+    z-index: 9;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    white-space: nowrap;
+    justify-content: center;
+  }
+
+  .boxPadding {
+    padding: 16px;
+
+    @include xs {
+      padding: 10px 0px;
+    }
+  }
+
+  .drawerPaper {
+    width: 300px;
+  }
+
+  .sideNavList {
+    padding: 100px 0 0 1vw;
+  }
+
+  .sideNavItem {
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      border-right: 1px solid red;
+      color: #000;
+    }
+
+    padding: 12px 0px;
+  }
+
+  .sideNavItemText {
+    padding: 0px;
+    text-align: left;
+
+    span {
+      width: 100%;
+      display: flex;
+      flex-direction: inherit;
+      justify-content: space-between;
+      padding-right: 10px;
+    }
+  }
+
+  .sideNavText {
+    font-size: 16px;
+    color: #767676;
+  }
+
+  .content {
+    flex-grow: 1;
+
+    @include md {
+      padding-left: 300px;
+    }
+
+    @include lg {
+      padding-left: 300px;
+    }
+
+    @include xl {
+      padding-left: 300px;
+    }
+  }
+
+  .viewProfileLink {
+    color: #484848;
+    text-decoration: none;
+  }
+
+  .viewProfileTab {
+    // width: 100%;
+    padding: 8px 0px;
+    border-radius: 4px;
+    border: 1px solid #c4c4c4;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+
+  .orangeAvatar {
+    margin: 10px;
+    color: #fff;
+    background: $primary;
+  }
+}

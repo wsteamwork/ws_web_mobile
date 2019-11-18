@@ -1,0 +1,25 @@
+{
+    "titleName": "Danh sách phòng",
+    "contentNotFound": "Danh sách phòng hiện tại chưa hiển thị, vui lòng đợi trong giây lát",
+    "tooltipUpdateRoom": "Cập nhật phòng",
+    "tooltipUpdateRoomLongTerm": "Bổ sung thông tin dài hạn",
+    "tooltipPreviewRoom": "Xem trước phòng",
+    "noNameRoom": "Chưa có tên căn hộ",
+    "numberGuest": "khách",
+    "numberBedroom": "phòng ngủ",
+    "numberBathroom": "phòng tắm",
+    "onePerMonth": "1tháng",
+    "onePerDay": "1ngày",
+    "onePerHour": "4giờ",
+    "roomType": "Loại phòng",
+    "dayAndHour": "Ngày và giờ",
+    "shortTerm": "Ngắn hạn",
+    "longTerm": "Dài hạn",
+    "locked": "Đang khóa",
+    "byMonth": "Theo tháng",
+    "rentType": "Loại đặt phòng",
+    "policy": "Chính sách hủy",
+    "leaseTypeLongTerm": "Thuê dài hạn",
+    "leaseTypeShortTerm": "Homestay"
+
+}

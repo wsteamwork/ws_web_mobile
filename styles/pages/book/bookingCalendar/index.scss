@@ -1,0 +1,201 @@
+.box-button-clear-dates {
+  position: absolute;
+
+  @include lgDown {
+    top: -24px;
+  }
+
+  @include lgUp {
+    top: 8px;
+  }
+
+  right: 20px;
+
+  .button-clear-dates {
+    color: #673ab7;
+    // font-size: 16px;
+    // cursor: pointer;
+    // text-decoration: none;
+    // background: transparent;
+    // border-width: 0px;
+    // border-style: initial;
+    border-color: #673ab7;
+    // border-image: initial;
+    // margin: 0px;
+    // padding: 0px;
+  }
+
+  .button-clear-dates:hover {
+    text-decoration: underline;
+  }
+}
+
+.booking-calendar {
+  &__box-title {
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    z-index: 10;
+    border-bottom: 1px solid rgb(235, 235, 235);
+    border-color: rgb(235, 235, 235);
+
+    @include lgDown {
+      position: fixed;
+      background: white;
+    }
+
+    .box-title__wrapper {
+      position: relative;
+      max-width: 1080px;
+      margin: 40px auto 44px;
+      width: auto;
+      padding-right: 24px;
+      padding-left: 24px;
+    }
+
+    .box-title__title {
+      overflow-wrap: break-word;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.125em;
+      color: inherit;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      margin: 0px;
+    }
+  }
+
+  &__box-main {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+
+    .box-main__wrapper {
+      @include lgDown {
+        // position: relative;
+        height: 95%;
+      }
+      @include lgUp {
+        // position: relative;
+        height: 95%;
+      }
+
+      padding-top: 126px;
+      height: 800px;
+      margin: 0px;
+    }
+
+    .calendar-picker {
+      @include lgDown {
+        // padding-bottom: 140px;
+        // padding-bottom: 100px;
+      }
+
+      padding-left: 8px;
+      padding-right: 8px;
+      min-height: 1px;
+      position: relative;
+      width: 100%;
+      float: left;
+
+      // CUSTOMIZE AIRBNB CALENDAR
+      // .CalendarMonthGrid__vertical_scrollable {
+      //   overflow-y: auto;
+      // }
+
+      .CalendarDay__default {
+        border: none;
+      }
+
+      .DayPicker_weekHeader__verticalScrollable {
+        z-index: 999;
+      }
+
+      // .CalendarDay__selected_span {
+      //   background: #ff9800;
+      // }
+    }
+  }
+
+  .box-price {
+    position: absolute;
+    // position: fixed;
+    padding-bottom: 15px;
+    align-items: center;
+
+    @include lgUp {
+      top: 200px;
+      width: 328px;
+      right: 0px;
+    }
+
+    @include lgDown {
+      bottom: 0;
+      z-index: 99;
+      width: 100%;
+      background: white;
+      // padding: 0 24px;
+      padding: 0 8px;
+      // position: fixed;
+    }
+
+    .price-title {
+      padding-bottom: 16px;
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.375em;
+      color: inherit;
+    }
+
+    .price-subtitle {
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.375em;
+      color: inherit;
+    }
+
+    .sub-price {
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.375em;
+      color: inherit;
+    }
+
+    .box-price-sub {
+      -webkit-box-align: center;
+      -webkit-box-pack: justify;
+      display: flex;
+      // margin-right: 24px;
+      justify-content: space-between;
+    }
+
+    .mobile-box-price {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 8px;
+    }
+  }
+}
+
+.mobile-box-price-detail {
+  margin-top: 50px;
+  padding: 0 24px;
+
+  .box-price-sub {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.price {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+}

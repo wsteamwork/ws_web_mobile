@@ -1,0 +1,135 @@
+.wrapper_cover {
+  display: flex;
+  justify-content: flex-end;
+}
+.wrapper {
+  background-color: #ffffff !important;
+  padding: 50px 0 150px 0 !important;
+}
+.label {
+  font-weight: 800 !important;
+  line-height: 1.25em !important;
+  color: rgb(72, 72, 72) !important;
+  margin: 0px !important;
+}
+.main_label {
+  font-size: 24px !important;
+  @include xs {
+    font-size: 18px !important;
+  }
+  @include sm {
+    font-size: 18px !important;
+  }
+}
+.sub_label {
+  font-size: 18px !important;
+}
+.normal_text {
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.25em !important;
+  color: rgb(72, 72, 72) !important;
+  margin: 5px 0px !important;
+  @include xs {
+    font-size: 14px !important;
+  }
+  @include sm {
+    font-size: 14px !important;
+  }
+}
+.textarea {
+  color: #484848;
+  font-size: 16px !important;
+  width: 100%;
+  outline: 0 solid transparent !important;
+  @include xs {
+    font-size: 14px !important;
+  }
+  @include sm {
+    font-size: 14px !important;
+  }
+}
+.error_textarea {
+  border: solid 1px #ff7272 !important;
+  border-radius: 3px 3px 0 0 !important;
+  overflow: hidden !important;
+}
+.sub_textarea {
+  margin: 10px 0 0 0 !important;
+  overflow: auto  !important;
+}
+.remain_char {
+  font-size: 12px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  line-height: 1
+}
+.error_char {
+  font-size: 12px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  line-height: 1;
+  color: #ff7272
+}
+.remain_text {
+  margin-top: 5px !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  line-height: 1.375em !important;
+  color: #484848 !important;
+  @include xs {
+    font-size: 14px !important;
+  }
+  @include sm {
+    font-size: 14px !important;
+  }
+}
+.normal_fieldset {
+  position: relative;
+  margin: 10px 0 0 0;
+  border: 0;
+  padding: 0;
+}
+.action_footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff !important;
+  padding: 16px 0px !important;
+  position: fixed !important;
+  z-index: 111 !important;
+  bottom: 0px !important;
+  width: 100% !important;
+}
+.custom_divider {
+  height: 1px !important;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.08) !important;
+  position: relative !important;
+  padding-bottom: 16px !important;
+}
+.action_back {
+  display: flex;
+  align-items: center;
+  color: #1174a6;
+}
+.back_icon {
+  height: 22px;
+  width:18px;
+  margin-right: 8px !important;  
+}
+.size_icon {
+  font-size: 20px !important;
+}
+.back_text {
+  display: flex;
+  align-items: center;
+  font-size: 18px;  
+}
+.btn_next {
+  font-size: 18px;
+  padding: 12px 15px !important;
+  background-color: #1174a6 !important;
+  color: white !important;
+}

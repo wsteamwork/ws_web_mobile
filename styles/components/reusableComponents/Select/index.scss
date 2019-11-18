@@ -1,0 +1,21 @@
+.select-reusable {
+  // @include xsUp {
+  //   margin-top: 32px;
+  // }
+  .icon {
+    margin-right: 10px;
+  }
+  .two-third-width {
+    width: 66.67%;
+  }
+}
+
+.create-listing-title {
+  padding-bottom: 8px;
+  overflow-wrap: break-word;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.375em;
+  color: rgb(118, 118, 118);
+  margin: 0;
+}

@@ -1,0 +1,123 @@
+.listing-container {
+  position: relative;
+  background-color: #fafafa;
+  min-height: 100vh;
+  .listing-header {
+    position: fixed;
+
+    width: 100%;
+    margin-top: 0px;
+    border-bottom: 1px solid #7676762e;
+    z-index: 9999;
+    padding: 0px;
+    background: rgb(255, 255, 255);
+    .listing-header-wrapper {
+      height: 64px;
+
+      .logo {
+        height: 64px;
+        line-height: 64px;
+        position: relative;
+        float: left;
+        margin-left: 10px;
+      }
+
+      .box-title {
+        height: 64px;
+        line-height: 72px;
+        position: relative;
+        float: left;
+        padding-left: 10px;
+        .box-title-wrapper {
+          .title {
+            overflow-wrap: break-word;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.44444em;
+            color: rgb(72, 72, 72);
+            margin: 0px;
+          }
+        }
+      }
+    }
+  }
+
+  .stepper {
+    height: 100%;
+  }
+
+  .listing-content {
+    min-height: 100%;
+  }
+
+  .listing-content-wrapper {
+    min-height: 100vh;
+    padding-top: 64px;
+  }
+
+  .stepper-content-wrapper {
+    background-color: #fff;
+    width: 60%;
+    padding: 30px 30px 120px;
+    .mobile-stepper {
+      position: fixed;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      padding: 20px;
+      z-index: 9999;
+    }
+  }
+
+  .bottom-navigation {
+    position: fixed;
+    z-index: 9999;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+    .bottom-navigation-container {
+      margin: 0px auto;
+      display: flex;
+      justify-content: flex-end;
+
+      .bottom-navigation-inner-container {
+        background: #fff;
+        padding: 0 30px;
+        .bottom-navigation-inner-wrapper {
+          border-top: 1px solid #ddd;
+          padding: 20px 0;
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    }
+
+    .prev-button {
+      // .prev-link {
+      //   cursor: pointer;
+      //   display: flex;
+      //   align-items: flex-start;
+      //   color: #fa991c;
+      //   font-weight: 600;
+      // }
+
+      // .prev-title {
+      //   margin-left: 10px;
+      //   font-size: 1.1rem;
+      // }
+    }
+  }
+  .prev-link {
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    color: #fa991c;
+    font-weight: 600;
+  }
+
+  .prev-title {
+    margin-left: 10px;
+    font-size: 1.1rem;
+  }
+}

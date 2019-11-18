@@ -1,0 +1,1117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+              <folding>
+                <element signature="e#0#82#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1564">
+              <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="414">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/FullCalendar/index.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/mixins.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2438">
+              <caret line="106" column="23" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/styles/index.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="161">
+              <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1748">
+              <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="874">
+              <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Typescript X" />
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>&quot;</find>
+      <find>axios.get</find>
+      <find>dataBlock</find>
+      <find>price</find>
+      <find>eventClicked</find>
+      <find>&lt;Dialog</find>
+      <find>filterbooking</find>
+      <find>event-bloc</find>
+      <find>test</find>
+      <find>isLoading</find>
+      <find>next</find>
+      <find>isLoaded</find>
+      <find>setIsLoaded</find>
+      <find>reloaded</find>
+      <find>setReloaded</find>
+      <find>MySnackbarContentWrapper</find>
+      <find>vi</find>
+      <find>“</find>
+      <find>”</find>
+      <find>disabledBoxBookingMoblie</find>
+      <find>selectAllow</find>
+      <find>TransformerInclude</find>
+      <find>selectOverlap</find>
+      <find>useConte</find>
+      <find>view</find>
+      <find>defaultView</find>
+      <find>serviceFe</find>
+      <find>@include</find>
+      <find>@include xs</find>
+      <find>Booking dài hạn</find>
+    </findStrings>
+    <dirStrings>
+      <dir>D:\VNP\ws_next_customer\node_modules</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/components/LTR/LTRooms/ListingLTRooms/index.tsx" />
+        <option value="$PROJECT_DIR$/components/RoomCard/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/rooms/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/long-term-rooms/index.tsx" />
+        <option value="$PROJECT_DIR$/styles/pages/rooms/index.scss" />
+        <option value="$PROJECT_DIR$/components/Rooms/MapMobile/index.tsx" />
+        <option value="$PROJECT_DIR$/components/Toolbar/NavHeader.tsx" />
+        <option value="$PROJECT_DIR$/components/Rooms/MapAndListing/MapCanvas.tsx" />
+        <option value="$PROJECT_DIR$/components/Rooms/Map/MapMarker.tsx" />
+        <option value="$PROJECT_DIR$/components/Rooms/MapAndListing/context.ts" />
+        <option value="$PROJECT_DIR$/components/Room/BoxImage/index.tsx" />
+        <option value="$PROJECT_DIR$/components/Rooms/RoomCardListing/index.tsx" />
+        <option value="$PROJECT_DIR$/store/Context/Room/RoomListContext.ts" />
+        <option value="$PROJECT_DIR$/routes/index.ts" />
+        <option value="$PROJECT_DIR$/pages/preview-room/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/room/index.tsx" />
+        <option value="$PROJECT_DIR$/components/HostInfo/index.tsx" />
+        <option value="$PROJECT_DIR$/styles/pages/home/index.scss" />
+        <option value="$PROJECT_DIR$/styles/shared/global.scss" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxBottomBooking.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxBookingLT/index.tsx" />
+        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomBasic/index.tsx" />
+        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" />
+        <option value="$PROJECT_DIR$/components/Room/BoxRoomDetail/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities.tsx" />
+        <option value="$PROJECT_DIR$/translations/room/room-vi.json" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxTablePrices/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxListImageRoom/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/preview-long-term-room/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/long-term-room/index.tsx" />
+        <option value="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" />
+        <option value="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" />
+        <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxAmenities/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManager/index.tsx" />
+        <option value="$PROJECT_DIR$/components/FullCalendar/index.tsx" />
+        <option value="$PROJECT_DIR$/types/Requests/Calendar/CalendarReq.ts" />
+        <option value="$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionManagement.tsx" />
+        <option value="$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx" />
+        <option value="$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx" />
+        <option value="$PROJECT_DIR$/translations/shared/shared-vi.json" />
+        <option value="$PROJECT_DIR$/translations/shared/shared-en.json" />
+        <option value="$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts" />
+        <option value="$USER_HOME$/Downloads/RoomCalendar.vue" />
+        <option value="$PROJECT_DIR$/styles/components/index.scss" />
+        <option value="$PROJECT_DIR$/styles/index.scss" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx" />
+        <option value="$PROJECT_DIR$/styles/FullCalendar/index.scss" />
+        <option value="$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="1710" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <showMembers ProjectPane="false" />
+      <autoscrollToSource ProjectPane="true" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CalendarManagement" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="LTR" type="462c0819:PsiDirectoryNode" />
+              <item name="Merchant" type="462c0819:PsiDirectoryNode" />
+              <item name="Listing" type="462c0819:PsiDirectoryNode" />
+              <item name="CreateListing" type="462c0819:PsiDirectoryNode" />
+              <item name="Step3" type="462c0819:PsiDirectoryNode" />
+              <item name="ServiceFee" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="preview-room" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_next_customer" type="462c0819:PsiDirectoryNode" />
+              <item name="styles" type="462c0819:PsiDirectoryNode" />
+              <item name="FullCalendar" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="ToolWindowEvent Log.ShowToolbar" value="false" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env" />
+    <property name="eu.ydp.idea.ts.spec.generator.settings.spec.template" value="import {$ClassName$} from '$TestsRelativePath$../src/$classRelativePath$/$ClassName$';&#10;&#10;describe('$ClassName$', () =&gt; {&#10;  let $ObjName$:$ClassName$;&#10;&#10;  beforeEach(() =&gt; {&#10;    $ObjName$ = new $ClassName$();&#10;  });&#10;&#10;  describe('', () =&gt; {&#10;    it('', () =&gt; {&#10;      // given&#10;&#10;      // when&#10;&#10;      // then&#10;    });&#10;  });&#10;});&#10;" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/styles/components/LTRoomCardListing" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\VNP\ws_next_customer\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="ts.external.directory.path" value="D:\VNP\ws_next_customer\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\styles\components\LTRoomCardListing" />
+      <recent name="D:\VNP\ws_next_customer\components\Home\SearchAutoSuggestion" />
+      <recent name="D:\VNP\ws_next_customer\components\LTR" />
+      <recent name="D:\VNP\ws_next_customer\components\Home\SearchComponent" />
+      <recent name="D:\VNP\ws_next_customer\components\LTR\LTRoom\BoxListImageRoom" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
+      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
+      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="" />
+      <created>1563847928743</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563847928743</updated>
+      <workItem from="1563847930098" duration="10910000" />
+      <workItem from="1563934929478" duration="1063000" />
+      <workItem from="1563936844570" duration="15010000" />
+      <workItem from="1564020661797" duration="22867000" />
+      <workItem from="1564106198236" duration="23325000" />
+      <workItem from="1564191412417" duration="11819000" />
+      <workItem from="1564204106687" duration="217000" />
+      <workItem from="1564364400260" duration="20850000" />
+      <workItem from="1564409329588" duration="8637000" />
+      <workItem from="1564451969038" duration="24045000" />
+      <workItem from="1564539730210" duration="20415000" />
+      <workItem from="1564625035144" duration="22567000" />
+      <workItem from="1564710230764" duration="25784000" />
+      <workItem from="1564805234503" duration="5648000" />
+      <workItem from="1564893328748" duration="4223000" />
+      <workItem from="1564969832448" duration="21161000" />
+      <workItem from="1565055876662" duration="23910000" />
+      <workItem from="1565143311598" duration="16467000" />
+      <workItem from="1565229121514" duration="23977000" />
+      <workItem from="1565315600084" duration="22092000" />
+      <workItem from="1565399369684" duration="9715000" />
+      <workItem from="1565575172050" duration="18256000" />
+      <workItem from="1565660984753" duration="17095000" />
+      <workItem from="1565835160836" duration="16360000" />
+      <workItem from="1566194964186" duration="722000" />
+      <workItem from="1566266339237" duration="20263000" />
+      <workItem from="1566353102521" duration="20598000" />
+      <workItem from="1566438248438" duration="22314000" />
+      <workItem from="1566609585568" duration="9516000" />
+      <workItem from="1566785392712" duration="12791000" />
+      <workItem from="1566870613412" duration="23538000" />
+      <workItem from="1566957954249" duration="14397000" />
+      <workItem from="1567045065087" duration="17028000" />
+      <workItem from="1567131323693" duration="23074000" />
+      <workItem from="1567214878509" duration="8808000" />
+      <workItem from="1567564909993" duration="12684000" />
+      <workItem from="1567648459128" duration="20964000" />
+      <workItem from="1567911320478" duration="1975000" />
+      <workItem from="1567930969172" duration="6317000" />
+      <workItem from="1567957414835" duration="1132000" />
+      <workItem from="1567993937288" duration="26517000" />
+      <workItem from="1568080569515" duration="4734000" />
+      <workItem from="1569225416520" duration="2939000" />
+      <workItem from="1569289313014" duration="18172000" />
+      <workItem from="1569326456248" duration="3737000" />
+      <workItem from="1569375842504" duration="18899000" />
+      <workItem from="1569462781282" duration="28440000" />
+      <workItem from="1569551715243" duration="10667000" />
+      <workItem from="1569634386052" duration="11026000" />
+      <workItem from="1569809646246" duration="9728000" />
+      <workItem from="1569895821892" duration="20005000" />
+      <workItem from="1569981903748" duration="24424000" />
+      <workItem from="1570113237099" duration="6201000" />
+      <workItem from="1570152880780" duration="27043000" />
+      <workItem from="1570197450864" duration="10869000" />
+      <workItem from="1570239625413" duration="42237000" />
+      <workItem from="1570327018388" duration="7302000" />
+      <workItem from="1570356354631" duration="971000" />
+      <workItem from="1570671864073" duration="18452000" />
+      <workItem from="1570758211159" duration="5765000" />
+      <workItem from="1570764516970" duration="20243000" />
+      <workItem from="1570800733109" duration="6896000" />
+      <workItem from="1570843094841" duration="9334000" />
+      <workItem from="1570873240183" duration="1841000" />
+      <workItem from="1571019010861" duration="445000" />
+      <workItem from="1571019486933" duration="87000" />
+      <workItem from="1571019605282" duration="20027000" />
+      <workItem from="1571105701801" duration="20495000" />
+      <workItem from="1571190813447" duration="22045000" />
+      <workItem from="1571277097556" duration="13760000" />
+      <workItem from="1571363529754" duration="21347000" />
+      <workItem from="1571416738491" duration="11214000" />
+      <workItem from="1571447415540" duration="17628000" />
+      <workItem from="1571901697781" duration="6968000" />
+      <workItem from="1571968409166" duration="45721000" />
+      <workItem from="1572054281123" duration="6816000" />
+      <workItem from="1572109446303" duration="10655000" />
+      <workItem from="1572173609778" duration="19492000" />
+      <workItem from="1572228037470" duration="11867000" />
+      <workItem from="1572334054480" duration="6895000" />
+      <workItem from="1572400024047" duration="12895000" />
+      <workItem from="1572423725350" duration="8472000" />
+      <workItem from="1572448627485" duration="450000" />
+      <workItem from="1572510964519" duration="6991000" />
+      <workItem from="1572572914246" duration="10802000" />
+      <workItem from="1572831187173" duration="18909000" />
+      <workItem from="1573004853305" duration="10588000" />
+      <workItem from="1573094807935" duration="18423000" />
+      <workItem from="1573179114654" duration="17297000" />
+      <workItem from="1573223753604" duration="7694000" />
+      <workItem from="1573261559889" duration="6131000" />
+      <workItem from="1573441768708" duration="16291000" />
+      <workItem from="1573523156270" duration="24010000" />
+      <workItem from="1573609828686" duration="21918000" />
+      <workItem from="1573654213566" duration="8086000" />
+      <workItem from="1573696145234" duration="21689000" />
+      <workItem from="1573783111834" duration="314000" />
+    </task>
+    <task id="LOCAL-00001" summary="duy PaymentContext">
+      <created>1563870475772</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1563870475772</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Component Card Intro + navHeader">
+      <created>1564203974797</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1564203974797</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Component GridMeotro">
+      <created>1564396825709</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1564396825709</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Layout HomePage">
+      <created>1564483265617</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1564483265617</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Layout HomePage responsive">
+      <created>1564656323235</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1564656323236</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Layout HomePage responsive 2">
+      <created>1564898765688</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1564898765688</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Box image in Detail page">
+      <created>1565072293967</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1565072293967</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Box Map in Detail page">
+      <created>1565087002410</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1565087002410</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Box Search in Detail page">
+      <created>1565237304500</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1565237304500</updated>
+    </task>
+    <task id="LOCAL-00010" summary="collection homepage">
+      <created>1565315827938</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1565315827938</updated>
+    </task>
+    <task id="LOCAL-00011" summary="collection homepage">
+      <created>1565346781888</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1565346781888</updated>
+    </task>
+    <task id="LOCAL-00012" summary="collection homepage">
+      <created>1565346874914</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1565346874914</updated>
+    </task>
+    <task id="LOCAL-00013" summary="sua anh trong trang chi tiet va avatar default">
+      <created>1566295467057</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1566295467057</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Fix compare Room">
+      <created>1567496613295</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1567496613295</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Buoc 3 - ngan han">
+      <created>1569331527168</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1569331527168</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Buoc 3 - Gia dich vu">
+      <created>1569509184596</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1569509184596</updated>
+    </task>
+    <task id="LOCAL-00017" summary="giao dien tab trang chu">
+      <created>1571984036082</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1571984036082</updated>
+    </task>
+    <task id="LOCAL-00018" summary="giao dien tab trang chu">
+      <created>1571984727219</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1571984727219</updated>
+    </task>
+    <task id="LOCAL-00019" summary="map long term demo">
+      <created>1572448720010</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1572448720010</updated>
+    </task>
+    <task id="LOCAL-00020" summary="map long term final">
+      <created>1572585067660</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1572585067660</updated>
+    </task>
+    <task id="LOCAL-00021" summary="test fullcalendar">
+      <created>1573115002367</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1573115002367</updated>
+    </task>
+    <task id="LOCAL-00022" summary="fullcalendar final #1">
+      <created>1573728735255</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1573728735255</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1514410000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.25799572" />
+      <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32937685" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49894625" weight="0.1928651" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
+      <window_info anchor="bottom" id="TypeScript" order="9" weight="0.15830547" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50586355" side_tool="true" weight="0.14046822" />
+      <window_info anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49413645" weight="0.19843924" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3277592" />
+      <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Codota" order="3" weight="0.32995737" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="duy PaymentContext" />
+    <MESSAGE value="Component Card Intro + navHeader" />
+    <MESSAGE value="Component GridMeotro" />
+    <MESSAGE value="Layout HomePage" />
+    <MESSAGE value="Layout HomePage responsive" />
+    <MESSAGE value="Layout HomePage responsive 2" />
+    <MESSAGE value="Box image in Detail page" />
+    <MESSAGE value="Box Map in Detail page" />
+    <MESSAGE value="Box Search in Detail page" />
+    <MESSAGE value="collection homepage" />
+    <MESSAGE value="mobile map va 1 so chinh sua roomlist" />
+    <MESSAGE value="sua anh trong trang chi tiet va avatar default" />
+    <MESSAGE value="Fix compare Room" />
+    <MESSAGE value="Buoc 3 - ngan han" />
+    <MESSAGE value="Buoc 3 - Gia dich vu" />
+    <MESSAGE value="giao dien tab trang chu" />
+    <MESSAGE value="map long term demo" />
+    <MESSAGE value="map long term final" />
+    <MESSAGE value="test fullcalendar" />
+    <MESSAGE value="fullcalendar final #1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fullcalendar final #1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/types/Requests/Cities/CityResponse.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="3" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Location/CitiesList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="114" column="23" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="135" column="13" selection-start-line="135" selection-start-column="13" selection-end-line="135" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/Layout/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-739">
+          <folding>
+            <element signature="e#0#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/booking-list/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2829">
+          <folding>
+            <element signature="e#0#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="66" column="39" lean-forward="true" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/room-list/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="50" column="17" selection-start-line="50" selection-start-column="17" selection-end-line="50" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#70#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/UpdateListing/listingdetails.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="18" column="12" selection-start-line="18" selection-start-column="12" selection-end-line="18" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/LTR/LTRoom/LTRoom.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/host/update-listing/[id]/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4439">
+          <caret line="212" column="25" selection-start-line="212" selection-start-column="25" selection-end-line="212" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#92#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Payment/PaymentResponse.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="46">
+          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/ResponseTemplate.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="55" column="17" selection-start-line="55" selection-start-column="17" selection-end-line="55" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/colors/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1288">
+          <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Button/Button.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-253">
+          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/MenuItem/MenuItem.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/ReusableComponents/SelectLeaseTypeGlobal.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="106" column="17" lean-forward="true" selection-start-line="106" selection-start-column="17" selection-end-line="106" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#78#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/BookingList/FilterBookingList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="10" column="6" lean-forward="true" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1219">
+          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Profile/BookingProfile/BookingList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5727">
+          <caret line="273" column="16" selection-start-line="273" selection-start-column="7" selection-end-line="273" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/store/Redux/Reducers/LTR/LTBooking/ltbooking.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2852">
+          <caret line="140" column="7" selection-start-line="140" selection-start-column="7" selection-end-line="140" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/Profile/EditProfile/MySnackbarContentWrapper.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/home/home-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/layout/layout-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/profile/profile-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/promotion/promotion-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/reviews/reviews-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/room/room-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="58" column="4" lean-forward="true" selection-start-line="58" selection-start-column="4" selection-end-line="58" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/room/room-vi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-764" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/user/user-en.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/shared/shared-vi.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/shared/shared-en.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="22" column="17" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/preview-room/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="48" column="17" lean-forward="true" selection-start-line="48" selection-start-column="17" selection-end-line="48" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#57#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/CancelBooking/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="174" column="32" selection-start-line="171" selection-start-column="8" selection-end-line="174" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/RoomList/RoomCardItem.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="708">
+          <caret line="244" column="10" selection-start-line="244" selection-start-column="10" selection-end-line="244" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarReq.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomResponses.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="112" column="37" lean-forward="true" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#71#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/RoomRequests.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Rooms/PriceByDay.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="128" column="25" selection-start-line="128" selection-start-column="25" selection-end-line="128" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/components/ltRoomCardListing/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/components/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CreateListing/Step3/ServiceFee/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-663">
+          <caret line="83" column="17" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1564">
+          <caret line="81" column="24" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/FullCalendarNoSSR/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/mixins.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2438">
+          <caret line="106" column="23" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="7" column="36" selection-start-line="7" selection-start-column="36" selection-end-line="7" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/types/Requests/Calendar/CalendarRes.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1748">
+          <caret line="76" column="19" selection-start-line="76" selection-start-column="19" selection-end-line="76" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/RoomCalendar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="874">
+          <caret line="38" column="32" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/styles/FullCalendar/index.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/Merchant/Listing/CalendarManagement/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="119" lean-forward="true" selection-start-line="119" selection-end-line="119" />
+          <folding>
+            <element signature="e#0#82#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

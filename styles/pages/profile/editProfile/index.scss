@@ -1,0 +1,262 @@
+.editProfile {
+  position: relative;
+  justify-content: center;
+
+  @include xs {
+    padding-bottom: 50px;
+  }
+
+  .formControl {
+    min-width: 120px;
+    text-align: center;
+  }
+
+  .editRequired {
+    margin: 0 auto;
+  }
+
+  .rowInputs {
+    margin: 5px 0px;
+
+    @include sm {
+      width: 100%;
+    }
+
+    @include xs {
+      width: 100%;
+    }
+  }
+
+  .typoTitle {
+    padding-top: 10px;
+    text-transform: inherit;
+    font-size: 16px;
+    padding-right: 5px;
+    color: #484848;
+    @include xs {
+      font-size: 14px;
+    }
+  }
+
+  .title {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .typoTitleOptional {
+    padding: 20px;
+  }
+
+  .typoBigTitle {
+    padding: 12px 0px;
+    color: #484848;
+
+    @include sm {
+      padding: 2;
+    }
+
+    @include xs {
+      font-size: 20px;
+      padding: 2px;
+    }
+  }
+
+  .rowButton {
+    padding: 40px 0px;
+    text-align: right;
+  }
+
+  .avatarNational {
+    width: 20px;
+    height: 20px;
+    vertical-align: sub;
+  }
+
+  .lightTooltip {
+    background: white;
+    color: $primary;
+    box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.3);
+  }
+
+  .boxPadding {
+    padding: 30px 50px;
+
+    @include md {
+      padding: 0px;
+    }
+
+    @include sm {
+      padding: 0px;
+    }
+
+    @include xs {
+      padding: 0px;
+    }
+  }
+
+  .lockIcon {
+    padding: 25px 0px 0px 10px;
+
+    @include md {
+      padding: 25px 0px 0px 0px;
+    }
+
+    @include sm {
+      padding: 25px 0px 0px 0px;
+    }
+
+    @include xs {
+      padding: 25px 0px 0px 0px;
+    }
+  }
+
+  .snackContent {
+    background-color: #43a047;
+  }
+
+  .iconSnackContent {
+    opacity: 0.9;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+  }
+
+  .box_avatar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+
+  .avatar {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @include xs {
+      width: 125px;
+      height: 125px;
+    }
+
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .uploadAvatar {
+    &:hover {
+      cursor: pointer;
+    }
+
+    border-radius: 50%;
+    position: absolute;
+    bottom: 15px;
+    right: 2px;
+    background: linear-gradient(to right, #ffc54d, #ffa712);
+    color: white;
+    padding: 6px;
+  }
+
+  .verifiedMail {
+    width: 17px;
+    height: 17px;
+    display: inline-block;
+    overflow: unset;
+    position: absolute;
+    font-size: 0px;
+  }
+
+  .imgIconEdit {
+    &:hover {
+      cursor: pointer;
+    }
+
+    width: 17px;
+    height: 17px;
+    vertical-align: sub;
+  }
+
+  .inline {
+    vertical-align: top;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .typeaheadMenu {
+    position: static;
+  }
+
+  .root {
+    height: 250px;
+    flex-grow: 1;
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .suggestionsContainerOpen {
+    position: absolute;
+    z-index: 1;
+    left: 0px;
+    right: 0px;
+  }
+
+  .suggestion {
+    display: block;
+  }
+
+  .suggestionsList {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+  }
+
+  .outlineInput {
+    padding: 12px 16px;
+  }
+
+  .helperText {
+    font-size: 14px;
+  }
+
+  .userTitle {
+    margin-left: 20px;
+  }
+
+  .formCountryCode {
+    min-width: fit-content;
+
+    @include md {
+      width: 100%;
+    }
+
+    @include lg {
+      width: 100%;
+    }
+
+    @include xl {
+      width: 100%;
+    }
+  }
+
+  .containerCountryCode {
+    padding: 8px;
+  }
+
+  .boxCountryCode {
+    margin-right: 10px;
+  }
+
+  .imageAvatar {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,43 @@
+@import "./boxBooking/index.scss";
+@import "./navBottomBook/index.scss";
+@import "./boxImage/index.scss";
+
+.roomPage {
+  &__boxBooking {
+    @include xs {
+      display: none;
+    }
+
+    @include sm {
+      display: none;
+    }
+
+    @include md {
+      display: none;
+    }
+  }
+
+  &__boxBookingMoblie {
+    @include lg {
+      display: none !important;
+    }
+
+    @include xl {
+      display: none !important;
+    }
+  }
+
+  &__disabledBoxBooking,
+  &__disabledBoxBookingMoblie,
+  &__disabledBoxSearch {
+    pointer-events: none;
+    // opacity: 0.5;
+  }
+
+  .Lottie_iconHeart {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+
+}

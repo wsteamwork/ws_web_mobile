@@ -1,0 +1,130 @@
+@import "../../../mixins.scss";
+
+.image-gallery-image{
+  max-height: 75vh;
+  height:70vh;
+
+  @include lg{
+    height:65vh;
+  }
+
+  @include md{
+    height:65vh;
+  }
+
+  @include xsDown{
+    height:60vh;
+  }
+  img{
+    //width: auto !important;
+    max-height: 100%;
+    height:100%;
+    object-fit: contain;
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 16px;
+    position: absolute;
+    width: auto;
+    margin: 0 auto;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateY(-50%);
+    opacity: 1;
+    transition: opacity 150ms ease-in-out 0s, transform 150ms ease-in-out 0s;
+    @include sm{
+      max-width: 100%;
+    }
+    @include xs{
+      max-width: 100%;
+    }
+  }
+}
+.image-gallery-fullscreen-button{
+  right: 0;
+  @include sm {
+    display: none;
+  }
+  @include xs {
+    display: none;
+  }
+}
+
+.image-gallery-index {
+  background: none;
+  color: #323232;
+  line-height: 1;
+  padding: 10px 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 4;
+  border-radius: 4px 16px 4px 4px;
+}
+
+.image-gallery-thumbnails{
+  position: relative;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  transform: translateY(0px) !important;
+  transition: -ms-transform 0.2s ease-out 0s, -webkit-transform 0.2s ease-out 0s, transform 0.2s ease-out 0s !important;
+
+  &::after {
+    position: absolute !important;
+    height: 64px !important;
+    transform: rotate(180deg) !important;
+    z-index: 1 !important;
+    width: 20px !important;
+    background: linear-gradient(270deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 90.82%) !important;
+  }
+  &::before {
+    position: absolute !important;
+    height: 64px !important;
+    transform: rotate(180deg) !important;
+    z-index: 1 !important;
+    width: 20px !important;
+    background: linear-gradient(270deg, rgb(255, 255, 255) 0%, rgba(255, 255, 255, 0) 90.82%) !important;
+  }
+}
+
+.fullscreen{
+  .image-gallery-image{
+    max-height: 85vh;
+    height:85vh;
+  }
+}
+
+.image-gallery-left-nav, .image-gallery-right-nav{
+ font-size: 3em;
+
+  &:before{
+    color: #323232;
+    line-height: .7;
+    text-shadow: none;
+    transition: color .2s ease-out;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-gallery-left-nav:hover::before, .image-gallery-right-nav:hover::before {
+    color: #323232;
+  }
+  .image-gallery-index{
+    display: none;
+  }
+}
+
+.image-gallery-thumbnail, .image-gallery-thumbnail.active{
+  border-radius: 8px;
+
+  .image-gallery-thumbnail-inner{
+    img{
+      border-radius: 4px;
+    }
+  }
+}
+
+.image-gallery-fullscreen-button::before, .image-gallery-play-button::before, .image-gallery-left-nav::before, .image-gallery-right-nav::before{
+  color: #6b6b6b;
+}

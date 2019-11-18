@@ -1,0 +1,97 @@
+@import "../../mixins.scss";
+
+.rooms-pagination {
+  margin: 48px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  font-family: inherit !important;
+  font-weight: 600;
+
+  .rc-pagination-item {
+    border: none;
+  }
+
+  .rc-pagination-item:hover {
+    color: #fa991c;
+  }
+
+  .rc-pagination-item:focus {
+    outline: none;
+  }
+
+  .rc-pagination-item-active {
+    background-color: #fa991c;
+    border-radius: 100%;
+  }
+
+  .rc-pagination-item-active:hover {
+    color: #fff;
+  }
+
+  .rc-pagination-prev,
+  .rc-pagination-next {
+    border: none;
+  }
+
+  .rc-pagination-item:hover a {
+    color: #fa991c;
+  }
+
+  .rc-pagination-jump-prev:hover:after,
+  .rc-pagination-jump-next:hover:after {
+    color: #fa991c;
+  }
+
+  @include mdDown {
+    margin-bottom: 60px !important;
+  }
+}
+
+.rooms-pagination-lt {
+  margin: 48px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 14px;
+  font-family: inherit !important;
+  font-weight: 600;
+
+  .rc-pagination-item {
+    border: none;
+  }
+
+  .rc-pagination-item:hover {
+    color: #673ab7;
+  }
+
+  .rc-pagination-item:focus {
+    outline: none;
+  }
+
+  .rc-pagination-item-active {
+    background-color: #673ab7;
+    border-radius: 100%;
+  }
+
+  .rc-pagination-item-active:hover {
+    color: #fff;
+  }
+
+  .rc-pagination-prev,
+  .rc-pagination-next {
+    border: none;
+  }
+
+  .rc-pagination-item:hover a {
+    color: #673ab7;
+  }
+
+  .rc-pagination-jump-prev:hover:after,
+  .rc-pagination-jump-next:hover:after {
+    color: #673ab7;
+  }
+
+  @include mdDown {
+    margin-bottom: 60px !important;
+  }
+}

@@ -1,0 +1,162 @@
+.roomCard {
+  &:focus {
+    outline: none;
+  }
+
+  &__wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 8px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .mediaContainer {
+      width: 100% !important;
+      position: relative !important;
+      z-index: 0 !important;
+      border-radius: 3px;
+      overflow: hidden !important;
+
+      .backContainer {
+        padding-top: 66.6667%;
+        background: rgb(216, 216, 216);
+        contain: strict;
+        position: relative;
+        width: 100%;
+        z-index: 0;
+        border-radius: 3px;
+        overflow: hidden;
+
+        .frontContainer {
+          position: absolute;
+          top: 0px;
+          bottom: 0px;
+          left: 0px;
+          right: 0px;
+          height: 100%;
+          width: 100%;
+
+          .mediaWrapper {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+
+            .media {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .infoContainer {
+      padding-top: 12px !important;
+
+      .infoLink {
+        display: block;
+        color: rgb(72, 72, 72);
+        text-decoration: none;
+
+        .iconWrapper {
+          display: inline-block !important;
+          vertical-align: bottom;
+          width: 25px;
+          height: 25px;
+          margin-right: 5px;
+        }
+
+        .instantBookIcon {
+          color: #fa991c;
+        }
+        .instantBookIconLT {
+          color: #673ab7;
+        }
+
+        .info {
+          .price {
+            margin-top: 5px;
+            display: flex;
+
+            .hourPrice {
+              margin-left: 6px;
+            }
+          }
+
+          .roomCard__type {
+            color: #fa991c !important;
+
+            text-transform: uppercase !important;
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
+
+            font-size: 12px !important;
+            font-weight: 700 !important;
+          }
+          .roomCard__type__LT {
+            color: #673ab7 !important;
+
+            text-transform: uppercase !important;
+            font-family: 'Circular', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', sans-serif !important;
+
+            font-size: 12px !important;
+            font-weight: 700 !important;
+          }
+
+          .roomCard__name {
+            font-size: 0.85rem !important;
+            font-weight: 600 !important;
+            line-height: 1.8 !important;
+            margin-bottom: 0;
+            display: -webkit-box;
+            max-height: 46px;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .roomCard__address {
+            font-size: 0.8rem !important;
+            font-weight: 500 !important;
+            line-height: 1.5 !important;
+            margin-bottom: 0;
+            display: -webkit-box;
+            max-height: 46px;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .review {
+            display: flex;
+            margin-top: 2px;
+            margin-left: -4px;
+            align-items: center;
+
+            .starIcon {
+              width: 20px;
+              height: 20px;
+              color: #ffc212;
+            }
+
+            .text {
+              display: inline-block;
+            }
+
+            .rating {
+              font-weight: 700;
+              margin-right: 2px;
+            }
+
+            .totalReview {
+              font-size: 14px;
+              font-weight: 500;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}

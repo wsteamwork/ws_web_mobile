@@ -1,0 +1,122 @@
+$xs: 0px;
+$sm: 600px;
+$md: 960px;
+$lg: 1280px;
+$xl: 1920px;
+
+@mixin transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transition-property($property...) {
+  -moz-transition-property: $property;
+  -o-transition-property: $property;
+  -webkit-transition-property: $property;
+  transition-property: $property;
+}
+
+@mixin transition-duration($duration...) {
+  -moz-transition-property: $duration;
+  -o-transition-property: $duration;
+  -webkit-transition-property: $duration;
+  transition-property: $duration;
+}
+
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function: $timing;
+  -o-transition-timing-function: $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function: $timing;
+}
+
+@mixin transition-delay($delay...) {
+  -moz-transition-delay: $delay;
+  -o-transition-delay: $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay: $delay;
+}
+
+@mixin between($start, $end) {
+  @media (min-width: $start) and (max-width: $end) {
+    @content;
+  }
+}
+
+@mixin xs {
+  @media (max-width: $sm - 1px) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: $sm) and (max-width: $md - 1px) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: $md) and (max-width: $lg - 1px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: $lg) and (max-width: $xl - 1px) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: $xl) {
+    @content;
+  }
+}
+// Up
+@mixin xsUp {
+  @media (min-width: 0) {
+    @content;
+  }
+}
+@mixin smUp {
+  @media (min-width: $sm) {
+    @content;
+  }
+}
+@mixin mdUp {
+  @media (min-width: $md) {
+    @content;
+  }
+}
+@mixin lgUp {
+  @media (min-width: $lg) {
+    @content;
+  }
+}
+
+// Down
+@mixin xsDown {
+  @media (max-width: $sm - 1px) {
+    @content;
+  }
+}
+
+@mixin smDown {
+  @media (max-width: $md - 1px) {
+    @content;
+  }
+}
+
+@mixin mdDown {
+  @media (max-width: $lg - 1px) {
+    @content;
+  }
+}
+
+@mixin lgDown {
+  @media (max-width: $xl - 1px) {
+    @content;
+  }
+}

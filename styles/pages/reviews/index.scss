@@ -1,0 +1,124 @@
+.reviewRoom {
+  .card {
+    padding: 0 5px;
+    background-color: transparent;
+    margin-top: 15px;
+  }
+
+  .media {
+    height: 12em;
+    border-radius: 0.2em;
+  }
+
+  .cardContent {
+    padding: 0px;
+    padding-top: 1em;
+  }
+
+  .nameCity {
+    font-weight: 500;
+    font-size: 0.8em;
+    line-height: 16px;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: rgb(118, 118, 118);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+    overflow: hidden;
+  }
+
+  .nameRoom {
+    font-weight: 500;
+    font-size: 1.25em;
+    line-height: 21px;
+    max-height: 42px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    margin-top: 7px;
+    margin-bottom: 4px;
+    overflow: hidden;
+    color: rgb(72, 72, 72);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-transform: uppercase;
+  }
+
+  .priceRoom {
+    font-weight: normal;
+    font-size: 1em;
+    line-height: 18px;
+    letter-spacing: normal;
+    color: rgb(72, 72, 72);
+    margin-bottom: 4px;
+  }
+
+  .totalReview {
+    overflow-wrap: break-word;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.3333em;
+    color: rgb(72, 72, 72);
+    margin: 0px;
+    float: left;
+    padding-left: 4px;
+  }
+
+  .starRatings {
+    float: left;
+  }
+
+  .boxPadding {
+    padding: 20px;
+  }
+
+  .title {
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 21px;
+    max-height: 42px;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    overflow: hidden;
+    color: rgb(109, 95, 95);
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 13px;
+  }
+
+  .review {
+    padding: 0px 5px;
+  }
+
+  .spanLike {
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 21px;
+    padding-right: 25px;
+    color: rgb(109, 95, 95);
+  }
+
+  .radio {
+    padding-left: 0px;
+    display: block;
+  }
+
+  .snackContent {
+    background-color: #43a047;
+  }
+
+  .iconSnackContent {
+    opacity: 0.9;
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+  }
+
+  .button {
+    color: #fff;
+  }
+}

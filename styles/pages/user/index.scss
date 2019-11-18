@@ -1,0 +1,30 @@
+@import "./userBox/index.scss";
+@import './userDetail/index.scss';
+
+.mainProfile {
+  margin: 40px auto 48px auto;
+  width: auto;
+  padding: 0px 24px;
+
+  .boxPadding {
+    padding: 16px;
+
+    @include xs {
+      padding: 10px 0px;
+    }
+  }
+
+  .detailPaper {
+    @include md {
+      margin-left: 80px;
+    }
+
+    @include lg {
+      margin-left: 80px;
+    }
+
+    @include xl {
+      margin-left: 80px;
+    }
+  }
+}

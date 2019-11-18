@@ -1,0 +1,64 @@
+{
+    "SearchAutocomplete": {
+        "toGo": "Bạn muốn tới đâu?",
+        "city": "Thành phố",
+        "district": "Quận huyện",
+        "accommodation": "Chỗ ở",
+        "room": "Phòng",
+        "searchResults": "Kết quả tìm kiếm",
+        "noResult": "Không tìm thấy kết quả nào"
+    },
+    "chooseGuestRoom": {
+        "close": "Đóng",
+        "apply": "Áp dụng"
+    },
+    "home": "Trang chủ",
+    "signUp": "Đăng kí",
+    "signIn": "Đăng nhập",
+    "logout": "Đăng xuất",
+    "profile": "Thông tin cá nhân",
+    "policyTerms": "Chính sách & Điều khoản",
+    "merchantChannel": "Kênh chủ nhà",
+    "contact" : "Liên hệ",
+    "notification" : "Thông báo",
+    "supportHost" : "Hỗ trợ chủ nhà",
+    "currency" : "VND",
+    "review": "Đánh giá",
+    "searchComponent": {
+        "enjoy": "Cùng nhau tận hưởng những khoảnh khắc vui vẻ !",
+        "sloganLongterm": "Tìm kiếm hơn 160 căn hộ cho thuê dài hạn trên cả nước",
+        "search": "Tìm kiếm",
+        "guestUpper": "Người",
+        "guest": "người",
+        "room": "phòng",
+        "roomUpper": "Phòng"
+    },
+    "topDestinations" : "Điểm đến hấp dẫn",
+    "becomeAHost" : "Trở thành chủ nhà",
+    "topHomestay" : "Phòng nổi bật",
+    "blogContainer":{
+        "where": "Ở đâu",
+        "journey":"Cẩm nang du lịch",
+        "whatPlay":"Chơi gì",
+        "blog":"Khám phá và trải nghiệm",
+        "titleJoFurney": "Cùng chia sẻ những trải nghiệm du lịch",
+        "titleWhere": "Cùng khám phá những địa điểm tuyệt đẹp",
+        "titlePlay": "Cùng tìm hiểu những trò chơi độc lạ - thú vị"
+    },
+    "collectionRooms": {
+        "collectionViews": "Ngắm nhìn cảnh đẹp",
+        "seaView": "Bình minh trên biển",
+        "cityView": "Ngắm nhìn thành phố từ trên cao"
+    },
+    "editorChoice": "Lựa chọn hàng đầu",
+    "hostAttraction": "Bạn có căn hộ rảnh rỗi? Bạn có phòng còn trống? Bạn muốn kiếm thêm thu nhập? Hay đơn giản hơn nữa, bạn muốn gặp gỡ và giao lưu với những người bạn tới từ khắp nơi trên thế giới. Hãy trở thành chủ nhà tại Westay ngay hôm nay để có cơ hội đạt được tất cả những điều đó!",
+    "searchVilla": "Villa - Biệt thự nghỉ dưỡng",
+    "fromPrice": "Chỉ từ",
+    "night": "đêm",
+    "longTermTab": "Thuê dài hạn",
+    "shortTermTab": "Thuê ngắn hạn",
+    "yourLocation": "Vị trí lân cận",
+    "checkout": "Ngày trả phòng",
+    "checkin": "Ngày nhận phòng"
+
+}

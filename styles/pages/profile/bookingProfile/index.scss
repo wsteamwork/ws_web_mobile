@@ -1,0 +1,228 @@
+.bookingProfile {
+  position: relative;
+
+  @include xs {
+    padding-bottom: 50px;
+  }
+
+  .tabsRoot {
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  .tabsIndicator {
+    background-color: $primary;
+  }
+
+  .tabRoot {
+    text-transform: inherit;
+    min-width: 72px;
+    font-weight: 600;
+    margin-right: 32px;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+      opacity: 1;
+    }
+  }
+
+  .tabSelected {
+    color: $primary;
+    font-weight: 600;
+  }
+
+  .myBooking {
+    padding-top: 20px;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .fakeData {
+    position: absolute;
+    width: 100%;
+    padding-top: 50px;
+    z-index: -1;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(0);
+
+    @include xs {
+      padding-bottom: 75px;
+    }
+  }
+
+  .bookingList {
+    .bookingListItem {
+      margin-top: 10px;
+    }
+
+    .boxBooking {
+      margin: 10px auto;
+      padding: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .ratingPro {
+      display: flex;
+      margin-top: 10px;
+    }
+
+    .imageRoom {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .txtAddress {
+      color: #484848;
+      font-size: 14px;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      @include sm {
+        font-size: 12px;
+      }
+
+      @include xs {
+        font-size: 12px;
+      }
+    }
+
+    .iconLocation {
+      vertical-align: bottom;
+      font-size: 20px;
+
+      @include sm {
+        font-size: 18px;
+      }
+
+      @include xs {
+        font-size: 18px;
+      }
+    }
+
+    .rowMargin {
+      margin-bottom: 4px;
+    }
+
+    .spanViews {
+      font-size: 10px;
+      color: grey;
+      padding-left: 5px;
+    }
+
+    .imgSocial {
+      width: 17px;
+      height: 17px;
+      padding: 5px;
+    }
+
+    .borLeft {
+      border-left: 1px solid #eee;
+      padding: 3px;
+      text-align: center;
+    }
+
+    .timeBooking {
+      padding: 3px 4px 3px 3px;
+      text-align: center;
+    }
+
+    .fontTime {
+      font-size: 13px;
+
+      @include sm {
+        font-size: 11px;
+      }
+
+      @include xs {
+        font-size: 11px;
+      }
+    }
+
+    .typoTotal {
+      align-content: flex-end;
+      align-items: flex-end;
+      display: flex;
+      flex-flow: row-reverse;
+    }
+
+    .bookAgain {
+      padding: 8px;
+    }
+
+    .rowBottom {
+      padding-top: 8px;
+    }
+
+    .typoDay {
+      font-size: 2.5vw;
+
+      @include md {
+        font-size: 3vw;
+      }
+
+      @include xs {
+        font-size: 3vw;
+      }
+
+      @include sm {
+        font-size: 3vw;
+      }
+    }
+
+    .typoName {
+      display: contents;
+
+      @include sm {
+        font-size: 17px;
+        line-height: 1.2px;
+      }
+
+      @include xs {
+        font-size: 17px;
+        line-height: 1.2px;
+      }
+    }
+
+    .typoTotalFee {
+      @include sm {
+        font-size: 17px;
+      }
+
+      @include xs {
+        font-size: 17px;
+      }
+    }
+
+    .fakeData {
+      width: 100%;
+      padding: 75px 0px;
+    }
+
+    .iconNote {
+      color: #757575;
+      font-size: 40px;
+    }
+
+    .boxPagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .customWidth {
+      max-width: 500px;
+    }
+
+    .noMaxWidth {
+      max-width: none;
+    }
+
+    .boxImg {
+      padding: 0px;
+    }
+  }
+}

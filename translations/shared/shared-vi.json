@@ -1,0 +1,25 @@
+{
+    "cancelBook": {
+        "returnHome": "Trở về trang chủ để tiếp tục đặt phòng",
+        "cancel": "Hủy đặt phòng",
+        "reason": "Lý do hủy phòng",
+        "desc1": "Hãy cho chúng tôi biết về lý do hủy phòng của bạn để có thể hỗ trợ dịch vụ tốt hơn",
+        "desc2": "Nếu chọn 'Lý do khác' xin vui lòng cho chúng tôi biết chi tiết lý do bạn hủy đơn đặt phòng",
+        "canceled": "Đã hủy đơn",
+        "conf": "Xác nhận hủy đơn",
+        "success": "Hủy phòng thành công!"
+    },
+    "dayPrice": "₫/ngày",
+    "hourPrice": "₫/4 giờ",
+    "facilities": "Tiện ích",
+    "bedrooms": "Phòng ngủ",
+    "kitchens": "Phòng bếp",
+    "bathrooms": "Phòng tắm",
+    "livingrooms": "Phòng khách",
+    "common": "Tiện nghi chung",
+    "entertainment": "Giải trí",
+    "others": "Tiện nghi khác",
+    "outdoors": "Ngoài trời",
+    "success": "Thành công!",
+    "lang": "vi"
+}

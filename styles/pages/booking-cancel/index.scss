@@ -1,0 +1,101 @@
+.cancelBooking {
+  .txtAddress {
+    color: #008489;
+    font-size: 14px;
+  }
+
+  .iconLocation {
+    vertical-align: bottom;
+    font-size: 20px;
+  }
+
+  .spanViews {
+    font-size: 10px;
+    color: gray;
+    padding-left: 5px;
+  }
+
+  .titleMargin {
+    margin-bottom: 16px;
+  }
+
+  .titleDetails {
+    text-transform: uppercase;
+    border-bottom: 3px solid $primary;
+    padding: 5px 0px;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .imageRoom {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .btStatus {
+    margin: 8px 8px 8px 0px;
+  }
+
+  .contentDetails {
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .rowMargin {
+    margin-bottom: 4px;
+  }
+
+  .boxPadding {
+    padding: 40px 30px;
+  }
+
+  .boxReason {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px;
+    // position: sticky;
+    // top: 10%;
+    // left: auto;
+    // right: 0px;
+  }
+
+  .PaperDatePick {
+    border: 1px solid #e4e4e4;
+    border-radius: 4px;
+  }
+
+  .formControl {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+  }
+
+  .menuSelect {
+    max-height: calc(100% - 60%);
+  }
+
+  .inputOutline {
+    border: none;
+  }
+
+  .buttonSubmit {
+    margin: 16px 0px;
+  }
+
+  .snackContent {
+    background-color: #43a047;
+  }
+
+  .iconSnackContent {
+    opacity: 0.9;
+    margin-right: 8px;
+    font-size: 20px;
+  }
+
+  .message {
+    display: flex;
+    align-items: center;
+  }
+}

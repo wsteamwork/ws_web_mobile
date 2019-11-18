@@ -1,0 +1,88 @@
+@import "./rc-calendar.scss";
+
+.dateRangeSearch {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5 !important;
+
+  .calendar {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+
+    .day {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .input {
+      flex: 1;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0;
+    }
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .numberDay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
+}
+
+.dateRangeSearchBooking {
+  height: 56px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff !important;
+  border: 1px solid #c4c4c4;
+  .calendar {
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+
+    .day {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: capitalize;
+    }
+
+    .input {
+      flex: 1;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0;
+    }
+  }
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .numberDay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p {
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+  }
+}
+
