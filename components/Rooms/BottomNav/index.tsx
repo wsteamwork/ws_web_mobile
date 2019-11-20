@@ -1,14 +1,15 @@
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Dialog from "@material-ui/core/Dialog/Dialog";
-import Slide, { SlideProps } from "@material-ui/core/Slide/Slide";
+import Dialog from '@material-ui/core/Dialog/Dialog';
+import Slide, { SlideProps } from '@material-ui/core/Slide/Slide';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, forwardRef, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import MapMobile from '../MapMobile';
+import mainColor from '@/styles/constants/colors';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -20,12 +21,18 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       zIndex: 1
     },
     customColor: {
-      color: '#484848'
+      color: '#8A8A8F'
+    },
+    colorSelected: {
+      color: mainColor.primaryLT
+    },
+    marginBottom: {
+      marginBottom: 5
     }
   })
 );
-export const FILTER = 0;
-export const TAB_LIST = 1;
+export const TAB_LIST = 0;
+export const FILTER = 1;
 export const MAP = 2;
 export const NAV = 3;
 
@@ -33,7 +40,7 @@ export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref)
   <Slide timeout={300} direction="up" ref={ref} {...props} />
 ));
 
-interface IProps { }
+interface IProps {}
 const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
@@ -62,23 +69,53 @@ const BottomNav: FC<IProps> = (props) => {
         }}
         showLabels
         className={classes.root}>
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:searchRooms:filterRooms')} icon={
-          <img width="16" height="16" src="/static/filter-results-button.svg" />
-        } />
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:list')} icon={
-          <img width="16" height="16" src="/static/list.svg" />
-        } />
-        <BottomNavigationAction className={classes.customColor} label={t('rooms:location')} icon={
-          <img width="16" height="16" src="/static/address.svg" />
-        } />
+        <BottomNavigationAction
+          classes={{
+            selected: classes.colorSelected
+          }}
+          className={classes.customColor}
+          label={t('rooms:searchRooms:explore')}
+          icon={
+            <img className={classes.marginBottom} width="16" height="16" src="/static/images/search.svg" />
+          }
+        />
+        <BottomNavigationAction
+          className={classes.customColor}
+          classes={{
+            selected: classes.colorSelected
+          }}
+          label={t('rooms:searchRooms:trips')}
+          icon={
+            <img
+              className={classes.marginBottom}
+              width="16"
+              height="16"
+              src='/static/images/Heart.svg'
+            />
+          }
+        />
+        <BottomNavigationAction
+          className={classes.customColor}
+          classes={{
+            selected: classes.colorSelected
+          }}
+          label={t('rooms:searchRooms:profile')}
+          icon={
+            <img
+              className={classes.marginBottom}
+              width="16"
+              height="16"
+              src="/static/images/user.svg"
+            />
+          }
+        />
       </BottomNavigation>
       <Dialog
         fullScreen
         TransitionComponent={TransitionCustom}
         scroll="paper"
         open={index === FILTER}
-        onClose={() => setIndex(TAB_LIST)}
-      >
+        onClose={() => setIndex(TAB_LIST)}>
         <FilterDrawerMobile setIndex={setIndex} />
       </Dialog>
       <MapMobile openMap={index === MAP} />
