@@ -64,9 +64,10 @@
     "emptyItem": "So sánh chỗ ở",
     "showCompare": "Xem so sánh",
     "totalResult": "Tổng số",
-    "results": "kết quả tìm kiếm",
+    "resultsFound": "căn hộ được tìm thấy",
     "contactForPrice": "Giá liên hệ",
     "currency": "VNĐ",
-    "month": "tháng"
+    "month": "tháng",
+    "placeholderSearch": "Bạn muốn đi đâu ?"
 
 }

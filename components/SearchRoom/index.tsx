@@ -1,7 +1,8 @@
-import { makeStyles, Theme, Typography, Grid, IconButton, TextField } from '@material-ui/core';
+import { makeStyles, Theme, Grid, TextField } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import React, { FC } from 'react';
 import mainColor from '@/styles/constants/colors';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any;
@@ -45,6 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const SearchRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { handleOpenSearch } = props;
+  const { t } = useTranslation();
   return (
     <Grid container item xs={12} className={classes.boxWrapper}>
       <Grid item xs={11}>
@@ -56,7 +58,7 @@ const SearchRoom: FC<IProps> = (props) => {
           id="search"
           type="search"
           name="Search"
-          placeholder="Where are you going ?"
+          placeholder={`${t('rooms:placeholderSearch')}`}
           InputLabelProps={{
             className: classes.multilineColor
           }}

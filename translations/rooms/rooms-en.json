@@ -62,8 +62,9 @@
     "emptyItem": "Comparison accommodation",
     "showCompare": "Show compare",
     "totalResult": "Total",
-    "results": "results",
+    "resultsFound": "rooms results",
     "contactForPrice": "Contact for price",
     "currency": "VND",
-    "month": "month"
+    "month": "month",
+    "placeholderSearch": "Where are you going ?"
 }

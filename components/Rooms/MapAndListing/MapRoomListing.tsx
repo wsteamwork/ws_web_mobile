@@ -24,7 +24,7 @@ const MapRoomListing: FC = () => {
         <Grid className="roomListingInMap">
           {leaseTypeGlobal ? (
             <LazyLoad>
-              <ListingLTRooms hoverAction={hoverAction} usingInMap={true}/>
+              <ListingLTRooms/>
             </LazyLoad>
           ) : (
             <LazyLoad>

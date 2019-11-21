@@ -23,7 +23,7 @@ import { Grid, Hidden } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useReducer, useState } from 'react';
+import React, { Fragment, useContext, useReducer, useState, useEffect } from 'react';
 import HeadRoom from 'react-headroom';
 import { useDispatch } from 'react-redux';
 import { Sticky, StickyContainer } from 'react-sticky';
@@ -50,7 +50,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     boxRoomListing: {
       marginTop: 218,
       marginBottom: 50
-    },
+    }
   })
 );
 
@@ -59,8 +59,7 @@ const Rooms: NextPage = (props) => {
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const [hideNavTop, setHideNavTop] = useState<boolean>(false);
-  const { router } = useContext(GlobalContext);
-
+  
   return (
     <Fragment>
       <NextHead
@@ -74,28 +73,6 @@ const Rooms: NextPage = (props) => {
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
-          {/* <div className="roomListing">
-            <Hidden mdUp implementation="css">
-              <GridContainer
-                xs={11}
-                md={11}
-                lg={10}
-                classNameItem="searchRooms__overlay"
-                className="searchRooms">
-                <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    <SelectLeaseTypeGlobal />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <SearchMobile />
-                  </Grid>
-                </Grid>
-              </GridContainer>
-              <FilterActions />
-              <MapAndListing />
-              <BottomNav />
-            </Hidden>
-          </div> */}
           <Grid item xs={12} className={classes.boxSearch}>
             <HeadRoom
               style={{
@@ -107,7 +84,7 @@ const Rooms: NextPage = (props) => {
               onPin={() => setHideNavTop(false)}
               onUnpin={() => setHideNavTop(true)}>
               <Grid item xs={12} className={classes.boxWrapper}>
-                <NavTop isHidden={hideNavTop}/>
+                <NavTop isHidden={hideNavTop} />
               </Grid>
             </HeadRoom>
             <Grid item xs={12}>
@@ -118,24 +95,7 @@ const Rooms: NextPage = (props) => {
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.boxRoomListing}>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
-            <Grid item xs={12}>
-              <RoomCardItem />
-            </Grid>
+            <MapAndListing />
           </Grid>
           <Grid item xs={12}>
             <BottomNav />
