@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%'
     },
     boxRoomListing: {
-      marginTop: 218,
+      marginTop: 200,
       marginBottom: 50
     }
   })

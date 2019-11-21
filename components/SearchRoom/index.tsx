@@ -15,7 +15,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      height: 100,
+      height: 80,
       backgroundColor: '#F6F6F6'
     },
     customTextField: {
@@ -37,6 +37,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: theme.typography.fontWeightBold
     },
     inputCustom: {
+      height:13,
       marginLeft: 8,
       zIndex: 2
     }

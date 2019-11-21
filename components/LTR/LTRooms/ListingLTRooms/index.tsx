@@ -34,7 +34,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  
+
   const changePage = (current: number) => {
     setCurrentPage(current);
     updateRouter('/long-term-rooms', true, 'page', current);
@@ -43,7 +43,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
   useEffect(() => {
     if (meta && meta.pagination) setCurrentPage(meta.pagination.current_page);
   }, [meta]);
-  
+
   useEffect(() => {
     setIsEmpty(meta !== null && longtermRooms.length === 0 && !isLoading);
   }, [longtermRooms, isLoading]);
@@ -52,9 +52,15 @@ const ListingLTRooms: FC<IProps> = (props) => {
     <Grid container item xs={12} justify="center">
       {longtermRooms.length && !isLoading ? (
         <Fragment>
-          <LazyLoad>
-          {longtermRooms.map((room, index) => <RoomCardItem room={room} key={index} />)}
-          </LazyLoad>
+          <Grid container item xs={12}>
+            <LazyLoad>
+              {longtermRooms.map((room, index) => (
+                <Grid item container xs={12} sm={6} key={index}>
+                  <RoomCardItem room={room} />
+                </Grid>
+              ))}
+            </LazyLoad>
+          </Grid>
           <Pagination
             className="rooms-pagination-lt"
             total={meta.pagination.total}
