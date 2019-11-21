@@ -20,11 +20,10 @@ export interface RoomTypeData {
   value: string;
 }
 
-export const getRoomType = async (
-  setData: Dispatch<SetStateAction<RoomTypeData[]>>
-): Promise<RoomTypeData[]> => {
+export const getRoomType = async (): // setData: Dispatch<SetStateAction<RoomTypeData[]>>
+Promise<RoomTypeData[]> => {
   const res: AxiosResponse<RoomTypeData[]> = await axios.get('rooms/type');
-  setData(res.data);
+  // setData(res.data);
   return res.data;
 };
 
@@ -58,7 +57,7 @@ export const useRoomTypeChecbox = (
   const queryTypeRoom = leaseTypeGlobal ? query.accommodation_type : query.type_room;
 
   useEffect(() => {
-    getRoomType(setData);
+    getRoomType().then((res) => setData(res));
   }, []);
 
   useEffect(() => {
