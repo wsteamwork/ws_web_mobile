@@ -15,31 +15,40 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       lineHeight: '1.8rem'
     },
     name: {
-      fontWeight: 700,
-      [theme.breakpoints.down('xs')]: {
-        margin: '1.5rem 0 0.4rem 0'
-      }
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: '#8A8A8F',
     },
-    icon: {
-      marginBottom: 10
+    tagP_inHtmlPare: {
+      width: '100%',
+      display: 'inline',
+      lineHeight: '20px',
+      letterSpacing: -0.24,
     },
-    button: {
-      // color: deepPurple[500],
+    btnLess: {
       padding: 0,
-      '&:hover': {
-        backgroundColor: '#fff'
-      },
-      '&:focus': {
-        backgroundColor: '#fff'
-      }
-    },
-    iconPlus: {
-      fontSize: '15px'
+      justifyContent: 'flex-start',
+      margin: '8px 0',
+      textTransform: 'initial',
     },
     title: {
       fontWeight: 700,
       margin: '8px 0',
-    }
+    },
+    txtDes: {
+      display: 'inline-block',
+      alignItems: 'center',
+      marginTop: 10
+    },
+    btnMore: {
+      padding: 0,
+      textTransform: 'initial',
+      color: '#1d8df7',
+      '&:hover': {
+        backgroundColor: '#ffffff'
+      },
+    },
   })
 );
 
@@ -53,7 +62,6 @@ interface IProps {
 const RoomDescription: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const { description, note, space, isPreviewPage } = props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
@@ -71,23 +79,27 @@ const RoomDescription: FC<IProps> = (props) => {
   };
 
   const notFoundContent = `<p> ${t('room:notFoundContent')} </p>`;
-  const desHTML = description ? `<div> ${description} </div>` : '';
+  const desHTML = description ? `${description}` : '';
   const spaceHTML = space ? `<div> ${space} </div>` : '';
   const noteHTML = note ? `<div> ${note} </div>` : '';
 
   return (
     <Fragment>
       <Grid container className={classes.root}>
-        <Grid item xs={12}>
-          <Typography variant="h5" className={classes.name}>
-            {t('rooms:description')}
-          </Typography>
-          {ReactHtmlParser(isPreviewPage && !desHTML ? notFoundContent : desHTML, {
-            transform: transformHtmlContent
-          })}
-        </Grid>
+        <Typography variant="h5" className={classes.name}>
+          {t('room:description')}
+        </Typography>
+
         {isOpen ? (
           <Fragment>
+            <Grid item xs={12}>
+              <Typography variant='subtitle2' className={classes.title}>
+                {t('room:description')}
+              </Typography>
+              {ReactHtmlParser(isPreviewPage && !desHTML ? notFoundContent : desHTML, {
+                transform: transformHtmlContent
+              })}
+            </Grid>
             <Grid item xs={12}>
               <Typography variant='subtitle2' className={classes.title}>
                 {t('room:space')}
@@ -104,14 +116,19 @@ const RoomDescription: FC<IProps> = (props) => {
                 transform: transformHtmlContent
               })}
             </Grid>
-            <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7' : '#ff9800'}` }} size="small">
+            <Button onClick={toggle} className={classes.btnLess} style={{ color: `${leaseTypeGlobal ? '#673ab7' : '#ff9800'}` }} size="small">
               {t('rooms:readLess')}
             </Button>
           </Fragment>
         ) : (
-            <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7' : '#ff9800'}` }} size="small">
-              &#8230; {t('rooms:readMore')}
-            </Button>
+            <span className={classes.txtDes}>
+              {ReactHtmlParser(isPreviewPage && !desHTML ? notFoundContent : desHTML.substring(0, 150), {
+                transform: transformHtmlContent
+              })}
+              <Button onClick={toggle} className={classes.btnMore}>
+                &#8230;Xem thêm
+              </Button>
+            </span>
           )}
       </Grid>
     </Fragment>

@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homepage/LTHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homepage/LTHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/homepage/STHome.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/homepage/STHome.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/preview-long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/preview-long-term-room/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -25,7 +16,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="1495">
               <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
               <folding>
                 <element signature="e#0#57#0" expanded="true" />
@@ -38,10 +29,7 @@
         <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="278">
-              <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-              <folding>
-                <element signature="e#70#132#0" expanded="true" />
-              </folding>
+              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -49,7 +37,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
+            <state relative-caret-position="230">
               <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
@@ -470,6 +458,7 @@
       <workItem from="1574148877075" duration="2717000" />
       <workItem from="1574154490352" duration="3758000" />
       <workItem from="1574223825326" duration="5966000" />
+      <workItem from="1574300935287" duration="207000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -629,13 +618,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1526970000" />
+    <option name="totallyTimeSpent" value="1527177000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.22761194" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.23027718" />
       <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -1038,16 +1026,6 @@
     <entry file="file://$PROJECT_DIR$/static/images/backgroundSignup.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/styles/pages/room/index.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="115">
@@ -1064,7 +1042,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
+        <state relative-caret-position="1495">
           <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
           <folding>
             <element signature="e#0#57#0" expanded="true" />
@@ -1072,13 +1050,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="278">
-          <caret line="29" column="18" lean-forward="true" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
-          <folding>
-            <element signature="e#70#132#0" expanded="true" />
-          </folding>
+          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
         </state>
       </provider>
     </entry>

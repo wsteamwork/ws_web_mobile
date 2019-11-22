@@ -22,18 +22,26 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 700,
-      margin: '1rem 0 0.35rem 0'
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: '#8A8A8F',
+    },
+    btnViewAll:{
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: '#54D3C2',
     },
     marginImage: {
       margin: '16px 0 0'
     },
     images: {
-      width: '100%',
+      width: 100,
       borderRadius: 4,
       cursor: 'pointer',
-      maxHeight: 150,
-      height: 150,
+      maxHeight: 100,
+      height: 100,
       objectFit: 'cover',
       backgroundSize: 'cover !important',
       backgroundPosition: '50% 50% !important',
@@ -108,6 +116,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       left: 'calc(50% - 9px)',
       transition: theme.transitions.create('opacity'),
     },
+    rowMargin:{
+      marginTop:14,
+    }
   })
 );
 
@@ -124,16 +135,22 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
-      <Typography variant='h5' className={classes.name}>
-        {t('longtermroom:discover')}
-      </Typography>
-      <Typography variant='subtitle2' gutterBottom>
-        {t('longtermroom:discoverSubTitle')}
-      </Typography>
-
-      <Grid container spacing={2} alignItems='center'>
+      <Grid container justify='space-between' alignContent='center'>
+        <Grid item>
+          <Typography variant='h5' className={classes.name} gutterBottom>
+            {t('longtermroom:discover')}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant='h5' className={classes.btnViewAll} gutterBottom>
+            {t('longtermroom:allImages')}
+          </Typography>
+        </Grid>
+      </Grid>
+      
+      <Grid container spacing={2} alignItems='center' className={classes.rowMargin}>
         {livingrooms.images && livingrooms.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + livingrooms.images[0].name}')` }}
@@ -146,7 +163,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
 
         {bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bedrooms.bedroom_1.images[0].name}')` }}
@@ -159,7 +176,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
 
         {bathrooms['bathroom_1'] && bathrooms[`bathroom_1`].images && bathrooms['bathroom_1'].images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name}')` }}
@@ -172,7 +189,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
 
         {kitchens.images && kitchens.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + kitchens.images[0].name}')` }}
@@ -185,7 +202,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
 
         {furnitures.images && furnitures.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + furnitures.images[0].name}')` }}
@@ -198,7 +215,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
         ) : <Fragment />}
 
         {outdoors.images && outdoors.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <div className={classes.marginImage} onClick={toggle}>
               <div
                 style={{ backgroundImage: `url('${IMAGE_STORAGE_LG + outdoors.images[0].name}')` }}
@@ -210,7 +227,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Grid>
         ) : <Fragment />}
         {cover_photo.images && cover_photo.images.length ? (
-          <Grid item xs={6} sm={3}>
+          <Grid item xs={4} sm={3}>
             <ButtonBase
               onClick={toggle}
               focusRipple
