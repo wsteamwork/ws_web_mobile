@@ -5,6 +5,9 @@
         "fastBooking": "Instant Book",
         "fastPayment": "Direct payment is possible",
         "filterRooms": "Filter",
+        "explore": "Explore",
+        "trips": "Trips",
+        "profile": "Profile",
         "districtsFilter": "Districts",
         "bookByHour": "Book by hour",
         "descBookByHour": "You can book by hour, at least 4 hours"
@@ -59,8 +62,9 @@
     "emptyItem": "Comparison accommodation",
     "showCompare": "Show compare",
     "totalResult": "Total",
-    "results": "results",
+    "resultsFound": "rooms results",
     "contactForPrice": "Contact for price",
     "currency": "VND",
-    "month": "month"
+    "month": "month",
+    "placeholderSearch": "Where are you going ?"
 }

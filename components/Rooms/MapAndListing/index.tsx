@@ -9,7 +9,6 @@ import MapRoomListing from './MapRoomListing';
 const MapAndListing = () => {
   const { isMapOpen } = useRefreshListing();
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-
   return useMemo(
     () =>
       !!isMapOpen ? <MapRoomListing /> : (leaseTypeGlobal ? <ListingLTRooms /> : <SidebarAndListing />),

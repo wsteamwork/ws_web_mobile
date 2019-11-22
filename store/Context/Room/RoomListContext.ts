@@ -154,7 +154,6 @@ export const getLTRooms = async (
   let params: LTRoomUrlParams = router.query;
 
   let query: Partial<LTRoomIndexGetParams> = {
-    // include: 'city,district,merchant',
     name: params.name,
     city_id: params.city_id,
     district_id: params.district_id,
@@ -166,6 +165,7 @@ export const getLTRooms = async (
     comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
     discount: params.discount === null ? 1 : undefined, // 0,1
     instant_book: params.instant_book, // 1,2
+    limit:20,
     page: params.page,
   };
 
@@ -173,7 +173,7 @@ export const getLTRooms = async (
     query = updateObject(query, coords);
   }
   const signature = 'long-term-rooms';
-  const url = `${signature}?${qs.stringify(query)}&limit=12`; // 12 item on 1 Page
+  const url = `${signature}?${qs.stringify(query)}`;
   const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(url);
   return res.data;
 };
