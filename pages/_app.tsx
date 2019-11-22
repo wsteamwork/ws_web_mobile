@@ -12,10 +12,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'tippy.js/themes/light-border.css';
-// import ''
+import 'antd/dist/antd.css';
+
 config.autoAddCss = false;
 
-interface NextContextApp extends NextJSContext, AppContext { }
+interface NextContextApp extends NextJSContext, AppContext {}
 interface IProps extends AppProps {
   isServer: boolean;
   store: any;
@@ -40,20 +41,9 @@ class MyApp extends App<IProps> {
     Router.events.on('routeChangeError', this.handleRouteChangeEnd);
     if (windowExist) {
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.ready.then(registration => {
+        navigator.serviceWorker.ready.then((registration) => {
           registration.unregister();
         });
-        // navigator.serviceWorker
-        //   .getRegistrations()
-        //   .then(function (registrations) {
-        //     for (let registration of registrations) {
-        //       registration.unregister();
-        //     }
-        //     console.log('unregistered')
-        //   })
-        //   .catch(function (err) {
-        //     console.log('Service Worker registration failed: ', err);
-        //   });
       }
     }
     const jssStyles = document.querySelector('#jss-server-side');

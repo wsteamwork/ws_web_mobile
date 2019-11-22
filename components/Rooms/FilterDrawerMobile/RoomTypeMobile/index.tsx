@@ -52,14 +52,12 @@ const RoomTypeMobile: FC<IProps> = (props) => {
     roomTypes
   );
 
-  const { data, handleChange } = useRoomTypeChecbox(
-    setOpen,
-    dataClick,
-    setDataClick
-  );
+  const { data, handleChange } = useRoomTypeChecbox(setOpen, dataClick, setDataClick);
 
   useEffect(() => {
-    if (roomTypes.length === 0) getRoomType(setRoomTypes);
+    if (roomTypes.length === 0) {
+      getRoomType().then((res) => setRoomTypes(res));
+    }
   }, []);
 
   return (

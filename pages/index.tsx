@@ -16,6 +16,7 @@ import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
+import LTHome from './homepage/LTHome';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
@@ -47,40 +48,9 @@ const Home: NextPage = () => {
         url="https://westay.vn"
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
-      <GridContainer xs={12}>
-        <LazyLoad>
-          <SearchHome />
-        </LazyLoad>
-        {/* {width === 'lg' || width === 'xl' || width === 'md' ? ( */}
-        <Hidden smDown implementation="css">
-          <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-            <LazyLoad offset="150">
-              <SliderTypeApartment />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <MetroGridImage />
-            </LazyLoad>
-            <LazyLoad offset="150">
-              <ListRoom
-                roomData={roomsHot}
-                usingSlider={true}
-                title={t('home:editorChoice')}
-                render={renderRoom}
-              />
-
-            </LazyLoad>
-          </GridContainer>
-        </Hidden>
-        {/* ) : ''} */}
-        {/* <HostBecome /> */}
-
-        {/* <GridContainer xs={11} sm={11} md={11} lg={10} xl={10}>
-          <BlogContainer />
-        </GridContainer> */}
-      </GridContainer>
-      <LazyLoad offset="150">
-        <FooterComponent />
-      </LazyLoad>
+      {/* <GridContainer xs={12}> */}
+        <LTHome />
+      {/* </GridContainer> */}
     </Fragment>
   );
 };

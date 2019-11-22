@@ -1,17 +1,16 @@
 @import "./searchAutoSuggestion/index.scss";
 @import "./dateRangeSearch/index.scss";
 @import "./chooseGuestRoom/index.scss";
-@import "./roomCard/index.scss";
+
 @import "./layout/footer.scss";
 @import "./shared/index.scss";
 @import "./listRoom/index.scss";
-@import "./roomCardListing/index.scss";
-@import "./ltRoomCardListing/index.scss";
+@import "./card/index.scss";
 @import "./longTermRental/listing/index.scss";
 @import "./reusableComponents/index.scss";
 @import "./geoSuggest/index.scss";
 @import "./formik/index.scss";
-@import "./RoomCardMobile/index.scss";
+
 
 .flex_columCenter {
   align-items: center;
