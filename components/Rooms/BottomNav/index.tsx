@@ -45,21 +45,21 @@ const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const [index, setIndex] = useState<number>(TAB_LIST);
-  const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
-  const { isMapOpen } = stateRoomIndex;
-  useEffect(() => {
-    if (index === MAP) {
-      mapDispatch({
-        type: 'setMapOpen',
-        isMapOpen: true
-      });
-    }
-  }, [index]);
-  useEffect(() => {
-    if (!isMapOpen) {
-      setIndex(TAB_LIST);
-    }
-  }, [isMapOpen]);
+  // const { state: stateRoomIndex, dispatch: mapDispatch } = useContext(RoomIndexContext);
+  // const { isMapOpen } = stateRoomIndex;
+  // useEffect(() => {
+  //   if (index === MAP) {
+  //     mapDispatch({
+  //       type: 'setMapOpen',
+  //       isMapOpen: true
+  //     });
+  //   }
+  // }, [index]);
+  // useEffect(() => {
+  //   if (!isMapOpen) {
+  //     setIndex(TAB_LIST);
+  //   }
+  // }, [isMapOpen]);
   return (
     <Fragment>
       <BottomNavigation
@@ -118,7 +118,7 @@ const BottomNav: FC<IProps> = (props) => {
         onClose={() => setIndex(TAB_LIST)}>
         <FilterDrawerMobile setIndex={setIndex} />
       </Dialog>
-      <MapMobile openMap={index === MAP} />
+      {/* <MapMobile openMap={index === MAP} /> */}
     </Fragment>
   );
 };

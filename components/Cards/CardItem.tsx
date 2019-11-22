@@ -16,6 +16,8 @@ interface IProps extends ICardIntro {
   subTitle?: string;
   subTitleContent?: string;
   onClickCard?: () => void;
+  centerTitle?: boolean;
+  bigTitle?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) => createStyles({}));
@@ -29,14 +31,12 @@ const CardItem: FunctionComponent<IProps> = (props) => {
     imgAlt,
     imgSrc,
     title,
-    // showPrice,
-    // showSubTitle,
     recommendedPrice,
     subTitle,
-    // showContent,
-    // titleContent,
     subTitleContent,
-    onClickCard
+    onClickCard,
+    centerTitle,
+    bigTitle
   } = props;
 
   const { t } = useTranslation();
@@ -47,13 +47,23 @@ const CardItem: FunctionComponent<IProps> = (props) => {
         <img className="card-item__image" src={imgSrc} />
       </Grid>
       <Grid className="card-item__box-shadow"></Grid>
-      {/* {title} */}
       <Grid className="card-item__box-title">
-        <Grid className="card-item__title">
+        <Grid
+          className={classNames(
+            centerTitle ? 'text-center' : '',
+            'card-item__title',
+            bigTitle ? 'card-item__big-title' : ''
+          )}>
           {cookies.get('initLanguage') == 'en' ? cleanAccents(title) : title}
         </Grid>
-        <hr className="card-item__hr"/>
-        <Grid className="card-item__sub-title">
+        {!centerTitle && <hr className="text-center card-item__hr" />}
+
+        <Grid
+          className={classNames(
+            centerTitle ? 'text-center' : '',
+            'card-item__sub-title',
+            bigTitle ? 'card-item__big-sub-title' : ''
+          )}>
           {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle}
           {recommendedPrice}/{t('home:night')}
         </Grid>

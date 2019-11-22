@@ -48,9 +48,9 @@ const Home: NextPage = () => {
         url="https://westay.vn"
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
-      <GridContainer xs={12}>
+      {/* <GridContainer xs={12}> */}
         <LTHome />
-      </GridContainer>
+      {/* </GridContainer> */}
     </Fragment>
   );
 };

@@ -11,7 +11,7 @@ import PropertyListHorizontalScroll from './PropertyListHorizontalScroll';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import { getRoomType } from '@/components/Rooms/FilterActions/RoomType/context';
 import { Grid, Typography } from '@material-ui/core';
-import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
+import { NumberRoomCity, RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import CardIntro from '@/components/Cards/CardIntro';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateRouter } from '@/store/Context/utility';
@@ -19,12 +19,18 @@ import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Dispatch } from 'redux';
 import numeral from 'numeral';
 import CardItem from '@/components/Cards/CardItem';
+import BottomNav from '@/components/Rooms/BottomNav';
+import CardRoom2 from '@/components/Cards/CardRoom2';
 
 const LTHome: NextPage = () => {
   const [roomTypesData, setRoomTypesData] = useState<any[]>([]);
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
   );
+  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+    (state) => state.roomHomepage.roomsHot
+  );
+  console.log(roomsHot[0]);
 
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
 
@@ -50,7 +56,7 @@ const LTHome: NextPage = () => {
       <Grid className="propery-item-icon">
         <img className="item-icon" src={item.img}></img>
       </Grid>
-      <Typography>{item.value}</Typography>
+      <Typography style={{ textAlign: 'center' }}>{item.value}</Typography>
     </Grid>
   );
 
@@ -60,7 +66,7 @@ const LTHome: NextPage = () => {
         title={city.name_city}
         imgSrc={city.image}
         subTitle={'chỉ từ '}
-        // showPrice={true}
+        bigTitle={true}
         recommendedPrice={numeral(city.average_price).format('0,0')}
         // imgHeight={290}
         onClickCard={() => locationRoom(city.name_city)}
@@ -71,15 +77,27 @@ const LTHome: NextPage = () => {
   const renderDestinations = (city: NumberRoomCity) => (
     <div>
       <CardItem
-        // title={city.name_city}
+        centerTitle={true}
+        title={city.name_city}
         imgSrc={city.image}
         subTitle={'chỉ từ '}
-        // showPrice={true}
         recommendedPrice={numeral(city.average_price).format('0,0')}
-        // imgHeight={290}
         onClickCard={() => locationRoom(city.name_city)}
       />
     </div>
+  );
+  const renderRoomsHot = (room) => (
+    <CardRoom2
+      city={room.city.data.name}
+      district={room.district.data.name}
+      // instantbook={room.instant_book}
+      roomID={room.id}
+      roomName={room.room_name}
+      roomNumber={room.number_room}
+      roomType={room.room_type_txt}
+      roomImage={room.avatar_image}
+      avg_rating={room.avg_rating}
+    />
   );
 
   const locationRoom = (nameCity: string) => {
@@ -101,30 +119,46 @@ const LTHome: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg"
       />
 
-      <GridContainer xs={12} style={{ paddingTop: 44 }}>
-        <SearchInput />
+      <Grid xs={12} style={{ padding: '44px 0 100px' }}>
+        <Grid style={{ padding: '14px 22px' }}>
+          <SearchInput />
+        </Grid>
+
         <PropertyListHorizontalScroll
-          itemWidth={'22%'}
-          gutter={12}
+          itemWidth={'25%'}
+          gutter={11}
           listData={roomTypesData}
           itemRender={renderRoomTypeItem}
         />
 
         <PropertyListHorizontalScroll
           itemWidth={'100%'}
-          gutter={12}
+          gutter={11}
           listData={roomsCity}
           itemRender={renderCity}
         />
 
         <PropertyListHorizontalScroll
           itemWidth={'66%'}
-          gutter={12}
+          gutter={11}
           headTitle={'Popular Destinations'}
           listData={roomsCity}
           itemRender={renderDestinations}
         />
-      </GridContainer>
+        <Grid style={{ padding: '14px 2px' }}>
+          <PropertyListHorizontalScroll
+            itemWidth={'100%'}
+            itemHeight={200}
+            gutter={11}
+            headTitle={'Best Deals'}
+            listData={roomsHot}
+            itemRender={renderRoomsHot}
+          />
+          {/* <CardRoom2 /> */}
+        </Grid>
+
+        <BottomNav />
+      </Grid>
 
       {/* <MetroGridImage /> */}
     </Fragment>

@@ -69,7 +69,7 @@
   &__title {
     margin: 0px;
     word-wrap: break-word;
-    font-size: 34px;
+    font-size: 20px;
     font-weight: 700;
     line-height: 1.4444444444444444em;
     color: #ffffff;
@@ -80,16 +80,30 @@
     margin-bottom: 10px;
     margin-top: 5px;
     width: 20px;
-    height: 2px;
+    height: 4px;
+    background-color: #fff;
+    border: none;
+    border-radius: 15px;
+  }
+
+  .text-center {
+    text-align: center;
   }
 
   &__sub-title {
     margin: 0px;
     word-wrap: break-word;
-    font-size: 20px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.2857142857142858em;
     color: #ffffff;
     // text-align: center;
+  }
+
+  &__big-sub-title {
+    font-size: 20px;
+  }
+  &__big-title {
+    font-size: 34px;
   }
 }

@@ -170,43 +170,7 @@ const RoomCardListing: FC<Iprops> = (props) => {
                         ''
                       )}
                   </Grid>
-                  {/*<Grid>*/}
-                  {/*  <ul className="ul">*/}
-                  {/*    {_.filter(room.comforts.data, (o, i) => {*/}
-                  {/*      return (*/}
-                  {/*        o.id === 20 || // air conditioner*/}
-                  {/*        o.id === 9 || //wifi*/}
-                  {/*        o.id === 27 || //swimming*/}
-                  {/*        o.id === 10 //television*/}
-                  {/*      );*/}
-                  {/*    })*/}
-                  {/*      .sort((a, b) => a.id - b.id)*/}
-                  {/*      .map((o, i) => (*/}
-                  {/*        <Tooltip*/}
-                  {/*          key={i}*/}
-                  {/*          title={o.details.data[0].name}*/}
-                  {/*          placement="bottom"*/}
-                  {/*          classes={{ tooltip: 'tooltip' }}>*/}
-                  {/*          <li key={o.id} className="list">*/}
-                  {/*            <SvgCustom icon={o.icon} />*/}
-                  {/*          </li>*/}
-                  {/*        </Tooltip>*/}
-                  {/*      ))}*/}
-                  {/*    {totalComfort > 0 ? (*/}
-                  {/*      <Tooltip*/}
-                  {/*        enterTouchDelay={300}*/}
-                  {/*        classes={{ tooltip: 'tooltip' }}*/}
-                  {/*        title={`${totalComfort} tiện nghi phòng khác`}*/}
-                  {/*        placement="bottom">*/}
-                  {/*        <li>*/}
-                  {/*          <SvgCustom borderClass="borderBlue" text={`+${totalComfort}`} />*/}
-                  {/*        </li>*/}
-                  {/*      </Tooltip>*/}
-                  {/*    ) : (*/}
-                  {/*        ''*/}
-                  {/*      )}*/}
-                  {/*  </ul>*/}
-                  {/*</Grid>*/}
+
                 </Grid>
                 {room!.total_review > 3 ? (
                   <Grid className="boxRating">
@@ -286,16 +250,6 @@ const RoomCardListing: FC<Iprops> = (props) => {
               </Link>
               <Grid className="boxSave">
                 <FavoriteAnimation />
-                {/* <Hidden smDown>
-                  <Tooltip title={t('rooms:compareRooms')} placement="right-start">
-                    <IconButton
-                      aria-label="compare"
-                      className="iconCompare"
-                      onClick={() => handleCompareList(comparisonList, room, dispatch)}>
-                      <FontAwesomeIcon size="1x" icon={faBalanceScaleRight} />
-                    </IconButton>
-                  </Tooltip>
-                </Hidden> */}
               </Grid>
             </Grid>
           </Grid>

@@ -10,6 +10,7 @@ interface Iprops<T> {
   listData?: T[];
   itemRender?: (item: T) => ReactNode;
   itemWidth?: number | string;
+  itemHeight?: number | string;
   gutter?: number | string;
 }
 
@@ -19,9 +20,8 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       textAlign: 'center'
     },
     propertyItemContainer: {
-      width: (props) => props.itemWidth
-    },
-    propertyListHorizontalScroll: {
+      height: (props) => props.itemHeight,
+      width: (props) => props.itemWidth,
       paddingLeft: (props) => props.gutter,
       paddingRight: (props) => props.gutter
     }
@@ -31,7 +31,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
 const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
-  const { headTitle, listData, itemRender } = props;
+  const { headTitle, listData, itemRender, itemHeight } = props;
 
   const renderList = useMemo(
     () =>
@@ -50,13 +50,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
           <Typography className="head-title">Popular Destinations</Typography>
         </Grid>
       )}
-      <Grid
-        className={classNames(
-          'property-list-horizontal-scroll',
-          classes.propertyListHorizontalScroll
-        )}>
-        {renderList}
-      </Grid>
+      <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>
     </section>
   );
 };
