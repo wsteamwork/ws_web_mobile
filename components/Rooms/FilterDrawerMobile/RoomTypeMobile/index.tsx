@@ -1,102 +1,133 @@
-import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useState, useEffect, Dispatch, SetStateAction } from 'react';
-import _ from 'lodash';
-import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox/Checkbox';
-import Paper from '@material-ui/core/Paper/Paper';
-import Grey from '@material-ui/core/colors/grey';
-import Blue from '@material-ui/core/colors/blue';
-import { TypeSelect } from '@/types/Requests/ResponseTemplate';
-import { useExpandableList } from '@/store/Hooks/filterHooks';
-import { Theme, makeStyles } from '@material-ui/core';
+import React, { FC, Fragment, Dispatch, SetStateAction, useState, ChangeEvent } from 'react';
+import IOSSwitch from '../../FilterActions/SwitchMap/IOSSwitch';
 import { useTranslation } from 'react-i18next';
-import { useRoomTypeChecbox, getRoomType } from '../../FilterActions/RoomType/context';
-interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
-  dataClick: number[];
-  setDataClick: Dispatch<SetStateAction<number[]>>;
-}
+import { Grid, Typography, Divider, Theme } from '@material-ui/core';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import mainColor from '@/styles/constants/colors';
+import Collapse from '@material-ui/core/Collapse';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
-    ul: {
-      listStyleType: 'none',
-      marginBlockStart: '0px',
-      paddingInlineStart: '0.4rem',
-      paddingBlockStart: '0.5rem',
-      marginBlockEnd: 0
-    },
-    checkboxRoot: {
-      padding: 5
-    },
-    showMore: {
-      textAlign: 'center',
-      padding: 5,
-      backgroundColor: Grey[200],
-      color: Blue[400]
-    },
     title: {
-      fontWeight: 700
+      fontWeight: 700,
+      color: mainColor.titleText
+    },
+    inline: {
+      display: 'flex',
+      alignItems: 'center'
+    },
+    itemRight: {
+      alignItems: 'flex-end',
+      textAlign: 'right'
+    },
+    divider: {
+      margin: '16px 0',
+      backgroundColor: '#D8D8D8',
+      width: '100%'
     }
   })
 );
-
+interface IProps {
+  classes?: any;
+}
 const RoomTypeMobile: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { setOpen, dataClick, setDataClick } = props;
 
-  const [roomTypes, setRoomTypes] = useState<TypeSelect[]>([]);
+  const [state, setState] = useState({
+    checkedAll: 0,
+    privateHouse: 0,
+    entireApartment: 0,
+    villa: 0,
+    privateRoom: 0,
+    hotelRoom: 0,
+  });
 
-  const [roomTypeChunks, isRoomTypeExpand, setRoomTypeExpand] = useExpandableList<TypeSelect>(
-    roomTypes
-  );
-
-  const { data, handleChange } = useRoomTypeChecbox(
-    setOpen,
-    dataClick,
-    setDataClick
-  );
-
-  useEffect(() => {
-    if (roomTypes.length === 0) getRoomType(setRoomTypes);
-  }, []);
+  const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [name]: event.target.checked ? 1 : 0 });
+  };
 
   return (
     <Fragment>
-      {roomTypes.length > 0 ? (
-        <Fragment>
-          <ul className={classes.ul}>
-            {_.map(roomTypeChunks, (item) => (
-              <li key={item.id}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name={item.id.toString()}
-                      color="primary"
-                      onChange={handleChange(item.id)}
-                      value={item.id.toString()}
-                      checked={dataClick.some((i) => i === item.id)}
-                      classes={{
-                        root: classes.checkboxRoot
-                      }}
-                    />
-                  }
-                  label={item.value}
-                />
-              </li>
-            ))}
-          </ul>
-          <Paper
-            elevation={0}
-            className={classes.showMore}
-            onClick={() => setRoomTypeExpand(!isRoomTypeExpand)}>
-            {isRoomTypeExpand ? t('rooms:readLess') : t('rooms:readMore')}
-          </Paper>
-        </Fragment>
-      ) : (
-        ''
-      )}
+      <Grid container item xs={12}>
+        <Grid item xs={6} className={classes.inline}>
+          <Typography variant="subtitle2" className={classes.title}>
+            Tất cả
+          </Typography>
+        </Grid>
+        <Grid item xs={6} className={classes.itemRight}>
+          <IOSSwitch checked={state.checkedAll === 1} onChange={handleChange('checkedAll')} value="checked" />
+        </Grid>
+        {state.checkedAll === 0 && (
+          <Grid container item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        )}
+      </Grid>
+      <Collapse in={state.checkedAll === 0}>
+        <Grid container item xs={12}>
+          <Grid item xs={6} className={classes.inline}>
+            <Typography variant="subtitle2" className={classes.title}>
+              Nhà riêng
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.itemRight}>
+            <IOSSwitch checked={state.privateHouse === 1} onChange={handleChange('privateHouse')} value="checked" />
+          </Grid>
+          <Grid container item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={6} className={classes.inline}>
+            <Typography variant="subtitle2" className={classes.title}>
+              Căn hộ
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.itemRight}>
+            <IOSSwitch checked={state.entireApartment === 1} onChange={handleChange('entireApartment')} value="checked" />
+          </Grid>
+          <Grid container item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={6} className={classes.inline}>
+            <Typography variant="subtitle2" className={classes.title}>
+              Biệt thự
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.itemRight}>
+            <IOSSwitch checked={state.villa === 1} onChange={handleChange('villa')} value="checked" />
+          </Grid>
+          <Grid container item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={6} className={classes.inline}>
+            <Typography variant="subtitle2" className={classes.title}>
+              Phòng riêng
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.itemRight}>
+            <IOSSwitch checked={state.privateRoom === 1} onChange={handleChange('privateRoom')} value="checked" />
+          </Grid>
+          <Grid container item xs={12}>
+            <Divider className={classes.divider} />
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <Grid item xs={6} className={classes.inline}>
+            <Typography variant="subtitle2" className={classes.title}>
+              Phòng khách sạn
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.itemRight}>
+            <IOSSwitch checked={state.hotelRoom === 1} onChange={handleChange('hotelRoom')} value="checked" />
+          </Grid>
+        </Grid>
+      </Collapse>
     </Fragment>
   );
 };
