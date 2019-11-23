@@ -2,16 +2,18 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, MouseEvent, useContext, useMemo, useState } from 'react';
+import React, { FC, Fragment, MouseEvent, useContext, useMemo, useState, useRef } from 'react';
 import 'react-animated-slider/build/horizontal.css';
 import { useTranslation } from 'react-i18next';
 import '/styles/pages/LTR/room/index.scss';
 import BoxInfoBasic from '../BoxInfoBasic';
 import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
+import Plx from 'react-plx';
 interface IProps {
   classes?: any,
   isPreviewPage?: boolean,
   backgroundImage?: string;
+  room: any;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -53,15 +55,37 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { isPreviewPage } = props;
-  const [openFullImage, setOpenFullImage] = useState<boolean>(false);
-  const { width } = useContext(GlobalContext);
+  const { isPreviewPage, room } = props;
   const { t } = useTranslation();
 
+  const parallaxData = [
+    {
+      start: 0,
+      end: 500,
+      properties: [
+        {
+          startValue: 1,
+          endValue: 2,
+          property: 'scale',
+        },
+      ],
+    },
+  ];
+
   return (
-    <div className={classes.boxContainer}>
+    <div className={classes.boxContainer}> 
       <div className={classes.boxInfo}>
-        <BoxInfoBasic showRating showButtonBook />
+
+      <Plx
+        parallaxData={ parallaxData }
+      >
+        <BoxInfoBasic showRating showButtonBook 
+          name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
+          district={room.district.data.name}
+                      city={room.city.data.name}
+                      price={room.price_display}
+        />
+      </Plx>
       </div>
       <Grid container justify='center' alignItems='center' className={classes.boxViewMore}>
         <span style={{color:'#fff'}}>Xem chi tiết</span>

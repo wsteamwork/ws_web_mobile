@@ -21,7 +21,6 @@ export const useRefreshListing = (): ReturnUseRefresh => {
       if (leaseTypeGlobal){
         const res = await getLTRooms(router,coords);
         dispatchIndexRoom({ type: 'setlongtermRooms', longtermRooms: res.data, meta: res.meta });
-        // dispatchIndexRoom({ type: 'setMeta', meta: res.meta });
       } else {
         const res = await getRooms(router, coords);
         dispatchIndexRoom({ type: 'setRooms', rooms: res.data, meta: res.meta });

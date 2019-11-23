@@ -5,6 +5,9 @@
         "fastBooking": "Đặt phòng nhanh",
         "fastPayment": "Có thể thanh toán trực tiếp",
         "filterRooms": "Bộ lọc",
+        "explore": "Khám phá",
+        "trips": "Hành trình",
+        "profile": "Cá nhân",
         "districtsFilter": "Quận, Huyện",
         "bookByHour": "Theo giờ",
         "descBookByHour": "Bạn có thể đặt phòng theo giờ, tối thiểu là 4h"
@@ -61,9 +64,10 @@
     "emptyItem": "So sánh chỗ ở",
     "showCompare": "Xem so sánh",
     "totalResult": "Tổng số",
-    "results": "kết quả tìm kiếm",
+    "resultsFound": "căn hộ được tìm thấy",
     "contactForPrice": "Giá liên hệ",
     "currency": "VNĐ",
-    "month": "tháng"
+    "month": "tháng",
+    "placeholderSearch": "Bạn muốn đi đâu ?"
 
 }

@@ -49,8 +49,8 @@ const init: SearchFilterState = {
   startDate: moment().format(DEFAULT_DATE_TIME_FORMAT),
   endDate: null,
   roomRecently: [],
-  leaseTypeGlobal: 0,
-  leaseTypePathName: '/rooms'
+  leaseTypeGlobal: 1,
+  leaseTypePathName: '/long-term-rooms'
 };
 
 const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (

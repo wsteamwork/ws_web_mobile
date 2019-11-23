@@ -3,8 +3,17 @@ import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { Checkbox, FormControl, FormControlLabel, InputAdornment, OutlinedInput } from '@material-ui/core';
+import {
+  CreateListingActions,
+  CreateListingState
+} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  InputAdornment,
+  OutlinedInput
+} from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, FormikProps } from 'formik';
@@ -50,7 +59,7 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType(setRoomTypesData);
+    getRoomType().then((res) => setRoomTypesData(res));
     // console.log(listing);
   }, []);
 

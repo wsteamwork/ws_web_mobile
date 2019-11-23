@@ -4,6 +4,8 @@ import { Theme, Grid, Typography } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ButtonGlobal from '@/components/ButtonGlobal';
+import { useTranslation } from 'react-i18next';
+import { formatPrice } from '@/utils/mixins';
 
 interface IProps {
   classes?: any,
@@ -11,6 +13,11 @@ interface IProps {
   subTextColor?: string,
   showRating?: boolean,
   showButtonBook?: boolean,
+  name: string,
+  isPreviewPage?: boolean,
+  district: string,
+  city: string,
+  price:number
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -76,31 +83,32 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxInfoBasic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {showButtonBook, showRating } = props;
-
+  const {showButtonBook, showRating, name, isPreviewPage, district, city, price } = props;
+  const { t } = useTranslation();
+  
   return (
     <Grid container>
       <Grid item xs={9}>
         <Typography variant='h1' className={classes.txtName}>
-          Grand Royale Park Hotel Royale Park Hotel
+          {isPreviewPage && !name ? t('room:updateRoomName') : name}
         </Typography>
       </Grid>
       <Grid item xs={3} container justify='flex-end' alignItems='flex-end'>
         <Grid item>
           <Typography variant='subtitle1' className={classes.txtPrice}>
-            $123
+            {formatPrice(price)}
           </Typography>
         </Grid>
       </Grid>
       <Grid item xs={9} className={classes.rowMarginTop}>
         <Typography variant='subtitle2' className={classes.txtAddress}>
-          Thanh Xuân, Hà Nội
+          {district}, {city}
         </Typography>
       </Grid>
       <Grid item xs={3} container justify='flex-end' alignItems='flex-end'>
         <Grid item>
           <Typography variant='subtitle2' className={classes.txtPer}>
-            vnd / tháng
+            {t('longtermroom:perMonth')}
           </Typography>
         </Grid>
       </Grid>
@@ -110,7 +118,7 @@ const BoxInfoBasic: FC<IProps> = (props) => {
             name="customized-empty"
             readOnly
             size="small"
-            value={2}
+            value={4.5}
             precision={0.5}
             classes={{ root: classes.colorStar }}
             emptyIcon={<StarBorderIcon fontSize="inherit" className={classes.iconEmpty} />}

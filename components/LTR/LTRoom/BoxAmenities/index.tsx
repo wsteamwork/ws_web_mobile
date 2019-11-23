@@ -1,8 +1,8 @@
 import DialogFullAmenities from '@/components/LTR/LTRoom/BoxAmenities/DialogFullAmenities';
 import { ReducersList } from '@/store/Redux/Reducers';
+import mainColor from '@/styles/constants/colors';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
 import { Theme } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
 // import deepPurple from '@material-ui/core/colors/deepPurple';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -28,8 +28,11 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     name: {
-      fontWeight: 700,
-      margin: '1rem 0 0.35rem 0'
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: mainColor.titleText,
+      fontWeight: 'bold'
     },
     rowMargin: {
       marginTop: 24,
@@ -40,15 +43,21 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     roomAmenitiesIcon: {
       verticalAlign: 'bottom',
-      width: 24,
-      height: 24
+      width: 20,
+      height: 20
     },
     roomName: {
-      margin: '24px 0 12px',
-      fontWeight: 700,
+      margin: '12px 0',
+      fontWeight: 600,
+      fontSize: 13
+    },
+    btnViewAll:{
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: '#54D3C2',
     },
     button: {
-      // color: deepPurple[500],
       margin: '30px 0 16px',
       '&:hover': {
         backgroundColor: '#fff'
@@ -109,12 +118,21 @@ const BoxAmenities: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Typography variant='h5' className={classes.name}>
-        {t('rooms:amenities')}
-      </Typography>
-      <Typography variant='subtitle2' className={classes.subName} gutterBottom>
-        {t('longtermroom:amenitiesOfRoom')}
-      </Typography>
+      <Grid container justify='space-between' alignContent='center'>
+        <Grid item>
+          <Typography variant='h5' className={classes.name} gutterBottom>
+            {t('rooms:amenities')}
+          </Typography>
+          <Typography variant='subtitle2' className={classes.subName} gutterBottom>
+            {t('longtermroom:amenitiesOfRoom')}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant='h5' className={classes.btnViewAll} gutterBottom onClick={toggle} >
+            {t('longtermroom:viewAll')}
+          </Typography>
+        </Grid>
+      </Grid>
 
       <div>
         <Typography variant='subtitle1' className={classes.roomName}>
@@ -123,7 +141,7 @@ const BoxAmenities: FC<IProps> = (props) => {
         {facilities === undefined || facilities.length === 0 ? (
           <Typography>{t('longtermroom:notFoundData')}</Typography>
         ) : (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} justify='space-between'>
               {facilities.map((o, i) => {
                 if (i < 6) return (
                   <Fragment key={i}>
@@ -146,44 +164,10 @@ const BoxAmenities: FC<IProps> = (props) => {
           )}
       </div>
 
-      <div>
-        <Typography variant='subtitle1' className={classes.roomName}>
-          {t('longtermroom:bathrooms')}
-        </Typography>
-        {bathrooms === undefined || bathrooms.length === 0 ? (
-          <Typography>{t('longtermroom:notFoundData')}</Typography>
-        ) : (
-            <Grid container spacing={2}>
-              {bathrooms.map((o, i) => {
-                if (i < 6) return (
-                  <Fragment key={i}>
-                    <Grid item container xs={6} sm={4} spacing={2}>
-                      <Grid item>
-                        <img
-                          src={o.icon}
-                          alt={o.type_txt}
-                          className={classes.roomAmenitiesIcon}
-                        />
-                      </Grid>
-                      <Grid className={classes.nameIcon} item xs>
-                        <Typography variant={'body2'}>{o.comfort_trans[0].name}</Typography>
-                      </Grid>
-                    </Grid>
-                  </Fragment>
-                )
-              })}
-            </Grid>
-          )}
-      </div>
-      <Button onClick={toggle} className={classes.button} style={{ color: `${leaseTypeGlobal ? '#673ab7 !important' : '#ff9800'}` }} size='small'>
-        &#8230; {t('rooms:readMore')}
-      </Button>
-      {/* <Grow in={openFullAmen}> */}
       <DialogFullAmenities open={openFullAmen} handleClose={() => setOpenFullAmen(false)}
         facilities={facilities} kitchens={kitchens} bedrooms={bedrooms}
         bathrooms={bathrooms} common={common} livingrooms={livingrooms}
         entertainment={entertainment} others={others} outdoors={outdoors} />
-      {/* </Grow> */}
     </Fragment>
   );
 };

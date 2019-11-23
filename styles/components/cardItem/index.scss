@@ -1,0 +1,95 @@
+.card-item {
+  padding-top: 125%;
+  background: rgb(72, 72, 72);
+  contain: strict;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  overflow: hidden;
+  border-radius: 15px;
+  &__image-container {
+    padding-top: 125%;
+    position: relative;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+
+  &__image {
+    height: 100%;
+    width: 100%;
+    position: static;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+
+  &__box-shadow {
+    background-image: -webkit-linear-gradient(-180deg, rgba(0, 0, 0, 0) 3%, #000000 100%);
+    background-image: -moz-linear-gradient(-180deg, rgba(0, 0, 0, 0) 3%, #000000 100%);
+    background-image: linear-gradient(-180deg, rgba(0, 0, 0, 0) 3%, #000000 100%);
+    opacity: 0.6;
+    position: absolute;
+    height: 60%;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+  }
+
+  &__box-title {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding-bottom: 32px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  &__title {
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.4444444444444444em;
+    color: #ffffff;
+    // text-align: center;
+  }
+
+  &__hr {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 20px;
+    height: 2px;
+  }
+
+  &__sub-title {
+    margin: 0px;
+    word-wrap: break-word;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2857142857142858em;
+    color: #ffffff;
+    // text-align: center;
+  }
+}

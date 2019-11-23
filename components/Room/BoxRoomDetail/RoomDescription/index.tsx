@@ -9,6 +9,8 @@ import React, { FC, Fragment, MouseEvent, useState } from 'react';
 import ReactHtmlParser, { convertNodeToElement } from 'react-html-parser';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import mainColor from '@/styles/constants/colors';
+
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
@@ -18,7 +20,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontSize: 15,
       lineHeight: '20px',
       letterSpacing: -0.24,
-      color: '#8A8A8F',
+      color: mainColor.titleText,
+      fontWeight: 'bold'
     },
     tagP_inHtmlPare: {
       width: '100%',
@@ -93,9 +96,6 @@ const RoomDescription: FC<IProps> = (props) => {
         {isOpen ? (
           <Fragment>
             <Grid item xs={12}>
-              <Typography variant='subtitle2' className={classes.title}>
-                {t('room:description')}
-              </Typography>
               {ReactHtmlParser(isPreviewPage && !desHTML ? notFoundContent : desHTML, {
                 transform: transformHtmlContent
               })}

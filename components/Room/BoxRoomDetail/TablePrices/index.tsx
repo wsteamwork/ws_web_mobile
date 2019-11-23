@@ -1,3 +1,4 @@
+import mainColor from '@/styles/constants/colors';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { formatMoney } from '@/utils/mixins';
 import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Typography } from '@material-ui/core';
@@ -44,12 +45,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 export const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: '#6b6b6b',
-      color: theme.palette.common.white,
+      color: mainColor.titleText,
+      padding: '16px 0'
     },
     body: {
-      fontSize: 14,
-      border: 'none'
+      fontSize: 13,
+      padding: '16px 0'
     },
   }),
 )(TableCell);
@@ -58,7 +59,7 @@ export const StyledTableRow = withStyles((theme: Theme) =>
   createStyles({
     root: {
       '&:nth-of-type(odd)': {
-        backgroundColor: '#f6f6f6',
+        backgroundColor: '#fff',
       },
     },
   }),
