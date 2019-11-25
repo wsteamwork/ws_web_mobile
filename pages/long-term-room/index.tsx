@@ -15,18 +15,25 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
+import dynamic from 'next/dynamic'
+import React, { Fragment, useContext, useEffect, useMemo, useState, useRef } from 'react';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
+import { Link, Element } from 'react-scroll';
+import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
+import { useTranslation } from 'react-i18next';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
+  const detailRef = useRef(null);
   // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+  const { t } = useTranslation();
+
   // forceCheck();
   if (router.pathname.includes('/long-term-room')) {
     dispatchLeaseType({
@@ -81,46 +88,55 @@ const LongtermRoom: NextPage = () => {
         () => (
           <Fragment>
             {ltroom ? (
-              <GridContainer xs={12} classNameItem="roomPage">
-                {/* <BoxImageLT
-                  backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name})`}
-                  room={ltroom}
-                /> */}
+              <GridContainer xs={12} classNameItem="roomPage" id='id_BoxDetails'>
+                
+                  <BoxImageLT
+                    backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name})`}
+                    room={ltroom}
+                  >
+                    <Link activeClass="active" to="test1" spy={true} smooth={true} duration={500} >
+                      <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' >
+                        <span style={{color:'#fff'}}>{t('longtermroom:moreDetails')}</span>
+                        <KeyboardArrowDownRounded style={{color:'#fff'}}/>
+                      </Grid>
+                    </Link>
+
+                  </BoxImageLT>
                 <Grid container>
                   <Grid item xs={12} sm={12}>
-                    {/* <BoxLTRoomDetail room={ltroom} /> */}
+                    <Element name="test1">
+                      <BoxLTRoomDetail room={ltroom} />
+                    </Element>
                   </Grid>
 
-                  <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">*/}
+                  <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
                     <Grid container className="roomPage__boxBookingMoblie">
-                      {/* <BoxBottomBooking
+                      <BoxBottomBooking
                         priceBasic={ltroom.price_display}
                         handleOpenBookingDialog={handleOpenBookingDialog}
-                      /> */}
+                      />
                     </Grid>
                   </Grid>
                 </Grid>
               </GridContainer>
-
             ) : ''}
           </Fragment>
         ),
         [ltroom]
       )}
-      {/* <Dialog
+      <Dialog
         fullScreen
         open={openBookingDialog}
         onClose={handleCloseBookingDialog}
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
-      </Dialog> */}
+      </Dialog>
     </Fragment>
   );
 };
 
 LongtermRoom.getInitialProps = async ({ store, query, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
-
   const data = await getDataLTRoom(store.dispatch, query, initLanguage);
   return {};
 };

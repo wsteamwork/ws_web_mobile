@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtName: {
       fontStyle: 'normal',
       fontWeight: 'bold',
-      fontSize: 28,
+      fontSize: 22,
       lineHeight: '34px',
       letterSpacing: 0.36,
       color: (props) => (props.textColor ? props.textColor : 'white'),
@@ -137,7 +137,7 @@ const BoxInfoBasic: FC<IProps> = (props) => {
           background='#54D3C2'
           onClick={() => { alert('ok') }}
         >
-          Đặt phòng
+          {t('longtermroom:bookNow')}
             </ButtonGlobal>
       </Grid>
       )}

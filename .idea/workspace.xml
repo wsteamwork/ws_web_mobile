@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="" />
+    <list default="true" id="e0d5d8df-e3d1-43b2-9b99-bef708f04c7d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/LTR/LTRoom/BoxInfoBasic/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/LTR/LTRoom/BoxInfoBasic/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Room/BoxRoomDetail/RoomDescription/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/long-term-room/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/long-term-room/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/Redux/Reducers/LTR/LTRoom/ltroomReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/Redux/Reducers/LTR/LTRoom/ltroomReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" beforeDir="false" afterPath="$PROJECT_DIR$/translations/LongTermRental/longtermroom/longtermroom-vi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,35 +24,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1495">
-              <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+            <state relative-caret-position="253">
+              <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
+        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="230">
-              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
-              <folding>
-                <element signature="e#0#42#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="-32">
+              <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2760">
+              <caret line="128" column="100" selection-start-line="128" selection-start-column="100" selection-end-line="128" selection-end-column="104" />
             </state>
           </provider>
         </entry>
@@ -153,8 +158,8 @@
         <option value="$PROJECT_DIR$/pages/homepage/LTHome.tsx" />
         <option value="$PROJECT_DIR$/pages/homepage/STHome.tsx" />
         <option value="$PROJECT_DIR$/pages/preview-long-term-room/index.tsx" />
-        <option value="$PROJECT_DIR$/pages/long-term-room/index.tsx" />
         <option value="$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx" />
+        <option value="$PROJECT_DIR$/pages/long-term-room/index.tsx" />
       </list>
     </option>
   </component>
@@ -173,27 +178,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -262,6 +246,45 @@
             <path>
               <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
               <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="@material-ui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="@material-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="@material-ui" type="462c0819:PsiDirectoryNode" />
+              <item name="core" type="462c0819:PsiDirectoryNode" />
+              <item name="Grid" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="@types" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="@types" type="462c0819:PsiDirectoryNode" />
+              <item name="react" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ws_web_mobile" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ws_web_mobile" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -304,6 +327,27 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="ws_next_customer" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\VNP\ws_next_customer" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="pages" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,17 +366,17 @@
     <property name="ts.external.directory.path" value="D:\VNP\ws_web_mobile\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
+      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
+      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\VNP\ws_next_customer\styles\components\LTRoomCardListing" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchAutoSuggestion" />
       <recent name="D:\VNP\ws_next_customer\components\LTR" />
       <recent name="D:\VNP\ws_next_customer\components\Home\SearchComponent" />
       <recent name="D:\VNP\ws_next_customer\components\LTR\LTRoom\BoxListImageRoom" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\VNP\ws_next_customer\types\Requests\LTR\LTRoom" />
-      <recent name="D:\VNP\ws_next_customer\components\Room\BoxRoomDetail" />
-      <recent name="D:\VNP\ws_next_customer\components\Slider\HomePage" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -459,6 +503,7 @@
       <workItem from="1574154490352" duration="3758000" />
       <workItem from="1574223825326" duration="5966000" />
       <workItem from="1574300935287" duration="207000" />
+      <workItem from="1574608531160" duration="3737000" />
     </task>
     <task id="LOCAL-00001" summary="duy PaymentContext">
       <created>1563870475772</created>
@@ -618,12 +663,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1527177000" />
+    <option name="totallyTimeSpent" value="1530914000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.23027718" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49809885" visible="true" weight="0.23294243" />
       <window_info id="Structure" order="1" sideWeight="0.50190115" side_tool="true" weight="0.23933902" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -638,7 +683,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.30769232" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.15830547" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50586355" side_tool="true" weight="0.14046822" />
-      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49413645" visible="true" weight="0.2374582" />
+      <window_info active="true" anchor="bottom" x="452" y="206" width="1342" height="282" id="Terminal" order="11" sideWeight="0.49413645" visible="true" weight="0.14046822" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3277592" />
       <window_info anchor="bottom" id="Thumbnails" order="13" weight="0.32998884" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -714,23 +759,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="fullcalendar final #1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/colors/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/index.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1288">
-          <caret line="58" column="32" selection-start-line="58" selection-start-column="32" selection-end-line="58" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Button/Button.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-253">
-          <caret line="6" column="24" lean-forward="true" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/MenuItem/MenuItem.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -1040,16 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1495">
-          <caret line="85" column="19" selection-start-line="85" selection-start-column="19" selection-end-line="85" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/components/ButtonGlobal/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
@@ -1060,10 +1078,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="62" column="9" selection-start-line="62" selection-start-column="9" selection-end-line="62" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/@material-ui/core/Grid/Grid.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="77" column="59" selection-start-line="77" selection-start-column="59" selection-end-line="77" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxLTRoomDetail.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="43" column="6" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/components/LTR/LTRoom/BoxImageLT/index.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+        <state relative-caret-position="2760">
+          <caret line="128" column="100" selection-start-line="128" selection-start-column="100" selection-end-line="128" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pages/long-term-room/index.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="93" column="18" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
         </state>
       </provider>
     </entry>

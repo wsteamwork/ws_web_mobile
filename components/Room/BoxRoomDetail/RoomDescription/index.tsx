@@ -126,7 +126,7 @@ const RoomDescription: FC<IProps> = (props) => {
                 transform: transformHtmlContent
               })}
               <Button onClick={toggle} className={classes.btnMore}>
-                &#8230;Xem thêm
+                &#8230;{t('room:readMore')}
               </Button>
             </span>
           )}
