@@ -95,7 +95,7 @@ interface IProps {
   classes?: any;
   setIndex(value: number): void;
 }
-const FilterDrawerMobile: FC<IProps> = (props) => {
+const FilterDrawerMobile2: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { setIndex } = props;
@@ -270,4 +270,4 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   );
 };
 
-export default FilterDrawerMobile;
+export default FilterDrawerMobile2;

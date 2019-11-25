@@ -56,7 +56,6 @@ export const useRoomTypeChecbox = (
 
   const paramsAPI = leaseTypeGlobal ? 'accommodation_type' : 'type_room';
   const queryTypeRoom = leaseTypeGlobal ? query.accommodation_type : query.type_room;
-
   useEffect(() => {
     getRoomType(setData);
   }, []);
@@ -77,10 +76,19 @@ export const useRoomTypeChecbox = (
     checked: boolean
   ) => {
     if (checked === true) {
-      setDataClick([...dataClick, item]);
+      if (item === 0) {
+        setDataClick([1, 2, 3, 4, 5]);
+      } else {
+        setDataClick([...dataClick, item]);
+      }
     } else {
-      const dataCheckboxUnCheck = dataClick.filter((i) => i !== item);
-      setDataClick(dataCheckboxUnCheck);
+      if (item === 0) {
+        let dataCheckboxUnCheck = [];
+        setDataClick(dataCheckboxUnCheck);
+      } else {
+        let dataCheckboxUnCheck = dataClick.filter((i) => i !== item);
+        setDataClick(dataCheckboxUnCheck);
+      }
     }
   };
 

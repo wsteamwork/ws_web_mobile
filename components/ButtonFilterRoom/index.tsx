@@ -48,10 +48,12 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
   return (
     <Grid container item xs={11} className={classes.boxWrapper}>
       <Grid item xs={6} className={classes.boxLeft}>
-        <Typography className={classes.textLeft}>{ meta && meta.pagination ? meta.pagination.total : 0 } {t('rooms:resultsFound')}</Typography>
+        <Typography className={classes.textLeft}>
+          {meta && meta.pagination ? meta.pagination.total : 0} {t('rooms:resultsFound')}
+        </Typography>
       </Grid>
       <Grid item xs={6} className={classes.boxRight}>
-  <Typography className={classes.textRight}>{t('rooms:searchRooms:filterRooms')}</Typography>
+        <Typography className={classes.textRight}>{t('rooms:searchRooms:filterRooms')}</Typography>
         <IconButton onClick={handleFilterAction}>
           <Sort className={classes.btnRight} />
         </IconButton>
