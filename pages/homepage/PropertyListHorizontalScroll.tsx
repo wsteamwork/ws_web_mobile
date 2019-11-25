@@ -23,7 +23,9 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
     propertyItemContainer: {
       height: (props) => props.itemHeight,
       width: (props) => props.itemWidth,
-      padding: (props) => props.paddingItem
+      padding: (props) => props.paddingItem,
+      paddingLeft: (props) => props.gutter,
+      paddingRight: (props) => props.gutter
     },
     propertyListHorizontalScroll: {
 
