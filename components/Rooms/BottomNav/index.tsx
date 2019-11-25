@@ -7,7 +7,6 @@ import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, forwardRef, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import MapMobile from '../MapMobile';
 import mainColor from '@/styles/constants/colors';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
