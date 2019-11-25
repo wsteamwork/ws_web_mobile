@@ -1,16 +1,12 @@
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import mainColor from '@/styles/constants/colors';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import Dialog from '@material-ui/core/Dialog/Dialog';
 import Slide, { SlideProps } from '@material-ui/core/Slide/Slide';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, forwardRef, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, forwardRef, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import MapMobile from '../MapMobile';
-import mainColor from '@/styles/constants/colors';
-import FilterDrawerMobile1 from '../FilterDrawerMobile/index';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -41,7 +37,7 @@ export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref)
   <Slide timeout={300} direction="up" ref={ref} {...props} />
 ));
 
-interface IProps {}
+interface IProps { }
 const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
@@ -111,15 +107,15 @@ const BottomNav: FC<IProps> = (props) => {
           }
         />
       </BottomNavigation>
-      <Dialog
+      {/* <Dialog
         fullScreen
         TransitionComponent={TransitionCustom}
         scroll="paper"
         open={index === FILTER}
         onClose={() => setIndex(TAB_LIST)}>
         <FilterDrawerMobile setIndex={setIndex} />
-      </Dialog>
-      {/* <MapMobile openMap={index === MAP} /> */}
+      </Dialog> */}
+      <MapMobile openMap={index === MAP} />
     </Fragment>
   );
 };
