@@ -1,8 +1,11 @@
 import React, { FC, Fragment } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { InputAdornment, InputBase } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
-interface Iprops {}
+interface Iprops {
+  onClick: () => void;
+}
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,11 +26,14 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const SearchInput: FC<Iprops> = (props: Iprops) => {
+  const { t } = useTranslation();
+
   const classes = useStyles(props);
+  const { onClick } = props;
   return (
     <Fragment>
       <InputBase
-        placeholder="Where are you going"
+        placeholder={t('home:SearchAutocomplete:toGo')}
         id="input-with-icon-textfield"
         classes={{ root: classes.InputBaseRoot }}
         startAdornment={
@@ -36,6 +42,7 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
           </InputAdornment>
         }
         fullWidth
+        onClick={onClick}
       />
     </Fragment>
   );

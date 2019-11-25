@@ -8,6 +8,7 @@ import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import Cookies from 'universal-cookie';
 import { cleanAccents } from '@/utils/mixins';
+import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
   city: string;
@@ -84,9 +85,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const CardRoom2: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { roomID, roomName, city, district, roomImage, roomType, roomNumber, avg_rating } = props;
-  // const { showButtonBook, showRating } = props;
-  // const { t }: UseTranslationResponse = useTranslation();
-  // const { width } = useContext<IGlobalContext>(GlobalContext);
+  const { t } = useTranslation();
   const cookies = new Cookies();
 
   return (
@@ -146,7 +145,9 @@ const CardRoom2: FC<IProps> = (props) => {
                       123tr
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>
-                      vnd / tháng
+                      {cookies.get('initLanguage') == 'en'
+                        ? 'usd/' + t('home:month')
+                        : 'vnd/' + t('home:month')}
                     </Typography>
                   </Grid>
                 </Grid>

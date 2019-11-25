@@ -8,10 +8,11 @@ import classNames from 'classnames';
 interface Iprops<T> {
   headTitle?: string;
   listData?: T[];
-  itemRender?: (item: T) => ReactNode;
+  itemRender?: (item: T, size?: number | string) => ReactNode;
   itemWidth?: number | string;
   itemHeight?: number | string;
   gutter?: number | string;
+  sizeIcon?: number | string;
 }
 
 const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
@@ -31,13 +32,13 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
 const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
-  const { headTitle, listData, itemRender, itemHeight } = props;
+  const { headTitle, listData, itemRender, itemHeight, sizeIcon } = props;
 
   const renderList = useMemo(
     () =>
       listData.map((item, index) => (
         <Grid className={classNames('property-item-container', classes.propertyItemContainer)}>
-          {itemRender(item)}
+          {itemRender(item, sizeIcon)}
         </Grid>
       )),
     [listData]
@@ -47,7 +48,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
     <section className="property-list-horizontal-scroll-container">
       {headTitle && (
         <Grid className="head-title-container">
-          <Typography className="head-title">Popular Destinations</Typography>
+          <Typography className="head-title">{headTitle}</Typography>
         </Grid>
       )}
       <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>

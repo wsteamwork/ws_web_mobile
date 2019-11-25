@@ -12,8 +12,7 @@
   overflow: hidden;
   border-radius: 15px;
   &__image-container {
-    padding-top: 125%;
-    position: relative;
+
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-box-align: center;
@@ -37,11 +36,7 @@
   &__image {
     height: 100%;
     width: 100%;
-    position: static;
-    top: 0px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    object-fit: cover;
   }
 
   &__box-shadow {

@@ -4,13 +4,13 @@ import NextHead from '@/components/NextHead';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getCookieFromReq } from '@/utils/mixins';
 import { NextPage } from 'next';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useContext } from 'react';
 import Antd_SearchInput from '@/components/LTR/ReusableComponents/SearchInput';
 import SearchInput from '@/components/LTR/ReusableComponents/SearchInput';
 import PropertyListHorizontalScroll from './PropertyListHorizontalScroll';
 import MetroGridImage from '@/components/Layout/MetroGridImage';
 import { getRoomType } from '@/components/Rooms/FilterActions/RoomType/context';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Dialog, Slide } from '@material-ui/core';
 import { NumberRoomCity, RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import CardIntro from '@/components/Cards/CardIntro';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,8 +21,16 @@ import numeral from 'numeral';
 import CardItem from '@/components/Cards/CardItem';
 import BottomNav from '@/components/Rooms/BottomNav';
 import CardRoom2 from '@/components/Cards/CardRoom2';
+import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useTranslation } from 'react-i18next';
+import SearchDialog from '@/components/SearchDialog';
+import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
+import { TransitionProps } from '@material-ui/core/transitions';
 
 const LTHome: NextPage = () => {
+  const { router, width } = useContext(GlobalContext);
+  const { t } = useTranslation();
   const [roomTypesData, setRoomTypesData] = useState<any[]>([]);
   const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
     (state) => state.roomHomepage.roomsCity
@@ -30,8 +38,7 @@ const LTHome: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.roomHomepage.roomsHot
   );
-  console.log(roomsHot[0]);
-
+  const [openSearchDialog, setOpenSearchDialog] = React.useState<boolean>(false);
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
 
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
@@ -51,10 +58,10 @@ const LTHome: NextPage = () => {
     // console.log(listing);
   }, []);
 
-  const renderRoomTypeItem = (item) => (
+  const renderRoomTypeItem = (item, size) => (
     <Grid>
       <Grid className="propery-item-icon">
-        <img className="item-icon" src={item.img}></img>
+        <img className="item-icon" style={{ width: size, height: size }} src={item.img}></img>
       </Grid>
       <Typography style={{ textAlign: 'center' }}>{item.value}</Typography>
     </Grid>
@@ -65,7 +72,7 @@ const LTHome: NextPage = () => {
       <CardItem
         title={city.name_city}
         imgSrc={city.image}
-        subTitle={'chỉ từ '}
+        subTitle={t('home:fromPrice')}
         bigTitle={true}
         recommendedPrice={numeral(city.average_price).format('0,0')}
         // imgHeight={290}
@@ -80,7 +87,7 @@ const LTHome: NextPage = () => {
         centerTitle={true}
         title={city.name_city}
         imgSrc={city.image}
-        subTitle={'chỉ từ '}
+        subTitle={t('home:fromPrice')}
         recommendedPrice={numeral(city.average_price).format('0,0')}
         onClickCard={() => locationRoom(city.name_city)}
       />
@@ -108,6 +115,17 @@ const LTHome: NextPage = () => {
     });
   };
 
+  const handleOpenSearchDialog = () => {
+    setOpenSearchDialog(true);
+  };
+
+  const handleCloseSearchDialog = () => {
+    setOpenSearchDialog(false);
+  };
+
+  const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+  });
   return (
     <Fragment>
       <NextHead
@@ -121,36 +139,37 @@ const LTHome: NextPage = () => {
 
       <Grid xs={12} style={{ padding: '44px 0 100px' }}>
         <Grid style={{ padding: '14px 22px' }}>
-          <SearchInput />
+          <SearchInput onClick={handleOpenSearchDialog} />
         </Grid>
 
         <PropertyListHorizontalScroll
-          itemWidth={'25%'}
-          gutter={11}
+          itemWidth={width == 'sm' ? '20%' : '25%'}
+          gutter={6}
           listData={roomTypesData}
           itemRender={renderRoomTypeItem}
+          sizeIcon={width == 'sm' ? 100 : 65}
         />
 
         <PropertyListHorizontalScroll
-          itemWidth={'100%'}
-          gutter={11}
+          itemWidth={width == 'sm' ? '50%' : '95%'}
+          gutter={6}
           listData={roomsCity}
           itemRender={renderCity}
         />
 
         <PropertyListHorizontalScroll
-          itemWidth={'66%'}
-          gutter={11}
-          headTitle={'Popular Destinations'}
+          itemWidth={width == 'sm' ? '33.3%' : '66%'}
+          gutter={6}
+          headTitle={t('home:topDestinations')}
           listData={roomsCity}
           itemRender={renderDestinations}
         />
         <Grid style={{ padding: '14px 2px' }}>
           <PropertyListHorizontalScroll
-            itemWidth={'100%'}
-            itemHeight={200}
-            gutter={11}
-            headTitle={'Best Deals'}
+            itemWidth={'95%'}
+            itemHeight={width == 'sm' ? 200 : 170}
+            gutter={6}
+            headTitle={t('home:topHomestay')}
             listData={roomsHot}
             itemRender={renderRoomsHot}
           />
@@ -159,8 +178,14 @@ const LTHome: NextPage = () => {
 
         <BottomNav />
       </Grid>
-
-      {/* <MetroGridImage /> */}
+      <Dialog
+        fullScreen
+        open={openSearchDialog}
+        onClose={handleCloseSearchDialog}
+        TransitionComponent={Transition}>
+        <SearchDialog handleClose={handleCloseSearchDialog} />
+      </Dialog>
+      {/*  */}
     </Fragment>
   );
 };
@@ -168,9 +193,9 @@ const LTHome: NextPage = () => {
 LTHome.getInitialProps = async ({ store, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
 
-  // if (store.getState().roomHomepage.roomsHot.length === 0) {
-  //   const res = await getRoomsHomepage(store.dispatch, initLanguage);
-  // }
+  if (store.getState().roomHomepage.roomsHot.length === 0) {
+    const res = await getRoomsHomepage(store.dispatch, initLanguage);
+  }
 
   return {};
 };
