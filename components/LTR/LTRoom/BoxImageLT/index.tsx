@@ -30,17 +30,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       position: 'absolute',
       width: '90%',
       borderRadius: 20,
-      top: '50%',
+      bottom: 0,
       left: '50%',
-      transform: 'translate(-50%, 50%)',
+      transform: 'translate(-50%, -50%)',
       background: 'rgba(255, 255, 255, 0.18)',
       backdropFilter: 'blur(27.1828px)',
       padding: '14px 18px',
-      [theme.breakpoints.only('sm')]:{
+      [theme.breakpoints.up('sm')]:{
         height: 'auto',
         maxWidth: '50%',
-        top: 'unset',
-        bottom:'0%',
+        bottom: 0,
         transform: 'translate(-50%, -50%)',
       }
     },
