@@ -2,6 +2,7 @@ import { IncomingMessage } from 'http';
 import _ from 'lodash';
 import moment, { Moment } from 'moment';
 import { ChangeEvent, useMemo } from 'react';
+import Cookies from 'universal-cookie';
 
 export const formatMoney = (
   amount: any,
@@ -68,15 +69,15 @@ export const selfMemo = <T = any>(value: T): T => {
   return useMemo(() => value, [value]);
 };
 
-export const formatPrice = (price: number): string => {
+export const formatPrice = (price: number): string | number => {
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
   try {
     let format = '';
     if (price >= 1000000) {
-      format = (price / 1000000).toFixed(2) + 'tr ';
-    } else {
-      format = (price / 1000).toFixed(0) + 'k ';
+      format = (price / 1000000).toFixed(1) + 'tr';
     }
-    return format;
+    return lang === 'vi' ? format : `$${price}`;
   } catch (e) {
     console.error(e);
   }

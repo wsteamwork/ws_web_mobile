@@ -1,10 +1,8 @@
-import React, { FC, Fragment, useEffect, useState, useMemo, ReactNode } from 'react';
+import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { InputAdornment, InputBase, Grid, Typography } from '@material-ui/core';
-import Swiper from 'react-id-swiper';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
-import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
 import classNames from 'classnames';
+import React, { ReactNode, useMemo } from 'react';
+import 'react-id-swiper/lib/styles/scss/swiper.scss';
 interface Iprops<T> {
   headTitle?: string;
   listData?: T[];
@@ -13,6 +11,8 @@ interface Iprops<T> {
   itemHeight?: number | string;
   gutter?: number | string;
   sizeIcon?: number | string;
+  margin?: number | string;
+  paddingItem?: number | string;
 }
 
 const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
@@ -23,8 +23,13 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
     propertyItemContainer: {
       height: (props) => props.itemHeight,
       width: (props) => props.itemWidth,
-      paddingLeft: (props) => props.gutter,
-      paddingRight: (props) => props.gutter
+      padding: (props) => props.paddingItem
+    },
+    propertyListHorizontalScroll: {
+
+    },
+    spaceList: {
+      margin: (props) => props.margin
     }
   })
 );
@@ -45,7 +50,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   );
 
   return (
-    <section className="property-list-horizontal-scroll-container">
+    <section className={classNames("property-list-horizontal-scroll-container", classes.spaceList)}>
       {headTitle && (
         <Grid className="head-title-container">
           <Typography className="head-title">{headTitle}</Typography>

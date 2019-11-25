@@ -74,7 +74,7 @@ const NameAndDescription: FC<IProps> = (props) => {
                       transform: transformHtmlContent
                     })}
                     <Button onClick={toggle} className={classes.button}>
-                      &#8230;Xem thêm
+                      ... Xem thêm
                   </Button>
                   </span>
                 )}

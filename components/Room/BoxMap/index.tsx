@@ -19,24 +19,11 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
-    title: {
-      fontWeight: 700,
-      marginTop: theme.spacing(4),
-      marginBottom: theme.spacing(2)
-    },
     root: {
-      height: 400,
-      margin: '10px 0',
-      borderRadius: 5,
+      height: 230,
       overflow: 'hidden',
       border: '1px solid #e0e0e0'
     },
-    txtAddress: {
-      color: '#484848'
-    },
-    icon: {
-      marginRight: theme.spacing(1)
-    }
   })
 );
 
@@ -49,15 +36,6 @@ const BoxMap: FC<IProps> = (props) => {
 
   return (
     <div>
-      <Typography variant="h5" className={classes.title}>
-        {t('room:map')}
-      </Typography>
-
-      <Typography variant="subtitle1" className={classes.txtAddress}>
-        <FontAwesomeIcon className={classes.icon} icon={faMapSigns} />
-        {district}, {city}
-      </Typography>
-
       <div className={classes.root}>
         <GoogleMap
           bootstrapURLKeys={{

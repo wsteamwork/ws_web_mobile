@@ -96,6 +96,7 @@ export const getDataLTRoom = async (
   initLanguage: string = 'vi'
 ): Promise<Omit<LTRoomReducerState, 'error'>> => {
   const { id } = query;
+
   try {
     const res = await Promise.all([
       getLTRoom(id, initLanguage),

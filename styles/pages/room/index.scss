@@ -3,6 +3,21 @@
 @import "./boxImage/index.scss";
 
 .roomPage {
+  &__boxViewMore{
+    left: 50%;
+    width: 90% !important;
+    bottom: 0%;
+    padding: 14px 18px;
+    position: absolute;
+    transform: translate(-50%, -35%);
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    backdrop-filter: blur(27.1828px);
+    @include sm {
+      width: 50% !important;
+    }
+  }
+
   &__boxBooking {
     @include xs {
       display: none;

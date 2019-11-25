@@ -7,7 +7,7 @@
     "viewSchedule": "Check availablility",
     "amenitiesOfRoom": "All amenities included in this accommodation",
     "amenitiesCommon": "Amenities common",
-    "discover": "Take a tour",
+    "discover": "Photos",
     "discoverSubTitle": "All information about the apartment is presented to help you have the most intuitive and accurate look",
     "livingrooms": "Livingroom",
     "bedrooms": "Bedroom",
@@ -16,6 +16,10 @@
     "furnitures": "Furnitures",
     "outdoors": "Outdoor",
     "allImages": "All Photos",
+    "viewAll": "View all",
     "priceBasic": "Each month for 1-2 months term",
-    "notFoundData": "Not found data!"
+    "notFoundData": "Not found data!",
+    "perMonth": "/ per month",
+    "moreDetails": "More details",
+    "bookNow": "Book"
 }

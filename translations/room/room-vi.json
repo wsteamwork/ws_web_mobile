@@ -24,7 +24,7 @@
     "night" : "đêm",
     "hour" : "giờ",
     "verified" : "Đã xác minh",
-    "description" : "Thông tin căn hộ",
+    "description" : "Tổng quan căn hộ",
     "amenities" : "Tiện ích",
     "amenitiesLower" : "tiện ích",
     "guests" : "khách",
@@ -56,5 +56,6 @@
     "surchargeLateCheckout" : "Phụ thu trả phòng muộn (mỗi giờ)",
     "surchargeHours" : "Phụ thu sau 4 giờ đầu (thuê theo giờ)",
     "feeList": "Danh mục phí",
+    "feeListLongterm": "Phí thuê theo tháng",
     "lang": "vi"
 }

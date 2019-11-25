@@ -31,15 +31,15 @@ const PreviewLongTermRoom: NextPage = () => {
           <Fragment>
             {ltroom && (
               <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <BoxImageLT
-                  isPreviewPage={isPreviewPage}
-                  livingrooms={isPreviewPage && !ltroom.livingrooms ? [] : ltroom.livingrooms}
-                  kitchens={isPreviewPage && !ltroom.kitchens ? [] : ltroom.kitchens}
-                  bathrooms={isPreviewPage && !ltroom.bathrooms ? [] : ltroom.bathrooms}
-                  furnitures={isPreviewPage && !ltroom.furnitures ? [] : ltroom.furnitures}
-                  bedrooms={isPreviewPage && !ltroom.bedrooms ? [] : ltroom.bedrooms}
-                  cover_photo={isPreviewPage && !ltroom.cover_photo ? [] : ltroom.cover_photo}
-                />
+                {/*<BoxImageLT*/}
+                {/*  isPreviewPage={isPreviewPage}*/}
+                {/*  livingrooms={isPreviewPage && !ltroom.livingrooms ? [] : ltroom.livingrooms}*/}
+                {/*  kitchens={isPreviewPage && !ltroom.kitchens ? [] : ltroom.kitchens}*/}
+                {/*  bathrooms={isPreviewPage && !ltroom.bathrooms ? [] : ltroom.bathrooms}*/}
+                {/*  furnitures={isPreviewPage && !ltroom.furnitures ? [] : ltroom.furnitures}*/}
+                {/*  bedrooms={isPreviewPage && !ltroom.bedrooms ? [] : ltroom.bedrooms}*/}
+                {/*  cover_photo={isPreviewPage && !ltroom.cover_photo ? [] : ltroom.cover_photo}*/}
+                {/*/>*/}
                 <Grid container>
                   <Grid item xs={12} lg={8} xl={9}>
                     <BoxLTRoomDetail room={ltroom} />

@@ -1,15 +1,12 @@
-import { StyledTableCell, StyledTableRow } from '@/components/Room/BoxRoomDetail/TablePrices';
+import mainColor from '@/styles/constants/colors';
 import { typeService } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
 import { detailPriceLT } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
-import { Theme, Typography } from '@material-ui/core';
+import { ExpansionPanel, ExpansionPanelDetails, ExpansionPanelSummary, Grid, Theme, Typography } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 interface IProps {
@@ -24,21 +21,38 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
-      marginTop: theme.spacing(3),
       borderRadius: 8,
       overflow: 'hidden',
     },
     name: {
-      fontWeight: 700,
-      margin: '1rem 0 1rem 0'
+      fontSize: 15,
+      lineHeight: '20px',
+      letterSpacing: -0.24,
+      color: mainColor.titleText,
+      fontWeight: 'bold'
     },
     heading: {
-      fontSize: theme.typography.pxToRem(15),
-      flexBasis: '50%',
       flexShrink: 0,
+      fontWeight: 600,
+      fontSize: 13
     },
     expansionPanel: {
-      margin: '1px 0 !important'
+      margin: '8px 0 12px !important'
+    },
+    expSummary: {
+      padding: '8px 0',
+      maxHeight: 38,
+    },
+    expDetails: {
+      padding: '8px 0',
+      display: 'block'
+    },
+    rowTable: {
+      padding: '16px 0',
+      borderBottom: '1px solid #E0E0E0'
+    },
+    sumaryExpend:{
+      margin:0
     }
   })
 );
@@ -47,14 +61,24 @@ const BoxTablePrices: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { prices, included_fee, not_included_services, included_services } = props;
   const { t } = useTranslation();
+  const [expanded, setExpanded] = useState<boolean>(false);
+  const [expandedServices, setEexpandedServices] = useState<boolean>(true);
+
+  const handleChange = () => {
+    setExpanded(!expanded);
+  };
+
+  const handleChangeServices = () => {
+    setEexpandedServices(!expandedServices);
+  };
 
   return (
     <Fragment>
-      <Typography variant='h5' className={classes.name}>
+      <Typography variant='h5' className={classes.name} gutterBottom>
         {t('room:feeList')}
       </Typography>
       {included_services && included_services.length ? (
-        <Typography variant='subtitle2' className={classes.subName}>
+        <Typography variant='subtitle2' className={classes.subName} gutterBottom>
           {t('longtermroom:priceIncludedFee')} : {
             included_services.map((value, index) => (
               <span key={index}>{value}{included_services.length !== (index + 1) ? ', ' : ''} </span>
@@ -64,68 +88,79 @@ const BoxTablePrices: FC<IProps> = (props) => {
       ) : (<Fragment />)}
 
       <Paper className={classes.root} elevation={0}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow>
-              <StyledTableCell> {t('longtermroom:priceByTerm')}</StyledTableCell>
-              <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {prices && prices.length ? (
-              prices.map((o, i) => (
-                <StyledTableRow key={i}>
-                  <StyledTableCell component="th" scope="row">
-                    {o.term}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{`${formatMoney(o.price)}`}</StyledTableCell>
-                </StyledTableRow>
-              ))
-            ) : (
-                <StyledTableRow>
-                  <StyledTableCell component="th" scope="row">
-                    {t('longtermroom:notFoundData')}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">0</StyledTableCell>
-                </StyledTableRow>
-              )}
-          </TableBody>
 
-          {included_services && included_services.length ? (
-            <Fragment>
-              <TableHead>
-                <TableRow>
-                  <StyledTableCell>{t('longtermroom:otherFee')}</StyledTableCell>
-                  <StyledTableCell align="right"> {t('longtermroom:currency')}</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
+      {included_services && included_services.length ? (
+          <Fragment>
+            <ExpansionPanel expanded={expandedServices} elevation={0} onChange={handleChangeServices} className={classes.expansionPanel}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+                classes={{ root: classes.expSummary }}
+              >
+                <Typography variant='subtitle1' className={classes.heading}>
+                  {t('longtermroom:otherFee')}
+                </Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails classes={{ root: classes.expDetails }}>
                 {included_fee.map((o, i) => {
                   if (o.included == 1) {
                     return (
-                      <StyledTableRow key={i}>
-                        <StyledTableCell component="th" scope="row">
+                      <Grid container key={i} justify='space-between' className={classes.rowTable}>
+                        <Grid item>
                           {o.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{`${t('longtermroom:feeIncluded')}`}</StyledTableCell>
-                        {/* <StyledTableCell align="right">{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</StyledTableCell> */}
-                      </StyledTableRow>
+                        </Grid>
+                        <Grid item>{`${t('longtermroom:feeIncluded')}`}</Grid>
+                        {/* <Grid item>{o.value == 0 ? `${t('longtermroom:feeIncluded')}` : `${formatMoney(o.value)}`}</Grid> */}
+                      </Grid>
                     )
                   } else {
                     return (
-                      <StyledTableRow key={i}>
-                        <StyledTableCell component="th" scope="row">
+                      <Grid container key={i} justify='space-between' className={classes.rowTable}>
+                        <Grid item>
                           {o.name}
-                        </StyledTableCell>
-                        <StyledTableCell align="right">{o.calculate_function == 3 || o.calculate_function == 6 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</StyledTableCell>
-                      </StyledTableRow>
+                        </Grid>
+                        <Grid item>{o.calculate_function == 3 || o.calculate_function == 6 ? `${o.calculate_function_txt}` : `${formatMoney(o.value)} ${o.calculate_function_txt}`}</Grid>
+                      </Grid>
                     )
                   }
                 })}
-              </TableBody>
-            </Fragment>
-          ) : (<Fragment />)}
-        </Table>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Fragment>
+        ) : (<Fragment />)}
+
+        <ExpansionPanel expanded={expanded} elevation={0} onChange={handleChange} className={classes.expansionPanel}>
+          <ExpansionPanelSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1bh-content"
+            id="panel1bh-header"
+            classes={{ root: classes.expSummary }}
+          >
+            <Typography variant='subtitle1' className={classes.heading}>
+              {t('room:feeListLongterm')} ({t('rooms:currency')})
+              </Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails classes={{ root: classes.expDetails }}>
+            {prices && prices.length ? (
+              prices.map((o, i) => (
+                <Grid container key={i} justify='space-between' className={classes.rowTable}>
+                  <Grid item>
+                    {o.term}
+                  </Grid>
+                  <Grid item>{`${formatMoney(o.price)}`}</Grid>
+                </Grid>
+              ))
+            ) : (
+                <Grid container justify='space-between' className={classes.rowTable}>
+                  <Grid item>
+                    {t('longtermroom:notFoundData')}
+                  </Grid>
+                  <Grid item>0</Grid>
+                </Grid>
+              )}
+          </ExpansionPanelDetails>
+        </ExpansionPanel>
       </Paper>
     </Fragment>
   );

@@ -1,8 +1,6 @@
 import Footer from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
 import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
-import BoxBookingLT from '@/components/LTR/LTRoom/BoxBookingLT';
-import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
 import NextHead from '@/components/NextHead';
@@ -17,17 +15,25 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
+import dynamic from 'next/dynamic'
+import React, { Fragment, useContext, useEffect, useMemo, useState, useRef } from 'react';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
+import { Link, Element } from 'react-scroll';
+import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
+import { useTranslation } from 'react-i18next';
 
 const LongtermRoom: NextPage = () => {
   const { router } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
+  const detailRef = useRef(null);
   // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
+  const { t } = useTranslation();
+
   // forceCheck();
   if (router.pathname.includes('/long-term-room')) {
     dispatchLeaseType({
@@ -78,49 +84,41 @@ const LongtermRoom: NextPage = () => {
         />
       )}
 
-      <NavHeader />
-
       {useMemo(
         () => (
           <Fragment>
             {ltroom ? (
+              <GridContainer xs={12} classNameItem="roomPage" id='id_BoxDetails'>
+                
+                  <BoxImageLT
+                    backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name})`}
+                    room={ltroom}
+                  >
+                    <Link activeClass="active" to="test1" spy={true} smooth={true} duration={500} >
+                      <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' >
+                        <span style={{color:'#fff'}}>{t('longtermroom:moreDetails')}</span>
+                        <KeyboardArrowDownRounded style={{color:'#fff'}}/>
+                      </Grid>
+                    </Link>
 
-              <GridContainer xs={11} lg={10} xl={9} classNameItem="roomPage">
-                <BoxImageLT
-                  livingrooms={ltroom.livingrooms}
-                  kitchens={ltroom.kitchens}
-                  bathrooms={ltroom.bathrooms}
-                  furnitures={ltroom.furnitures}
-                  bedrooms={ltroom.bedrooms}
-                  cover_photo={ltroom.cover_photo}
-                />
+                  </BoxImageLT>
                 <Grid container>
-                  <Grid item xs={12} lg={8} xl={9}>
-                    <BoxLTRoomDetail room={ltroom} />
+                  <Grid item xs={12} sm={12}>
+                    <Element name="test1">
+                      <BoxLTRoomDetail room={ltroom} />
+                    </Element>
                   </Grid>
 
                   <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                    {/* <LazyLoad> */}
-                    <BoxBookingLT
-                      priceBasic={ltroom.price_display}
-                      id={ltroom.merchant.data.id}
-                      avatar={ltroom.merchant.data.avatar}
-                      avatar_url={ltroom.merchant.data.avatar_url}
-                      name={ltroom.merchant.data.name}
-                      number_room={ltroom.merchant.data.number_room}
-                      handleOpenBookingDialog={handleOpenBookingDialog}
-                    />
-                    {/* </LazyLoad> */}
+                    <Grid container className="roomPage__boxBookingMoblie">
+                      <BoxBottomBooking
+                        priceBasic={ltroom.price_display}
+                        handleOpenBookingDialog={handleOpenBookingDialog}
+                      />
+                    </Grid>
                   </Grid>
                 </Grid>
-                <Grid container className="roomPage__boxBookingMoblie">
-                  <BoxBottomBooking
-                    priceBasic={ltroom.price_display}
-                    handleOpenBookingDialog={handleOpenBookingDialog}
-                  />
-                </Grid>
               </GridContainer>
-
             ) : ''}
           </Fragment>
         ),
@@ -133,16 +131,12 @@ const LongtermRoom: NextPage = () => {
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>
-      {/* <LazyLoad offset={100}> */}
-      <Footer />
-      {/* </LazyLoad> */}
     </Fragment>
   );
 };
 
 LongtermRoom.getInitialProps = async ({ store, query, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
-
   const data = await getDataLTRoom(store.dispatch, query, initLanguage);
   return {};
 };

@@ -56,5 +56,6 @@
     "surchargeLateCheckout" : "Late checkout surcharge (per 1 hour)",
     "surchargeHours" : "Surcharge after 4 hours early (rent by the hour)",
     "feeList": "Fee list",
+    "feeListLongterm": "Monthly rental fee",
     "lang": "en"
 }
