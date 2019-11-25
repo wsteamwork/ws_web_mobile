@@ -93,7 +93,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 interface IProps {
   classes?: any;
-  setIndex(value: number): void;
+  setIndex?: () => void;
 }
 const FilterDrawerMobile: FC<IProps> = (props) => {
   const { t } = useTranslation();
@@ -160,7 +160,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   };
 
   const applyFilter = () => {
-    setIndex(TAB_LIST);
+    setIndex();
     filterRoomType();
     filterAmentites();
     filterDistricts();
@@ -177,7 +177,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
         <Typography variant="h6" className={classes.center}>
           {t('rooms:filterRooms:filters')}
         </Typography>
-        <IconButton className={classes.closeButton} onClick={() => setIndex(TAB_LIST)}>
+        <IconButton className={classes.closeButton} onClick={() => setIndex()}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>

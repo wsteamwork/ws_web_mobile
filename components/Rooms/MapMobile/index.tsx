@@ -157,7 +157,7 @@ const MapMobile: FC<IProps> = (props) => {
                 scroll="paper"
                 onClose={() => setIndex(TAB_LIST)}
               >
-                <FilterDrawerMobile setIndex={setIndex} />
+                {/* <FilterDrawerMobile setIndex={setIndex} /> */}
               </Dialog>
             </Hidden>
           </Grid>
