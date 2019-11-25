@@ -64,7 +64,7 @@ const CardItem: FunctionComponent<IProps> = (props) => {
             'card-item__sub-title',
             bigTitle ? 'card-item__big-sub-title' : ''
           )}>
-          {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle}
+          {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle} {' '}
           {recommendedPrice}/{t('home:night')}
         </Grid>
       </Grid>
