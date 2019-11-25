@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import MapMobile from '../MapMobile';
 import mainColor from '@/styles/constants/colors';
-import FilterDrawerMobile1 from '../FilterDrawerMobile/index';
+import FilterDrawerMobile from '../FilterDrawerMobile/index';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -111,14 +111,14 @@ const BottomNav: FC<IProps> = (props) => {
           }
         />
       </BottomNavigation>
-      <Dialog
+      {/* <Dialog
         fullScreen
         TransitionComponent={TransitionCustom}
         scroll="paper"
         open={index === FILTER}
         onClose={() => setIndex(TAB_LIST)}>
         <FilterDrawerMobile setIndex={setIndex} />
-      </Dialog>
+      </Dialog> */}
       <MapMobile openMap={index === MAP} />
     </Fragment>
   );
