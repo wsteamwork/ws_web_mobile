@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, useContext } from 'react';
+import React, { FC, Fragment, useState, useContext, forwardRef } from 'react';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core/styles';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -19,11 +19,12 @@ import { updateObject } from '@/store/Context/utility';
 import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import Router from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { Divider } from '@material-ui/core';
+import { Divider, Dialog } from '@material-ui/core';
 import mainColor from '@/styles/constants/colors';
 import RoomTypeMobile from './RoomTypeMobile';
+import Slide, { SlideProps } from '@material-ui/core/Slide';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
@@ -42,7 +43,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     title: {
       fontWeight: 700,
-      color: '#8A8A8F',
+      color: '#8A8A8F'
     },
     titleRoomType: {
       fontWeight: 700,
@@ -68,7 +69,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       borderColor: mainColor.primary,
       borderRadius: 25,
       color: '#ffffff',
-      height:46,
+      height: 46,
       margin: 20,
       boxShadow: '0px 12px 22px rgba(0, 0, 0, 0.0968914)'
     },
@@ -79,7 +80,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       color: '#ffffff',
       borderColor: mainColor.primaryLT,
       borderRadius: 25,
-      height:46,
+      height: 46,
       margin: 20,
       boxShadow: '0px 12px 22px rgba(0, 0, 0, 0.0968914)'
     },
@@ -92,16 +93,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 interface IProps {
   classes?: any;
-  setIndex(value: number): void;
+  setIndex?: () => void;
 }
 const FilterDrawerMobile: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { setIndex } = props;
   const { state, dispatch } = useContext(RoomFilterContext);
+  const { router } = useContext(GlobalContext);
+  const [open, setOpen] = useState(false);
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
-  const [open, setOpen] = useState(false);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
     (state) => state.searchFilter.leaseTypeGlobal
   );
@@ -109,10 +111,9 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     (state) => state.searchFilter.leaseTypePathName
   );
 
-  const queryTypeRoom = leaseTypeGlobal ? Router.query.accommodation_type : Router.query.type_room;
-  const queryAmenities = leaseTypeGlobal ? Router.query.comfort_lists : Router.query.amenities;
-  const queryDistricts = leaseTypeGlobal ? Router.query.district_id : Router.query.districts;
-
+  const queryTypeRoom = leaseTypeGlobal ? router.query.accommodation_type : router.query.type_room;
+  const queryAmenities = leaseTypeGlobal ? router.query.comfort_lists : router.query.amenities;
+  const queryDistricts = leaseTypeGlobal ? router.query.district_id : router.query.districts;
   const convertParams = (params: string) => {
     if (params) {
       return params.split(',').map((i) => parseInt(i, 10));
@@ -126,6 +127,9 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const [dataRoomType, setDataRoomType] = useState<number[]>(roomTypeInit);
   const [dataAmentites, setDataAmentites] = useState<number[]>(amenitiesInit);
   const [dataDistricts, setDataDistricts] = useState<number[]>(districtInit);
+  const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
+    <Slide timeout={300} direction="up" ref={ref} {...props} />
+  ));
   const filterRoomType = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataRoomType });
   };
@@ -139,7 +143,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const query = {
     type_room: dataRoomType.join(','),
     amenities: dataAmentites.join(','),
-    districts: dataDistricts,
+    districts: dataDistricts.join(','),
     rent_type: booking_type,
     instant_book: instant_book,
     price_day_from: price_day_from,
@@ -149,21 +153,21 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const queryLT = {
     accommodation_type: dataRoomType.join(','),
     comfort_lists: dataAmentites.join(','),
-    district_id: dataDistricts,
+    district_id: dataDistricts.join(','),
     instant_book: instant_book,
     min_price: price_day_from,
     max_price: price_day_to
   };
 
   const applyFilter = () => {
-    setIndex(TAB_LIST);
+    setIndex();
     filterRoomType();
     filterAmentites();
     filterDistricts();
 
-    Router.push({
+    router.push({
       pathname: leaseTypePathName,
-      query: updateObject<any>(Router.query, leaseTypeGlobal ? queryLT : query)
+      query: updateObject<any>(router.query, leaseTypeGlobal ? queryLT : query)
     });
   };
 
@@ -173,7 +177,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
         <Typography variant="h6" className={classes.center}>
           {t('rooms:filterRooms:filters')}
         </Typography>
-        <IconButton className={classes.closeButton} onClick={() => setIndex(TAB_LIST)}>
+        <IconButton className={classes.closeButton} onClick={() => setIndex()}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
@@ -221,7 +225,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
             <Typography variant="subtitle2" className={classes.titleRoomType}>
               {t('rooms:filterRooms:roomsType')}
             </Typography>
-            <RoomTypeMobile />
+            <RoomTypeMobile dataClick={dataRoomType} setDataClick={setDataRoomType} setOpen={setOpen}/>
             <Grid container item xs={12}>
               <Divider className={classes.divider} />
             </Grid>
@@ -230,21 +234,13 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
             <Typography variant="subtitle2" className={classes.title}>
               {t('rooms:filterRooms:districtsFilter')}
             </Typography>
-            <DistrictsMobile
-              dataClick={dataDistricts}
-              setDataClick={setDataDistricts}
-              setOpen={setOpen}
-            />
+            <DistrictsMobile dataClick={dataDistricts} setDataClick={setDataDistricts} setOpen={setOpen}/>
             <Grid container item xs={12}>
               <Divider className={classes.divider} />
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.sortMargin}>
-            <AmentitesMobile
-              dataClick={dataAmentites}
-              setDataClick={setDataAmentites}
-              setOpen={setOpen}
-            />
+            <AmentitesMobile dataClick={dataAmentites} setDataClick={setDataAmentites} setOpen={setOpen}/>
           </Grid>
         </Grid>
       </DialogContent>

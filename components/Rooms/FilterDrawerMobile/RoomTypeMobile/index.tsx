@@ -5,7 +5,8 @@ import { Grid, Typography, Divider, Theme } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import mainColor from '@/styles/constants/colors';
 import Collapse from '@material-ui/core/Collapse';
-
+import { useRoomTypeChecbox } from '../../FilterActions/RoomType/context';
+import _ from 'lodash';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     title: {
@@ -29,23 +30,15 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 interface IProps {
   classes?: any;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
+  dataClick: number[];
+  setDataClick: Dispatch<SetStateAction<number[]>>;
 }
 const RoomTypeMobile: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-
-  const [state, setState] = useState({
-    checkedAll: 0,
-    privateHouse: 0,
-    entireApartment: 0,
-    villa: 0,
-    privateRoom: 0,
-    hotelRoom: 0,
-  });
-
-  const handleChange = (name: string) => (event: ChangeEvent<HTMLInputElement>) => {
-    setState({ ...state, [name]: event.target.checked ? 1 : 0 });
-  };
+  const { setOpen, dataClick, setDataClick } = props;
+  const { data, handleChange } = useRoomTypeChecbox(setOpen, dataClick, setDataClick);
 
   return (
     <Fragment>
@@ -56,77 +49,40 @@ const RoomTypeMobile: FC<IProps> = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={6} className={classes.itemRight}>
-          <IOSSwitch checked={state.checkedAll === 1} onChange={handleChange('checkedAll')} value="checked" />
+          <IOSSwitch checked={dataClick.length === 5} onChange={handleChange(0)} value="checked" />
         </Grid>
-        {state.checkedAll === 0 && (
+        {dataClick.length < 5 && (
           <Grid container item xs={12}>
             <Divider className={classes.divider} />
           </Grid>
         )}
       </Grid>
-      <Collapse in={state.checkedAll === 0}>
-        <Grid container item xs={12}>
-          <Grid item xs={6} className={classes.inline}>
-            <Typography variant="subtitle2" className={classes.title}>
-              Nhà riêng
-            </Typography>
-          </Grid>
-          <Grid item xs={6} className={classes.itemRight}>
-            <IOSSwitch checked={state.privateHouse === 1} onChange={handleChange('privateHouse')} value="checked" />
-          </Grid>
-          <Grid container item xs={12}>
-            <Divider className={classes.divider} />
-          </Grid>
-        </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6} className={classes.inline}>
-            <Typography variant="subtitle2" className={classes.title}>
-              Căn hộ
-            </Typography>
-          </Grid>
-          <Grid item xs={6} className={classes.itemRight}>
-            <IOSSwitch checked={state.entireApartment === 1} onChange={handleChange('entireApartment')} value="checked" />
-          </Grid>
-          <Grid container item xs={12}>
-            <Divider className={classes.divider} />
-          </Grid>
-        </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6} className={classes.inline}>
-            <Typography variant="subtitle2" className={classes.title}>
-              Biệt thự
-            </Typography>
-          </Grid>
-          <Grid item xs={6} className={classes.itemRight}>
-            <IOSSwitch checked={state.villa === 1} onChange={handleChange('villa')} value="checked" />
-          </Grid>
-          <Grid container item xs={12}>
-            <Divider className={classes.divider} />
-          </Grid>
-        </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6} className={classes.inline}>
-            <Typography variant="subtitle2" className={classes.title}>
-              Phòng riêng
-            </Typography>
-          </Grid>
-          <Grid item xs={6} className={classes.itemRight}>
-            <IOSSwitch checked={state.privateRoom === 1} onChange={handleChange('privateRoom')} value="checked" />
-          </Grid>
-          <Grid container item xs={12}>
-            <Divider className={classes.divider} />
-          </Grid>
-        </Grid>
-        <Grid container item xs={12}>
-          <Grid item xs={6} className={classes.inline}>
-            <Typography variant="subtitle2" className={classes.title}>
-              Phòng khách sạn
-            </Typography>
-          </Grid>
-          <Grid item xs={6} className={classes.itemRight}>
-            <IOSSwitch checked={state.hotelRoom === 1} onChange={handleChange('hotelRoom')} value="checked" />
-          </Grid>
-        </Grid>
+      <Collapse in={dataClick.length < 5}>
+        {data.length > 0
+          ? _.map(data, (item, idx) => (
+              <Grid container item xs={12} key={idx}>
+                <Grid item xs={6} className={classes.inline}>
+                  <Typography variant="subtitle2" className={classes.title}>
+                    {item.value}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} className={classes.itemRight}>
+                  <IOSSwitch
+                    checked={dataClick.some((i) => i === item.id)}
+                    onChange={handleChange(item.id)}
+                    value="checked"
+                  />
+                </Grid>
+                {data.length !== idx + 1 ? (
+                  <Grid container item xs={12}>
+                    <Divider className={classes.divider} />
+                  </Grid>
+                ) : (
+                  ''
+                )}
+              </Grid>
+            ))
+          : ''}
       </Collapse>
     </Fragment>
   );

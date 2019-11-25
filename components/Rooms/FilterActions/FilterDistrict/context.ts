@@ -68,7 +68,6 @@ export const useFilterRoom = (
   const [data, setData] = useState<ResDataFilter>([]);
   const { state, dispatch } = useContext(RoomFilterContext);
   const { router } = useContext(GlobalContext);
-  //   console.log(router);
   const city_id = router.query.city_id ? router.query.city_id : undefined;
   const { query } = router;
   const { districts } = state;

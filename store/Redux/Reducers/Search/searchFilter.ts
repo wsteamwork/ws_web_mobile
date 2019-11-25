@@ -10,8 +10,8 @@ export type DateRange = {
 };
 
 export type SearchFilterState = {
-  readonly city_id: number | undefined;
-  readonly district_id: number | undefined;
+  readonly city_id: number;
+  readonly district_id: number;
   readonly guestsCount: number | undefined;
   readonly searchText: string;
   readonly roomsCount: number | undefined;
@@ -39,8 +39,8 @@ export type SearchFilterAction =
   | { type: 'setLeaseTypeGlobal'; leaseTypeGlobal: 0 | 1; leaseTypePathName: string };
 
 const init: SearchFilterState = {
-  city_id: undefined,
-  district_id: undefined,
+  city_id: null,
+  district_id: null,
   searchText: '',
   guestsCount: 1,
   roomsCount: 1,
@@ -49,8 +49,8 @@ const init: SearchFilterState = {
   startDate: moment().format(DEFAULT_DATE_TIME_FORMAT),
   endDate: null,
   roomRecently: [],
-  leaseTypeGlobal: 1,
-  leaseTypePathName: '/long-term-rooms'
+  leaseTypeGlobal: 0,
+  leaseTypePathName: '/rooms'
 };
 
 const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (

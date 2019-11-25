@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../FilterDrawerMobile/index';
 import MapMobile from '../MapMobile';
 import mainColor from '@/styles/constants/colors';
+import FilterDrawerMobile1 from '../FilterDrawerMobile/index';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -31,8 +32,8 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     }
   })
 );
-export const TAB_LIST = 0;
-export const FILTER = 1;
+export const FILTER = 0;
+export const TAB_LIST = 1;
 export const MAP = 2;
 export const NAV = 3;
 
