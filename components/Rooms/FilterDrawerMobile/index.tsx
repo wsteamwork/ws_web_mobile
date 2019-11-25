@@ -9,7 +9,6 @@ import { TAB_LIST } from '@/components/Rooms/BottomNav';
 import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import PriceRangeMobile from './PriceRangeMobile/index';
-import RoomTypeMobile from './RoomTypeMobile/index';
 import AmentitesMobile from './AmentitesMobile/index';
 import DistrictsMobile from './DistrictsMobile/index';
 import BookingTypeMobile from './BookingTypeMobile/index';
@@ -22,10 +21,14 @@ import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
 import Router from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { Divider } from '@material-ui/core';
+import mainColor from '@/styles/constants/colors';
+import RoomTypeMobile from './RoomTypeMobile';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
-      textAlign: 'center'
+      textAlign: 'center',
+      fontWeight: 600
     },
     closeButton: {
       position: 'absolute',
@@ -37,13 +40,17 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
         padding: '0 20px'
       }
     },
-    sortMargin: {
-      marginTop: 24
-    },
     title: {
-      fontWeight: 700
+      fontWeight: 700,
+      color: '#8A8A8F',
+    },
+    titleRoomType: {
+      fontWeight: 700,
+      color: '#8A8A8F',
+      marginBottom: 16
     },
     titlePrice: {
+      color: '#8A8A8F',
       fontWeight: 700,
       marginBottom: 13
     },
@@ -56,11 +63,30 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       textAlign: 'right'
     },
     apply: {
-      width: '100%'
+      width: '100%',
+      border: ' 1px solid',
+      borderColor: mainColor.primary,
+      borderRadius: 25,
+      color: '#ffffff',
+      height:46,
+      margin: 20,
+      boxShadow: '0px 12px 22px rgba(0, 0, 0, 0.0968914)'
     },
     applyLT: {
       width: '100%',
-      backgroundColor: '#673ab7'
+      backgroundColor: mainColor.primaryLT,
+      border: ' 1px solid',
+      color: '#ffffff',
+      borderColor: mainColor.primaryLT,
+      borderRadius: 25,
+      height:46,
+      margin: 20,
+      boxShadow: '0px 12px 22px rgba(0, 0, 0, 0.0968914)'
+    },
+    divider: {
+      margin: '24px 0',
+      backgroundColor: '#D8D8D8',
+      width: '100%'
     }
   })
 );
@@ -76,8 +102,12 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const [open, setOpen] = useState(false);
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-  const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
+  const leaseTypePathName = useSelector<ReducersList, string>(
+    (state) => state.searchFilter.leaseTypePathName
+  );
 
   const queryTypeRoom = leaseTypeGlobal ? Router.query.accommodation_type : Router.query.type_room;
   const queryAmenities = leaseTypeGlobal ? Router.query.comfort_lists : Router.query.amenities;
@@ -149,7 +179,16 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
       </DialogTitle>
       <DialogContent className={classes.dialog}>
         <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
-          {leaseTypeGlobal ? '' : (
+          <Grid item xs={12} className={classes.sortMargin}>
+            <Typography variant="subtitle2" className={classes.titlePrice}>
+              {t('rooms:filterRooms:priceRange')}
+            </Typography>
+            <PriceRangeMobile />
+            <Divider className={classes.divider} />
+          </Grid>
+          {leaseTypeGlobal ? (
+            ''
+          ) : (
             <Grid container item xs={12}>
               <Grid item xs={6} className={classes.inline}>
                 <Typography variant="subtitle2" className={classes.title}>
@@ -159,9 +198,11 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
               <Grid item xs={6} className={classes.itemRight}>
                 <BookingTypeMobile />
               </Grid>
+              <Grid container item xs={12}>
+                <Divider className={classes.divider} />
+              </Grid>
             </Grid>
           )}
-
           <Grid container item xs={12}>
             <Grid item xs={6} className={classes.inline}>
               <Typography variant="subtitle2" className={classes.title}>
@@ -171,22 +212,19 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
             <Grid item xs={6} className={classes.itemRight}>
               <InstantBookMobile />
             </Grid>
+            <Grid container item xs={12}>
+              <Divider className={classes.divider} />
+            </Grid>
           </Grid>
+
           <Grid item xs={12} className={classes.sortMargin}>
-            <Typography variant="subtitle2" className={classes.titlePrice}>
-              {t('rooms:filterRooms:priceRange')}
-            </Typography>
-            <PriceRangeMobile />
-          </Grid>
-          <Grid item xs={12} className={classes.sortMargin}>
-            <Typography variant="subtitle2" className={classes.title}>
+            <Typography variant="subtitle2" className={classes.titleRoomType}>
               {t('rooms:filterRooms:roomsType')}
             </Typography>
-            <RoomTypeMobile
-              dataClick={dataRoomType}
-              setDataClick={setDataRoomType}
-              setOpen={setOpen}
-            />
+            <RoomTypeMobile />
+            <Grid container item xs={12}>
+              <Divider className={classes.divider} />
+            </Grid>
           </Grid>
           <Grid item xs={12} className={classes.sortMargin}>
             <Typography variant="subtitle2" className={classes.title}>
@@ -197,6 +235,9 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
               setDataClick={setDataDistricts}
               setOpen={setOpen}
             />
+            <Grid container item xs={12}>
+              <Divider className={classes.divider} />
+            </Grid>
           </Grid>
           <Grid item xs={12} className={classes.sortMargin}>
             <AmentitesMobile
@@ -208,16 +249,16 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        {leaseTypeGlobal ?
+        {leaseTypeGlobal ? (
           <Button
-
             variant="contained"
             onClick={applyFilter}
             classes={{
               root: classes.applyLT
             }}>
             {t('rooms:filterRooms:apply')}
-          </Button> :
+          </Button>
+        ) : (
           <Button
             color="primary"
             variant="contained"
@@ -226,8 +267,8 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
               root: classes.apply
             }}>
             {t('rooms:filterRooms:apply')}
-          </Button>}
-
+          </Button>
+        )}
       </DialogActions>
     </Fragment>
   );

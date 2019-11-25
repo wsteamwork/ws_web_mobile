@@ -17,6 +17,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       padding: 1,
       '&$checked': {
         color: theme.palette.common.white,
+        transform: 'translateX(24px)',
         '& + $track': {
           backgroundColor: mainColor.primary,
           opacity: 1,
@@ -32,6 +33,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       padding: 1,
       '&$checked': {
         color: theme.palette.common.white,
+        transform: 'translateX(24px)',
         '& + $track': {
           backgroundColor: mainColor.primaryLT,
           opacity: 1,
