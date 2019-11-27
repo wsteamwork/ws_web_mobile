@@ -7,6 +7,7 @@ import React, { FC, Fragment, MouseEvent, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
 import mainColor from '@/styles/constants/colors';
+import DialogFullImage from './DialogFullImage';
 
 interface IProps {
   classes?: any,
@@ -30,20 +31,20 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       lineHeight: '20px',
       letterSpacing: -0.24,
       color: mainColor.titleText,
-      fontWeight:'bold'
+      fontWeight: 'bold'
     },
-    btnViewAll:{
+    btnViewAll: {
       fontSize: 15,
       lineHeight: '20px',
       letterSpacing: -0.24,
       color: '#54D3C2',
       paddingRight: 28,
     },
-    properyItemIcon:{
+    properyItemIcon: {
       display: 'flex',
       justifyContent: 'center',
     },
-    itemIcon:{
+    itemIcon: {
       width: 103,
       height: 100,
       objectFit: 'cover',
@@ -102,7 +103,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   const renderRoomImages = (item) => (
     <Grid>
       <Grid className={classes.properyItemIcon}>
-        <img className={classes.itemIcon} src={item.imgURL}></img>
+        <img className={classes.itemIcon} src={item.imgURL} onClick={toggle}></img>
       </Grid>
     </Grid>
   );
@@ -122,13 +123,22 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Typography>
         </Grid>
       </Grid>
-    
+
       <PropertyListHorizontalScroll
         // itemWidth={'33,33%'}
         margin='14px 0 0'
         paddingItem='0 10px 0 0 !important'
         listData={arrImage}
         itemRender={renderRoomImages}
+      />
+
+      <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}
+        livingrooms={livingrooms}
+        kitchens={kitchens}
+        bathrooms={bathrooms}
+        bedrooms={bedrooms}
+        outdoors={outdoors}
+        furnitures={furnitures}
       />
     </Fragment>
   );

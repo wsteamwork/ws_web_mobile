@@ -24,15 +24,18 @@ import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import { Link, Element } from 'react-scroll';
 import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
 import { useTranslation } from 'react-i18next';
+import NavTop from '@/components/NavTop';
+import HeadRoom from 'react-headroom';
 
 const LongtermRoom: NextPage = () => {
-  const { router } = useContext(GlobalContext);
+  const { router, width } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
   const error = useSelector<ReducersList, boolean>((state) => state.ltroomPage.error);
   const detailRef = useRef(null);
   // const [] = useVisitedRoom();  const { router } = useContext(GlobalContext);
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
   const { t } = useTranslation();
+  const [hideNavTop, setHideNavTop] = useState<boolean>(false);
 
   // forceCheck();
   if (router.pathname.includes('/long-term-room')) {
@@ -89,22 +92,33 @@ const LongtermRoom: NextPage = () => {
           <Fragment>
             {ltroom ? (
               <GridContainer xs={12} classNameItem="roomPage" id='id_BoxDetails'>
-                
-                  <BoxImageLT
-                    backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name})`}
-                    room={ltroom}
-                  >
-                    <Link activeClass="active" to="test1" spy={true} smooth={true} duration={500} >
-                      <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' >
-                        <span style={{color:'#fff'}}>{t('longtermroom:moreDetails')}</span>
-                        <KeyboardArrowDownRounded style={{color:'#fff'}}/>
-                      </Grid>
-                    </Link>
 
-                  </BoxImageLT>
+                <HeadRoom
+                  style={{
+                    WebkitTransition: 'all 0.3s ease-in-out',
+                    MozTransition: 'all 0.3s ease-in-out',
+                    OTransition: 'all 0.3s ease-in-out',
+                    transition: 'all 0.3s ease-in-out'
+                  }}
+                  onPin={() => setHideNavTop(false)}
+                  onUnpin={() => setHideNavTop(true)}>
+                  <NavTop isHidden={hideNavTop} />
+                </HeadRoom>
+
+                <BoxImageLT
+                  backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+                  room={ltroom}
+                >
+                  <Link activeClass="active" to="toInfoScroll" spy={true} smooth={true} duration={500} >
+                    <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' >
+                      <span style={{ color: '#fff' }}>{t('longtermroom:moreDetails')}</span>
+                      <KeyboardArrowDownRounded style={{ color: '#fff' }} />
+                    </Grid>
+                  </Link>
+                </BoxImageLT>
                 <Grid container>
                   <Grid item xs={12} sm={12}>
-                    <Element name="test1">
+                    <Element name="toInfoScroll">
                       <BoxLTRoomDetail room={ltroom} />
                     </Element>
                   </Grid>

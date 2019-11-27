@@ -28,7 +28,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       paddingRight: (props) => props.gutter
     },
     propertyListHorizontalScroll: {
-
+      padding:'0 12px 0 0'
     },
     spaceList: {
       margin: (props) => props.margin

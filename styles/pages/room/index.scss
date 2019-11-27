@@ -3,6 +3,16 @@
 @import "./boxImage/index.scss";
 
 .roomPage {
+  .headroom-wrapper{
+    position: absolute;
+    width: 100%;
+    background: transparent;
+    z-index: 9;
+  }
+  .headroom--pinned {
+    background: #fff
+  }
+
   &__boxViewMore{
     left: 50%;
     width: 90% !important;
