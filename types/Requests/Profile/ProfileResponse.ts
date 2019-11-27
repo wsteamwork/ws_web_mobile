@@ -12,7 +12,9 @@ export interface ProfileInfoRes {
   birthday: string | null;
   address: string | null;
   phone: string;
-  account_number: number | null;
+  account_number: string | null;
+  account_holder: string | null;
+  account_branch: string | null;
   avatar: string | null;
   avatar_url: string;
   level: number;

@@ -45,7 +45,10 @@
         "sos": "Liên lạc khẩn cấp",
         "note5": "Cung cấp cho chúng tôi một liên hệ đáng tin cậy để có thể thông báo trong tình huống khẩn cấp.",
         "save": "Lưu",
-        "updateSuccess": "Cập nhật thành công!"
+        "updateSuccess": "Cập nhật thành công!",
+        "accountNumber": "Số tài khoản",
+        "accountBranch": "Chi nhánh",
+        "accountHolder": "Chủ tài khoản"
     },
     "bookingProfile": {
         "evaluate": "đánh giá",
