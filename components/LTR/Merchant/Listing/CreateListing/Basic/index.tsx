@@ -3,17 +3,8 @@ import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { getRoomType, RoomTypeData } from '@/components/Rooms/FilterActions/RoomType/context';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  InputAdornment,
-  OutlinedInput
-} from '@material-ui/core';
+import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { Checkbox, FormControl, FormControlLabel, InputAdornment, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, FormikProps } from 'formik';
@@ -59,7 +50,7 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType().then((res) => setRoomTypesData(res));
+    getRoomType().then((list) => setRoomTypesData(list));;
     // console.log(listing);
   }, []);
 
@@ -156,7 +147,7 @@ const Basic: FC<IProps> = (props) => {
                     }}
                     defaultDisabledOption={'Chọn một'}
                     value={values.accommodation_type}
-                    title="Loại Căn hộ: "
+                    title="Loại Căn hộ * "
                     options={roomTypesData}
                     onBlurTouched={setFieldTouched}
                   />
@@ -166,7 +157,7 @@ const Basic: FC<IProps> = (props) => {
                 </FormControl>
               </Grid>
 
-              <Grid className="create-listing-title">Tổng diện tích căn hộ</Grid>
+              <Grid className="create-listing-title">Tổng diện tích căn hộ *</Grid>
               <Grid item xs={10} md={8}>
                 <FormControl
                   style={{ marginBottom: 32 }}

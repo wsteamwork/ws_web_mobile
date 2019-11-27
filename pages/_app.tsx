@@ -12,7 +12,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'tippy.js/themes/light-border.css';
-import 'antd/dist/antd.css';
 
 config.autoAddCss = false;
 

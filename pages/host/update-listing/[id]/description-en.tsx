@@ -1,4 +1,4 @@
-import Description from '@/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateDescription';
+import Description from '@/components/LTR/Merchant/Listing/UpdateListing/UpdateComponentDetails/UpdateDescriptionEN';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { Breadcrumbs, createStyles, Grid, Theme, Typography } from '@material-ui/core';
@@ -20,7 +20,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-const UpdateDescription: FC<IProps> = (props) => {
+const UpdateDescriptionEN: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
@@ -49,4 +49,4 @@ const UpdateDescription: FC<IProps> = (props) => {
     </Fragment>
   );
 };
-export default UpdateDescription;
+export default UpdateDescriptionEN;

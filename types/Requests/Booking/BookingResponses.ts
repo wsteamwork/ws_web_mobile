@@ -1,6 +1,6 @@
+import { MediaIndexRes } from '@/types/Requests/Media/MediaIndexResponse';
 import { TransformerInclude } from '@/types/Requests/ResponseTemplate';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { MediaIndexRes } from '@/types/Requests/Media/MediaIndexResponse';
 
 export interface BookingIndexRes {
   id: number;
@@ -68,6 +68,7 @@ export interface LTBookingIndexRes {
   latest_move_in: string;
   latest_move_out: string;
   long_term_room_id: number;
+  deposit: number;
   note: string;
   coupon: string;
   price_and_contract: LTPriceAndContract[];
@@ -92,6 +93,7 @@ export interface LTBookingContracts {
   status: number;
   move_in: string;
   move_out: string;
+  status_txt: string;
   next_payment_due: {
     payment_due_date: string;
     payment_amount: number;

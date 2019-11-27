@@ -145,7 +145,7 @@ const ServiceFee: FC<IProps> = (props) => {
   };
   const handleChangeServices = (id: number) => (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      included_fee.sort((a, b) => a.id - b.id);
+      // console.log('included_fee1', included_fee)
       setServiceOtp([...serviceOpt, id]);
       let newObj = {
         id: id,
@@ -155,11 +155,12 @@ const ServiceFee: FC<IProps> = (props) => {
       };
       let dataCheck = included_fee.filter((item) => item.id !== id);
       let newDataChecked = [...dataCheck, newObj];
+      newDataChecked.sort((a, b) => a.id - b.id);
       setIncludedFee(newDataChecked);
       newDataChecked.sort((a, b) => a.id - b.id);
       dispatch({ type: 'setServiceFee', payload: { included_fee: newDataChecked } });
     } else {
-      included_fee.sort((a, b) => a.id - b.id);
+      // console.log('included_fee2',included_fee)
       let dataCheckboxUnCheck = serviceOpt.filter((i) => i !== id);
       setServiceOtp(dataCheckboxUnCheck);
       let newObj = {
@@ -170,6 +171,7 @@ const ServiceFee: FC<IProps> = (props) => {
       };
       let dataCheck = included_fee.filter((item) => item.id !== id);
       let newDataChecked = [...dataCheck, newObj];
+      newDataChecked.sort((a, b) => a.id - b.id);
       setIncludedFee(newDataChecked);
       newDataChecked.sort((a, b) => a.id - b.id);
       dispatch({ type: 'setServiceFee', payload: { included_fee: newDataChecked } });

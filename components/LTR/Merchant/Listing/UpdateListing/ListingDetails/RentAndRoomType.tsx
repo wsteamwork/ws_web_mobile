@@ -53,7 +53,8 @@ const RentAndRoomType: FC<IProps> = (props) => {
             <Grid item xs={12} sm={6}>
               Dài hạn:{' '}
               {listing.prices && listing.prices.prices && listing.prices.prices.term_1_month == 0 ? <b style={{ cursor: 'pointer' }} onClick={openLongTermRoomProcess}>Cập nhật thông tin</b> : (
-                <span className={classes.rentType}>{listing.long_term_rent_type.rent_type_txt}</span>
+                <span className={classes.rentType}>{listing.merchant_status == 1 || listing.status == 1 ? listing.long_term_rent_type.rent_type_txt :
+                  (listing.merchant_status == 1 && listing.status == 0 ? listing.status_txt : (listing.status == 1 && listing.merchant_status == 0 ? listing.merchant_status_txt : (listing.status == 0 && listing.merchant_status == 0 ? listing.merchant_status_txt : '')))}</span>
               )}
             </Grid>
           </Grid>

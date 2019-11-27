@@ -4,35 +4,11 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import {
-  getDataUpdateListing,
-  handleUpdateRentAndRoomType,
-  UpdateDetailsActions,
-  UpdateDetailsState
-} from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
-import {
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  Grid,
-  InputAdornment,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  Typography
-} from '@material-ui/core';
+import { getDataUpdateListing, handleUpdateRentAndRoomType, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { Checkbox, FormControl, FormControlLabel, Grid, InputAdornment, MenuItem, OutlinedInput, Select, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Switch from '@material-ui/core/Switch';
-import React, {
-  ChangeEvent,
-  FC,
-  Fragment,
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import React, { ChangeEvent, FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -130,7 +106,7 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
   useEffect(() => {
-    getRoomType().then((res) => setRoomTypesData(res));
+    getRoomType().then((list) => setRoomTypesData(list));
   }, []);
 
   useEffect(() => {

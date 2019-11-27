@@ -6,7 +6,7 @@ import { CardActions, createStyles, Grid, makeStyles, TextField, Theme, Tooltip,
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import React, { ChangeEvent, FC, Fragment, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -92,15 +92,15 @@ const CardImageCaption: FC<IProps> = (props) => {
     setValues(arrImage)
   }, [arrImage]);
 
-  const imageExists = useMemo(() => (image_url: string) => {
-    if (onUpdateImage) {
-      let http = new XMLHttpRequest();
-      http.open('GET', image_url, false);
-      http.setRequestHeader("Accept", 'application/json');
-      http.send();
-      return http.status != 404;
-    }
-  }, [arrImage]);
+  // const imageExists = useMemo(() => (image_url: string) => {
+  //   if (onUpdateImage) {
+  //     let http = new XMLHttpRequest();
+  //     http.open('GET', image_url, false);
+  //     http.setRequestHeader("Accept", 'application/json');
+  //     http.send();
+  //     return http.status != 404;
+  //   }
+  // }, [arrImage]);
 
   return (
     <Fragment>
@@ -136,9 +136,14 @@ const CardImageCaption: FC<IProps> = (props) => {
                   ''
                 )}
               <Card>
-                <CardMedia
+                {/* <CardMedia
                   className={classes.media}
                   image={onUpdateImage ? (imageExists(IMAGE_STORAGE_LG + img.name) ? IMAGE_STORAGE_LG + img.name : '') : IMAGE_STORAGE_LG + img.name}
+                  title="Image"
+                /> */}
+                <CardMedia
+                  className={classes.media}
+                  image={IMAGE_STORAGE_LG + img.name}
                   title="Image"
                 />
                 <CardContent className={classes.cardContent}>

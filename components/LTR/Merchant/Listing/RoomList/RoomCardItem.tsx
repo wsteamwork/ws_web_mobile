@@ -253,7 +253,6 @@ const RoomCardItem: FC<IProps> = (props) => {
   })(LinearProgress);
   const openUpdateRoom = (room_id: number, percent_longterm: number, lease_type: number, percent_shortterm: number) => {
     if (lease_type !== 1) {
-
       if (percent_longterm == 100) {
         window.open(`/host/update-listing/${room_id}`, `_blank`);
       } else {
@@ -347,7 +346,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               href={`/room/${room.room_id}`}
                               className={classes.roomName}
                               target="_blank">
-                              {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
+                              {room.about_room && room.about_room.vi ? room.about_room.vi.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
                                 <Tooltip
                                   title={`Verified`}

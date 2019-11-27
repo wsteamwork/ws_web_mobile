@@ -1,6 +1,6 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { DescriptionReducerAction, getDetailDescription } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
+import { DescriptionReducerAction, getDetailDescriptionEN } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/description';
 import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
@@ -69,11 +69,11 @@ const UpdateDescription: FC<IProps> = (props) => {
   const FormValidationSchema = useValidatation();
 
   const room_id = useSelector<ReducersList, number>((state) => state.description.room_id);
-  const name = useSelector<ReducersList, string>((state) => state.description.name);
-  const description = useSelector<ReducersList, string>((state) => state.description.description);
-  const space = useSelector<ReducersList, string>((state) => state.description.space);
-  const rules = useSelector<ReducersList, string>((state) => state.description.rules);
-  const lang = useSelector<ReducersList, string>((state) => state.description.lang);
+  const name = useSelector<ReducersList, string>((state) => state.description.name_en);
+  const description = useSelector<ReducersList, string>((state) => state.description.description_en);
+  const space = useSelector<ReducersList, string>((state) => state.description.space_en);
+  const rules = useSelector<ReducersList, string>((state) => state.description.rules_en);
+  const lang = useSelector<ReducersList, string>((state) => state.description.lang_en);
   // const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
   const disable_save = useSelector<ReducersList, boolean>(
     (state) => state.listingdetails.disable_save
@@ -85,11 +85,11 @@ const UpdateDescription: FC<IProps> = (props) => {
   const [statusSnack, setStatusSnack] = useState<string>("success");
   const id = router.query.id;
   useEffect(() => {
-    getDetailDescription(id, dispatch_des);
+    getDetailDescriptionEN(id, dispatch_des);
   }, [id]);
 
   useMemo(() => {
-    if (name.length < 10 || description.length < 50) {
+    if (name.length < 10 || description.length < 30) {
       dispatch_detail({ type: 'setDisableSave', payload: true });
     } else {
       dispatch_detail({ type: 'setDisableSave', payload: false });
@@ -102,7 +102,7 @@ const UpdateDescription: FC<IProps> = (props) => {
   const updateDescription: any = () => {
     const res = handleUpdateListing(room_id, {
       about_room: {
-        vi: {
+        en: {
           name: name,
           description: description,
           space: space,
@@ -111,7 +111,7 @@ const UpdateDescription: FC<IProps> = (props) => {
         }
       }
     });
-    if (res) {
+    if(res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật mô tả căn hộ thành công !")
     }
@@ -164,28 +164,28 @@ const UpdateDescription: FC<IProps> = (props) => {
                   <Grid item xs={12}>
                     <CardTextarea
                       name="name"
-                      label={t('details:listingName')}
+                      label={t('details:listingNameEN')}
                       sub_label={t('details:subName')}
                       value={values.name.replace(/\s+/g, ' ')}
                       classTextField={
-                        !!(values.name.length < 10 && touched!.name)
+                        !!(values.name.length < 15 && touched!.name && errors.name)
                           ? 'textarea error_textarea'
                           : 'textarea'
                       }
-                      show_error={!!(values.name.length < 10 && touched!.name)}
+                      show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
                       error_message={errors.name ? errors.name : t('details:defaultError')}
                       rows={1}
                       rowsMax={1}
                       max_char={100}
                       multiline={true}
                       classMaxChar={
-                        !!(values.name.length < 10 && touched!.name)
+                        !!(values.name.length < 15 && touched!.name && errors.name)
                           ? 'error_char'
                           : 'remain_char'
                       }
                       InputProps={{
                         classes: {
-                          notchedOutline: !!(values.name.length < 15 && touched!.name)
+                          notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
                             ? classes.notchedOutline
                             : ''
                         }
@@ -193,13 +193,13 @@ const UpdateDescription: FC<IProps> = (props) => {
                       autoFocus={true}
                       inputProps={{ maxLength: 100 }}
                       handleChange={(e) => {
-                        handleChange(e)
-                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                          handleChange(e)
+                          dispatchDescription({ type: 'setNameEN' }, e.currentTarget.value);
                       }}
                       handleBlur={(e) => {
                         handleBlur(e);
                         // if (e.currentTarget.value.length > 14) {
-                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                        dispatchDescription({ type: 'setNameEN' }, e.currentTarget.value);
                         // }
                       }}
                     />
@@ -208,7 +208,7 @@ const UpdateDescription: FC<IProps> = (props) => {
 
                     <CardTextarea
                       name="description"
-                      label={t('details:listingDes')}
+                      label={t('details:listingDesEN')}
                       sub_label={t('details:subDes')}
                       value={values.description.replace(/\s+/g, ' ')}
                       classTextField={
@@ -269,7 +269,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                       handleBlur={(e) => {
                         handleBlur(e);
                         // if (e.currentTarget.value.length > 49) {
-                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                        dispatchDescription({ type: 'setDescriptionEN' }, e.currentTarget.value);
                         // }
                       }}
                     />
@@ -286,7 +286,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                     <Grid item className={classes.margin_top}>
                       <CardTextarea
                         name="space"
-                        label={t('details:listingSpace')}
+                        label={t('details:listingSpaceEN')}
                         sub_textarea={true}
                         sub_label={t('details:subSpace')}
                         value={values.space}
@@ -326,7 +326,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                         handleChange={handleChange}
                         handleBlur={(e) => {
                           handleBlur(e);
-                          dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                          dispatchDescription({ type: 'setSpaceEN' }, e.currentTarget.value);
                         }}
                       />
                     </Grid>
@@ -334,7 +334,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                     <Grid item className={classes.margin_top}>
                       <CardTextarea
                         name="rules"
-                        label={t('details:listingRules')}
+                        label={t('details:listingRulesEN')}
                         sub_textarea={true}
                         sub_label={t('details:subRules')}
                         value={values.rules}
@@ -374,7 +374,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                         handleChange={handleChange}
                         handleBlur={(e) => {
                           handleBlur(e);
-                          dispatchDescription({ type: 'setRules' }, e.currentTarget.value);
+                          dispatchDescription({ type: 'setRulesEN' }, e.currentTarget.value);
                         }}
                       />
                     </Grid>

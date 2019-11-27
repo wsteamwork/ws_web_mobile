@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
   })
 );
 
-const NameAndDescription: FC<IProps> = (props) => {
+const NameAndDescriptionEN: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
@@ -51,26 +51,26 @@ const NameAndDescription: FC<IProps> = (props) => {
     setIsOpen(!isOpen);
   };
   const openUpdate = () => {
-    router.push(`/host/update-listing/${id}/description`);
+    router.push(`/host/update-listing/${id}/description-en`);
   };
   return (
     <Fragment>
       {listing ? (
-        <CardWrapperItem title="Tên và mô tả tiếng Việt" onClick={openUpdate}>
+        <CardWrapperItem title="Tên và mô tả tiếng Anh" onClick={openUpdate}>
           <Typography variant="subtitle1" className={classes.name}>
-            {listing.about_room.vi.name}
+            {listing.about_room.en.name}
           </Typography>
           <Grid>
             <span>
               {isOpen ? (
                 <span className={classes.roomName}>
-                  {ReactHtmlParser(listing.about_room.vi.description, {
+                  {ReactHtmlParser(listing.about_room.en.description, {
                     transform: transformHtmlContent
                   })}
                 </span>
               ) : (
                   <span className={classes.roomName}>
-                    {ReactHtmlParser(listing.about_room.vi.description.substring(0, 150), {
+                    {ReactHtmlParser(listing.about_room.en.description.substring(0, 150), {
                       transform: transformHtmlContent
                     })}
                     <Button onClick={toggle} className={classes.button}>
@@ -87,4 +87,4 @@ const NameAndDescription: FC<IProps> = (props) => {
     </Fragment>
   );
 };
-export default NameAndDescription;
+export default NameAndDescriptionEN;
