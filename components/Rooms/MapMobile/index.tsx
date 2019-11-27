@@ -1,5 +1,4 @@
 import { FILTER, TAB_LIST, TransitionCustom } from '@/components/Rooms/BottomNav';
-import FilterDrawerMobile from '@/components/Rooms/FilterDrawerMobile';
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { Dialog, DialogContent, DialogTitle, Grid, Hidden, IconButton, Theme, Typography } from '@material-ui/core';

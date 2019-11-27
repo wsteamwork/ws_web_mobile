@@ -614,71 +614,107 @@ const EditProfile: FC = (props) => {
                         </FormHelperText>
                       </FormControl>
                     </Grid>
-                    <Grid item xs={8} sm={9} md={8} lg={8}>
-                      <FormControl
-                        className={'formControl'}
-                        aria-describedby="emergencyContact-helper-text"
-                        fullWidth>
-                        <TextField
-                          name="account_number"
-                          value={values.account_number ? values.account_number : ''}
-                          inputProps={{
-                            className: 'outlineInput'
-                          }}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          variant="outlined"
-                        />
-                        <FormHelperText
-                          classes={{ root: 'helperText' }}
-                          id="emergencyContact-helper-text">
+                    <Grid
+                      container
+                      spacing={2}
+                      direction="row"
+                      justify="center"
+                      className={'rowInputs'}>
+                      <Grid className={'title'} item xs={4} sm={3} md={4} lg={3}>
+                        <Typography variant="button" align="right" className={'typoTitle'}>
                           {t('profile:editProfile:accountNumber')}
-                        </FormHelperText>
-                      </FormControl>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8} sm={9} md={8} lg={8}>
+                        <FormControl
+                          className={'formControl'}
+                          aria-describedby="emergencyContact-helper-text"
+                          fullWidth>
+                          <TextField
+                            name="account_number"
+                            value={values.account_number ? values.account_number : ''}
+                            inputProps={{
+                              className: 'outlineInput'
+                            }}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            variant="outlined"
+                          />
+                          {/* <FormHelperText
+                            classes={{ root: 'helperText' }}
+                            id="emergencyContact-helper-text">
+                            {t('profile:editProfile:accountNumber')}
+                          </FormHelperText> */}
+                        </FormControl>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={8} sm={9} md={8} lg={8}>
-                      <FormControl
-                        className={'formControl'}
-                        aria-describedby="emergencyContact-helper-text"
-                        fullWidth>
-                        <TextField
-                          name="account_branch"
-                          value={values.account_branch ? values.account_branch : ''}
-                          inputProps={{
-                            className: 'outlineInput'
-                          }}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          variant="outlined"
-                        />
-                        <FormHelperText
-                          classes={{ root: 'helperText' }}
-                          id="emergencyContact-helper-text">
+                    <Grid
+                      container
+                      spacing={2}
+                      direction="row"
+                      justify="center"
+                      className={'rowInputs'}>
+                      <Grid className={'title'} item xs={4} sm={3} md={4} lg={3}>
+                        <Typography variant="button" align="right" className={'typoTitle'}>
                           {t('profile:editProfile:accountBranch')}
-                        </FormHelperText>
-                      </FormControl>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8} sm={9} md={8} lg={8}>
+                        <FormControl
+                          className={'formControl'}
+                          aria-describedby="emergencyContact-helper-text"
+                          fullWidth>
+                          <TextField
+                            name="account_branch"
+                            value={values.account_branch ? values.account_branch : ''}
+                            inputProps={{
+                              className: 'outlineInput'
+                            }}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            variant="outlined"
+                          />
+                          {/* <FormHelperText
+                            classes={{ root: 'helperText' }}
+                            id="emergencyContact-helper-text">
+                            {t('profile:editProfile:accountBranch')}
+                          </FormHelperText> */}
+                        </FormControl>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={8} sm={9} md={8} lg={8}>
-                      <FormControl
-                        className={'formControl'}
-                        aria-describedby="emergencyContact-helper-text"
-                        fullWidth>
-                        <TextField
-                          name="account_holder"
-                          value={values.account_holder ? values.account_holder : ''}
-                          inputProps={{
-                            className: 'outlineInput'
-                          }}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          variant="outlined"
-                        />
-                        <FormHelperText
-                          classes={{ root: 'helperText' }}
-                          id="emergencyContact-helper-text">
+                    <Grid
+                      container
+                      spacing={2}
+                      direction="row"
+                      justify="center"
+                      className={'rowInputs'}>
+                      <Grid className={'title'} item xs={4} sm={3} md={4} lg={3}>
+                        <Typography variant="button" align="right" className={'typoTitle'}>
                           {t('profile:editProfile:accountHolder')}
-                        </FormHelperText>
-                      </FormControl>
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={8} sm={9} md={8} lg={8}>
+                        <FormControl
+                          className={'formControl'}
+                          aria-describedby="emergencyContact-helper-text"
+                          fullWidth>
+                          <TextField
+                            name="account_holder"
+                            value={values.account_holder ? values.account_holder : ''}
+                            inputProps={{
+                              className: 'outlineInput'
+                            }}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            variant="outlined"
+                          />
+                          {/* <FormHelperText
+                            classes={{ root: 'helperText' }}
+                            id="emergencyContact-helper-text">
+                            {t('profile:editProfile:accountHolder')}
+                          </FormHelperText> */}
+                        </FormControl>
+                      </Grid>
                     </Grid>
                   </Grid>
                 </GridContainer>
@@ -690,7 +726,7 @@ const EditProfile: FC = (props) => {
                   justify="flex-end"
                   alignItems="flex-end"
                   className={'rowButton'}>
-                  <Grid item xs={4} sm={4}>
+                  <Grid item xs={12} sm={12} md={4}>
                     <ButtonGlobal
                       variant="contained"
                       color="primary"
