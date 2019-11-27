@@ -1,32 +1,20 @@
-import Lock from '@material-ui/icons/LockOutlined';
-import React, { useMemo, useState, FC, Dispatch } from 'react';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import * as Yup from 'yup';
-import moment from 'moment';
-import { ProfileInfoReq } from '@/types/Requests/Profile/ProfileReq';
-import { axios } from '@/utils/axiosInstance';
-import {
-  TextField,
-  Paper,
-  Typography,
-  Divider,
-  Grid,
-  FormControl,
-  Tooltip,
-  Select,
-  OutlinedInput,
-  FormHelperText,
-  Snackbar
-} from '@material-ui/core';
-import { ReducersList, ReducresActions } from '@/store/Redux/Reducers';
-import { useSelector, useDispatch } from 'react-redux';
-import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import GridContainer from '@/components/Layout/Grid/Container';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import MySnackbarContentWrapper from './MySnackbarContentWrapper';
+import GridContainer from '@/components/Layout/Grid/Container';
+import { ReducersList, ReducresActions } from '@/store/Redux/Reducers';
 import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
+import { ProfileInfoReq } from '@/types/Requests/Profile/ProfileReq';
+import { ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { axios } from '@/utils/axiosInstance';
+import { Divider, FormControl, FormHelperText, Grid, OutlinedInput, Paper, Select, Snackbar, TextField, Tooltip, Typography } from '@material-ui/core';
+import Lock from '@material-ui/icons/LockOutlined';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import moment from 'moment';
+import React, { Dispatch, FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import * as Yup from 'yup';
+import MySnackbarContentWrapper from './MySnackbarContentWrapper';
 
 const arrMenuItem = (x: number, y: number) => {
   let i = x;
@@ -55,6 +43,9 @@ interface FormikProfileValues {
   description: string | null;
   job: string | null;
   emergency_contact: string | null;
+  account_number: string | null;
+  account_holder: string | null;
+  account_branch: string | null;
   avatar_url: string | undefined;
   city_id?: number | null;
   district_id?: number | null;
@@ -85,6 +76,9 @@ const EditProfile: FC = (props) => {
       description: profile.description ? profile.description : '',
       job: profile.job ? profile.job : '',
       emergency_contact: profile.emergency_contact ? profile.emergency_contact : '',
+      account_number: profile.account_number ? profile.account_number : '',
+      account_holder: profile.account_holder ? profile.account_holder : '',
+      account_branch: profile.account_branch ? profile.account_branch : '',
       avatar_url: profile.avatar_url ? profile.avatar_url : '',
       city_id: profile.city_id ? profile.city_id : null,
       district_id: profile.district_id ? profile.district_id : null
@@ -121,14 +115,17 @@ const EditProfile: FC = (props) => {
       phone: values.phone,
       description: values.description,
       job: values.job,
-      emergency_contact: values.emergency_contact
+      emergency_contact: values.emergency_contact,
+      account_number: values.account_number,
+      account_branch: values.account_branch,
+      account_holder: values.account_holder
     };
 
     try {
       const res: AxiosRes<ProfileInfoRes> = await axios.put('profile?include=city,district', data);
       getProfile(dispath);
       setOpen(true);
-    } catch (error) {}
+    } catch (error) { }
 
     axios
       .put('profile', data)
@@ -321,10 +318,10 @@ const EditProfile: FC = (props) => {
                         {!!errors.phone ? (
                           touched.phone && <FormHelperText>{errors.phone}</FormHelperText>
                         ) : (
-                          <FormHelperText id="phone-helper-text">
-                            {t('profile:editProfile:note2')}
-                          </FormHelperText>
-                        )}
+                            <FormHelperText id="phone-helper-text">
+                              {t('profile:editProfile:note2')}
+                            </FormHelperText>
+                          )}
                       </FormControl>
                       {/* </Grid> */}
                     </Grid>
@@ -376,10 +373,10 @@ const EditProfile: FC = (props) => {
                             </FormHelperText>
                           )
                         ) : (
-                          <FormHelperText classes={{ root: 'helperText' }} id="email-helper-text">
-                            {t('profile:editProfile:note3')}
-                          </FormHelperText>
-                        )}
+                            <FormHelperText classes={{ root: 'helperText' }} id="email-helper-text">
+                              {t('profile:editProfile:note3')}
+                            </FormHelperText>
+                          )}
                       </FormControl>
                     </Grid>
                   </Grid>
@@ -614,6 +611,72 @@ const EditProfile: FC = (props) => {
                           classes={{ root: 'helperText' }}
                           id="emergencyContact-helper-text">
                           {t('profile:editProfile:note5')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_number"
+                          value={values.account_number ? values.account_number : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountNumber')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_branch"
+                          value={values.account_branch ? values.account_branch : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountBranch')}
+                        </FormHelperText>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={8} sm={9} md={8} lg={8}>
+                      <FormControl
+                        className={'formControl'}
+                        aria-describedby="emergencyContact-helper-text"
+                        fullWidth>
+                        <TextField
+                          name="account_holder"
+                          value={values.account_holder ? values.account_holder : ''}
+                          inputProps={{
+                            className: 'outlineInput'
+                          }}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          variant="outlined"
+                        />
+                        <FormHelperText
+                          classes={{ root: 'helperText' }}
+                          id="emergencyContact-helper-text">
+                          {t('profile:editProfile:accountHolder')}
                         </FormHelperText>
                       </FormControl>
                     </Grid>

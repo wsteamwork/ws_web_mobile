@@ -45,7 +45,10 @@
         "sos": "Emergency communication",
         "note5": "Provide us with a reliable contact to be able to notify in an emergency.",
         "save": "Save",
-        "updateSuccess": "Update successful!"
+        "updateSuccess": "Update successful!",
+        "accountNumber": "Bank Account",
+        "accountBranch": "Bank branch",
+        "accountHolder": "Account holder"
     },
     "bookingProfile": {
         "evaluate": "evaluate",
