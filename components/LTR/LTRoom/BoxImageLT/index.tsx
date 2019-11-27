@@ -7,6 +7,7 @@ import Plx from 'react-plx';
 import BoxInfoBasic from '../BoxInfoBasic';
 import '/styles/pages/LTR/room/index.scss';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Parallax } from 'react-parallax';
 interface IProps {
   classes?: any,
   isPreviewPage?: boolean,
@@ -20,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     boxContainer: {
       height: '100vh',
       width: '100%',
-      backgroundImage: (props) => props.backgroundImage || 'url(@/../../../../static/images/room_demo.jpg)',
+      // backgroundImage: (props) => props.backgroundImage || 'url(@/../../../../static/images/room_demo.jpg)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
@@ -36,27 +37,37 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       background: 'rgba(255, 255, 255, 0.18)',
       backdropFilter: 'blur(27.1828px)',
       padding: '14px 18px',
-      [theme.breakpoints.up('sm')]:{
+      [theme.breakpoints.up('sm')]: {
         height: 'auto',
         maxWidth: '50%',
         bottom: 0,
         transform: 'translate(-50%, -50%)',
       }
     },
-    boxViewMore:{
-      position: 'absolute',
-      width: '90%',
-      borderRadius: 20,
-      bottom: '0%',
-      left: '50%',
-      transform: 'translate(-50%, -35%)',
-      background: 'rgba(255, 255, 255, 0.18)',
-      backdropFilter: 'blur(27.1828px)',
-      padding: '14px 18px',
-      [theme.breakpoints.only('sm')]:{
-        width: '50%',
-      }
-    }
+    imgRoom: {
+      // maxHeight: '60vh',
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      cursor: 'pointer',
+      MozTransition: 'all 0.5s',
+      WebkitTransition: 'all 0.5s',
+      transition: 'all 0.5s',
+      '&:hover': {
+        MsTransform: 'scale(1.008)' /* IE  */,
+        WebkitTransform: 'scale(1.008)' /* Safari */,
+        transform: 'scale(1.008)'
+      },
+    },
+    parallaxContainer: {
+      width: '100%',
+    },
+    contentParallax: {
+      justifyContent: 'center',
+      height: '100vh',
+      position: 'relative',
+      overflow: 'hidden'
+    },
   })
 );
 
@@ -68,12 +79,17 @@ const BoxImageLT: FC<IProps> = (props) => {
   const parallaxData = [
     {
       start: 0,
-      end: 300,
+      duration: width === 'sm' ? 1800 : width === 'md' ? 3800 : 1000,
       properties: [
         {
-          startValue: width === 'sm' ? 1070 : 320,
-          endValue: 0,
+          startValue: 0,
+          endValue: 500,
           property: "translateY"
+        },
+        {
+          startValue: 1,
+          endValue: 0.05,
+          property: "scaleY"
         },
         {
           startValue: 1,
@@ -86,29 +102,51 @@ const BoxImageLT: FC<IProps> = (props) => {
 
   const parallaxData2 = [
     {
-      start: 100,
-      end: 300,
+      start: 0,
+      end: 900,
       properties: [
         {
           startValue: 660,
           endValue: 0,
           property: "translateY"
         },
-        {
-          startValue: 1,
-          endValue: -1,
-          property: "opacity"
-        }
       ]
     },
   ];
 
   return (
-    <div className={classes.boxContainer}>
-     {/* <Plx
-        parallaxData={ parallaxData }
+    <Plx
+      parallaxData={parallaxData}
+    >
+
+      <Parallax
+        bgImage={props.backgroundImage}
+        strength={300}
+        bgClassName={classes.imgRoom}
+        className={classes.parallaxContainer}
+        contentClassName={classes.contentParallax}>
+        <div className={classes.insideParalax}>
+          <div className={classes.boxContainer}>
+            <div className={classes.boxInfo}>
+              <BoxInfoBasic showButtonBook
+                name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
+                district={room.district.data.name}
+                city={room.city.data.name}
+                price={room.price_display}
+              />
+            </div>
+            {props.children}
+          </div>
+        </div>
+      </Parallax>
+
+      {/* <div className={classes.boxContainer}> */}
+
+
+      {/* <Plx
+        parallaxData={ parallaxData2 }
       > */}
-        <div className={classes.boxInfo}>
+      {/* <div className={classes.boxInfo}>
           <BoxInfoBasic showButtonBook
             name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
             district={room.district.data.name}
@@ -116,13 +154,11 @@ const BoxImageLT: FC<IProps> = (props) => {
                         price={room.price_display}
           />
         </div>
-      {/* </Plx>
-      <Plx
-        parallaxData={ parallaxData2 }
-      > */}
-       {props.children}
+       {props.children} */}
       {/* </Plx> */}
-    </div>
+      {/* </div> */}
+    </Plx>
+
   );
 };
 

@@ -2,11 +2,11 @@ import { makeStyles, Theme, Typography, Grid, IconButton } from '@material-ui/co
 import createStyles from '@material-ui/core/styles/createStyles';
 import React, { FC, Fragment } from 'react';
 import { Sort } from '@material-ui/icons';
-
 interface IProps {
   classes?: any;
   isHidden?: boolean;
   showTextCenter?: boolean;
+  textCenter?: string;
   showBackAction?: boolean;
   handleBackAction?: () => void;
   showFavoriteAction?: boolean;
@@ -16,7 +16,6 @@ interface IProps {
   showFilterAction?: boolean;
   handleFilterAction?: () => void;
 }
-
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxWrapper: {
@@ -38,12 +37,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     }
   })
 );
-
 const NavTop: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const {
     isHidden,
     showTextCenter,
+    textCenter,
     showBackAction,
     handleBackAction,
     showFavoriteAction,
@@ -65,7 +64,7 @@ const NavTop: FC<IProps> = (props) => {
         )}
       </Grid>
       <Grid item xs={4} className={classes.boxCenter}>
-        {showTextCenter ? <Typography className={classes.textCenter}>Khám phá</Typography> : ''}
+        {showTextCenter ? <Typography className={classes.textCenter}>{textCenter}</Typography> : ''}
       </Grid>
       <Grid item xs={4} className={classes.boxRight}>
         {showFavoriteAction ? (
@@ -100,8 +99,7 @@ NavTop.defaultProps = {
   showTextCenter: true,
   showBackAction: true,
   showFavoriteAction: true,
-  showLocationAction: true,
+  showLocationAction: false,
   showFilterAction: false
 };
-
 export default NavTop;
