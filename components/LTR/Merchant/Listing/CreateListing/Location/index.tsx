@@ -16,6 +16,7 @@ import LazyLoad from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import SearchPlaceCustom from './SearchPlaceCustom';
+
 interface IProps { }
 
 interface Coordinate {
@@ -61,7 +62,6 @@ const Location: FC<IProps> = (props) => {
     city_id
   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
   const [addressInput, setAddress] = useState<string>(address);
-  // const [buildingInput, setBuilding] = useState<string>(building);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [coordinateMarker, setCoordinateMarker] = useState<Coordinate>(coordinateState);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate | null>(coordinateState);
@@ -69,7 +69,7 @@ const Location: FC<IProps> = (props) => {
   const [districtList, setDistrictList] = useState<any[]>(null);
   const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
-
+  const { t } = useTranslation();
   let refStandaloneBox: any = null;
   const onSearchBoxMounted = (ref) => {
     refStandaloneBox = ref;
@@ -104,17 +104,13 @@ const Location: FC<IProps> = (props) => {
       payload: coordinateMarker
     });
   }, [coordinateMarker]);
+
   useEffect(() => {
-    // console.log(addressInput);
     dispatch({
       type: 'SET_ADDRESS',
       payload: addressInput
     });
   }, [addressInput]);
-
-  // useEffect(() => {
-  //   console.log(defaultCenter);
-  // }, [defaultCenter]);
 
   const handleDragEnd = (e: google.maps.MouseEvent) => {
     const lat = e.latLng.lat();
@@ -158,9 +154,9 @@ const Location: FC<IProps> = (props) => {
   return (
     <div className="step1-tab3-location">
       <Grid className="createListing-location">
-        <Grid className="createListing-heading-1">Địa chỉ căn hộ của bạn</Grid>
+        <Grid className="createListing-heading-1">{t('host:address')}</Grid>
         <Grid className="createListing-subTitle">
-          Khách sẽ chỉ biết được địa chỉ chính xác sau khi đặt phòng thành công
+          {t('host:provideAddress')}
         </Grid>
       </Grid>
       <Formik
@@ -198,11 +194,10 @@ const Location: FC<IProps> = (props) => {
                         fontWeight: 600,
                         lineHeight: '1.375em'
                       }}>
-                      Thành phố *
+                      {t('host:city')}
                     </h3>
                     <CitiesList
                       onChange={setFieldValue}
-                      // onBlur={handleBlur}
                       valueCity={values.city}
                       onBlur={setFieldTouched}
                       districtList={districtList}
@@ -222,7 +217,7 @@ const Location: FC<IProps> = (props) => {
                     name="district"
                     value={values.district}
                     options={districtList}
-                    title="Quận huyện *"
+                    title={t('host:district')}
                     onBlurTouched={setFieldTouched}
                     disabled={disabledDistrictField}
                   />
@@ -232,7 +227,7 @@ const Location: FC<IProps> = (props) => {
                 <Grid container>
                   <LazyLoad>
                     <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                      <h3 style={{ color: '#484848' }}>Địa chỉ *</h3>
+                      <h3 style={{ color: '#484848' }}>{t('host:addressSpecific')}</h3>
                       <div data-standalone-searchbox="">
                         <SearchPlaceCustom
                           setCoordinateMarker={setCoordinateMarker}
@@ -242,20 +237,15 @@ const Location: FC<IProps> = (props) => {
                         />
                       </div>
                     </Grid>
-                    {/* {touched.address && <InputFeedback error={errors.address} />} */}
                     <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                      <h3 style={{ color: '#484848' }}>Toà nhà (Tuỳ chọn)</h3>
+                      <h3 style={{ color: '#484848' }}>{t('host:building')}</h3>
                       <FormControl fullWidth variant="outlined">
                         <OutlinedInput
-                          placeholder="Thông tin thêm về toà nhà, khu nhà..."
+                          placeholder={t('host:buildingPlaceholder')}
                           id="component-outlined"
                           value={values.building}
                           onChange={(e) => {
                             setFieldValue('building', e.target.value);
-                            // dispatch({
-                            //   type: 'SET_BUILDING',
-                            //   payload: e.currentTarget.value
-                            // });
                           }}
                           onBlur={(e: any) => {
                             handleBlur(e);
@@ -274,10 +264,9 @@ const Location: FC<IProps> = (props) => {
       />
       {addressInput ? (
         <Fragment>
-          <Grid className="createListing-heading-2">Đây đã phải là địa chỉ đúng chưa?</Grid>
+          <Grid className="createListing-heading-2">{t('host:mapAddressTitle')}</Grid>
           <h3 className="createListing-subTitle">
-            Nếu cần thiết, bạn có thể thay đổi vị trí cho chính xác. Chỉ những khách hàng xác nhận đặt
-            phòng mới có thể thấy được
+            {t('host:mapAddressSubTitle')}
           </h3>
           {defaultCenter && (
             <MapWithAMarker
@@ -286,7 +275,6 @@ const Location: FC<IProps> = (props) => {
               defaultCenter={defaultCenter}
               coordinate={coordinateMarker}
               handleDragEnd={handleDragEnd}
-            // onClickMap={onClickMap}
             />
           )}
         </Fragment>

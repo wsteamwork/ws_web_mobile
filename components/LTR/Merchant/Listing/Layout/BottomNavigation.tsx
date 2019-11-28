@@ -119,7 +119,7 @@ const BottomNavigation: FC<IProps> = (props) => {
               <ButtonGlobal
                 onClick={submitEachStep ? handleFinish : handleNext}
                 disabled={disableSubmit ? disableSubmit : disableNext}>
-                Finish
+                Save
               </ButtonGlobal>
             ) : (
                 <ButtonGlobal onClick={handleNext} disabled={disableNext}>

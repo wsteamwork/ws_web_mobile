@@ -9,6 +9,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import React, { Dispatch, FC, Fragment, useContext, useEffect, useState } from 'react';
 import { Cookies, withCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 interface IProps {
@@ -18,6 +19,7 @@ interface IProps {
 const RoomCreateListing: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const { cookies } = props;
+  const { t } = useTranslation();
   const [idListing, setIdListing] = useState<number>(null);
   const { router } = useContext(GlobalContext);
   const disableSubmit = useSelector<ReducersList, boolean>(
@@ -26,11 +28,10 @@ const RoomCreateListing: FC<IProps> = (props) => {
   const isLogin = !!cookies.get('_token');
 
   const getSteps = () => {
-    return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
+    return [t('host:basicInformation'), t('host:aboutBedrooms'), t('host:bathroomTitle'), t('host:addressTitle')];
   };
 
   useEffect(() => {
-    console.log(isLogin)
     if (!isLogin) {
       router.push('/auth/signin');
     }
@@ -86,7 +87,7 @@ const RoomCreateListing: FC<IProps> = (props) => {
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
       <Layout
-        title="Bước 1: Thông tin cơ bản"
+        title={t('host:firstStep')}
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={`/host/create-listing/${idListing}/detail`}

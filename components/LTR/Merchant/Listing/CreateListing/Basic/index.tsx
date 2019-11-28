@@ -9,9 +9,11 @@ import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import { Formik, FormikProps } from 'formik';
 import React, { ChangeEvent, Dispatch, FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
+
 interface IProps {
   classes?: any;
 }
@@ -37,6 +39,7 @@ const Basic: FC<IProps> = (props) => {
   >((state) => state.createListing);
   const [isStayWithHost, setStayWithHost] = useState<boolean>(!!stayWithHost);
   const { router } = useContext(GlobalContext);
+  const { t } = useTranslation();
   const id = router.query.id;
   const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
@@ -50,8 +53,7 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType().then((list) => setRoomTypesData(list));;
-    // console.log(listing);
+    getRoomType().then((res) => setRoomTypesData(res));
   }, []);
 
   const checkLeaseType = (listing: any) => {
@@ -98,7 +100,7 @@ const Basic: FC<IProps> = (props) => {
   return (
     <div>
       <Grid className="createListing-title">
-        <Grid className="createListing-heading-1">Thông tin cơ bản</Grid>
+        <Grid className="createListing-heading-1">{t('host:basicInformation')}</Grid>
       </Grid>
 
       <Formik
@@ -117,12 +119,10 @@ const Basic: FC<IProps> = (props) => {
           setFieldTouched,
           setFieldValue
         }: FormikProps<FormValues>) => {
-          // const hasChanged = !deepEqual(values, initialValues);
           const hasErrors = Object.keys(errors).length > 0;
           setDisableSubmit(hasErrors || isSubmitting);
           return (
             <form onSubmit={handleSubmit}>
-              {/* onSubmit={handleSubmit} */}
               <CheckboxCustom
                 name="lease_type"
                 values={values}
@@ -131,7 +131,6 @@ const Basic: FC<IProps> = (props) => {
               />
 
               <Grid item xs={10} md={8} style={{ marginBottom: 32 }}>
-                {/* <h3>Loại Căn hộ: </h3> */}
                 <FormControl
                   error={!!errors.accommodation_type && touched.accommodation_type}
                   fullWidth>
@@ -139,7 +138,6 @@ const Basic: FC<IProps> = (props) => {
                     name="accommodation_type"
                     onChange={(e) => {
                       handleChange(e);
-                      // console.log(e.target.value);
                       dispatch({
                         type: 'SET_ACCOMMODATION_TYPE',
                         payload: parseInt(e.target.value)
@@ -147,7 +145,7 @@ const Basic: FC<IProps> = (props) => {
                     }}
                     defaultDisabledOption={'Chọn một'}
                     value={values.accommodation_type}
-                    title="Loại Căn hộ * "
+                    title={t('host:propertyType')}
                     options={roomTypesData}
                     onBlurTouched={setFieldTouched}
                   />
@@ -157,7 +155,7 @@ const Basic: FC<IProps> = (props) => {
                 </FormControl>
               </Grid>
 
-              <Grid className="create-listing-title">Tổng diện tích căn hộ *</Grid>
+              <Grid className="create-listing-title">{t('host:totalArea')}</Grid>
               <Grid item xs={10} md={8}>
                 <FormControl
                   style={{ marginBottom: 32 }}
@@ -167,7 +165,7 @@ const Basic: FC<IProps> = (props) => {
                   fullWidth>
                   <OutlinedInput
                     name="total_area"
-                    placeholder="Nhập diện tích"
+                    placeholder={t('host:totalArea')}
                     type="number"
                     value={values.total_area}
                     onChange={(e) => {
@@ -202,7 +200,7 @@ const Basic: FC<IProps> = (props) => {
                     value="stayWithHost"
                   />
                 }
-                label="Bạn có đang ở trong căn hộ này không?"
+                label={t('host:stayWithHost')}
               />
             </form>
           );

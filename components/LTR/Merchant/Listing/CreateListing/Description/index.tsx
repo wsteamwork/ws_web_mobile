@@ -34,9 +34,9 @@ const useValidatation = () => {
     description: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(5000, t('details:des500Character')),
-    space: Yup.string().max(1000, t('details:space1000Character')),
-    rules: Yup.string().max(5000, t('details:rules500Character'))
+      .max(5000, t('details:des5000Character')),
+    space: Yup.string().max(5000, t('details:space5000Character')),
+    rules: Yup.string().max(5000, t('details:rules5000Character'))
   });
 
   return FormValidationSchema;
@@ -82,14 +82,6 @@ const Description: FC<IProps> = (props) => {
   useMemo(() => {
     dispatch_detail({ type: 'setDisableNext', payload: (name.length < 10) });
   }, [name]);
-  // useMemo(() => {
-  //   if (name.length < 10 || description.length < 50) {
-  //     dispatch_detail({ type: 'setDisableNext', payload: true });
-  //   }
-  //   elseif {
-  //     dispatch_detail({ type: 'setDisableNext', payload: false });
-  //   }
-  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -171,7 +163,6 @@ const Description: FC<IProps> = (props) => {
                     name="description"
                     label={t('details:listingDes')}
                     sub_label={t('details:subDes')}
-                    // value={values.description.replace(/\s+/g, ' ')}
                     value={values.description}
                     classTextField={
                       !!(values.description.length < 50 && touched!.description)
@@ -216,9 +207,7 @@ const Description: FC<IProps> = (props) => {
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      // if (e.currentTarget.value.length > 30) {
                       dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
-                      // }
                     }}
                   />
 
@@ -253,7 +242,7 @@ const Description: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={1000}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={!!(touched!.space && errors.space) ? 'error_char' : 'remain_char'}
                       InputProps={{
@@ -263,7 +252,7 @@ const Description: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 1000 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={
                         width !== 'xl' && width !== 'lg'
                           ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
@@ -272,7 +261,6 @@ const Description: FC<IProps> = (props) => {
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        // console.log(e.currentTarget.value);
                         dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
                       }}
                     />

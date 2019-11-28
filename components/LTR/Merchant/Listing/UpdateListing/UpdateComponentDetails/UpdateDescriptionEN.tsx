@@ -33,9 +33,9 @@ const useValidatation = () => {
     description: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(5000, t('details:des500Character')),
-    space: Yup.string().max(1000, t('details:space1000Character')),
-    rules: Yup.string().max(5000, t('details:rules500Character'))
+      .max(5000, t('details:des5000Character')),
+    space: Yup.string().max(1000, t('details:space5000Character')),
+    rules: Yup.string().max(5000, t('details:rules5000Character'))
   });
 
   return FormValidationSchema;

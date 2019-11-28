@@ -1,9 +1,10 @@
 {
     "feeIncluded":"Phí đã bao gồm trong giá thuê nhà",
     "otherFee": "Phí dịch vụ",
-    "currency": "VNĐ",
+    "currency": "đ",
     "priceByTerm": "Giá theo kỳ hạn",
     "priceIncludedFee": "Giá thuê phòng đã bao gồm",
+    "priceNotIncludedFee": "Giá thuê KHÔNG bao gồm",
     "viewSchedule": "Kiểm tra lịch",
     "amenitiesOfRoom": "Tiện nghi trong căn hộ",
     "amenitiesCommon": "Tiện nghi chung",
@@ -16,10 +17,8 @@
     "furnitures": "Nội thất",
     "outdoors": "Ngoài trời",
     "allImages": "Tất cả ảnh",
-    "viewAll": "Xem tất cả",
     "priceBasic": "Mỗi tháng cho kỳ hạn 1 - 2 tháng",
+    "priceBasicMobile": "/tháng",
     "notFoundData": "Chưa có dữ liệu!",
-    "perMonth": "/ tháng",
-    "moreDetails": "Xem chi tiết",
-    "bookNow": "Đặt phòng"
+    "depositFee": "Giá chưa bao gồm tiền đặt cọc cho những hư hỏng, mất mát phát sinh"
 }

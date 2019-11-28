@@ -6,6 +6,7 @@ import { IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceT
 import { Divider, FormControl, Grid, InputAdornment, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -23,7 +24,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: 'rgb(118, 118, 118)'
     },
     bigTitle: {
-      margin: '32px 0'
+      margin: '8px 0'
+    },
+    bigTitleSubTitle: {
+      marginBottom: 32
     },
     divider: {
       margin: '16px 0'
@@ -45,17 +49,18 @@ const PriceShortTerm: FC<IProps> = (props) => {
     price_after_hour: 0,
     cleaning_fee: 0
   });
+  const { t } = useTranslation();
 
   useEffect(() => {
     setPrice({
-      rent_type: listing ? listing.short_term_rent_type.rent_type : 1, 
+      rent_type: listing ? listing.short_term_rent_type.rent_type : 1,
       price_day: priceShort ? priceShort.price_day : 0,
       price_hour: priceShort ? priceShort.price_hour : 0,
       price_charge_guest: priceShort ? priceShort.price_charge_guest : 0,
       price_after_hour: priceShort ? priceShort.price_after_hour : 0,
       cleaning_fee: priceShort ? priceShort.cleaning_fee : 0
     });
-  }, [listing,priceShort]);
+  }, [listing, priceShort]);
 
   useEffect(() => {
     dispatchStep({ type: 'setStep', payload: 'tab1' });
@@ -90,26 +95,27 @@ const PriceShortTerm: FC<IProps> = (props) => {
             return null;
           }}>
           <div>
-            <h1 className={classes.bigTitle}>Giá cơ bản</h1>
-
+            <Typography variant="h5" className={classes.bigTitle}>{t('price:shortTermPriceTitle')}</Typography>
+            <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
+              {t('price:shortTermPriceSubtitle')}
+            </Typography>
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Giá theo ngày
+                  {t('price:priceByDay')}
                 </Typography>
 
                 <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  Đây là giá cơ bản cho một ngày. Nếu không phụ thu thêm giá khác, giá này sẽ được
-                  áp dụng cho tất cả các ngày trong căn hộ của bạn.
+                  {t('price:priceByDaySubtitle')}
                 </Typography>
 
                 <FormControl className={'formControl'} aria-describedby="price_day_helper" required>
                   <TextValidator
                     validators={['required', 'isNumber', 'minNumber:100000']}
                     errorMessages={[
-                      'Bạn cần nhập giá cho trường này',
-                      'Bạn cần nhập giá cho trường này',
-                      'Giá tối thiểu của hình thức thuê theo ngày là : 100.000đ'
+                      t('price:requirePrice'),
+                      t('price:requirePrice'),
+                      t('price:minPriceDay')
                     ]}
                     name="price_day"
                     variant="outlined"
@@ -129,20 +135,19 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   <Divider className={classes.divider} />
 
                   <Typography className={classes.title} variant="h6" gutterBottom>
-                    Giá theo giờ
+                    {t('price:priceByHours')}
                   </Typography>
 
                   <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                    Đây là giá cơ bản cho một ngày. Nếu không phụ thu thêm giá khác, giá này sẽ được
-                    áp dụng cho tất cả các ngày trong căn hộ của bạn.
+                    {t('price:priceByHoursSubtitle')}
                   </Typography>
 
                   <TextValidator
                     validators={['required', 'isNumber', 'minNumber:50000']}
                     errorMessages={[
-                      'Bạn cần nhập giá cho trường này',
-                      'Bạn cần nhập giá cho trường này',
-                      'Giá tối thiểu của hình thức thuê theo giờ là : 50.000đ'
+                      t('price:requirePrice'),
+                      t('price:requirePrice'),
+                      t('price:minPriceHours')
                     ]}
                     id="outlined-adornment-amount"
                     variant="outlined"
@@ -156,29 +161,30 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   />
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
           </div>
+          <Divider className={classes.divider} />
+
           <div>
-            <h1 className={classes.bigTitle}>Giá phụ thu</h1>
+            <Typography variant="h5" className={classes.bigTitle}>{t('price:surchargePriceTitle')}</Typography>
 
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Phụ thu khi thêm người
+                  {t('price:surchargeAdditionalGuests')}
                 </Typography>
 
                 <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  Đây là giá phụ thu khi tăng thêm mỗi khách, hệ thống sẽ tự động tính vào tiền đặt
-                  căn hộ của khách.
+                  {t('price:surchargeAdditionalGuestsSubtitle')}
                 </Typography>
 
                 <TextValidator
                   validators={['required', 'isNumber']}
                   errorMessages={[
-                    'Bạn cần nhập giá cho trường này',
-                    'Bạn cần nhập giá cho trường này'
+                    t('price:requirePrice'),
+                    t('price:requirePrice')
                   ]}
                   id="outlined-adornment-amount"
                   variant="outlined"
@@ -197,19 +203,18 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   <Divider className={classes.divider} />
 
                   <Typography className={classes.title} variant="h6" gutterBottom>
-                    Phụ thu khi khách ở thêm giờ
+                    {t('price:surchargeAdditionalHours')}
                   </Typography>
 
                   <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                    Đây là giá phụ thu khi khách đặt thêm giờ, bắt đầu từ sau 4 giờ, cứ mỗi giờ tiếp
-                    theo hệ thống sẽ tự động tính vào tiền đặt căn hộ của khách.
+                    {t('price:surchargeAdditionalHoursSubtitle')}
                   </Typography>
 
                   <TextValidator
                     validators={['required', 'isNumber']}
                     errorMessages={[
-                      'Bạn cần nhập giá cho trường này',
-                      'Bạn cần nhập giá cho trường này'
+                      t('price:requirePrice'),
+                      t('price:requirePrice')
                     ]}
                     id="outlined-adornment-amount"
                     variant="outlined"
@@ -223,29 +228,29 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   />
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
           </div>
+          <Divider className={classes.divider} />
           <div>
-            <h1 className={classes.bigTitle}>Phí dọn dẹp</h1>
+            <Typography variant="h5" className={classes.bigTitle}>{t('price:cleaningFeeTitle')}</Typography>
 
             <Grid container justify="center">
               <Grid item xs={12}>
-                <Typography className={classes.title} variant="h6" gutterBottom>
+                {/* <Typography className={classes.title} variant="h6" gutterBottom>
                   Phụ thu dịch vụ dọn dẹp
-                </Typography>
+                </Typography> */}
 
                 <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  Đây là giá phụ thu dọn dẹp sau khi khách checkout, để thu hút khách chúng tôi
-                  khuyên bạn nên thiết lập giá này sau.
+                  {t('price:cleaningFeeSubtitle')}
                 </Typography>
 
                 <TextValidator
                   validators={['required', 'isNumber']}
                   errorMessages={[
-                    'Bạn cần nhập giá cho trường này',
-                    'Bạn cần nhập giá cho trường này'
+                    t('price:requirePrice'),
+                    t('price:requirePrice')
                   ]}
                   id="outlined-adornment-amount"
                   variant="outlined"

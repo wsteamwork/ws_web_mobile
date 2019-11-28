@@ -50,9 +50,9 @@ const AdditionalServiceFee: FC<IProps> = (props) => {
   return (
     <Fragment>
       <div>
-        <h1 className={classes.bigTitle}>
+        <Typography variant="h5" className={classes.bigTitle}>
           Lựa chọn gói dịch vụ
-        </h1>
+        </Typography>
         <Grid container className={classes.container} justify='center'>
           {/* <h3>Hình thức thuê: </h3> */}
           <Grid item xs={11}>

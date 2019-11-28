@@ -34,9 +34,9 @@ const useValidatation = () => {
     description_en: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(5000, t('details:des500Character')),
-    space_en: Yup.string().max(1000, t('details:space1000Character')),
-    rules_en: Yup.string().max(5000, t('details:rules500Character'))
+      .max(5000, t('details:des5000Character')),
+    space_en: Yup.string().max(5000, t('details:space5000Character')),
+    rules_en: Yup.string().max(5000, t('details:rules5000Character'))
   });
 
   return FormValidationSchema;
@@ -82,14 +82,6 @@ const DescriptionEN: FC<IProps> = (props) => {
   useMemo(() => {
     dispatch_detail({ type: 'setDisableNext', payload: (name_en.length < 10) });
   }, [name_en]);
-  // useMemo(() => {
-  //   if (name.length < 10 || description.length < 50) {
-  //     dispatch_detail({ type: 'setDisableNext', payload: true });
-  //   }
-  //   elseif {
-  //     dispatch_detail({ type: 'setDisableNext', payload: false });
-  //   }
-  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -253,7 +245,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={1000}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={!!(touched!.space_en && errors.space_en) ? 'error_char' : 'remain_char'}
                       InputProps={{
@@ -263,7 +255,7 @@ const DescriptionEN: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 1000 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={
                         width !== 'xl' && width !== 'lg'
                           ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
