@@ -1,6 +1,5 @@
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
-import MapAndListing from '@/components/Rooms/MapAndListing';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import {
   RoomFilterContext,
@@ -18,12 +17,10 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { Grid, createStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useReducer, useState, useEffect } from 'react';
-import HeadRoom from 'react-headroom';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
 import NavTop from '@/components/NavTop';
 import SearchRoom from '@/components/SearchRoom';
-import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import { makeStyles } from '@material-ui/styles';
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 
@@ -36,48 +33,33 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     },
     boxSearch: {
       backgroundColor: '#ffffff',
-      position: 'fixed',
-      top: '0px',
-      zIndex: 2,
-      width: '100%'
-    },
-    boxSearchMap: {
-      backgroundColor: '#ffffff',
       width: '100%'
     },
     boxRoomListing: {
-      marginTop: 200,
-      marginBottom: 50
-    },
-    boxMapListing: {
       marginBottom: 50
     }
   })
 );
-const LongtermRooms: NextPage = (props) => {
+const MapListing: NextPage = (props) => {
   const classes = useStyles(props);
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
-  const { isMapOpen } = state;
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const [hideNavTop, setHideNavTop] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
   useEffect(() => {
     setHideNavTop(false);
   }, [router]);
-  const handleOpenMap = () => {
-    dispatch({ type: 'setMapOpen', isMapOpen: true });
-  };
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
-  // if (router.pathname.includes('/long-term-rooms')) {
-  //   dispatchLeaseType({
-  //     type: 'setLeaseTypeGlobal',
-  //     leaseTypeGlobal: 1,
-  //     leaseTypePathName: router.pathname.includes('/long-term-rooms')
-  //       ? '/long-term-rooms'
-  //       : '/rooms'
-  //   });
-  // }
+    if (router.pathname.includes('/long-term-rooms')) {
+      dispatchLeaseType({
+        type: 'setLeaseTypeGlobal',
+        leaseTypeGlobal: 1,
+        leaseTypePathName: router.pathname.includes('/long-term-rooms')
+          ? '/long-term-rooms'
+          : '/rooms'
+      });
+    }
   return (
     <Fragment>
       <NextHead
@@ -86,53 +68,28 @@ const LongtermRooms: NextPage = (props) => {
         title="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         description="Căn hộ, biệt thự cho thuê dài hạn - Westay - Westay.vn"
         ogImage="/static/favicon.ico"
-        url="/long-term-rooms"
+        url="/map-and-listing"
       />
 
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
-          <Grid item xs={12} className={isMapOpen ? classes.boxSearchMap : classes.boxSearch}>
-            {!isMapOpen ? (
-              <HeadRoom
-                style={{
-                  WebkitTransition: 'all 0.3s ease-in-out',
-                  MozTransition: 'all 0.3s ease-in-out',
-                  OTransition: 'all 0.3s ease-in-out',
-                  transition: 'all 0.3s ease-in-out'
-                }}
-                onPin={() => setHideNavTop(false)}
-                onUnpin={() => setHideNavTop(true)}>
-                <Grid item xs={12} className={classes.boxWrapper}>
-                  <NavTop
-                    isHidden={hideNavTop}
-                    textCenter={'Khám phá'}
-                    handleLocationAction={handleOpenMap}
-                  />
-                </Grid>
-              </HeadRoom>
-            ) : (
+          <Grid item xs={12} className={classes.boxSearch}>
+            <Grid item xs={12} className={classes.boxWrapper}>
               <NavTop
-                isHidden={false}
+                isHidden={hideNavTop}
                 textCenter={'Bản đồ'}
                 showLocationAction={false}
                 showFilterAction={true}
               />
-            )}
+            </Grid>
             <Grid item xs={12}>
               <SearchRoom />
             </Grid>
-            {!isMapOpen ? (
-              <Grid item xs={12} className={classes.boxWrapper}>
-                <ButtonFilterRoom />
-              </Grid>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={12} className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
+          <Grid item xs={12} className={classes.boxRoomListing}>
             <Grid item xs={12}>
-              <MapAndListing />
+              <MapRoomListing />
             </Grid>
           </Grid>
           <Grid item xs={12}>
@@ -144,10 +101,9 @@ const LongtermRooms: NextPage = (props) => {
   );
 };
 
-LongtermRooms.getInitialProps = async ({ store, query, req }: NextContextPage) => {
+MapListing.getInitialProps = async ({ store, query, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
-
   return {};
 };
 
-export default LongtermRooms;
+export default MapListing;

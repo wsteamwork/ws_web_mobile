@@ -168,7 +168,7 @@ const DirectPayment: FC = () => {
             <Grid item xs={4}>
               <img
                 className="image"
-                src={`${IMAGE_STORAGE_LG}${longTermRoom.avatar.images[0].name}`}
+                src={`${IMAGE_STORAGE_LG}${longTermRoom.avatar.images.length ? longTermRoom.avatar.images[0].name : ''}`}
                 alt={longTermRoom.about_room.name}
               />
             </Grid>

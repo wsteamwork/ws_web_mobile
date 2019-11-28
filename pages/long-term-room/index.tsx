@@ -1,8 +1,10 @@
 import Footer from '@/components/Layout/FooterComponent';
 import GridContainer from '@/components/Layout/Grid/Container';
 import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
+import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
 import BoxImageLT from '@/components/LTR/LTRoom/BoxImageLT';
 import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
+import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
 import NavHeader from '@/components/Toolbar/NavHeader';
@@ -14,18 +16,15 @@ import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { getCookieFromReq } from '@/utils/mixins';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Dialog, Grid } from '@material-ui/core';
+import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
 import { NextPage } from 'next';
-import dynamic from 'next/dynamic'
-import React, { Fragment, useContext, useEffect, useMemo, useState, useRef } from 'react';
+import React, { Fragment, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import HeadRoom from 'react-headroom';
+import { useTranslation } from 'react-i18next';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
+import { Element, Link } from 'react-scroll';
 import { Dispatch } from 'redux';
-import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
-import { Link, Element } from 'react-scroll';
-import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
-import { useTranslation } from 'react-i18next';
-import NavTop from '@/components/NavTop';
-import HeadRoom from 'react-headroom';
 
 const LongtermRoom: NextPage = () => {
   const { router, width } = useContext(GlobalContext);
@@ -83,7 +82,7 @@ const LongtermRoom: NextPage = () => {
             ltroom.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/ltroom/${ltroom.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images.length ? ltroom.avatar.images[0].name : ''}`}
         />
       )}
 

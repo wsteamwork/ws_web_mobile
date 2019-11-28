@@ -102,11 +102,10 @@
 }
 
 .mapRoomListing {
-  margin-top: 164px;
-
-  @include mdDown {
-    margin-top: 0px;
-  }
+  width: 100% !important;
+  top: 0;
+  flex: 1;
+  height: calc(100vh - 195px);
 }
 
 .roomListingInMap {

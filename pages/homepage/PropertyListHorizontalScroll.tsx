@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import React, { ReactNode, useMemo } from 'react';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 interface Iprops<T> {
+  classCustom?: any;
   headTitle?: string;
   listData?: T[];
   itemRender?: (item: T, size?: number | string) => ReactNode;
@@ -39,20 +40,20 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
 const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
-  const { headTitle, listData, itemRender, itemHeight, sizeIcon } = props;
+  const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom } = props;
 
   const renderList = useMemo(
     () =>
       listData.map((item, index) => (
-        <Grid className={classNames('property-item-container', classes.propertyItemContainer)}>
+        <Grid key ={index} className={classNames('property-item-container', classes.propertyItemContainer)}>
           {itemRender(item, sizeIcon)}
         </Grid>
       )),
-    [listData]
+    [itemRender]
   );
 
   return (
-    <section className={classNames("property-list-horizontal-scroll-container", classes.spaceList)}>
+    <section className={classNames("property-list-horizontal-scroll-container", classes.spaceList, classCustom)}>
       {headTitle && (
         <Grid className="head-title-container">
           <Typography className="head-title">{headTitle}</Typography>

@@ -11,7 +11,7 @@ const MapAndListing = () => {
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
   return useMemo(
     () =>
-      !!isMapOpen ? <MapRoomListing /> : (leaseTypeGlobal ? <ListingLTRooms /> : <SidebarAndListing />),
+      isMapOpen ? <MapRoomListing /> : (leaseTypeGlobal ? <ListingLTRooms /> : <SidebarAndListing />),
     [isMapOpen]
   );
 };

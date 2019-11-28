@@ -9,6 +9,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
+import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 interface IProps {
   classes?: any,

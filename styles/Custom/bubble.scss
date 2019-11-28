@@ -1,0 +1,37 @@
+$x: 12px;
+$border-color: #ffffff;
+$bg-color: #252529;
+
+.speech-bubble {
+  background-color: $border-color;
+  color: $bg-color;
+  font-weight: bold;
+  font-size: 14px !important;
+  border: 1px solid $border-color;
+  border-radius: 25px;
+  max-width: 180px;
+  min-width: 60px;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  transition: all 10000ms;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.151825);
+}
+
+.bottom {
+  border-color: $border-color transparent transparent transparent;
+  border-width: $x $x 0 $x;
+  bottom: -$x;
+  left: 40%;
+
+  &:after {
+    transition: all ease-in-out 300ms;
+    border-color: $bg-color transparent transparent transparent;
+    border-style: solid;
+    border-width: ($x - 1) ($x - 1) 0px ($x - 1);
+    bottom: 1px;
+    content: "";
+    position: absolute;
+    left: -($x - 1);
+  }
+}
