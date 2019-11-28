@@ -46,7 +46,6 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
     () =>
       listData.map((item, index) => (
         <Grid key ={index} className={classNames('property-item-container', classes.propertyItemContainer)}>
-          {item.price_display}
           {itemRender(item, sizeIcon)}
         </Grid>
       )),
