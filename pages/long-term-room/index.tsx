@@ -80,7 +80,7 @@ const LongtermRoom: NextPage = () => {
             ltroom.city.data.name
             }. Đặt phòng ngay với Westay để có trải nghiệm độc đáo và tuyệt vời nhất.`}
           url={`https://westay.vn/ltroom/${ltroom.id}`}
-          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+          ogImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images.length ? ltroom.avatar.images[0].name : ''}`}
         />
       )}
 
@@ -91,7 +91,7 @@ const LongtermRoom: NextPage = () => {
               <GridContainer xs={12} classNameItem="roomPage" id='id_BoxDetails'>
                 
                   <BoxImageLT
-                    backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name})`}
+                    backgroundImage={`url(${IMAGE_STORAGE_LG}${ltroom.avatar.images.length ? ltroom.avatar.images[0].name : ''})`}
                     room={ltroom}
                   >
                     <Link activeClass="active" to="test1" spy={true} smooth={true} duration={500} >

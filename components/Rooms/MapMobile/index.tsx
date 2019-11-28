@@ -98,16 +98,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const MapMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { openMap } = props;
-  const [index, setIndex] = useState<number>(TAB_LIST);
-  const { dispatch: mapDispatch } = useContext(RoomIndexContext);
+  const { dispatch } = useContext(RoomIndexContext);
   const { t } = useTranslation();
 
-  const handleOpenFilter = () => {
-    setIndex(FILTER);
-  };
-
   const mapClose = () => {
-    mapDispatch({
+    dispatch({
       type: 'setMapOpen',
       isMapOpen: false
     });
@@ -121,7 +116,6 @@ const MapMobile: FC<IProps> = (props) => {
             <Typography variant="h6">
               {t('rooms:map')}
             </Typography>
-            {/*<MapFilter />*/}
           </Hidden>
 
           <IconButton
@@ -139,27 +133,6 @@ const MapMobile: FC<IProps> = (props) => {
             <div className='roomListing'>
               <MapRoomListing />
             </div>
-
-            <Hidden mdUp implementation="css">
-              <IconButton
-                className={classes.filterButton}
-                classes={{
-                  root: classes.closeButtonRoot,
-                  label: classes.label
-                }}
-                onClick={handleOpenFilter}>
-                <FilterIcon />
-              </IconButton>
-              <Dialog
-                fullScreen
-                open={index === FILTER}
-                TransitionComponent={TransitionCustom}
-                scroll="paper"
-                onClose={() => setIndex(TAB_LIST)}
-              >
-                {/* <FilterDrawerMobile setIndex={setIndex} /> */}
-              </Dialog>
-            </Hidden>
           </Grid>
         </DialogContent>
       </Dialog>

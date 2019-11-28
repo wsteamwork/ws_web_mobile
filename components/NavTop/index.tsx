@@ -7,6 +7,7 @@ interface IProps {
   classes?: any;
   isHidden?: boolean;
   showTextCenter?: boolean;
+  textCenter?: string;
   showBackAction?: boolean;
   handleBackAction?: () => void;
   showFavoriteAction?: boolean;
@@ -44,6 +45,7 @@ const NavTop: FC<IProps> = (props) => {
   const {
     isHidden,
     showTextCenter,
+    textCenter,
     showBackAction,
     handleBackAction,
     showFavoriteAction,
@@ -65,7 +67,7 @@ const NavTop: FC<IProps> = (props) => {
         )}
       </Grid>
       <Grid item xs={4} className={classes.boxCenter}>
-        {showTextCenter ? <Typography className={classes.textCenter}>Khám phá</Typography> : ''}
+        {showTextCenter ? <Typography className={classes.textCenter}>{textCenter}</Typography> : ''}
       </Grid>
       <Grid item xs={4} className={classes.boxRight}>
         {showFavoriteAction ? (

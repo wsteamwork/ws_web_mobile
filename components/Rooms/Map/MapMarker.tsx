@@ -1,86 +1,98 @@
-import CustomPopper from '@/components/CustomPopper';
-import RoomCard from '@/components/RoomCard';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { Grid } from '@material-ui/core';
+import createStyles from '@material-ui/core/styles/createStyles';
+import React, { ComponentType, Fragment, useContext, memo } from 'react';
+import { compose } from 'recompose';
+import { Coords, ChildComponentProps } from 'google-map-react';
+import '@/styles/Custom/bubble.scss';
 import classNames from 'classnames';
-import { ChildComponentProps, Coords } from 'google-map-react';
-import numeral from 'numeral';
-import React, { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { formatMoney } from '@/utils/mixins';
+import { scroller } from 'react-scroll';
+import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
+import mainColor from '@/styles/constants/colors';
+import { makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
-interface IProps extends Coords, ChildComponentProps {
-  room: any;
-  isHover?: boolean;
-  focus(room: RoomIndexRes): void;
+interface IProps extends Required<Coords> {
+  classes?: any;
+  room: LTRoomIndexRes;
+  isHover: boolean;
 }
 
-// @ts-ignore
-const MapMarker: FC<IProps> = (props) => {
-  const { room, $hover, isHover, focus } = props;
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-  const avatarImg = room.media && room.media.data.length ? room.media.data[0].image : room.avatar_image ? room.avatar_image : './static/images/westay-avatar.jpg';
-  const priceOnMap = leaseTypeGlobal ? room.price_display : room.price_day;
-  // console.log(room);
-  const cardRoom = useMemo(() => {
-    if (leaseTypeGlobal) {
-      return (
-        <RoomCard city={room.city.name}
-          district={room.district.name}
-          instantbook={room.instant_book}
-          roomID={room.id}
-          roomName={room.about_room.name}
-          roomNumber={room.bedrooms.number_room}
-          roomType={room.accommodation_type_txt}
-          roomImage={room.avatar.images[0].name}
-          price_day={room.price_display}
-          isHomepage={true} />
-      )
-    } else {
-      return (
-        <RoomCard city={room.city.data.name}
-          district={room.district.data.name}
-          instantbook={room.instant_book}
-          roomID={room.id}
-          roomName={room.room_name}
-          roomNumber={room.number_room}
-          roomType={room.room_type_txt}
-          roomImage={room.media ? room.media.data[0].image : avatarImg}
-          price_day={room.price_day}
-          price_hour={room.price_hour}
-          total_review={room.total_review}
-          avg_rating={room.avg_rating}
-          isHomepage={true} />
-      )
+interface LocalProps extends IProps, ChildComponentProps {}
+
+const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
+  createStyles({
+    root: {
+      position: 'absolute',
+      fontSize: '1rem',
+      transform: 'translate(-50%, -135%)',
+      transition: theme.transitions.create(['all'], {
+        duration: 200,
+        easing: 'ease-in-out'
+      })
+    },
+    hover: {
+      zIndex: 2,
+      backgroundColor: '#54D3C2',
+      border: '1px solid #54D3C2',
+      color: '#ffffff',
+      transition: theme.transitions.create(['all'], {
+        duration: 200,
+        easing: 'ease-in-out'
+      })
+    },
+    overBubble: {
+      [theme.breakpoints.only('xs')]: {
+        minWidth: 110
+      }
     }
-  }, [leaseTypeGlobal]);
+  })
+);
 
-  // useEffect(() => {
-  // }, [leaseTypeGlobal]);
+// @ts-ignore
+const MapMarker: ComponentType<IProps> = (props: LocalProps) => {
+  const classes = useStyles(props);
+  const { room, isHover } = props;
+  console.log('isHover marker', isHover)
+  const { width } = useContext(GlobalContext);
 
-  // console.log(room);
+  const markerEvent = () => {
+    let id = `room-${room.id}`;
+    let offset = -80;
+    if (width === 'md' || width === 'sm') {
+      offset = Math.floor(window.innerHeight / -1.9);
+    }
+
+    let effect: ReactScrollLinkProps = {
+      containerId: 'room-map-list',
+      to: id,
+      smooth: 'easeInOutQuad',
+      offset
+    };
+    scroller.scrollTo(id, effect);
+  };
+
   return (
-    <CustomPopper
-      arrow
-      multiple
-      placement="top"
-      duration={200}
-      trigger="click"
-      theme="light-border"
-      interactive
-      onTrigger={() => focus(room)}
-      content={
-        // <LazyLoad>
-        <Grid className="mapRoom">
-          {cardRoom}
-        </Grid>
-        // </LazyLoad>
-      }>
-      <Grid className={classNames('arrow_box')}>
-        <p className={isHover ? 'arrow_hover' : ''}>{numeral(priceOnMap).format('0,0')}đ</p>
-      </Grid>
-    </CustomPopper>
+    <Fragment>
+      <div
+        onClick={markerEvent}
+        className={classNames(
+          'speech-bubble',
+          classes.root,
+          classes.overBubble,
+          {
+            [classes.hover]: isHover
+          },
+          classes.speechBubbleOver
+        )}>
+        <span>đ {formatMoney(room.price_display, 0)}</span>
+      </div>
+    </Fragment>
   );
 };
 
-export default MapMarker;
+const memoCheck = (prevProps: IProps, nextProps: IProps) => {
+  return prevProps.isHover === nextProps.isHover;
+};
+export default compose<IProps, any>()(React.memo(MapMarker, memoCheck));
