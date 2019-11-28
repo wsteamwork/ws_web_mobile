@@ -27,6 +27,7 @@ export interface LTRoomIndexRes {
   kitchens: ImagesRes;
   livingrooms: ImagesRes;
   about_room: aboutRoom;
+  detail_room: detailOfRoom;
   address: string;
   long_term_rent_type: detailRentType;
   short_term_rent_type: detailRentType;
@@ -118,4 +119,20 @@ export interface detailcomforts {
   entertainment: AmenitiesIndexRes[];
   facilities: AmenitiesIndexRes[];
   outdoors: AmenitiesIndexRes[];
+}
+export interface detailOfRoom {
+  vi: {
+    name: string;
+    description: string;
+    lang: string;
+    space: string;
+    note: string;
+  };
+  en: {
+    name: string;
+    description: string;
+    lang: string;
+    space: string;
+    note: string;
+  };
 }

@@ -58,19 +58,19 @@ const NameAndDescriptionEN: FC<IProps> = (props) => {
       {listing ? (
         <CardWrapperItem title="Tên và mô tả tiếng Anh" onClick={openUpdate}>
           <Typography variant="subtitle1" className={classes.name}>
-            {listing.about_room.en.name}
+            {listing.detail_room.en.name}
           </Typography>
           <Grid>
             <span>
               {isOpen ? (
                 <span className={classes.roomName}>
-                  {ReactHtmlParser(listing.about_room.en.description, {
+                  {ReactHtmlParser(listing.detail_room.en.description, {
                     transform: transformHtmlContent
                   })}
                 </span>
               ) : (
                   <span className={classes.roomName}>
-                    {ReactHtmlParser(listing.about_room.en.description.substring(0, 150), {
+                    {ReactHtmlParser(listing.detail_room.en.description.substring(0, 150), {
                       transform: transformHtmlContent
                     })}
                     <Button onClick={toggle} className={classes.button}>
