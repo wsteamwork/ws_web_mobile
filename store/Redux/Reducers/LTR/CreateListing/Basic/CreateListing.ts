@@ -5,8 +5,8 @@ import { axios_merchant } from '@/utils/axiosInstance';
 import _ from 'lodash';
 import { ParsedUrlQuery } from 'querystring';
 import { Dispatch, Reducer } from 'redux';
-import { getLTRoom } from '../../LTRoom/ltroomReducer';
 import Cookies from 'universal-cookie';
+import { getLTRoom } from '../../LTRoom/ltroomReducer';
 
 interface Coordinate {
   lat: number;

@@ -1,4 +1,5 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
+import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
 import Logo from '@/components/Toolbar/Logo';
 import SideDrawer from '@/components/Toolbar/SideDrawer';
 import SwitchLanguage from '@/components/Toolbar/SwitchLanguage';
@@ -6,13 +7,12 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { NotificationReducerAction, setMarkAllRead } from '@/store/Redux/Reducers/Notification/notification';
 import { CountUnreadRes } from '@/types/Requests/Notification/CountUnread';
-import { AppBar, Avatar, Badge, Button, ClickAwayListener, Divider, Grow, Hidden, ListItemIcon, MenuItem, MenuList, Paper, Popover, Popper, SwipeableDrawer, Theme, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Avatar, Badge, Button, ClickAwayListener, Divider, Grid, Grow, Hidden, ListItemIcon, MenuItem, MenuList, Paper, Popover, Popper, SwipeableDrawer, Theme, Toolbar, Typography } from '@material-ui/core';
 import blue from '@material-ui/core/colors/blue';
 import Orange from '@material-ui/core/colors/orange';
 import createStyles from '@material-ui/core/styles/createStyles';
 import withStyles from '@material-ui/core/styles/withStyles';
 import AccountCircleOutlined from '@material-ui/icons/AccountCircleOutlined';
-import EmailIcon from '@material-ui/icons/Email';
 import IconMenu from '@material-ui/icons/Menu';
 import NotificationsOutlined from '@material-ui/icons/NotificationsOutlined';
 import People from '@material-ui/icons/PersonRounded';
@@ -25,11 +25,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { compose } from 'recompose';
 import Cookies from 'universal-cookie';
 import GridContainer from '../Layout/Grid/Container';
+
 interface IProps {
   classes?: any;
   hiddenListCitySearch?: boolean;
   cookies: Cookies;
   isSticky?: boolean;
+  isDetailPage?: boolean;
 }
 
 const styles = (theme: Theme) =>
@@ -153,7 +155,7 @@ const styles = (theme: Theme) =>
   });
 
 const NavHeader: FunctionComponent<IProps> = (props) => {
-  const { classes, cookies, hiddenListCitySearch, isSticky } = props;
+  const { classes, cookies, hiddenListCitySearch, isSticky, isDetailPage } = props;
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const { t }: UseTranslationResponse = useTranslation();
@@ -161,7 +163,7 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const userRefButton = useRef(null);
-  const { router } = useContext(GlobalContext);
+  const { router, width } = useContext(GlobalContext);
   const count_unread = useSelector<ReducersList, CountUnreadRes>(
     (state) => state.notifications.count_unread
   );
@@ -197,7 +199,6 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
     });
     router.push('/profile');
   };
-
   // @ts-ignore
   return (
     <Fragment>
@@ -213,7 +214,15 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
           style={{ backgroundColor: '#fffffff0' }}>
           <Toolbar className={hiddenListCitySearch ? classes.centerLogo : null}>
             <Hidden smDown>
-              <Logo />
+              <Grid container item md={width === 'lg' || width === 'xl' ? 6 : 2}>
+                <Logo isDetailPage={isDetailPage} />
+                {
+                  isDetailPage && (width === 'lg' || width === 'xl') &&
+                  <Grid item md={6}>
+                    <SearchAutoSuggestion />
+                  </Grid>
+                }
+              </Grid>
               <div className={classes.grow} />
               <ButtonGlobal
                 background={leaseTypeGlobal ? 'linear-gradient(to right, #667eea, #764ba2);' : ''}
@@ -273,32 +282,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
                 <ClickAwayListener onClickAway={handleClose}>
                   <Paper>
                     <MenuList>
-                      <MenuItem onClick={() => Hotline('tel:0916374057')} component="li">
-                        <ListItemIcon>
-                          <PhoneIcon />
-                        </ListItemIcon>
-                        Hotline 1: 0916 374 057
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem onClick={() => Hotline('tel:0946746417')} component={'li'}>
-                        <ListItemIcon>
-                          <PhoneIcon />
-                        </ListItemIcon>
-                        Hotline 2: 0946 746 417
-                      </MenuItem>
-                      <Divider />
                       <MenuItem onClick={() => Hotline('tel:0917041849')}>
                         <ListItemIcon>
                           <PhoneIcon />
                         </ListItemIcon>
                         {t('home:supportHost')}: 0917 041 849
-                      </MenuItem>
-                      <Divider />
-                      <MenuItem onClick={() => Hotline('mailto:info@westay.vn')}>
-                        <ListItemIcon>
-                          <EmailIcon />
-                        </ListItemIcon>
-                        Email: info@westay.vn
                       </MenuItem>
                     </MenuList>
                   </Paper>
@@ -411,9 +399,6 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
             </Hidden>
           </Toolbar>
         </AppBar>
-        {/*{props.animation.isLoginFormOpen && <LoginForm />}*/}
-        {/*{props.animation.isSignUpFormOpen && <SignUpForm />}*/}
-        {/*{props.animation.isForgetPasswordFormOpen && <ForgetPasswordForm />}*/}
       </GridContainer>
     </Fragment>
   );
