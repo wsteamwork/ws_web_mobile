@@ -1,15 +1,15 @@
 import FavoriteAnimation from '@/components/Rooms/Lotte/FavoriteAnimation';
+import { GlobalContext, IGlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { formatMoney } from '@/utils/mixins';
+import { formatMoney, formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC } from 'react';
+import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 
 interface IProps {
   classes?: any,
@@ -25,11 +25,11 @@ const LTRoomCardListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { room, usingInMap } = props;
   const { t } = useTranslation();
+  const { width } = useContext<IGlobalContext>(GlobalContext);
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
-  const price = room.price_display ? `${formatMoney(room.price_display)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
-  // const price = room.price_display ? `${(room.price_display / 1000000)} ${t('rooms:currency')}/${t('rooms:month')}` : `${t('rooms:contactForPrice')}}`;
-
+  const price = room.price_display ? `${width === 'sm' || width === 'xs' ? formatPrice(room.price_display) : t('rooms:currency') + formatMoney(room.price_display)}` : `${t('rooms:contactForPrice')}}`;
+  console.log('price: ' + price)
   return (
     <Paper elevation={0} className='ltRoomCardListing'>
       <Grid container className='roomCardListing__wrapper'>

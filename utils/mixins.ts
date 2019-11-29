@@ -77,7 +77,7 @@ export const formatPrice = (price: number): string | number => {
     if (price >= 1000000) {
       format = (price / 1000000).toFixed(1) + 'tr';
     }
-    return lang === 'vi' ? format : `$${price}`;
+    return lang && lang === 'vi' ? format : `$${price}`;
   } catch (e) {
     console.error(e);
   }
@@ -245,24 +245,24 @@ export const hoursList = [
 ];
 
 export const statusBookingList = [
-    {
-      id: 0,
-      name: 'Tất cả',
-    },
-    {
-      id: 1,
-      name: 'Đơn mới',
-    },
-    {
-      id: 2,
-      name: 'Xác nhận',
-    },
-    {
-      id: 4,
-      name: 'Hoàn thành',
-    },
-    {
-      id: 5,
-      name: 'Đã hủy',
-    },
+  {
+    id: 0,
+    name: 'Tất cả'
+  },
+  {
+    id: 1,
+    name: 'Đơn mới'
+  },
+  {
+    id: 2,
+    name: 'Xác nhận'
+  },
+  {
+    id: 4,
+    name: 'Hoàn thành'
+  },
+  {
+    id: 5,
+    name: 'Đã hủy'
+  }
 ];

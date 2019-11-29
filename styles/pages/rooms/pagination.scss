@@ -1,5 +1,11 @@
 @import "../../mixins.scss";
 
+.rc-pagination-item {
+  @include xs {
+    margin-right: 0px !important;
+  }
+}
+
 .rooms-pagination {
   margin: 48px 0;
   display: flex;
