@@ -1,5 +1,7 @@
 import FullCalendarNoSSR from '@/components/FullCalendarNoSSR';
 import DialogActionCalendar from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogActionCalendar';
+import DialogDetailBooking from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailBooking';
+import DialogDetailLTBooking from '@/components/LTR/Merchant/Listing/CalendarManagement/DialogDetailLTBooking';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import { BlockCalendarReq, UnlockCalendarReq } from '@/types/Requests/Calendar/CalendarReq';
 import { BookingEvents, ScheduleRes } from '@/types/Requests/Calendar/CalendarRes';
@@ -11,6 +13,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import moment from 'moment';
 import React, { FC, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import LazyLoad from 'react-lazyload';
 
 interface IProps {
   classes?: any,
@@ -35,7 +38,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: 25,
       borderRadius: 4,
       display: 'inline-flex',
-      margin: 8,
+      margin: 8
     },
     boxItem: {
       display: 'flex',
@@ -53,42 +56,43 @@ const CalendarManagement: FC<IProps> = (props) => {
   const [period, setPeriod] = useState<string[]>([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [reload, setReload] = useState(false);
+  const [openDialogDetail, setOpenDialogDetail] = useState(false);
+  const [openDialogLTDetail, setOpenDialogLTDetail] = useState(false);
+  const [idbooking, setIdbooking] = useState<number>(null);
+  const [isLongterm, setIsLongterm] = useState<boolean>(null);
+  const [isNewBooking, setIsNewBooking] = useState<boolean>(null);
   const { t } = useTranslation();
   const today = moment().format(DEFAULT_DATE_FORMAT);
   const oneYearLater = moment(today).add(1.2, 'years').format(DEFAULT_DATE_FORMAT);
 
-  const putApiLock = (period: string[]) => {
+  const putApiLock = async (period: string[]) => {
     const data: BlockCalendarReq = {
       room_id: idRoom,
       room_time_blocks: [period]
     };
-    axios_merchant
+    await axios_merchant
       .put('rooms/update-block?option=room_time_blocks', data)
       .then(() => {
         setOpenSnackbar(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      })
+      });
     setOpenDialog(false);
+    getDataBlock();
   };
 
-  const putApiUnlock = (period: string[]) => {
+  const putApiUnlock = async (period: string[]) => {
     const data: UnlockCalendarReq = {
       room_id: idRoom,
       unlock_days: [period]
     };
 
-    axios_merchant
+    await axios_merchant
       .put('rooms/update-block?option=unlock_days', data)
       .then(() => {
         setOpenSnackbar(true);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      })
+      });
+    getDataBlock();
     setOpenDialog(false);
+
   };
 
   const getDataBlock = async (): Promise<ScheduleRes> => {
@@ -115,11 +119,10 @@ const CalendarManagement: FC<IProps> = (props) => {
   useEffect(() => {
     getDataBlock();
     getDataBooking();
-    setReload(true);
   }, []);
 
   useEffect(() => {
-  }, [reload, dataBooking, dataBlock]);
+  }, [dataBooking, dataBlock]);
 
   return (
     <div>
@@ -133,7 +136,8 @@ const CalendarManagement: FC<IProps> = (props) => {
           <span>Booking ngắn hạn</span>
         </Grid>
         <Grid item xs={6} sm={4} className={classes.boxItem}>
-          <div className={classes.boxSugguest} style={{ background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 5px,#f2f2f2 5px,#f2f2f2 10px)' }} />
+          <div className={classes.boxSugguest}
+            style={{ background: 'repeating-linear-gradient(-45deg,#cccccc, #cccccc 5px,#f2f2f2 5px,#f2f2f2 10px)' }} />
           <span>Ngày đã khóa</span>
         </Grid>
       </Grid>
@@ -152,19 +156,17 @@ const CalendarManagement: FC<IProps> = (props) => {
                   let endDayBooking = moment(day.end).format(DEFAULT_DATE_FORMAT);
                   if (info.startStr >= startDayBooking && info.startStr < endDayBooking) {
                     temp++;
-                  };
-                })
+                  }
+                });
               });
             }
             return temp <= 0;
-            //
-            // if (info.startStr === '2019-11-20') return true;
-            // return false;
           }}
           selectOverlap={false}
           eventSources={
             dataBooking
           }
+          eventRender={(x) => { console.log(x) }}
           validRange={() => {
             return {
               start: today,
@@ -186,8 +188,21 @@ const CalendarManagement: FC<IProps> = (props) => {
             ]);
             setOpenDialog(true);
           }}
+          eventClick={(x) => {
+            if (x.event.extendedProps.long_term) {
+              setIdbooking(x.event.extendedProps.booking_id);
+              setIsLongterm(true);
+              setOpenDialogLTDetail(true);
+            } else {
+              setIdbooking(x.event.id);
+              setIsLongterm(false);
+              setOpenDialogDetail(true);
+            }
+            setIsNewBooking(x.event.extendedProps.is_new_booking);
+          }}
         />
       ), [dataBooking, dataBlock])}
+
       <DialogActionCalendar open={openDialog}
         handleClose={() => {
           setOpenDialog(false);
@@ -201,6 +216,24 @@ const CalendarManagement: FC<IProps> = (props) => {
         startDate={period[0]}
         endDate={period[1]}
       />
+      <LazyLoad>
+        <DialogDetailBooking open={openDialogDetail}
+          handleClose={() => setOpenDialogDetail(false)}
+          idBooking={idbooking}
+          isLongterm={isLongterm}
+          isNewBooking={isNewBooking}
+        />
+      </LazyLoad>
+
+      <LazyLoad>
+        <DialogDetailLTBooking open={openDialogLTDetail}
+          handleClose={() => setOpenDialogLTDetail(false)}
+          idBooking={idbooking}
+          isLongterm={isLongterm}
+          isNewBooking={isNewBooking}
+        />
+      </LazyLoad>
+
       <Snackbar
         anchorOrigin={{
           vertical: 'bottom',

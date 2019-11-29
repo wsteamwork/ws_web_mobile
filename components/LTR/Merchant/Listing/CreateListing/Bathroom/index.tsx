@@ -3,9 +3,9 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import Grid from '@material-ui/core/Grid/Grid';
 import React, { Dispatch, FC, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-
-interface IProps {}
+interface IProps { }
 
 const Bathroom: FC<IProps> = (props) => {
   const { bathroomNumber } = useSelector<ReducersList, CreateListingState>(
@@ -13,6 +13,7 @@ const Bathroom: FC<IProps> = (props) => {
   );
   const [bathroom, setBathroom] = useState<number>(bathroomNumber);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch({
       type: 'SET_BATHROOM_NUMBER',
@@ -26,15 +27,15 @@ const Bathroom: FC<IProps> = (props) => {
   return (
     <div className="step1-tab3-bathroom">
       <Grid className="createListing-title">
-        <Grid className="createListing-heading-1">Số phòng tắm</Grid>
-        <Grid className="createListing-subTitle">Nhập số phòng tắm trong căn hộ của bạn</Grid>
+        <Grid className="createListing-heading-1">{t('host:bathroom')}</Grid>
+        <Grid className="createListing-subTitle">{t('host:bathroomSubtitle')}</Grid>
       </Grid>
 
       <Grid item sm={8}>
         <QuantityButtons
           number={bathroom}
           setNumber={setBathroom}
-          title={'Phòng tắm'}></QuantityButtons>
+          title={t('host:bathroom')}></QuantityButtons>
       </Grid>
     </div>
   );

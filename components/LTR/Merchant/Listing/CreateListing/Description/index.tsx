@@ -29,14 +29,14 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(10, t('details:name15Character'))
+      .min(10, t('details:name10Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(500, t('details:des500Character')),
-    space: Yup.string().max(1000, t('details:space1000Character')),
-    rules: Yup.string().max(500, t('details:rules500Character'))
+      .max(5000, t('details:des5000Character')),
+    space: Yup.string().max(5000, t('details:space5000Character')),
+    rules: Yup.string().max(5000, t('details:rules5000Character'))
   });
 
   return FormValidationSchema;
@@ -71,7 +71,6 @@ const Description: FC<IProps> = (props) => {
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
   const dispatch_des = useDispatch<Dispatch<DescriptionReducerAction>>();
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
-
   const id = router.query.id;
   useEffect(() => {
     getDataDescription(id, dispatch_des);
@@ -83,14 +82,6 @@ const Description: FC<IProps> = (props) => {
   useMemo(() => {
     dispatch_detail({ type: 'setDisableNext', payload: (name.length < 10) });
   }, [name]);
-  // useMemo(() => {
-  //   if (name.length < 10 || description.length < 50) {
-  //     dispatch_detail({ type: 'setDisableNext', payload: true });
-  //   }
-  //   elseif {
-  //     dispatch_detail({ type: 'setDisableNext', payload: false });
-  //   }
-  // }, [name, description]);
 
   const handleSubmitForm: any = () => {
     return {};
@@ -133,54 +124,53 @@ const Description: FC<IProps> = (props) => {
                     sub_label={t('details:subName')}
                     value={values.name.replace(/\s+/g, ' ')}
                     classTextField={
-                      !!(values.name.length < 10 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
-                    show_error={!!(values.name.length < 10 && touched!.name && errors.name)}
+                    show_error={!!(values.name.length < 10 && touched!.name)}
                     error_message={errors.name ? errors.name : t('details:defaultError')}
                     rows={1}
                     rowsMax={1}
                     max_char={100}
                     multiline={true}
                     classMaxChar={
-                      !!(values.name.length < 10 && touched!.name && errors.name)
+                      !!(values.name.length < 10 && touched!.name)
                         ? 'error_char'
                         : 'remain_char'
                     }
                     InputProps={{
                       classes: {
-                        notchedOutline: !!(values.name.length < 10 && touched!.name && errors.name)
+                        notchedOutline: !!(values.name.length < 10 && touched!.name)
                           ? classes.notchedOutline
                           : ''
                       }
                     }}
                     autoFocus={true}
                     inputProps={{ maxLength: 100 }}
-                    handleChange={handleChange}
+                    handleChange={(e) => {
+                      handleChange(e)
+                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                    }}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 9) {
-                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
-                      }
+                      dispatchDescription({ type: 'setName' }, e.currentTarget.value);
                     }}
                   />
-
                   <Divider className={classes.normal_divider} />
 
                   <CardTextarea
                     name="description"
                     label={t('details:listingDes')}
                     sub_label={t('details:subDes')}
-                    // value={values.description.replace(/\s+/g, ' ')}
                     value={values.description}
                     classTextField={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                         ? 'textarea error_textarea'
                         : 'textarea'
                     }
                     show_error={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                     }
                     error_message={
                       values.description.length < 50 ? errors.description : t('details:defaultError')
@@ -194,10 +184,10 @@ const Description: FC<IProps> = (props) => {
                     }
                     rows={4}
                     rowsMax={9}
-                    max_char={500}
+                    max_char={5000}
                     multiline={true}
                     classMaxChar={
-                      !!(values.description.length < 50 && touched!.description && errors.description)
+                      !!(values.description.length < 50 && touched!.description)
                         ? 'error_char'
                         : 'remain_char'
                     }
@@ -212,14 +202,12 @@ const Description: FC<IProps> = (props) => {
                           : ''
                       }
                     }}
-                    inputProps={{ maxLength: 500 }}
+                    inputProps={{ maxLength: 5000 }}
                     placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                     handleChange={handleChange}
                     handleBlur={(e) => {
                       handleBlur(e);
-                      if (e.currentTarget.value.length > 30) {
-                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
-                      }
+                      dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
                     }}
                   />
 
@@ -254,7 +242,7 @@ const Description: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={1000}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={!!(touched!.space && errors.space) ? 'error_char' : 'remain_char'}
                       InputProps={{
@@ -264,7 +252,7 @@ const Description: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 1000 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={
                         width !== 'xl' && width !== 'lg'
                           ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
@@ -273,7 +261,6 @@ const Description: FC<IProps> = (props) => {
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        // console.log(e.currentTarget.value);
                         dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
                       }}
                     />
@@ -301,7 +288,7 @@ const Description: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={500}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={!!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'}
                       InputProps={{
@@ -311,7 +298,7 @@ const Description: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 500 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={
                         width !== 'xl' && width !== 'lg'
                           ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`

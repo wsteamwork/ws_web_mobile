@@ -1,29 +1,38 @@
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  CreateListingActions,
-  CreateListingState,
-  countBedsNumberFromBedRoomList
-} from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { countBedsNumberFromBedRoomList, CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
+import { Theme } from '@material-ui/core';
+import { Tooltip } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
+import LiveHelpOutlinedIcon from '@material-ui/icons/LiveHelpOutlined'; import { withStyles } from '@material-ui/styles';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import _ from 'lodash';
-import React, { Dispatch, FC, useEffect, useState, useContext } from 'react';
+import React, { Dispatch, FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { scroller } from 'react-scroll';
 import * as Yup from 'yup';
 import { InputFeedback } from '../Location';
 import AddBedRoom from './AddBedRoom';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 
-interface IProps {}
+interface IProps { }
 
 interface FormValues {
   bedsNumber: number;
   bedRoomsNumber: number;
 }
+
+const HtmlTooltip = withStyles((theme: Theme) => ({
+  tooltip: {
+    backgroundColor: '#f5f5f9',
+    color: 'rgba(0, 0, 0, 0.87)',
+    maxWidth: 400,
+    fontSize: theme.typography.pxToRem(12),
+    border: '1px solid #dce0e0',
+  }
+}))(Tooltip);
 
 const Room: FC<IProps> = (props) => {
   const {
@@ -39,10 +48,9 @@ const Room: FC<IProps> = (props) => {
 
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
-
+  const { t } = useTranslation();
   const [guest, setGuest] = useState<number>(guestRecommendation);
   const [maxGuests, setMaxGuests] = useState<number>(maxGuest);
-
   const [showErrorsBedsNumber, setErrorsBedsNumber] = useState<boolean>(false);
   const [bedRoomsList, setBedRoomsList] = useState<BedRoomReq>(bedRooms);
   const [bedsNumber, setBedsNumber] = useState<number>(bedsNumberRedux);
@@ -185,7 +193,7 @@ const Room: FC<IProps> = (props) => {
     <div className="step1-tab2-room">
       <Grid className="createListing-title">
         <Grid className="createListing-heading-1">
-          Bạn có thể cung cấp dịch vụ cho bao nhiêu khách
+          {t('host:numberOfGuest')}
         </Grid>
       </Grid>
 
@@ -205,20 +213,30 @@ const Room: FC<IProps> = (props) => {
           setFieldTouched,
           setFieldValue
         }: FormikProps<FormValues>) => {
-          // const hasChanged = !deepEqual(values, initialValues);
-          // const hasErrors = Object.keys(errors).length > 0;
-
           return (
             <form onSubmit={handleSubmit}>
               <Grid item sm={8}>
                 <QuantityButtons
                   number={guest}
                   setNumber={setGuest}
-                  title={'Khách'}></QuantityButtons>
+                  title={t('host:guest')}
+                  tooltip={<HtmlTooltip
+                    classes={{ tooltip: 'tooltip' }}
+                    title={t('host:tooltipGuest')}
+                    placement='top'>
+                    <LiveHelpOutlinedIcon style={{ marginLeft: 8 }} fontSize="small" />
+                  </HtmlTooltip>}>
+                </QuantityButtons>
                 <QuantityButtons
                   number={maxGuests}
                   setNumber={setMaxGuests}
-                  title={'Số khách được thêm tối đa'}></QuantityButtons>
+                  title={t('host:maxAdditionalGuest')}
+                  tooltip={<HtmlTooltip
+                    classes={{ tooltip: 'tooltip' }}
+                    title={t('host:tooltipMaxGuest')}
+                    placement='top'>
+                    <LiveHelpOutlinedIcon style={{ marginLeft: 8 }} fontSize="small" />
+                  </HtmlTooltip>}></QuantityButtons>
               </Grid>
 
               <Grid className="errors-beds-number" style={{ paddingRight: 10 }}>
@@ -230,8 +248,8 @@ const Room: FC<IProps> = (props) => {
                   }}
                   value={values.bedRoomsNumber}
                   // callBackOnChange={callBackOnChange}
-                  unit={' phòng ngủ'}
-                  title="Bạn có thể cung cấp bao nhiêu phòng ngủ cho khách?"
+                  unit={t('host:bedroom')}
+                  title={t('host:bedroomSubtitle')}
                   options={bedRoomsNumberArray(50)}
                   twoThirdWidth={true}
                   onBlurTouched={setFieldTouched}
@@ -240,32 +258,31 @@ const Room: FC<IProps> = (props) => {
               </Grid>
 
               <Grid style={{ marginTop: 32 }} item sm={8}>
-                <h3 className="create-listing-title">Khách có thể sử dụng bao nhiêu giường</h3>
+                <h3 className="create-listing-title">{t('host:bedInBedroom')}</h3>
                 <QuantityButtons
                   number={bedsNumber}
                   setNumber={setBedsNumber}
                   minimumValue={1}
-                  title={'Số giường'}></QuantityButtons>
+                  title={t('host:numberBedTotal')}></QuantityButtons>
               </Grid>
               <Grid style={{ marginBottom: 32 }}>
                 {showErrorsBedsNumber && !(bedsNumber == totalBedsNumber) && (
                   <InputFeedback
-                    error={`Cần phải bằng số giường được liệt kê tại mục "Sắp xếp chỗ ngủ"`}
+                    error={t('host:numberBedTotalSubtitle')}
                   />
                 )}
               </Grid>
 
-              <Grid className="createListing-heading-2">Sắp xếp chỗ ngủ</Grid>
+              <Grid className="createListing-heading-2">{t('host:aboutBedrooms')}</Grid>
               <h3 className="createListing-subTitle">
-                Cung cấp chi tiết về chỗ ngủ sẽ giúp khách có được sự lựa chọn tốt hơn
+                {t('host:aboutBedroomSubtitle1')}
                 <br></br>
-                Số giường cần phải bằng số giường được liệt kệ tại mục "Sắp xếp chỗ ngủ"
+                {t('host:aboutBedroomSubtitle2')}
               </h3>
               {bedRoomsNumberArray(bedRoomsNumber).map((number) => (
                 <AddBedRoom
                   key={number}
                   setErrorsBedsNumber={setErrorsBedsNumber}
-                  // setTotalBedsNumber={setTotalBedsNumber}
                   roomNumber={number}
                   bedRoomsList={bedRoomsList}
                   setBedroomsList={setBedRoomsList}

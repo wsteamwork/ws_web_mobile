@@ -1,13 +1,14 @@
+import { ReducersList } from '@/store/Redux/Reducers';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, IconButton } from '@material-ui/core';
 import { AddCircleOutline, RemoveCircleOutline } from '@material-ui/icons';
-import React, { Dispatch, FC, Fragment, SetStateAction } from 'react';
+import React, { Dispatch, FC, Fragment, ReactNode, SetStateAction } from 'react';
 import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 
 interface Iprops {
   icon?: IconDefinition;
+  tooltip?: ReactNode;
   title: string;
   number: number;
   setNumber: Dispatch<SetStateAction<number>>;
@@ -16,7 +17,7 @@ interface Iprops {
 }
 
 const QuantityButtons: FC<Iprops> = (props) => {
-  const { icon, title, number, setNumber, step, minimumValue } = props;
+  const { icon, title, number, setNumber, step, minimumValue, tooltip } = props;
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   const handleDecrement = () => {
@@ -41,7 +42,7 @@ const QuantityButtons: FC<Iprops> = (props) => {
   return (
     <Grid container className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}>
       <Grid item xs={8} className="flex_columCenter">
-        <p>
+        <p style={{ display: 'flex' }}>
           {icon ? (
             <Fragment>
               <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp;
@@ -50,6 +51,7 @@ const QuantityButtons: FC<Iprops> = (props) => {
               ''
             )}
           {title}
+          {tooltip}
         </p>
       </Grid>
       {

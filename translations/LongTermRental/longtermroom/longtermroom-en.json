@@ -1,13 +1,14 @@
 {
     "feeIncluded":"Fee included in rent price",
     "otherFee": "Other fee",
-    "currency": "VND",
+    "currency": "$",
     "priceByTerm": "Price by lease term",
-    "priceIncludedFee": "Following fee is included in rent prices",
+    "priceIncludedFee": "This rent costs include all of the following",
+    "priceNotIncludedFee": "This rent costs NOT include following fee",
     "viewSchedule": "Check availablility",
     "amenitiesOfRoom": "All amenities included in this accommodation",
     "amenitiesCommon": "Amenities common",
-    "discover": "Photos",
+    "discover": "Take a tour",
     "discoverSubTitle": "All information about the apartment is presented to help you have the most intuitive and accurate look",
     "livingrooms": "Livingroom",
     "bedrooms": "Bedroom",
@@ -16,10 +17,8 @@
     "furnitures": "Furnitures",
     "outdoors": "Outdoor",
     "allImages": "All Photos",
-    "viewAll": "View all",
     "priceBasic": "Each month for 1-2 months term",
+    "priceBasicMobile": "/month",
     "notFoundData": "Not found data!",
-    "perMonth": "/ per month",
-    "moreDetails": "More details",
-    "bookNow": "Book"
+    "depositFee": "Only furnitures guarantees deposit"
 }

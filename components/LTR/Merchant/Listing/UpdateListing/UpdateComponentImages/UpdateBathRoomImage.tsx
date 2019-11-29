@@ -85,7 +85,9 @@ const UpdateBathRoomImage: FC<IProps> = (props) => {
 
   const UpdateBathImage: any = () => {
     const res = handleUpdateListing(room_id, {
-      bathrooms: bathrooms
+      images: {
+        bathrooms: bathrooms
+      }
     });
     if (res) {
       setOpenSnack(true);

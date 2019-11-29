@@ -15,6 +15,7 @@ import React, { Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import DescriptionEN from '@/components/LTR/Merchant/Listing/CreateListing/DescriptionEN';
 
 
 const RoomCreateListing = () => {
@@ -29,11 +30,19 @@ const RoomCreateListing = () => {
   const listing = useSelector<ReducersList, any>((state) => state.details.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.details.step);
   const disable_next = useSelector<ReducersList, boolean>((state) => state.details.disable_next);
-  const data_description = {
+
+  const data_description_vi = {
     name: useSelector<ReducersList, string>((state) => state.description.name),
     description: useSelector<ReducersList, string>((state) => state.description.description),
     space: useSelector<ReducersList, string>((state) => state.description.space),
     rules: useSelector<ReducersList, string>((state) => state.description.rules)
+  };
+
+  const data_description_en = {
+    name: useSelector<ReducersList, string>((state) => state.description.name_en),
+    description: useSelector<ReducersList, string>((state) => state.description.description_en),
+    space: useSelector<ReducersList, string>((state) => state.description.space_en),
+    rules: useSelector<ReducersList, string>((state) => state.description.rules_en)
   };
 
   const data_amenities = {
@@ -57,13 +66,15 @@ const RoomCreateListing = () => {
   const data = (step) => {
     switch (step) {
       case 'tab1':
-        return data_description;
+        return data_description_vi;
+      case 'tab1-en':
+        return data_description_en;
       case 'tab2':
         return data_amenities;
       case 'tab3':
         return data_images;
       default:
-        return data_description;
+        return data_description_vi;
     }
   };
 
@@ -82,22 +93,23 @@ const RoomCreateListing = () => {
   }, []);
 
   useEffect(() => {
-    // localStorage.setItem('currentStep', '2');
     dispatch_process({ type: 'setActiveStepListing', payload: '2' });
   }, []);
 
   const getSteps = () => {
-    return [t('details:tab1'), t('details:tab2'), t('details:tab3'), t('details:tab4')];
+    return [t('details:tab1'), t('details:tab1-en'), t('details:tab2'), t('details:tab3'), t('details:tab4')];
   };
   const getStepContent = (step) => {
     switch (step) {
       case 0:
         return <Description />;
       case 1:
-        return <Amenities />;
+        return <DescriptionEN />;
       case 2:
-        return <UploadImage />;
+        return <Amenities />;
       case 3:
+        return <UploadImage />;
+      case 4:
         return <ImageCaption />;
       default:
         return 'Unknown step';

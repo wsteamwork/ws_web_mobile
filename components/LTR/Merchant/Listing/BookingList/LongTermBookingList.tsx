@@ -1,26 +1,21 @@
 import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getRoomList } from '@/store/Redux/Reducers/LTR/RoomList/roomlist';
-import { getCookieFromReq } from '@/utils/mixins';
-import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { updateObject } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import { BookingListReducerAction, getBookingListLT } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
+import Router from 'next/router';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, { Fragment, useEffect, useState, useContext, useMemo } from 'react';
+import React, { Fragment, useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';
 import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import BookingCardItem from './BookingCardItem';
-import Router from 'next/router';
-import { updateObject } from '@/store/Context/utility';
-import {
-  getBookingListLT,
-  BookingListReducerAction
-} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import FilterBookingList from './FilterBookingList';
 interface IProps {
   classes?: any;
@@ -104,15 +99,15 @@ const LongTermBookingList: NextPage = (props) => {
     <Fragment>
       {useMemo(
         () => (
-          currentTab === 0 ? (<FilterBookingList handleSearch={handleSearchLT} />):('')
+          currentTab === 0 ? (<FilterBookingList handleSearch={handleSearchLT} />) : ('')
         ),
         [currentTab]
       )}
       {bookinglist.length ? (
         bookinglist.map((o) => <BookingCardItem key={o.id} booking={o} />)
       ) : (
-        <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
-      )}
+          <NotFoundGlobal height={300} width={250} content={t('roomlist:contentNotFound')} />
+        )}
       {meta && (
         <Pagination
           className="rooms-pagination"

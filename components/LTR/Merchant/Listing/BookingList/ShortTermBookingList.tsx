@@ -3,30 +3,9 @@ import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { updateObject } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  BookingListReducerAction,
-  getBookingListST
-} from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { BookingListReducerAction, getBookingListST } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 import { axios_merchant } from '@/utils/axiosInstance';
-import {
-  Button,
-  createStyles,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Divider,
-  FormControl,
-  Grid,
-  Hidden,
-  makeStyles,
-  MenuItem,
-  OutlinedInput,
-  Select,
-  Snackbar,
-  Theme,
-  Typography
-} from '@material-ui/core';
+import { Button, createStyles, Dialog, DialogActions, DialogContent, DialogTitle, Divider, FormControl, Grid, Hidden, makeStyles, MenuItem, OutlinedInput, Select, Snackbar, Theme, Typography } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -40,15 +19,7 @@ import numeral from 'numeral';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import localeInfo from 'rc-pagination/lib/locale/vi_VN';
-import React, {
-  FC,
-  Fragment,
-  SyntheticEvent,
-  useContext,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll/modules';

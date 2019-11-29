@@ -7,20 +7,35 @@ import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, handleCreateRoom } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import React, { Dispatch, Fragment, useContext, useState } from 'react';
+import React, { Dispatch, FC, Fragment, useContext, useEffect, useState } from 'react';
+import { Cookies, withCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-const RoomCreateListing = () => {
+interface IProps {
+  cookies?: Cookies;
+}
+
+const RoomCreateListing: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  const { cookies } = props;
+  const { t } = useTranslation();
   const [idListing, setIdListing] = useState<number>(null);
   const { router } = useContext(GlobalContext);
   const disableSubmit = useSelector<ReducersList, boolean>(
     (state) => state.createListing.disableSubmit
   );
+  const isLogin = !!cookies.get('_token');
 
   const getSteps = () => {
-    return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
+    return [t('host:basicInformation'), t('host:aboutBedrooms'), t('host:bathroomTitle'), t('host:addressTitle')];
   };
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/auth/signin');
+    }
+  }, [isLogin])
 
   const data = {
     lease_type: useSelector<ReducersList, number>((state) => state.createListing.leaseType),
@@ -47,7 +62,7 @@ const RoomCreateListing = () => {
     district_id: useSelector<ReducersList, any>((state) => state.createListing.district_id)
   };
 
-  const uid = router.query.uid;
+  const uid = router.query.uid ? router.query.uid : null;
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -72,7 +87,7 @@ const RoomCreateListing = () => {
         url="/host/create-listing"
         ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
       <Layout
-        title="Bước 1: Thông tin cơ bản"
+        title={t('host:firstStep')}
         getSteps={getSteps}
         getStepContent={getStepContent}
         nextLink={`/host/create-listing/${idListing}/detail`}
@@ -85,4 +100,4 @@ const RoomCreateListing = () => {
   );
 };
 
-export default RoomCreateListing;
+export default withCookies(RoomCreateListing);

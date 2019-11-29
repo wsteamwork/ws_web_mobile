@@ -6,6 +6,7 @@ import BedRooms from './BedRooms';
 import Guests from './Guests';
 import Location from './Location';
 import NameAndDescription from './NameAndDescription';
+import NameAndDescriptionEN from './NameAndDescriptionEN';
 import RentAndRoomType from './RentAndRoomType';
 import StatusRoom from './StatusRoom';
 
@@ -17,6 +18,7 @@ const ListingDetails: FC<IProps> = (props) => {
     <Grid container alignContent="center">
       <Grid item xs={12} sm={10} lg={9}>
         <NameAndDescription />
+        <NameAndDescriptionEN />
         <RentAndRoomType />
         <Guests />
         <Amenities />

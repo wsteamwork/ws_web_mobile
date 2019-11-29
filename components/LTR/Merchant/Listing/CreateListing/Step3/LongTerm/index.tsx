@@ -7,6 +7,7 @@ import { calcPercentage } from '@/utils/mixins';
 import { Button, Divider, Grid, InputAdornment, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -32,7 +33,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       color: 'rgb(118, 118, 118)'
     },
     bigTitle: {
-      margin: '24px 0'
+      margin: '8px 0'
+    },
+    bigTitleSubTitle: {
+      marginBottom: 32
     },
     divider: {
       margin: '32px 0'
@@ -55,10 +59,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const LongTerm: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {} = props;
+  const { } = props;
   const priceLong = useSelector<ReducersList, IPriceLongTerm>((state) => state.priceTerm.priceLT);
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
+  const { t } = useTranslation();
 
   const [price, setPrice] = useState<IPriceLongTerm>({
     term_1_month: 0,
@@ -115,8 +120,7 @@ const LongTerm: FC<IProps> = (props) => {
       ...price,
       [typePrice]: price.term_1_month - price.term_1_month * percent
     });
-
-    dispatch({ type: 'setPriceLT', payload: { ...price } });
+    // dispatch({ type: 'setPriceLT', payload: { ...price } });
   };
 
   const handleBlur = () => {
@@ -148,24 +152,26 @@ const LongTerm: FC<IProps> = (props) => {
         }}>
         <div>
           <div>
-            <h1 className={classes.bigTitle}>Giá cơ bản</h1>
-
+            <Typography variant="h5" className={classes.bigTitle}>{t('price:longTermPriceTitle')}</Typography>
+            <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
+              {t('price:longTermPriceSubtitle')}
+            </Typography>
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Giá theo tháng (chưa tính hóa đơn)
+                  {t('price:longTerm1MonthPrices')}
                 </Typography>
 
                 <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  Đây là giá tối thiểu từ 1 tháng - 2 tháng
+                  {t('price:longTerm1MonthPricesSubtitle')}
                 </Typography>
 
                 <TextValidator
-                  validators={['required', 'isNumber', 'minNumber:500000']}
+                  validators={['required', 'isNumber', 'minNumber:5000000']}
                   errorMessages={[
-                    'Bạn cần nhập giá cho trường này',
-                    'Bạn cần nhập giá cho trường này',
-                    'Giá tối thiểu của hình thức thuê theo tháng là : 500.000'
+                    t('price:requirePrice'),
+                    t('price:requirePrice'),
+                    t('price:minLongTermPrice')
                   ]}
                   variant="outlined"
                   value={price.term_1_month}
@@ -179,14 +185,15 @@ const LongTerm: FC<IProps> = (props) => {
               </Grid>
             </Grid>
           </div>
+          <Divider className={classes.divider} />
 
           <div>
-            <h1 className={classes.bigTitle}>Giá theo kì hạn</h1>
+            <Typography variant="h5" className={classes.bigTitle}>{t('price:otherRentalTermTitle')}</Typography>
 
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Kì hạn 2 - 3 tháng
+                  {t('price:longTerm2MonthPrices')}
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
@@ -194,8 +201,8 @@ const LongTerm: FC<IProps> = (props) => {
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
-                        'Bạn cần nhập giá cho trường này',
-                        'Bạn cần nhập giá cho trường này'
+                        t('price:requirePrice'),
+                        t('price:requirePrice')
                       ]}
                       disabled={!price.term_1_month}
                       variant="outlined"
@@ -211,16 +218,16 @@ const LongTerm: FC<IProps> = (props) => {
                   {price.term_2_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
-                        <b>{pricePercent.term_2_month}</b> so với giá cơ bản{' '}
+                        <b>{pricePercent.term_2_month}</b> {t('price:compareToBasicPrice')}{' '}
                       </Typography>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Grid>
 
                 <div className={classes.rowMargin}>
-                  <span>Gợi ý: </span>
+                  <span>{t('price:suggestion')} </span>
                   <Button
                     color="primary"
                     className={classes.btnTip}
@@ -230,15 +237,14 @@ const LongTerm: FC<IProps> = (props) => {
                   </Button>
                   <span>
                     {' '}
-                    là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì
-                    hạn này{' '}
+                    {t('price:suggestPrice')}{' '}
                   </span>
                 </div>
                 <Divider className={classes.divider} />
               </Grid>
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Kì hạn 3 - 6 tháng
+                  {t('price:longTerm3MonthPrices')}
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
@@ -246,8 +252,8 @@ const LongTerm: FC<IProps> = (props) => {
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
-                        'Bạn cần nhập giá cho trường này',
-                        'Bạn cần nhập giá cho trường này'
+                        t('price:requirePrice'),
+                        t('price:requirePrice')
                       ]}
                       disabled={!price.term_1_month}
                       variant="outlined"
@@ -263,16 +269,16 @@ const LongTerm: FC<IProps> = (props) => {
                   {price.term_3_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
-                        <b>{pricePercent.term_3_month}</b> so với giá cơ bản{' '}
+                        <b>{pricePercent.term_3_month}</b> {t('price:compareToBasicPrice')}{' '}
                       </Typography>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Grid>
 
                 <div className={classes.rowMargin}>
-                  <span>Gợi ý: </span>
+                  <span>{t('price:suggestion')} </span>
                   <Button
                     color="primary"
                     className={classes.btnTip}
@@ -282,8 +288,7 @@ const LongTerm: FC<IProps> = (props) => {
                   </Button>
                   <span>
                     {' '}
-                    là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì
-                    hạn này{' '}
+                    {t('price:suggestPrice')}{' '}
                   </span>
                 </div>
                 <Divider className={classes.divider} />
@@ -291,7 +296,7 @@ const LongTerm: FC<IProps> = (props) => {
 
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Kì hạn 6 - 12 tháng
+                  {t('price:longTerm6MonthPrices')}
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
@@ -299,8 +304,8 @@ const LongTerm: FC<IProps> = (props) => {
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
-                        'Bạn cần nhập giá cho trường này',
-                        'Bạn cần nhập giá cho trường này'
+                        t('price:requirePrice'),
+                        t('price:requirePrice')
                       ]}
                       disabled={!price.term_1_month}
                       variant="outlined"
@@ -316,26 +321,25 @@ const LongTerm: FC<IProps> = (props) => {
                   {price.term_6_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
-                        <b>{pricePercent.term_6_month}</b> so với giá cơ bản{' '}
+                        <b>{pricePercent.term_6_month}</b> {t('price:compareToBasicPrice')}{' '}
                       </Typography>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Grid>
                 <div className={classes.rowMargin}>
-                  <span>Gợi ý: </span>
+                  <span>{t('price:suggestion')} </span>
                   <Button
                     color="primary"
                     className={classes.btnTip}
                     disabled={!price.term_1_month}
-                    onClick={() => handleTip('term_6_month', 0.1)}>
-                    10%
+                    onClick={() => handleTip('term_6_month', 0.07)}>
+                    7%
                   </Button>
                   <span>
                     {' '}
-                    là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì
-                    hạn này{' '}
+                    {t('price:suggestPrice')}{' '}
                   </span>
                 </div>
                 <Divider className={classes.divider} />
@@ -343,7 +347,7 @@ const LongTerm: FC<IProps> = (props) => {
 
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
-                  Kì hạn từ 1 năm trở lên
+                  {t('price:longTerm12MonthPrices')}
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
@@ -351,8 +355,8 @@ const LongTerm: FC<IProps> = (props) => {
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
-                        'Bạn cần nhập giá cho trường này',
-                        'Bạn cần nhập giá cho trường này'
+                        t('price:requirePrice'),
+                        t('price:requirePrice')
                       ]}
                       disabled={!price.term_1_month}
                       variant="outlined"
@@ -368,26 +372,25 @@ const LongTerm: FC<IProps> = (props) => {
                   {price.term_12_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
-                        <b>{pricePercent.term_12_month}</b> so với giá cơ bản{' '}
+                        <b>{pricePercent.term_12_month}</b> {t('price:compareToBasicPrice')}{' '}
                       </Typography>
                     </Grid>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Grid>
                 <div className={classes.rowMargin}>
-                  <span>Gợi ý: </span>
+                  <span>{t('price:suggestion')} </span>
                   <Button
                     color="primary"
                     className={classes.btnTip}
                     disabled={!price.term_1_month}
-                    onClick={() => handleTip('term_12_month', 0.15)}>
-                    15%
+                    onClick={() => handleTip('term_12_month', 0.11)}>
+                    11%
                   </Button>
                   <span>
                     {' '}
-                    là mức giảm trung bình cần thiết để khuyến khích khách hàng thuê phòng theo kì
-                    hạn này{' '}
+                    {t('price:suggestPrice')}{' '}
                   </span>
                 </div>
               </Grid>

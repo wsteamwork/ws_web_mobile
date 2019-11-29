@@ -1,14 +1,14 @@
-import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { BedRoomReq } from '@/types/Requests/LTR/Basic/BasicRequests';
-import { Theme, Typography } from '@material-ui/core';
+import { OutlinedInput, Select, Theme, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
+import { KeyboardArrowDown } from '@material-ui/icons';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import _ from 'lodash';
-import React, { FC, Fragment, useContext, useEffect, useState, SyntheticEvent } from 'react';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import CardWrapperUpdate from '../CardWrapperUpdate';
@@ -45,7 +45,38 @@ const UpdateBedRooms: FC<IProps> = (props) => {
   const bedRoomsNumberArray = (length: number) =>
     Array.from(new Array(length), (val: any, index: number) => ++index);
 
-  const callBackOnChange = (value: any) => {
+  // const callBackOnChange = (value: any) => {
+  //   dispatch({
+  //     type: 'SET_BEDROOMS_NUMBER',
+  //     payload: parseInt(value)
+  //   });
+  //   bedRoomsList['number_bedroom'] = parseInt(value);
+  //   let bedRoomsTemp: any = {};
+  //   if (bedRoomsNumber < parseInt(value)) {
+  //     for (let i = bedRoomsNumber + 1; i <= parseInt(value); i++) {
+  //       bedRoomsTemp[`bedroom_${i}`] = {
+  //         number_bed: 0,
+  //         images: [],
+  //         beds: [],
+  //         area: 0
+  //       };
+  //     }
+  //     let newRoomsList = Object.assign({}, bedRoomsList, bedRoomsTemp);
+  //     setBedRoomsList(newRoomsList);
+  //   } else {
+  //     for (let i = 1; i <= parseInt(value); i++) {
+  //       bedRoomsTemp[`bedroom_${i}`] = bedRoomsList[`bedroom_${i}`];
+  //     }
+  //     bedRoomsTemp['number_bedroom'] = parseInt(value);
+  //     setBedRoomsList(bedRoomsTemp);
+  //     dispatch({
+  //       type: 'SET_BEDROOMS',
+  //       payload: bedRoomsTemp
+  //     });
+  //   }
+  // };
+  const callBackOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let value = event.target.value;
     dispatch({
       type: 'SET_BEDROOMS_NUMBER',
       payload: parseInt(value)
@@ -75,12 +106,11 @@ const UpdateBedRooms: FC<IProps> = (props) => {
       });
     }
   };
-
   const UpdateBedRooms: any = () => {
     const res = handleUpdateListing(room_id, {
       bedrooms: bedRooms
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật phòng ngủ thành công !")
     }
@@ -90,7 +120,15 @@ const UpdateBedRooms: FC<IProps> = (props) => {
       setMessageSnack("Cập nhật phòng ngủ căn hộ thất bại !")
     }
   };
-
+  const optionsRender = (options, unit) => {
+    return options.map((item, i) => {
+      return (
+        <option key={i} value={unit ? item : item.id}>
+          {unit ? item + unit : item.value}
+        </option>
+      );
+    });
+  };
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -106,14 +144,34 @@ const UpdateBedRooms: FC<IProps> = (props) => {
             <Typography variant="h1" gutterBottom className="label main_label">
               Phòng ngủ
             </Typography>
-            <SelectCustom
+            {/* <SelectCustom
               value={bedRoomsNumber}
               callBackOnChange={callBackOnChange}
               unit={' phòng ngủ'}
               title="Bạn có thể cung cấp bao nhiêu phòng ngủ cho khách ?"
               options={bedRoomsNumberArray(50)}
               twoThirdWidth={true}
-            />
+            /> */}
+            <Typography variant="subtitle1">
+              Vui lòng chọn số phòng ngủ chính xác cho căn hộ của bạn
+            </Typography>
+            <Select
+              native
+              fullWidth
+              classes={{ icon: 'icon' }}
+              onChange={callBackOnChange}
+              value={bedRoomsNumber}
+              input={
+                <OutlinedInput
+                  name="term-rental"
+                  labelWidth={0}
+                  id="outlined-term-rental-native-simple"
+                />
+              }
+              displayEmpty
+              IconComponent={KeyboardArrowDown}>
+              {optionsRender(bedRoomsNumberArray(50), ' phòng')}
+            </Select>
           </Grid>
 
           <Grid className={classes.margin}>

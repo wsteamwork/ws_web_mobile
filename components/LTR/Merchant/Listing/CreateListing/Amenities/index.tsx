@@ -61,7 +61,7 @@ const Amenities: FC<IProps> = (props) => {
           <Typography variant="h1" gutterBottom className="label main_label">
             {t('details:amenities:titleAmenities')}
           </Typography>
-          <Typography variant="h6">{t('details:amenities:subTitleAmenities')}</Typography>
+          <Typography variant="subtitle1">{t('details:amenities:subTitleAmenities')}</Typography>
         </Grid>
         <Grid item xs={11}>
           {amenities['facilities'] ? (

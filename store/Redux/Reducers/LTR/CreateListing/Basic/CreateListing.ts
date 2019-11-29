@@ -5,8 +5,8 @@ import { axios_merchant } from '@/utils/axiosInstance';
 import _ from 'lodash';
 import { ParsedUrlQuery } from 'querystring';
 import { Dispatch, Reducer } from 'redux';
-import { getLTRoom } from '../../LTRoom/ltroomReducer';
 import Cookies from 'universal-cookie';
+import { getLTRoom } from '../../LTRoom/ltroomReducer';
 
 interface Coordinate {
   lat: number;
@@ -59,7 +59,7 @@ export type CreateListingActions =
 const init: CreateListingState = {
   leaseType: 3,
   accommodationType: 2,
-  totalArea: null,
+  totalArea: 0,
   stayWithHost: 0,
   bedRooms: null,
   bedsNumber: 1,
@@ -136,8 +136,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
 export const handleCreateRoom = async (
   data: any,
   dispatch: any,
-  uid: any,
-  initLanguage: string = 'vi'
+  uid?: any,
+  initLanguage: string = 'en'
 ) => {
   const cookies = new Cookies();
   const token = cookies.get('_token');
@@ -178,22 +178,25 @@ export const handleCreateRoom = async (
       }
     }
   };
+  const url = uid && uid !== null ? `long-term/room/create?uid=${uid}` : 'long-term/room/create';
+  try {
+    const response = await axios_merchant.post(url, body, headers);
 
-  const response = await axios_merchant.post(`long-term/room/create?uid=${uid}`, body, headers);
-
-  dispatch({
-    type: 'SET_LISTING',
-    payload: response.data.data
-  });
-
-  return response;
+    dispatch({
+      type: 'SET_LISTING',
+      payload: response.data.data
+    });
+    return response;
+  } catch (error) {
+    return false;
+  }
 };
 
 export const handleUpdateStep1 = async (
   data: any,
   dispatch: any,
   uid: any,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ) => {
   const cookies = new Cookies();
   const token = cookies.get('_token');
@@ -257,12 +260,12 @@ export const countBedsNumberFromBedRoomList = (bedRoomsList: BedRoomReq) => {
 export const getDataLTCreateListingID = async (
   dispatch: Dispatch<CreateListingActions>,
   query: ParsedUrlQuery,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ): Promise<any> => {
   const { id } = query;
   try {
     const res = await getLTRoom(id, initLanguage);
-    console.log(res);
+    // console.log(res);
     dispatch({ type: 'SET_LISTING', payload: res });
     dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: res.accommodation_type });
     dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });

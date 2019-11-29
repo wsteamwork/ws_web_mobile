@@ -5,7 +5,7 @@ import { handleUpdateListing, ListingDetailsReducerAction } from '@/store/Redux/
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import { Formik, FormikProps } from 'formik';
-import React, { FC, Fragment, useContext, useEffect, useMemo, useState, SyntheticEvent } from 'react';
+import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -28,14 +28,14 @@ const useValidatation = () => {
   const FormValidationSchema = Yup.object().shape({
     name: Yup.string()
       .required(t('details:requiredName'))
-      .min(15, t('details:name15Character'))
+      .min(15, t('details:name10Character'))
       .max(100, t('details:name100Character')),
     description: Yup.string()
       .required(t('details:requiredDes'))
       .min(50, t('details:des50Character'))
-      .max(500, t('details:des500Character')),
-    space: Yup.string().max(1000, t('details:space1000Character')),
-    rules: Yup.string().max(500, t('details:rules500Character'))
+      .max(5000, t('details:des5000Character')),
+    space: Yup.string().max(1000, t('details:space5000Character')),
+    rules: Yup.string().max(5000, t('details:rules5000Character'))
   });
 
   return FormValidationSchema;
@@ -74,7 +74,7 @@ const UpdateDescription: FC<IProps> = (props) => {
   const space = useSelector<ReducersList, string>((state) => state.description.space);
   const rules = useSelector<ReducersList, string>((state) => state.description.rules);
   const lang = useSelector<ReducersList, string>((state) => state.description.lang);
-  const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
+  // const detail_en = useSelector<ReducersList, string>((state) => state.description.detail_en);
   const disable_save = useSelector<ReducersList, boolean>(
     (state) => state.listingdetails.disable_save
   );
@@ -108,11 +108,10 @@ const UpdateDescription: FC<IProps> = (props) => {
           space: space,
           lang: lang,
           note: rules
-        },
-        en: detail_en
+        }
       }
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật mô tả căn hộ thành công !")
     }
@@ -169,36 +168,39 @@ const UpdateDescription: FC<IProps> = (props) => {
                       sub_label={t('details:subName')}
                       value={values.name.replace(/\s+/g, ' ')}
                       classTextField={
-                        !!(values.name.length < 15 && touched!.name && errors.name)
+                        !!(values.name.length < 10 && touched!.name)
                           ? 'textarea error_textarea'
                           : 'textarea'
                       }
-                      show_error={!!(values.name.length < 15 && touched!.name && errors.name)}
+                      show_error={!!(values.name.length < 10 && touched!.name)}
                       error_message={errors.name ? errors.name : t('details:defaultError')}
                       rows={1}
                       rowsMax={1}
                       max_char={100}
                       multiline={true}
                       classMaxChar={
-                        !!(values.name.length < 15 && touched!.name && errors.name)
+                        !!(values.name.length < 10 && touched!.name)
                           ? 'error_char'
                           : 'remain_char'
                       }
                       InputProps={{
                         classes: {
-                          notchedOutline: !!(values.name.length < 15 && touched!.name && errors.name)
+                          notchedOutline: !!(values.name.length < 15 && touched!.name)
                             ? classes.notchedOutline
                             : ''
                         }
                       }}
                       autoFocus={true}
                       inputProps={{ maxLength: 100 }}
-                      handleChange={handleChange}
+                      handleChange={(e) => {
+                        handleChange(e)
+                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                      }}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        if (e.currentTarget.value.length > 14) {
-                          dispatchDescription({ type: 'setName' }, e.currentTarget.value);
-                        }
+                        // if (e.currentTarget.value.length > 14) {
+                        dispatchDescription({ type: 'setName' }, e.currentTarget.value);
+                        // }
                       }}
                     />
 
@@ -211,7 +213,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                       value={values.description.replace(/\s+/g, ' ')}
                       classTextField={
                         !!(
-                          values.description.length < 50 &&
+                          values.description.length < 30 &&
                           touched!.description &&
                           errors.description
                         )
@@ -220,13 +222,13 @@ const UpdateDescription: FC<IProps> = (props) => {
                       }
                       show_error={
                         !!(
-                          values.description.length < 50 &&
+                          values.description.length < 30 &&
                           touched!.description &&
                           errors.description
                         )
                       }
                       error_message={
-                        values.description.length < 50
+                        values.description.length < 30
                           ? errors.description
                           : t('details:defaultError')
                       }
@@ -239,11 +241,11 @@ const UpdateDescription: FC<IProps> = (props) => {
                       }
                       rows={4}
                       rowsMax={9}
-                      max_char={500}
+                      max_char={5000}
                       multiline={true}
                       classMaxChar={
                         !!(
-                          values.description.length < 50 &&
+                          values.description.length < 30 &&
                           touched!.description &&
                           errors.description
                         )
@@ -253,7 +255,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                       InputProps={{
                         classes: {
                           notchedOutline: !!(
-                            values.description.length < 50 &&
+                            values.description.length < 30 &&
                             touched!.description &&
                             errors.description
                           )
@@ -261,14 +263,14 @@ const UpdateDescription: FC<IProps> = (props) => {
                             : ''
                         }
                       }}
-                      inputProps={{ maxLength: 500 }}
+                      inputProps={{ maxLength: 5000 }}
                       placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
                       handleChange={handleChange}
                       handleBlur={(e) => {
                         handleBlur(e);
-                        if (e.currentTarget.value.length > 49) {
-                          dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
-                        }
+                        // if (e.currentTarget.value.length > 49) {
+                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                        // }
                       }}
                     />
 
@@ -351,7 +353,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                         }
                         rows={4}
                         rowsMax={9}
-                        max_char={500}
+                        max_char={5000}
                         multiline={true}
                         classMaxChar={
                           !!(touched!.rules && errors.rules) ? 'error_char' : 'remain_char'
@@ -363,7 +365,7 @@ const UpdateDescription: FC<IProps> = (props) => {
                               : ''
                           }
                         }}
-                        inputProps={{ maxLength: 500 }}
+                        inputProps={{ maxLength: 5000 }}
                         placeholder={
                           width !== 'xl' && width !== 'lg'
                             ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`

@@ -20,6 +20,6 @@
     "rentType": "Loại đặt phòng",
     "policy": "Chính sách hủy",
     "leaseTypeLongTerm": "Thuê dài hạn",
-    "leaseTypeShortTerm": "Homestay"
-
+    "leaseTypeShortTerm": "Homestay",
+    "duplicateListing": "Nhân đôi phòng"
 }

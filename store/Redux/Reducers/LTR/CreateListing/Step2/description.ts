@@ -10,7 +10,12 @@ export type DescriptionReducerState = {
   space: string;
   rules: string;
   lang: string;
-  detail_en: any;
+  name_en: string;
+  description_en: string;
+  space_en: string;
+  rules_en: string;
+  lang_en: string;
+  // detail_en: any;
   error: boolean;
 };
 
@@ -21,7 +26,12 @@ export const init: DescriptionReducerState = {
   space: '',
   rules: '',
   lang: 'vi',
-  detail_en: null,
+  name_en: '',
+  description_en: '',
+  space_en: '',
+  rules_en: '',
+  lang_en: 'en',
+  // detail_en: null,
   error: false
 };
 
@@ -32,7 +42,12 @@ export type DescriptionReducerAction =
   | { type: 'setSpace'; payload: string }
   | { type: 'setRules'; payload: string }
   | { type: 'setLang'; payload: string }
-  | { type: 'setDetailEn'; payload: any }
+  | { type: 'setNameEN'; payload: string }
+  | { type: 'setDescriptionEN'; payload: string }
+  | { type: 'setSpaceEN'; payload: string }
+  | { type: 'setRulesEN'; payload: string }
+  | { type: 'setLangEN'; payload: string }
+  // | { type: 'setDetailEn'; payload: any }
   | { type: 'setError'; payload: boolean };
 
 export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionReducerAction> = (
@@ -52,8 +67,18 @@ export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionRed
       return updateObject(state, { rules: action.payload });
     case 'setLang':
       return updateObject(state, { lang: action.payload });
-    case 'setDetailEn':
-      return updateObject(state, { detail_en: action.payload });
+    case 'setNameEN':
+      return updateObject(state, { name_en: action.payload });
+    case 'setDescriptionEN':
+      return updateObject(state, { description_en: action.payload });
+    case 'setSpaceEN':
+      return updateObject(state, { space_en: action.payload });
+    case 'setRulesEN':
+      return updateObject(state, { rules_en: action.payload });
+    case 'setLangEN':
+      return updateObject(state, { lang_en: action.payload });
+    // case 'setDetailEn':
+    //   return updateObject(state, { detail_en: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -68,19 +93,77 @@ export const getDataDescription = async (
   try {
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const room_id = res.data.data.room_id;
-    const about_room = res.data.data.about_room;
+    const about_room_vi = res.data.data.about_room.vi;
+    // const about_room_en = res.data.data.about_room.en;
+
     dispatch({ type: 'setRoomId', payload: room_id });
-    dispatch({ type: 'setName', payload: about_room && about_room.name ? about_room.name : '' });
+    dispatch({
+      type: 'setName',
+      payload: about_room_vi && about_room_vi.name ? about_room_vi.name : ''
+    });
     dispatch({
       type: 'setDescription',
-      payload: about_room && about_room.description ? about_room.description : ''
+      payload: about_room_vi && about_room_vi.description ? about_room_vi.description : ''
     });
-    dispatch({ type: 'setSpace', payload: about_room && about_room.space ? about_room.space : '' });
+    dispatch({
+      type: 'setSpace',
+      payload: about_room_vi && about_room_vi.space ? about_room_vi.space : ''
+    });
     dispatch({
       type: 'setRules',
-      payload: about_room && about_room.note ? about_room.note : ''
+      payload: about_room_vi && about_room_vi.note ? about_room_vi.note : ''
     });
-    return about_room;
+    //EN
+    // dispatch({
+    //   type: 'setNameEN',
+    //   payload: about_room_en && about_room_en.name ? about_room_en.name : ''
+    // });
+    // dispatch({
+    //   type: 'setDescriptionEN',
+    //   payload: about_room_en && about_room_en.description ? about_room_en.description : ''
+    // });
+    // dispatch({
+    //   type: 'setSpaceEN',
+    //   payload: about_room_en && about_room_en.space ? about_room_en.space : ''
+    // });
+    // dispatch({
+    //   type: 'setRulesEN',
+    //   payload: about_room_en && about_room_en.note ? about_room_en.note : ''
+    // });
+    return about_room_vi;
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+export const getDataDescriptionEN = async (
+  id: any,
+  dispatch: Dispatch<DescriptionReducerAction>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
+    const room_id = res.data.data.room_id;
+    const about_room_en = res.data.data.about_room.en;
+
+    dispatch({ type: 'setRoomId', payload: room_id });
+
+    //EN
+    dispatch({
+      type: 'setNameEN',
+      payload: about_room_en && about_room_en.name ? about_room_en.name : ''
+    });
+    dispatch({
+      type: 'setDescriptionEN',
+      payload: about_room_en && about_room_en.description ? about_room_en.description : ''
+    });
+    dispatch({
+      type: 'setSpaceEN',
+      payload: about_room_en && about_room_en.space ? about_room_en.space : ''
+    });
+    dispatch({
+      type: 'setRulesEN',
+      payload: about_room_en && about_room_en.note ? about_room_en.note : ''
+    });
+    return about_room_en;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
   }
@@ -92,27 +175,69 @@ export const getDetailDescription = async (
   try {
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const room_id = res.data.data.room_id;
-    const detail_room = res.data.data.detail_room.vi;
+    const detail_room_vi = res.data.data.detail_room.vi;
     dispatch({ type: 'setRoomId', payload: room_id });
+    // dispatch({
+    //   type: 'setDetailEn',
+    //   payload: res.data.data.detail_room.en ? res.data.data.detail_room.en : ''
+    // });
     dispatch({
-      type: 'setDetailEn',
-      payload: res.data.data.detail_room.en ? res.data.data.detail_room.en : ''
+      type: 'setName',
+      payload: detail_room_vi && detail_room_vi.name ? detail_room_vi.name : ''
     });
-    dispatch({ type: 'setName', payload: detail_room && detail_room.name ? detail_room.name : '' });
     dispatch({
       type: 'setDescription',
-      payload: detail_room && detail_room.description ? detail_room.description : ''
+      payload: detail_room_vi && detail_room_vi.description ? detail_room_vi.description : ''
     });
     dispatch({
       type: 'setSpace',
-      payload: detail_room && detail_room.space ? detail_room.space : ''
+      payload: detail_room_vi && detail_room_vi.space ? detail_room_vi.space : ''
     });
     dispatch({
       type: 'setRules',
-      payload: detail_room && detail_room.note ? detail_room.note : ''
+      payload: detail_room_vi && detail_room_vi.note ? detail_room_vi.note : ''
     });
-    dispatch({ type: 'setLang', payload: detail_room && detail_room.lang ? detail_room.lang : '' });
-    return detail_room;
+    dispatch({
+      type: 'setLang',
+      payload: detail_room_vi && detail_room_vi.lang ? detail_room_vi.lang : ''
+    });
+    return detail_room_vi;
+  } catch (error) {
+    dispatch({ type: 'setError', payload: true });
+  }
+};
+export const getDetailDescriptionEN = async (
+  id: any,
+  dispatch: Dispatch<DescriptionReducerAction>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
+    const room_id = res.data.data.room_id;
+    const detail_room_en = res.data.data.detail_room.en;
+    dispatch({ type: 'setRoomId', payload: room_id });
+
+    //EN
+    dispatch({
+      type: 'setNameEN',
+      payload: detail_room_en && detail_room_en.name ? detail_room_en.name : ''
+    });
+    dispatch({
+      type: 'setDescriptionEN',
+      payload: detail_room_en && detail_room_en.description ? detail_room_en.description : ''
+    });
+    dispatch({
+      type: 'setSpaceEN',
+      payload: detail_room_en && detail_room_en.space ? detail_room_en.space : ''
+    });
+    dispatch({
+      type: 'setRulesEN',
+      payload: detail_room_en && detail_room_en.note ? detail_room_en.note : ''
+    });
+    dispatch({
+      type: 'setLangEN',
+      payload: detail_room_en && detail_room_en.lang ? detail_room_en.lang : ''
+    });
+    return detail_room_en;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
   }

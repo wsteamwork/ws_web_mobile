@@ -3,7 +3,7 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { getDataImages, ImageReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/images';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import _ from 'lodash';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -44,6 +44,13 @@ const UploadImage: FC<IProps> = (props) => {
       {listing ? (
         <Fragment>
           <Grid container justify="center" alignContent="center">
+            <Grid item xs={11} style={{marginBottom: 16}}>
+              <Typography variant="h1" gutterBottom className="label main_label">
+                {t('details:images:titleImages')}
+              </Typography>
+              <Typography variant="subtitle2">{t('details:images:subTitleImages1')}</Typography>
+              <Typography variant="subtitle2">{t('details:images:subTitleImages2')}</Typography>
+            </Grid>
             <Grid item xs={11}>
               <UppyImage
                 label={t('details:images:labelAvatar')}

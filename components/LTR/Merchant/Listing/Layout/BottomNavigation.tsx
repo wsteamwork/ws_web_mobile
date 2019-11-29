@@ -3,12 +3,13 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { DetailsReducerAction } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/details';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Hidden, MobileStepper } from '@material-ui/core';
+import { Button, Hidden, MobileStepper, Snackbar } from '@material-ui/core';
 import Router from 'next/router';
-import React, { FC, Fragment, useEffect } from 'react';
+import React, { FC, Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import BottomMdNavigation from './BottomMdNavigation';
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 
 interface IProps {
   steps?: string[];
@@ -35,6 +36,9 @@ const BottomNavigation: FC<IProps> = (props) => {
   const currentActiveStep = useSelector<ReducersList, string>(
     (state) => state.process.currentActiveStep
   );
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+
   const dispatch_detail = useDispatch<Dispatch<DetailsReducerAction>>();
 
   // useEffect(() => {
@@ -50,10 +54,13 @@ const BottomNavigation: FC<IProps> = (props) => {
     try {
       const result = await handleAPI();
       if (result) {
+        setOpen(false);
         Router.push(`/host/create-listing/${result.data.data.id}/detail`);
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error.data)
+      setMessage(error);
+      setOpen(true);
     }
   };
 
@@ -112,7 +119,7 @@ const BottomNavigation: FC<IProps> = (props) => {
               <ButtonGlobal
                 onClick={submitEachStep ? handleFinish : handleNext}
                 disabled={disableSubmit ? disableSubmit : disableNext}>
-                Finish
+                Save
               </ButtonGlobal>
             ) : (
                 <ButtonGlobal onClick={handleNext} disabled={disableNext}>
@@ -128,6 +135,23 @@ const BottomNavigation: FC<IProps> = (props) => {
           }
         />
       </Hidden>
+      <Snackbar
+        style={{
+          zIndex: 150000
+        }}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        open={open}
+        onClose={() => setOpen(false)}
+        autoHideDuration={3000}
+      >
+        <MySnackbarContentWrapper
+          variant="error"
+          message={'Có lỗi xảy ra, vui lòng kiểm tra lại thông tin'}
+        ></MySnackbarContentWrapper>
+      </Snackbar>
     </Fragment>
   );
 };

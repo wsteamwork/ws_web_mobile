@@ -1,13 +1,15 @@
+import CalendarManagement from '@/components/LTR/Merchant/Listing/CalendarManagement';
 import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/ListingDetails';
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
+import OtherSetting from '@/components/LTR/Merchant/Listing/UpdateListing/OtherSetting';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
+import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { getListingDetails, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
-import { UpdateDetailsActions } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { AppBar, Box, Breadcrumbs, createStyles, Grid, Tab, Tabs, Theme, withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
@@ -15,11 +17,13 @@ import Typography from '@material-ui/core/Typography';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext, useEffect } from 'react';
+import { Cookies, withCookies } from 'react-cookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import CalendarManagement from '@/components/LTR/Merchant/Listing/CalendarManagement';
+
 interface IProps {
   classes?: any;
+  cookies?: Cookies;
 }
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,7 +81,7 @@ export const TabPanel = (props: TabPanelProps) => {
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
       {...other}>
-      <Box p={0}>
+      <Box pt={3}>
         {children}
       </Box>
     </Typography>
@@ -111,15 +115,24 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const UpdateListing: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const { cookies } = props
   const [value, setValue] = React.useState(0);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const dispatch = useDispatch<Dispatch<ListingDetailsReducerAction>>();
   const dispatch_amen = useDispatch<Dispatch<AmenitiesReducerAction>>();
+  const isLogin = !!cookies.get('_token');
 
   const listing = useSelector<ReducersList, LTRoomIndexRes>(
     (state) => state.listingdetails.listing
   );
+
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/auth/signin');
+    }
+  }, [isLogin])
+
   useEffect(() => {
     if (!listing) {
       getListingDetails(id, dispatch);
@@ -150,6 +163,16 @@ const UpdateListing: FC<IProps> = (props) => {
   };
   return (
     <Fragment>
+      {listing ?
+        <NextHead
+          googleMapApiRequire={false}
+          ogSitename="Westay - Đặt phòng dài hạn trực tuyến"
+          title={`${listing.about_room.name} | Westay - Đặt phòng dài hạn trực tuyến`}
+          description={`Cập nhật căn hộ`}
+          url={`https://westay.vn/host/update-listing/${listing.id}`}
+          // ogImage={`${listing.avatar.images ? `${IMAGE_STORAGE_SM} ${listing.avatar.images[0].name}` : '/static/images/Bg_home.4023648f.jpg'}`}
+          ogImage={`'/static/images/Bg_home.4023648f.jpg'}`}
+        /> : ''}
       <NavHeader_Merchant />
       {listing ? (
         <Grid container justify="center" alignContent="center">
@@ -185,6 +208,7 @@ const UpdateListing: FC<IProps> = (props) => {
                   <AntTab label="Giá phòng" {...a11yProps(2)} />
                   <AntTab label="Chế độ đặt phòng" {...a11yProps(3)} />
                   <AntTab label="Lịch trống phòng" {...a11yProps(4)} />
+                  <AntTab label="Cài đặt khác" {...a11yProps(5)} />
                 </AntTabs>
                 <Typography className={classes.padding} />
               </AppBar>
@@ -203,6 +227,9 @@ const UpdateListing: FC<IProps> = (props) => {
               <TabPanel value={value} index={4}>
                 <CalendarManagement idRoom={listing.room_id} />
               </TabPanel>
+              <TabPanel value={value} index={5}>
+                <OtherSetting />
+              </TabPanel>
             </Grid>
           </Grid>
         </Grid>
@@ -212,4 +239,4 @@ const UpdateListing: FC<IProps> = (props) => {
     </Fragment>
   );
 };
-export default UpdateListing;
+export default withCookies(UpdateListing);

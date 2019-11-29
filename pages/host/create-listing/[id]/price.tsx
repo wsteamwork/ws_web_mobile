@@ -13,10 +13,12 @@ import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesF
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import { useTranslation } from 'react-i18next';
 
 const RoomCreateListing = () => {
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
+  const { t } = useTranslation();
   const listing = useSelector<ReducersList, any>((state) => state.stepPrice.listing);
   const current_step = useSelector<ReducersList, string>((state) => state.stepPrice.step);
   const disable_next = useSelector<ReducersList, boolean>((state) => state.stepPrice.disable_next);
@@ -60,11 +62,11 @@ const RoomCreateListing = () => {
 
   const getSteps = () => {
     if (listing.long_term_rent_type.rent_type === 1 && listing.short_term_rent_type) {
-      return ['Ngắn hạn', 'Dài hạn', 'Giá dịch vụ cho thuê dài hạn'];
+      return [t('price:shortTermStep'), t('price:longTermStep'), t('price:longTermFee')];
     } else if (listing.long_term_rent_type.rent_type === 0) {
-      return ['Ngắn hạn'];
+      return [t('price:shortTermStep')];
     } else {
-      return ['Ngắn hạn', 'Dài hạn', 'Giá dịch vụ cho thuê dài hạn'];
+      return [t('price:shortTermStep'), t('price:longTermStep'), t('price:longTermFee')];
     }
   };
 
