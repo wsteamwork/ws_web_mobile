@@ -99,7 +99,7 @@ const MapMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { openMap } = props;
   const [index, setIndex] = useState<number>(TAB_LIST);
-  const { dispatch: mapDispatch } = useContext(RoomIndexContext);
+  // const { dispatch: mapDispatch } = useContext(RoomIndexContext);
   const { t } = useTranslation();
 
   const handleOpenFilter = () => {
@@ -107,10 +107,10 @@ const MapMobile: FC<IProps> = (props) => {
   };
 
   const mapClose = () => {
-    mapDispatch({
-      type: 'setMapOpen',
-      isMapOpen: false
-    });
+    // mapDispatch({
+    //   type: 'setMapOpen',
+    //   isMapOpen: false
+    // });
   };
 
   return (
