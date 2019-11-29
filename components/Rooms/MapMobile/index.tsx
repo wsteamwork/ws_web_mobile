@@ -97,14 +97,15 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const MapMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { openMap } = props;
-  const { dispatch } = useContext(RoomIndexContext);
+  const [index, setIndex] = useState<number>(TAB_LIST);
+  // const { dispatch: mapDispatch } = useContext(RoomIndexContext);
   const { t } = useTranslation();
 
   const mapClose = () => {
-    dispatch({
-      type: 'setMapOpen',
-      isMapOpen: false
-    });
+    // mapDispatch({
+    //   type: 'setMapOpen',
+    //   isMapOpen: false
+    // });
   };
 
   return (

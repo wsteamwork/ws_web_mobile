@@ -1,9 +1,23 @@
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import {
+  IS_SEARCH_CITY,
+  IS_SEARCH_DISTRICT,
+  SearchSuggestData,
+  SearchSuggestRes
+} from '@/types/Requests/Search/SearchResponse';
 import { axios } from '@/utils/axiosInstance';
-import { Fade, Grid, IconButton, InputAdornment, MenuItem, Paper, TextField } from '@material-ui/core';
+import {
+  Fade,
+  Grid,
+  IconButton,
+  InputAdornment,
+  MenuItem,
+  Paper,
+  TextField,
+  InputBase
+} from '@material-ui/core';
 import { createStyles, Theme } from '@material-ui/core/styles';
 import { Close, SearchRounded } from '@material-ui/icons';
 import HomeIcon from '@material-ui/icons/HomeRounded';
@@ -119,25 +133,25 @@ const styles: any = (theme: Theme) =>
     }
   });
 
+export const getDataSearch = async (value: string): Promise<any> => {
+  const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
+  //Change response to one-array-data
+  //if (Array.isArray(res.data.data[0]))
+  let dataChange: SearchSuggestData[] = [];
+  Object.keys(res.data.data[0]).map((key) => {
+    res.data.data[0][key].map((item) => {
+      dataChange.push(item);
+    });
+  });
+  return dataChange;
+};
+
 const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   const { classes, updateSearchText, updateSearchDistrict, updateSearchCity, filter } = props;
   const [searchText, setSearchText] = useState<string>(filter.searchText);
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
   // const { dispatch: dispatchGlobal } = useContext(GlobalContext);
-
-  const getDataSearch = async (value: string): Promise<any> => {
-    const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
-    //Change response to one-array-data
-    //if (Array.isArray(res.data.data[0]))
-    let dataChange: SearchSuggestData[] = [];
-    Object.keys(res.data.data[0]).map((key) => {
-      res.data.data[0][key].map((item) => {
-        dataChange.push(item);
-      });
-    });
-    setData(dataChange);
-  };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>, { newValue }: { newValue: any }) => {
     setSearchText(newValue);
@@ -147,7 +161,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const onSuggestionsFetchRequested = ({ value }: { value: any }) => {
-    getDataSearch(value);
+    getDataSearch(value).then((data) => setData(data));
   };
 
   const onSuggestionsClearRequested = () => {
@@ -191,36 +205,52 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => { }, ref, ...other } = inputProps;
+    const { inputRef = () => {}, ref, ...other } = inputProps;
     return (
-      <TextField
-        fullWidth
-        classes={{ root: classes.textFieldRoot }}
-        placeholder={t('home:SearchAutocomplete:toGo')}
-        InputProps={{
-          classes: { input: classes.inputCustom },
-          startAdornment: (
-            <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
-              <SearchRounded />
+      <InputBase
+          placeholder={t('home:SearchAutocomplete:toGo')}
+          id="input-with-icon-textfield"
+          classes={{ root: classes.InputBaseRoot }}
+          startAdornment={
+            <InputAdornment position="start" className={classes.startAdornmentt}>
+              <img src="/static/icons/search.svg" alt="search icon" />
             </InputAdornment>
-          ),
-          endAdornment: (
-            <InputAdornment position="end">
-              <Fade in={!!searchText}>
-                <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
-                  <Close fontSize="small" />
-                </IconButton>
-              </Fade>
-            </InputAdornment>
-          ),
-          inputRef: (node) => {
+          }
+          fullWidth
+          inputRef= {(node) => {
             ref(node);
             inputRef(node);
-          },
-          disableUnderline: true
-        }}
-        {...other}
-      />
+          }}
+          {...other}
+        />
+      // <TextField
+      //   fullWidth
+      //   classes={{ root: classes.textFieldRoot }}
+      //   placeholder={t('home:SearchAutocomplete:toGo')}
+      //   InputProps={{
+      //     classes: { input: classes.inputCustom },
+      //     startAdornment: (
+      //       <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
+      //         <SearchRounded />
+      //       </InputAdornment>
+      //     ),
+      //     endAdornment: (
+      //       <InputAdornment position="end">
+      //         <Fade in={!!searchText}>
+      //           <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
+      //             <Close fontSize="small" />
+      //           </IconButton>
+      //         </Fade>
+      //       </InputAdornment>
+      //     ),
+      //     inputRef: (node) => {
+      //       ref(node);
+      //       inputRef(node);
+      //     },
+      //     disableUnderline: true
+      //   }}
+      //   {...other}
+      // />
     );
   };
 
@@ -235,8 +265,8 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                  <HomeIcon className={classes.searchIcon} />
-                )}
+                <HomeIcon className={classes.searchIcon} />
+              )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (

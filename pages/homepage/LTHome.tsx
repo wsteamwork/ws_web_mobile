@@ -139,7 +139,7 @@ const LTHome: NextPage = () => {
 
       <Grid xs={12} style={{ padding: '44px 0 100px' }}>
         <Grid style={{ padding: '14px 22px' }}>
-          <SearchInput onClick={handleOpenSearchDialog} />
+          <SearchInput displayOnlyForModal onClick={handleOpenSearchDialog} />
         </Grid>
 
         <PropertyListHorizontalScroll
@@ -178,13 +178,9 @@ const LTHome: NextPage = () => {
 
         <BottomNav />
       </Grid>
-      <Dialog
-        fullScreen
-        open={openSearchDialog}
-        onClose={handleCloseSearchDialog}
-        TransitionComponent={Transition}>
-        <SearchDialog handleClose={handleCloseSearchDialog} />
-      </Dialog>
+
+      <SearchDialog handleClose={handleCloseSearchDialog} open={openSearchDialog} />
+      {/* </Dialog> */}
       {/*  */}
     </Fragment>
   );
