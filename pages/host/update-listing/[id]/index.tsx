@@ -3,6 +3,7 @@ import ListingDetails from '@/components/LTR/Merchant/Listing/UpdateListing/List
 import ListingImage from '@/components/LTR/Merchant/Listing/UpdateListing/ListingImage';
 import ListingPolicy from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPolicy';
 import ListingPrice from '@/components/LTR/Merchant/Listing/UpdateListing/ListingPrice';
+import OtherSetting from '@/components/LTR/Merchant/Listing/UpdateListing/OtherSetting';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
@@ -10,7 +11,6 @@ import { ReducersList } from '@/store/Redux/Reducers';
 import { AmenitiesReducerAction, getDataAmenities } from '@/store/Redux/Reducers/LTR/CreateListing/Step2/amenities';
 import { getListingDetails, ListingDetailsReducerAction } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import { AppBar, Box, Breadcrumbs, createStyles, Grid, Tab, Tabs, Theme, withStyles } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
@@ -170,7 +170,8 @@ const UpdateListing: FC<IProps> = (props) => {
           title={`${listing.about_room.name} | Westay - Đặt phòng dài hạn trực tuyến`}
           description={`Cập nhật căn hộ`}
           url={`https://westay.vn/host/update-listing/${listing.id}`}
-          ogImage={`${IMAGE_STORAGE_SM}${listing.avatar.images[0].name}`}
+          // ogImage={`${listing.avatar.images ? `${IMAGE_STORAGE_SM} ${listing.avatar.images[0].name}` : '/static/images/Bg_home.4023648f.jpg'}`}
+          ogImage={`'/static/images/Bg_home.4023648f.jpg'}`}
         /> : ''}
       <NavHeader_Merchant />
       {listing ? (
@@ -207,6 +208,7 @@ const UpdateListing: FC<IProps> = (props) => {
                   <AntTab label="Giá phòng" {...a11yProps(2)} />
                   <AntTab label="Chế độ đặt phòng" {...a11yProps(3)} />
                   <AntTab label="Lịch trống phòng" {...a11yProps(4)} />
+                  <AntTab label="Cài đặt khác" {...a11yProps(5)} />
                 </AntTabs>
                 <Typography className={classes.padding} />
               </AppBar>
@@ -224,6 +226,9 @@ const UpdateListing: FC<IProps> = (props) => {
               </TabPanel>
               <TabPanel value={value} index={4}>
                 <CalendarManagement idRoom={listing.room_id} />
+              </TabPanel>
+              <TabPanel value={value} index={5}>
+                <OtherSetting />
               </TabPanel>
             </Grid>
           </Grid>

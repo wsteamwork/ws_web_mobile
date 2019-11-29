@@ -57,6 +57,9 @@ const RentAndRoomType: FC<IProps> = (props) => {
                   (listing.merchant_status == 1 && listing.status == 0 ? listing.status_txt : (listing.status == 1 && listing.merchant_status == 0 ? listing.merchant_status_txt : (listing.status == 0 && listing.merchant_status == 0 ? listing.merchant_status_txt : '')))}</span>
               )}
             </Grid>
+            <Grid item xs={12} sm={6}>
+              <span className={classes.rentType}>Diện tích: {listing.total_area}m<sup>2</sup></span>
+            </Grid>
           </Grid>
         </CardWrapperItem>
       ) : (

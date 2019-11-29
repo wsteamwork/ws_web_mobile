@@ -1,17 +1,21 @@
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { axios_merchant } from '@/utils/axiosInstance';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { faBath, faBed, faDoorOpen, faUserFriends } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Theme } from '@material-ui/core';
+import { createStyles, Divider, Grid, Hidden, IconButton, Link, Paper, Snackbar, Theme } from '@material-ui/core';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import EditIcon from '@material-ui/icons/Edit';
-import AddIcon from '@material-ui/icons/Add';
+import AddIconOutlined from '@material-ui/icons/AddOutlined';
+import EditIconOutlined from '@material-ui/icons/EditOutlined';
+import FileCopyIconOutlined from '@material-ui/icons/FileCopyOutlined';
 import { makeStyles, withStyles } from '@material-ui/styles';
 import numeral from 'numeral';
-import React, { FC, Fragment, useContext } from 'react';
+import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 interface IProps {
   classes?: any;
   room: any;
@@ -239,6 +243,13 @@ const RoomCardItem: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { room } = props;
   const { router } = useContext(GlobalContext);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState('');
+  const [snackStatus, setSnackStatus] = useState('success');
+  const handleClose = () => {
+    setOpen(false)
+    setTimeout(location.reload.bind(location), 1000);
+  };
   const BorderLinearProgress = withStyles({
     root: {
       height: 6,
@@ -266,6 +277,17 @@ const RoomCardItem: FC<IProps> = (props) => {
       }
     }
   };
+
+  const duplicateListing = (id: number) => {
+    axios_merchant.get(`long-term-rooms/duplicate-listing/${id}`).then((res) => {
+      setMessage(`Đã nhân đôi, phòng mới  nằm trên cùng danh sách!}`);
+      setOpen(true);
+      setSnackStatus('success');
+
+    }).catch(error => {
+      console.log(error)
+    })
+  }
   const openLongTermRoomUpdateFirstTime = (room_id: number) => {
     window.open(`/host/create-listing/${room_id}/process`, `_blank`);
   };
@@ -293,7 +315,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                       />
                     </Grid>
                   ) : (
-                      <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                         <Grid className={classes.wrapperImage}>
                           <img
                             src={'/static/images/camera.svg'}
@@ -304,7 +326,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                       </Grid>
                     )}
                   <Hidden smUp>
-                    <Grid item xs={5} className={classes.btnShowSmUp}>
+                    <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>
                         <Tooltip
                           title={t('roomlist:tooltipUpdateRoom')}
@@ -315,7 +337,21 @@ const RoomCardItem: FC<IProps> = (props) => {
                             className={classes.IconButton}
                             aria-label="Edit"
                             onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
-                            <EditIcon className={classes.sizeButton} />
+                            <EditIconOutlined className={classes.sizeButton} />
+                          </IconButton>
+                        </Tooltip>
+                      </Grid>
+                      <Grid item>
+                        <Tooltip
+                          title={t('roomlist:duplicateListing')}
+                          placement="bottom"
+                          classes={{ tooltip: 'tooltip' }}>
+                          <IconButton
+                            color="primary"
+                            className={classes.IconButton}
+                            aria-label="Edit"
+                            onClick={() => duplicateListing(room.id)}>
+                            <FileCopyIconOutlined className={classes.sizeButton} />
                           </IconButton>
                         </Tooltip>
                       </Grid>
@@ -330,7 +366,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               className={classes.IconButton}
                               aria-label="Edit"
                               onClick={() => openLongTermRoomUpdateFirstTime(room.id)}>
-                              <AddIcon className={classes.sizeButton} />
+                              <AddIconOutlined className={classes.sizeButton} />
                             </IconButton>
                           </Tooltip>
                         </Grid>
@@ -340,13 +376,13 @@ const RoomCardItem: FC<IProps> = (props) => {
                   <Grid item xs={12} sm={9} md={9} lg={10}>
                     <Grid className={classes.content}>
                       <Grid container>
-                        <Grid item xs={12} sm={10} className={classes.infoRoomName}>
+                        <Grid item xs={12} sm={9} className={classes.infoRoomName}>
                           <span>
                             <Link
                               href={`/room/${room.room_id}`}
                               className={classes.roomName}
                               target="_blank">
-                              {room.about_room && room.about_room.vi ? room.about_room.vi.name : t('roomlist:noNameRoom')}
+                              {room.about_room ? room.about_room.name : t('roomlist:noNameRoom')}
                               {room.short_term_room.status === 1 ? (
                                 <Tooltip
                                   title={`Verified`}
@@ -365,7 +401,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </span>
                         </Grid>
                         <Hidden xsDown>
-                          <Grid container item xs={2} justify="flex-end">
+                          <Grid container item xs={3} justify="flex-end">
                             <Grid item>
                               <Tooltip
                                 title={t('roomlist:tooltipUpdateRoom')}
@@ -376,7 +412,21 @@ const RoomCardItem: FC<IProps> = (props) => {
                                   className={classes.IconButton}
                                   aria-label="Edit"
                                   onClick={() => openUpdateRoom(room.id, room.percent, room.lease_type, room.short_term_room.percent)}>
-                                  <EditIcon className={classes.sizeButton} />
+                                  <EditIconOutlined className={classes.sizeButton} />
+                                </IconButton>
+                              </Tooltip>
+                            </Grid>
+                            <Grid item>
+                              <Tooltip
+                                title={t('roomlist:duplicateListing')}
+                                placement="bottom"
+                                classes={{ tooltip: 'tooltip' }}>
+                                <IconButton
+                                  color="primary"
+                                  className={classes.IconButton}
+                                  aria-label="Edit"
+                                  onClick={() => duplicateListing(room.id)}>
+                                  <FileCopyIconOutlined className={classes.sizeButton} />
                                 </IconButton>
                               </Tooltip>
                             </Grid>
@@ -391,7 +441,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                     className={classes.IconButton}
                                     aria-label="Edit"
                                     onClick={() => openLongTermRoomUpdateFirstTime(room.id)}>
-                                    <AddIcon className={classes.sizeButton} />
+                                    <AddIconOutlined className={classes.sizeButton} />
                                   </IconButton>
                                 </Tooltip>
                               </Grid>
@@ -714,6 +764,19 @@ const RoomCardItem: FC<IProps> = (props) => {
           </Paper>
         </Grid>
       </Grid>
+      <Snackbar
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right'
+        }}
+        open={open}
+        autoHideDuration={2000}
+        onClose={handleClose}>
+        <MySnackbarContentWrapper
+          variant="success"
+          message={message}
+          onClose={handleClose}></MySnackbarContentWrapper>
+      </Snackbar>
     </Fragment>
   );
 };

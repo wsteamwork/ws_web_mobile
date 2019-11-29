@@ -28,7 +28,7 @@ const CancelPolicy: FC<IProps> = (props) => {
   return (
     <Fragment>
       {listing ? (
-        <CardWrapperItem title="Chính sách hủy phòng" onClick={openUpdate}>
+        <CardWrapperItem title="Chính sách hủy phòng (Thuê ngắn hạn)" onClick={openUpdate}>
           <Typography variant="subtitle1" className={classes.name}>
             {listing.short_term_room.settings.booking_cancel_type_text}
           </Typography>
