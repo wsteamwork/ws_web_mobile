@@ -1,12 +1,12 @@
+import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
+import mainColor from '@/styles/constants/colors';
 import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { IMAGE_STORAGE_LG } from '@/utils/store/global';
 import { Grid, Theme } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, MouseEvent, useState, useMemo } from 'react';
+import React, { FC, Fragment, MouseEvent, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
-import mainColor from '@/styles/constants/colors';
 import DialogFullImage from './DialogFullImage';
 
 interface IProps {
@@ -68,7 +68,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
     setOpenFullImage(!openFullImage);
   };
 
-  const toggleDialog = (e: MouseEvent<HTMLElement>, idEl:string) => {
+  const toggleDialog = (e: MouseEvent<HTMLElement>, idEl: string) => {
     e.preventDefault();
     setElImage(idEl);
     setOpenFullImage(!openFullImage);
@@ -116,7 +116,7 @@ const BoxListImageRoom: FC<IProps> = (props) => {
 
   const renderRoomImages = (item) => (
     <Grid className={classes.properyItemIcon}>
-      <img className={classes.itemIcon} src={item.imgURL} onClick={(e)=>toggleDialog(e, item.id)} />
+      <img className={classes.itemIcon} src={item.imgURL} onClick={(e) => toggleDialog(e, item.id)} />
     </Grid>
   );
 
@@ -134,18 +134,14 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Typography>
         </Grid>
       </Grid>
-
-      {useMemo(() => (
-        <PropertyListHorizontalScroll
+      <PropertyListHorizontalScroll
         // itemWidth={'33,33%'}
         margin='14px 0 0'
         paddingItem='0 12px 0 0 !important'
         listData={arrImage}
         itemRender={renderRoomImages}
+        isDependencies={false}
       />
-      ), [])}
-      
-      
       <DialogFullImage idEl={elImage} open={openFullImage} handleClose={() => setOpenFullImage(false)}
         livingrooms={livingrooms}
         kitchens={kitchens}

@@ -112,7 +112,8 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           cover_photo={isPreviewPage && !room.cover_photo ? [] : room.cover_photo}
           kitchens={isPreviewPage && !room.kitchens ? [] : room.kitchens}
           bedrooms={isPreviewPage && !room.bedrooms ? [] : room.bedrooms}
-          bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms} />
+          bathrooms={isPreviewPage && !room.bathrooms ? [] : room.bathrooms}
+        />
         {/* </LazyLoad> */}
       </div>
 

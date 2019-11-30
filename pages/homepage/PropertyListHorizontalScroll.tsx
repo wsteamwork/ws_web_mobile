@@ -14,6 +14,7 @@ interface Iprops<T> {
   sizeIcon?: number | string;
   margin?: number | string;
   paddingItem?: number | string;
+  isDependencies?: boolean;
 }
 
 const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
@@ -41,7 +42,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
 const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
-  const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom } = props;
+  const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom, isDependencies } = props;
 
   const renderList = useMemo(
     () =>
@@ -52,7 +53,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
           {itemRender(item, sizeIcon)}
         </Grid>
       )),
-    [itemRender]
+    [!isDependencies && isDependencies ? null : itemRender]
   );
 
   return (
