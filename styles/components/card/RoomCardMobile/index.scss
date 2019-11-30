@@ -168,38 +168,50 @@
           font-weight: 500;
 
           .boxTitle {
+            .marginRoomName{
+              @include smDown{
+                margin-top: 8px;
+              }
+            }
+
             .roomName {
               overflow: hidden;
               overflow-wrap: break-word;
               font-style: normal;
               font-weight: bold;
-              font-size: 16px;
+              font-size: 0.9rem;
               line-height: 22px;
               letter-spacing: 0.065882px;
               color: #484848;
               display: -webkit-box;
+              @include xs {
+                -webkit-line-clamp: 1;
+              }
               -webkit-line-clamp: 2;
               text-overflow: ellipsis;
               -webkit-box-orient: vertical;
-              @include sm {
+              @include smUp {
                 max-height: 52px;
-                height: 52px;
+                height: 2.625;
+                max-width: 420px;
               }
-              @include xs {
-                margin-bottom: 10px;
-              }
+              // @include xs {
+              //   margin-bottom: 10px;
+              // }
 
               .svgQuick {
                 color: #673ab7;
                 position: relative;
                 top: 7px;
+                height: 0.9rem;
+                width: 0.9rem;
                 margin-right: 8px;
               }
             }
 
             .roomType {
               text-transform: uppercase;
-              font-size: 12px;
+              font-size: 0.7875rem;
               font-weight: 600;
               color: #673ab7;
               display: inline-block;
@@ -207,7 +219,7 @@
             }
             .address {
               font-weight: normal;
-              font-size: 11px;
+              font-size: 0.7875rem;
               line-height: 13px;
               letter-spacing: 0.07px;
               color: #767676;
@@ -277,15 +289,30 @@
             }
           }
 
-          .boxPrice {
-            margin-top: 12px;
+          .boxPriceContainer {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            @include smDown{
+              margin-top:8px;
+            }
+          }
 
+          .boxPrice {
+            // margin-top: 12px;
             .priceBasic {
-              font-weight: bold;
-              font-size: 18px;
+              font-weight: 600;
+              font-size: 1.0375rem;
               line-height: 24px;
               letter-spacing: 0.38px;
               color: #484848;
+            }
+            .priceUnit {
+              display: flex;
+              justify-content: flex-end;
+              font-size: 0.6875rem;
+              font-weight: 400;
+              color: #767676;
             }
           }
         }

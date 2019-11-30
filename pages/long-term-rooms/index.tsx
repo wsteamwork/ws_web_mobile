@@ -69,15 +69,15 @@ const LongtermRooms: NextPage = (props) => {
   };
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
-  // if (router.pathname.includes('/long-term-rooms')) {
-  //   dispatchLeaseType({
-  //     type: 'setLeaseTypeGlobal',
-  //     leaseTypeGlobal: 1,
-  //     leaseTypePathName: router.pathname.includes('/long-term-rooms')
-  //       ? '/long-term-rooms'
-  //       : '/rooms'
-  //   });
-  // }
+  if (router.pathname.includes('/long-term-rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 1,
+      leaseTypePathName: router.pathname.includes('/long-term-rooms')
+        ? '/long-term-rooms'
+        : '/rooms'
+    });
+  }
   return (
     <Fragment>
       <NextHead
@@ -112,13 +112,13 @@ const LongtermRooms: NextPage = (props) => {
                 </Grid>
               </HeadRoom>
             ) : (
-              <NavTop
-                isHidden={false}
-                textCenter={'Bản đồ'}
-                showLocationAction={false}
-                showFilterAction={true}
-              />
-            )}
+                <NavTop
+                  isHidden={false}
+                  textCenter={'Bản đồ'}
+                  showLocationAction={false}
+                  showFilterAction={true}
+                />
+              )}
             <Grid item xs={12}>
               <SearchRoom />
             </Grid>
@@ -127,8 +127,8 @@ const LongtermRooms: NextPage = (props) => {
                 <ButtonFilterRoom />
               </Grid>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </Grid>
           <Grid item xs={12} className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
             <Grid item xs={12}>
