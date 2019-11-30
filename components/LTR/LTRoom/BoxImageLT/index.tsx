@@ -1,13 +1,14 @@
-import { Grid, Theme } from '@material-ui/core';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, useContext } from 'react';
 import 'react-animated-slider/build/horizontal.css';
 import { useTranslation } from 'react-i18next';
-import Plx from 'react-plx';
+import { Parallax } from 'react-parallax';
 import BoxInfoBasic from '../BoxInfoBasic';
 import '/styles/pages/LTR/room/index.scss';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { Parallax } from 'react-parallax';
+import ProgressiveImage from 'react-progressive-image';
+
 interface IProps {
   classes?: any,
   isPreviewPage?: boolean,
@@ -115,50 +116,26 @@ const BoxImageLT: FC<IProps> = (props) => {
   ];
 
   return (
-    <Plx
-      parallaxData={parallaxData}
-    >
-
-      <Parallax
-        bgImage={props.backgroundImage}
-        strength={300}
-        bgClassName={classes.imgRoom}
-        className={classes.parallaxContainer}
-        contentClassName={classes.contentParallax}>
-        <div className={classes.insideParalax}>
-          <div className={classes.boxContainer}>
-            <div className={classes.boxInfo}>
-              <BoxInfoBasic showButtonBook
-                name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
-                district={room.district.data.name}
-                city={room.city.data.name}
-                price={room.price_display}
-              />
-            </div>
-            {props.children}
+    <Parallax
+      bgImage={props.backgroundImage}
+      strength={50}
+      bgClassName={classes.imgRoom}
+      className={classes.parallaxContainer}
+      contentClassName={classes.contentParallax}>
+      <div className={classes.insideParalax}>
+        <div className={classes.boxContainer}>
+          <div className={classes.boxInfo}>
+            <BoxInfoBasic showButtonBook
+              name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
+              district={room.district.data.name}
+              city={room.city.data.name}
+              price={room.price_display}
+            />
           </div>
+          {props.children}
         </div>
-      </Parallax>
-
-      {/* <div className={classes.boxContainer}> */}
-
-
-      {/* <Plx
-        parallaxData={ parallaxData2 }
-      > */}
-      {/* <div className={classes.boxInfo}>
-          <BoxInfoBasic showButtonBook
-            name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
-            district={room.district.data.name}
-                        city={room.city.data.name}
-                        price={room.price_display}
-          />
-        </div>
-       {props.children} */}
-      {/* </Plx> */}
-      {/* </div> */}
-    </Plx>
-
+      </div>
+    </Parallax>
   );
 };
 

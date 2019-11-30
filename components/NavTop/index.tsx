@@ -1,7 +1,7 @@
-import { makeStyles, Theme, Typography, Grid, IconButton } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment } from 'react';
 import { Sort } from '@material-ui/icons';
+import React, { FC, Fragment } from 'react';
 interface IProps {
   classes?: any;
   isHidden?: boolean;
@@ -21,7 +21,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     boxWrapper: {
       display: 'flex',
       alignItems: 'center',
-      height: 55
+      height: 55,
+      margin: '0 auto'
     },
     boxCenter: {
       display: 'flex',
@@ -60,8 +61,8 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/left-arrow.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
       <Grid item xs={4} className={classes.boxCenter}>
         {showTextCenter ? <Typography className={classes.textCenter}>{textCenter}</Typography> : ''}
@@ -72,27 +73,27 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/Heart.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-          ''
-        )}
+            ''
+          )}
         {showLocationAction ? (
           <IconButton onClick={handleLocationAction}>
             <img src={'/static/images/maps-and-flags.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-          ''
-        )}
+            ''
+          )}
         {showFilterAction ? (
           <IconButton onClick={handleFilterAction}>
             <Sort className={classes.btnRight} />
           </IconButton>
         ) : (
-          ''
-        )}
+            ''
+          )}
       </Grid>
     </Grid>
   ) : (
-    <Fragment></Fragment>
-  );
+      <Fragment></Fragment>
+    );
 };
 NavTop.defaultProps = {
   isHidden: false,

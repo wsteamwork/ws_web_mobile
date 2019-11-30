@@ -108,11 +108,8 @@ export const getDataLTRoom = async (
     dispatch({ type: 'setLTRoom', payload: room });
     dispatch({ type: 'setAvailableDates', payload: availableDates });
     dispatch({ type: 'setErrorSSRLTRoompage', payload: false });
-    // console.log(res);
     return { room, availableDates };
   } catch (error) {
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
-    // console.log(error.response);
-    // console.log(error);
   }
 };
