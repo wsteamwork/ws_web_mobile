@@ -57,5 +57,6 @@
     "surchargeHours" : "Surcharge after 4 hours early (rent by the hour)",
     "feeList": "Fee list",
     "feeListLongterm": "Monthly rental fee",
-    "lang": "en"
+    "lang": "en",
+    "viewAll": "View all"
 }

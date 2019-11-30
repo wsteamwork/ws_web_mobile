@@ -18,7 +18,8 @@
     "outdoors": "Outdoor",
     "allImages": "All Photos",
     "priceBasic": "Each month for 1-2 months term",
-    "priceBasicMobile": "/month",
+    "priceBasicMobile": "/per month",
     "notFoundData": "Not found data!",
-    "depositFee": "Only furnitures guarantees deposit"
+    "depositFee": "Only furnitures guarantees deposit",
+    "moreDetails": "More details"
 }

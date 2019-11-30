@@ -17,7 +17,7 @@ interface IProps {
   isPreviewPage?: boolean,
   district: string,
   city: string,
-  price:number
+  price: number
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -37,7 +37,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     txtPrice: {
       fontSize: 22,
-      lineHeight: '28px',
+      lineHeight: '34px',
       textAlign: 'right',
       letterSpacing: 0.32,
       fontWeight: 'bold',
@@ -83,11 +83,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxInfoBasic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {showButtonBook, showRating, name, isPreviewPage, district, city, price } = props;
+  const { showButtonBook, showRating, name, isPreviewPage, district, city, price } = props;
   const { t } = useTranslation();
-  
+
   return (
-    <Grid container>
+    <Grid container spacing={1}>
       <Grid item xs={9}>
         <Typography variant='h1' className={classes.txtName}>
           {isPreviewPage && !name ? t('room:updateRoomName') : name}
@@ -100,15 +100,15 @@ const BoxInfoBasic: FC<IProps> = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item xs={9} className={classes.rowMarginTop}>
+      <Grid item xs={9}>
         <Typography variant='subtitle2' className={classes.txtAddress}>
           {district}, {city}
         </Typography>
       </Grid>
       <Grid item xs={3} container justify='flex-end' alignItems='flex-end'>
         <Grid item>
-          <Typography variant='subtitle2' className={classes.txtPer}>
-            {t('longtermroom:perMonth')}
+          <Typography variant='subtitle2' className={classes.txtAddress}>
+            {t('longtermroom:priceBasicMobile')}
           </Typography>
         </Grid>
       </Grid>
@@ -128,18 +128,18 @@ const BoxInfoBasic: FC<IProps> = (props) => {
           </span>
         </Grid>
       )}
-      
+
       {showButtonBook && (
         <Grid item xs={12} className={classes.rowMarginTop}>
-        <ButtonGlobal
-          width='100%'
-          textColor='#fff'
-          background='#54D3C2'
-          onClick={() => { alert('ok') }}
-        >
-          {t('longtermroom:bookNow')}
-            </ButtonGlobal>
-      </Grid>
+          <ButtonGlobal
+            width='100%'
+            textColor='#fff'
+            background='#54D3C2'
+            onClick={() => { alert('ok') }}
+          >
+            {t('longtermroom:viewSchedule')}
+          </ButtonGlobal>
+        </Grid>
       )}
     </Grid>
   );

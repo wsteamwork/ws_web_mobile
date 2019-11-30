@@ -99,7 +99,7 @@ const BoxTablePrices: FC<IProps> = (props) => {
                 classes={{ root: classes.expSummary }}
               >
                 <Typography variant='subtitle1' className={classes.heading}>
-                  {t('longtermroom:otherFee')}
+                  {t('longtermroom:otherFee')} ({t('rooms:currency')})
                 </Typography>
               </ExpansionPanelSummary>
               <ExpansionPanelDetails classes={{ root: classes.expDetails }}>

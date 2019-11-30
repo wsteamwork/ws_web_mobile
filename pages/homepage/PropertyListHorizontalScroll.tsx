@@ -31,6 +31,9 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
     propertyListHorizontalScroll: {},
     spaceList: {
       margin: (props) => props.margin
+    },
+    propertyList: {
+      padding: (props) => props.paddingItem,
     }
   })
 );
@@ -59,7 +62,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
           <Typography className="head-title">{headTitle}</Typography>
         </Grid>
       )}
-      <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>
+      <Grid className={classNames('property-list-horizontal-scroll', classes.propertyList)}>{renderList}</Grid>
     </section>
   );
 };

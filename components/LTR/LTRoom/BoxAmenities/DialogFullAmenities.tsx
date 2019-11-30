@@ -69,7 +69,7 @@ const DialogFullAmenities: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Dialog scroll='body' fullWidth fullScreen={width === 'xs'}
+    <Dialog fullWidth fullScreen={width === 'xs'}
       aria-labelledby="scroll-dialog-title" open={open} onClose={handleClose} TransitionComponent={TransitionCustom}>
       <DialogTitle id="scroll-dialog-title" disableTypography className={classes.dialogTitle}>
         <IconButton
