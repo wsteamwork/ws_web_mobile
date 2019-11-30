@@ -21,7 +21,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     boxWrapper: {
       display: 'flex',
       alignItems: 'center',
-      height: 55
+      height: 55,
+      margin:'0 auto'
     },
     boxCenter: {
       display: 'flex',

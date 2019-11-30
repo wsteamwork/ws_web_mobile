@@ -22,6 +22,7 @@ interface IProps {
 
 interface IArrayImage {
   imgURL: string,
+  id: string
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -60,9 +61,16 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   const { livingrooms, outdoors, furnitures, kitchens, bedrooms, bathrooms, cover_photo } = props;
   const { t } = useTranslation();
   const [openFullImage, setOpenFullImage] = useState<boolean>(false);
+  const [elImage, setElImage] = useState<string>('');
 
   const toggle = (e: MouseEvent<HTMLElement>) => {
     e.preventDefault();
+    setOpenFullImage(!openFullImage);
+  };
+
+  const toggleDialog = (e: MouseEvent<HTMLElement>, idEl:string) => {
+    e.preventDefault();
+    setElImage(idEl);
     setOpenFullImage(!openFullImage);
   };
 
@@ -70,44 +78,47 @@ const BoxListImageRoom: FC<IProps> = (props) => {
   const funcPushImage = useMemo(() => {
     if (cover_photo.images && cover_photo.images.length) {
       arrImage.push({
-        imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`
+        imgURL: `${IMAGE_STORAGE_LG + cover_photo.images[0].name}`,
+        id: 'cover_photo'
       })
     }
     if (livingrooms.images && livingrooms.images.length) {
       arrImage.push({
-        imgURL: `${IMAGE_STORAGE_LG + livingrooms.images[0].name}`
+        imgURL: `${IMAGE_STORAGE_LG + livingrooms.images[0].name}`,
+        id: 'livingrooms'
       })
     }
     if (bedrooms[`bedroom_1`] && bedrooms[`bedroom_1`].images && bedrooms[`bedroom_1`].images.length) {
       arrImage.push({
-        imgURL: `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}`
+        imgURL: `${IMAGE_STORAGE_LG + bedrooms['bedroom_1'].images[0].name}`,
+        id: 'bedrooms'
       })
     }
     if (bathrooms['bathroom_1'] && bathrooms['bathroom_1'].images && bathrooms['bathroom_1'].images.length) {
       arrImage.push({
-        imgURL: `${bathrooms.bathroom_1 ? IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name : ''}`
+        imgURL: `${bathrooms.bathroom_1 ? IMAGE_STORAGE_LG + bathrooms['bathroom_1'].images[0].name : ''}`,
+        id: 'bathrooms'
       })
     }
     if (kitchens.images && kitchens.images.length) {
       arrImage.push({
-        imgURL: `${IMAGE_STORAGE_LG + kitchens.images[0].name}`
+        imgURL: `${IMAGE_STORAGE_LG + kitchens.images[0].name}`,
+        id: 'kitchens'
       })
     }
     if (furnitures.images && furnitures.images.length) {
       arrImage.push({
-        imgURL: `${IMAGE_STORAGE_LG + furnitures.images[0].name}`
+        imgURL: `${IMAGE_STORAGE_LG + furnitures.images[0].name}`,
+        id: 'furnitures'
       })
     }
   }, []);
 
   const renderRoomImages = (item) => (
-    <Grid>
-      <Grid className={classes.properyItemIcon}>
-        <img className={classes.itemIcon} src={item.imgURL} onClick={toggle}></img>
-      </Grid>
+    <Grid className={classes.properyItemIcon}>
+      <img className={classes.itemIcon} src={item.imgURL} onClick={(e)=>toggleDialog(e, item.id)} />
     </Grid>
   );
-
 
   return (
     <Fragment>
@@ -118,21 +129,24 @@ const BoxListImageRoom: FC<IProps> = (props) => {
           </Typography>
         </Grid>
         <Grid item>
-          <Typography variant='h5' className={classes.btnViewAll} gutterBottom>
+          <Typography variant='h5' className={classes.btnViewAll} gutterBottom onClick={toggle}>
             {t('longtermroom:allImages')}
           </Typography>
         </Grid>
       </Grid>
 
-      <PropertyListHorizontalScroll
+      {useMemo(() => (
+        <PropertyListHorizontalScroll
         // itemWidth={'33,33%'}
         margin='14px 0 0'
-        paddingItem='0 10px 0 0 !important'
+        paddingItem='0 12px 0 0 !important'
         listData={arrImage}
         itemRender={renderRoomImages}
       />
-
-      <DialogFullImage open={openFullImage} handleClose={() => setOpenFullImage(false)}
+      ), [])}
+      
+      
+      <DialogFullImage idEl={elImage} open={openFullImage} handleClose={() => setOpenFullImage(false)}
         livingrooms={livingrooms}
         kitchens={kitchens}
         bathrooms={bathrooms}

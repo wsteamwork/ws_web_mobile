@@ -21,11 +21,11 @@ import React, { Fragment, useContext, useEffect, useMemo, useState, useRef } fro
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
 import BoxBottomBooking from '@/components/LTR/LTRoom/BoxBottomBooking';
-import { Link, Element } from 'react-scroll';
 import KeyboardArrowDownRounded from '@material-ui/icons/KeyboardArrowDownRounded';
 import { useTranslation } from 'react-i18next';
 import NavTop from '@/components/NavTop';
 import HeadRoom from 'react-headroom';
+import Collapse from '@material-ui/core/Collapse';
 
 const LongtermRoom: NextPage = () => {
   const { router, width } = useContext(GlobalContext);
@@ -36,6 +36,11 @@ const LongtermRoom: NextPage = () => {
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
   const { t } = useTranslation();
   const [hideNavTop, setHideNavTop] = useState<boolean>(false);
+  const [viewDetail, setViewDetail] = useState<boolean>(false);
+
+  const handleView = () => {
+    setViewDetail(!viewDetail);
+  };
 
   // forceCheck();
   if (router.pathname.includes('/long-term-room')) {
@@ -69,7 +74,6 @@ const LongtermRoom: NextPage = () => {
       </div>
     )
   }
-
   return (
     <Fragment>
       {!!ltroom && (
@@ -105,38 +109,39 @@ const LongtermRoom: NextPage = () => {
                   <NavTop isHidden={hideNavTop} />
                 </HeadRoom>
 
-                <BoxImageLT
-                  backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
-                  room={ltroom}
-                >
-                  <Link activeClass="active" to="toInfoScroll" spy={true} smooth={true} duration={500} >
-                    <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' >
-                      <span style={{ color: '#fff' }}>{t('longtermroom:moreDetails')}</span>
-                      <KeyboardArrowDownRounded style={{ color: '#fff' }} />
-                    </Grid>
-                  </Link>
-                </BoxImageLT>
-                <Grid container>
-                  <Grid item xs={12} sm={12}>
-                    <Element name="toInfoScroll">
-                      <BoxLTRoomDetail room={ltroom} />
-                    </Element>
-                  </Grid>
+                <Collapse in={!viewDetail} >
+                  <BoxImageLT
+                    backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
+                    room={ltroom}
+                  >
+                      <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' onClick={handleView}>
+                        <span style={{ color: '#fff' }}>{t('longtermroom:moreDetails')}</span>
+                        <KeyboardArrowDownRounded style={{ color: '#fff' }} />
+                      </Grid>
+                  </BoxImageLT>
+                </Collapse>
 
-                  <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                    <Grid container className="roomPage__boxBookingMoblie">
-                      <BoxBottomBooking
-                        priceBasic={ltroom.price_display}
-                        handleOpenBookingDialog={handleOpenBookingDialog}
-                      />
+                <Collapse in={viewDetail} > 
+                  <Grid container>
+                    <Grid item xs={12} sm={12}>
+                        <BoxLTRoomDetail room={ltroom} clickBook={handleView}/>
+                    </Grid>
+
+                    <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
+                      <Grid container className="roomPage__boxBookingMoblie">
+                        <BoxBottomBooking
+                          priceBasic={ltroom.price_display}
+                          handleOpenBookingDialog={handleOpenBookingDialog}
+                        />
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
+                </Collapse>
               </GridContainer>
             ) : ''}
           </Fragment>
         ),
-        [ltroom]
+        [ltroom, viewDetail]
       )}
       <Dialog
         fullScreen

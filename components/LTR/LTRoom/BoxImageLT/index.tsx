@@ -115,50 +115,26 @@ const BoxImageLT: FC<IProps> = (props) => {
   ];
 
   return (
-    <Plx
-      parallaxData={parallaxData}
-    >
-
-      <Parallax
-        bgImage={props.backgroundImage}
-        strength={300}
-        bgClassName={classes.imgRoom}
-        className={classes.parallaxContainer}
-        contentClassName={classes.contentParallax}>
-        <div className={classes.insideParalax}>
-          <div className={classes.boxContainer}>
-            <div className={classes.boxInfo}>
-              <BoxInfoBasic showButtonBook
-                name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
-                district={room.district.data.name}
-                city={room.city.data.name}
-                price={room.price_display}
-              />
-            </div>
-            {props.children}
+    <Parallax
+      bgImage={props.backgroundImage}
+      strength={50}
+      bgClassName={classes.imgRoom}
+      className={classes.parallaxContainer}
+      contentClassName={classes.contentParallax}>
+      <div className={classes.insideParalax}>
+        <div className={classes.boxContainer}>
+          <div className={classes.boxInfo}>
+            <BoxInfoBasic showButtonBook
+              name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
+              district={room.district.data.name}
+              city={room.city.data.name}
+              price={room.price_display}
+            />
           </div>
+          {props.children}
         </div>
-      </Parallax>
-
-      {/* <div className={classes.boxContainer}> */}
-
-
-      {/* <Plx
-        parallaxData={ parallaxData2 }
-      > */}
-      {/* <div className={classes.boxInfo}>
-          <BoxInfoBasic showButtonBook
-            name={isPreviewPage && !room.about_room ? t('room:updateRoomName') : room.about_room.name}
-            district={room.district.data.name}
-                        city={room.city.data.name}
-                        price={room.price_display}
-          />
-        </div>
-       {props.children} */}
-      {/* </Plx> */}
-      {/* </div> */}
-    </Plx>
-
+      </div>
+    </Parallax>
   );
 };
 
