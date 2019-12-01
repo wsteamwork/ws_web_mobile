@@ -154,6 +154,7 @@ export const getLTRooms = async (
   let params: LTRoomUrlParams = router.query;
 
   let query: Partial<LTRoomIndexGetParams> = {
+    include: 'city,district',
     name: params.name,
     city_id: params.city_id,
     district_id: params.district_id,

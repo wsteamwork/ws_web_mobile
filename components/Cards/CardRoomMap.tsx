@@ -1,17 +1,12 @@
-import React, { Fragment, FC, useMemo } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, Link, Tooltip } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import Cookies from 'universal-cookie';
-import { cleanAccents, formatPrice } from '@/utils/mixins';
-import { useTranslation } from 'react-i18next';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { Grid, Link, Theme, Typography } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import { compose } from 'recompose';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import Cookies from 'universal-cookie';
 interface IProps {
   classes?: any;
   city: string;
@@ -29,6 +24,12 @@ interface IProps {
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
+    roomInMap: {
+      position: 'relative',
+      width: '97%',
+      margin: 'auto',
+      height: 'auto'
+    },
     txtName: {
       fontStyle: 'normal',
       fontWeight: 'bold',
@@ -84,7 +85,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginLeft: 8
     },
     border: {
-      border: '4px solid #54D3C2',
+      border: '1px solid #54D3C2',
       borderRadius: 15
     }
   })
@@ -107,11 +108,10 @@ const CardRoomMap: FC<IProps> = (props) => {
   } = props;
   const { t } = useTranslation();
   const cookies = new Cookies();
-  return useMemo(
-    () => (
+  return (
     <Grid
-      className={classNames('roomCardMap', isHover ? classes.border : '')}
-      onClick={() => focus(room)}>
+      className={classNames('roomCardMap', classes.roomInMap, isHover ? classes.border : '')}
+      onMouseOver={() => focus(room)}>
       <Grid container className="roomCardMap__wrapper" spacing={0}>
         <Grid item xs={4} className="boxImg">
           <img
@@ -124,11 +124,14 @@ const CardRoomMap: FC<IProps> = (props) => {
         <Grid item xs={8} className="boxCard">
           <Grid className="cardWrapper">
             <Grid container className="cardContainer">
-              <Link href={`/long-term-room/${roomID}`} target="_blank" className="boxLink">
+              <Grid className="boxLink">
                 <Grid className="boxTitle">
                   <Grid>
                     <Typography variant="subtitle2" className="roomName">
-                      {roomName}
+                      {roomName.length > 35 ? roomName.substr(0, 36) : roomName}
+                      <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
+                        <span>{t('rooms:exploreDetailsRoom')}</span>
+                      </Link>
                     </Typography>
                   </Grid>
                   <Grid className="roomSubtitle">
@@ -165,18 +168,12 @@ const CardRoomMap: FC<IProps> = (props) => {
                     </Typography>
                   </Grid>
                 </Grid>
-              </Link>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
     </Grid>
-  ),
-  [room]
-);
+  );
 };
-// const memoCheck = (prevProps: IProps, nextProps: IProps) => {
-//   return prevProps.isHover === nextProps.isHover;
-// };
-// export default compose<IProps, any>()(React.memo(CardRoomMap, memoCheck));
 export default CardRoomMap;

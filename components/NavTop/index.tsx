@@ -1,7 +1,9 @@
-import { Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Dialog, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Sort } from '@material-ui/icons';
-import React, { FC, Fragment } from 'react';
+import React, { FC, Fragment, useState } from 'react';
+import FilterDrawerMobile from '../Rooms/FilterDrawerMobile';
+
 interface IProps {
   classes?: any;
   isHidden?: boolean;
@@ -40,6 +42,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 );
 const NavTop: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const [openFilter, setOpenFilter] = useState<boolean>(false);
+  const handleFilter = () => {
+    setOpenFilter(!openFilter);
+  };
   const {
     isHidden,
     showTextCenter,
@@ -83,13 +89,16 @@ const NavTop: FC<IProps> = (props) => {
             ''
           )}
         {showFilterAction ? (
-          <IconButton onClick={handleFilterAction}>
+          <IconButton onClick={() => handleFilter()}>
             <Sort className={classes.btnRight} />
           </IconButton>
         ) : (
             ''
           )}
       </Grid>
+      <Dialog fullScreen scroll="paper" open={openFilter} onClose={() => setOpenFilter(false)}>
+        <FilterDrawerMobile setIndex={handleFilter} />
+      </Dialog>
     </Grid>
   ) : (
       <Fragment></Fragment>

@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile/index';
 interface IProps {
   classes?: any;
-  handleFilterAction?: () => void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -43,7 +42,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const ButtonFilterRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
-  const { handleFilterAction } = props;
   const { state } = useContext(RoomIndexContext);
   const { meta } = state;
   const [open, setOpen] = useState<boolean>(false)

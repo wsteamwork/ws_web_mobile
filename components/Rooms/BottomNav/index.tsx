@@ -28,10 +28,10 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
     }
   })
 );
-export const FILTER = 0;
-export const TAB_LIST = 1;
-export const MAP = 2;
-export const NAV = 3;
+export const FILTER = 4;
+export const TAB_LIST = 5;
+export const MAP = 6;
+export const NAV = 7;
 
 export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
   <Slide timeout={300} direction="up" ref={ref} {...props} />
