@@ -1,8 +1,7 @@
-import { formatMoney, formatPrice } from '@/utils/mixins';
+import { formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Paper, Theme, Tooltip, Typography } from '@material-ui/core';
+import { Grid, Paper, Theme, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
-import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -33,7 +32,7 @@ const RoomCardItem: FC<IProps> = (props) => {
       ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
       : './static/ms-icon-310x310.png';
   const price = room.price_display ? formatPrice(room.price_display) : t('rooms:contactForPrice');
-
+  console.log(room);
   return (
     <Grid container item xs={12} className={classes.boxWrapper}>
       <Grid item xs={11}>
@@ -68,7 +67,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                         <Grid item xs={12} className="roomSubtitle">
                           <span className="roomType">{room.accommodation_type_txt}</span>
                           <span className="dotAmenties">.</span>&nbsp;
-                          <span className="address">{room.district}, {room.city}</span>
+                          <span className="address">{room.district.data.name}, {room.city.data.name}</span>
                         </Grid>
                         <Grid item xs={12} className="collectionAmenities">
                           <span className="address">

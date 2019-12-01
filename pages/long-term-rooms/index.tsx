@@ -1,31 +1,23 @@
+import ButtonFilterRoom from '@/components/ButtonFilterRoom';
+import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
 import MapAndListing from '@/components/Rooms/MapAndListing';
+import SearchRoom from '@/components/SearchRoom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  RoomFilterContext,
-  RoomFilterReducer,
-  RoomFilterStateInit
-} from '@/store/Context/Room/RoomFilterContext';
-import {
-  RoomIndexContext,
-  RoomIndexReducer,
-  RoomIndexStateInit
-} from '@/store/Context/Room/RoomListContext';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { getCookieFromReq } from '@/utils/mixins';
-import { Grid, createStyles, Theme } from '@material-ui/core';
+import { createStyles, Grid, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useReducer, useState, useEffect } from 'react';
+import React, { Fragment, useContext, useEffect, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import NavTop from '@/components/NavTop';
-import SearchRoom from '@/components/SearchRoom';
-import ButtonFilterRoom from '@/components/ButtonFilterRoom';
-import { makeStyles } from '@material-ui/styles';
-import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -56,6 +48,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const LongtermRooms: NextPage = (props) => {
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const { isMapOpen } = state;
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
@@ -66,6 +59,12 @@ const LongtermRooms: NextPage = (props) => {
   }, [router]);
   const handleOpenMap = () => {
     dispatch({ type: 'setMapOpen', isMapOpen: true });
+  };
+  const backRoomList = () => {
+    dispatch({ type: 'setMapOpen', isMapOpen: false });
+  };
+  const backHomePage = () => {
+    router.push('/')
   };
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
@@ -106,18 +105,23 @@ const LongtermRooms: NextPage = (props) => {
                 <Grid item xs={12} className={classes.boxWrapper}>
                   <NavTop
                     isHidden={hideNavTop}
-                    textCenter={'Khám phá'}
+                    textCenter={t('rooms:searchRooms:explore')}
+                    handleBackAction={backHomePage}
                     handleLocationAction={handleOpenMap}
+                    showLocationAction={true}
                   />
                 </Grid>
               </HeadRoom>
             ) : (
-                <NavTop
-                  isHidden={false}
-                  textCenter={'Bản đồ'}
-                  showLocationAction={false}
-                  showFilterAction={true}
-                />
+                <Grid item xs={12} className={classes.boxWrapper}>
+                  <NavTop
+                    isHidden={false}
+                    handleBackAction={backRoomList}
+                    textCenter={t('rooms:map')}
+                    showLocationAction={false}
+                    showFilterAction={true}
+                  />
+                </Grid>
               )}
             <Grid item xs={12}>
               <SearchRoom />

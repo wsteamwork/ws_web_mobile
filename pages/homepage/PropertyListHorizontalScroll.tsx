@@ -53,7 +53,7 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
           {itemRender(item, sizeIcon)}
         </Grid>
       )),
-    [!isDependencies && isDependencies ? null : itemRender]
+    [isDependencies == false ? null : itemRender]
   );
 
   return (
@@ -64,6 +64,12 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
         </Grid>
       )}
       <Grid className={classNames('property-list-horizontal-scroll', classes.propertyList)}>{renderList}</Grid>
+      {/* {useMemo(
+        () => (
+          <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>
+        ),
+        [listData]
+      )} */}
     </section>
   );
 };

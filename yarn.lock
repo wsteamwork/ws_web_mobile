@@ -9206,6 +9206,11 @@ react-headroom@^3.0.0:
     raf "^3.3.0"
     shallowequal "^1.1.0"
 
+react-horizontal-scrolling-menu@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/react-horizontal-scrolling-menu/-/react-horizontal-scrolling-menu-0.7.4.tgz#e92f8537ed1b4cd49f51c5c22ff167b9d0fc4009"
+  integrity sha512-bTYrocJzztGuvNV7z6ijEQOdW/D4A2XNFseRWWF6KvjeEsCCO/tfBckB4z6FFyp8NNRPYmR/zuUKIuN0fI+jKQ==
+
 react-html-parser@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/react-html-parser/-/react-html-parser-2.0.2.tgz#6dbe1ddd2cebc1b34ca15215158021db5fc5685e"
