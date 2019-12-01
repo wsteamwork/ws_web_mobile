@@ -28,9 +28,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       paddingLeft: (props) => props.gutter,
       paddingRight: (props) => props.gutter
     },
-    propertyListHorizontalScroll: {
-
-    },
+    propertyListHorizontalScroll: {},
     spaceList: {
       margin: (props) => props.margin
     }
@@ -41,25 +39,33 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
   const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom } = props;
-
-  const renderList = useMemo(
-    () =>
-      listData.map((item, index) => (
-        <Grid key ={index} className={classNames('property-item-container', classes.propertyItemContainer)}>
-          {itemRender(item, sizeIcon)}
-        </Grid>
-      )),
-    [itemRender]
-  );
+  console.log(listData);
+  const renderList = listData.map((item, index) => (
+    <Grid
+      key={index}
+      className={classNames('property-item-container', classes.propertyItemContainer)}>
+      {itemRender(item, sizeIcon)}
+    </Grid>
+  ));
 
   return (
-    <section className={classNames("property-list-horizontal-scroll-container", classes.spaceList, classCustom)}>
+    <section
+      className={classNames(
+        'property-list-horizontal-scroll-container',
+        classes.spaceList,
+        classCustom
+      )}>
       {headTitle && (
         <Grid className="head-title-container">
           <Typography className="head-title">{headTitle}</Typography>
         </Grid>
       )}
-      <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>
+      {useMemo(
+        () => (
+          <Grid className={'property-list-horizontal-scroll'}>{renderList}</Grid>
+        ),
+        [listData]
+      )}
     </section>
   );
 };

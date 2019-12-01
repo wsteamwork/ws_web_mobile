@@ -28,10 +28,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 // @ts-ignore
 const MapCanvas: FC<IProps> = (props) => {
   const { rooms, hoverAction, hoverId, center } = props;
-  // console.log('hoverId', hoverId);
-  // console.log('rooms', rooms);
   const classes = useStyles(props);
-  const { state, dispatch } = useContext(RoomIndexContext);
+  const { dispatch } = useContext(RoomIndexContext);
   const [readyToLoad, setReadyToLoad] = useState<boolean>(false);
   const getMapBounds = (map, maps) => {
     let ne = map.getBounds().getNorthEast();
@@ -40,7 +38,7 @@ const MapCanvas: FC<IProps> = (props) => {
     return boundsInit;
   };
   const onChangeMap = (data: ChangeEventValue) => {
-    if (hoverId === 0) {
+    if (readyToLoad && hoverId === 0) {
       const bounds = data.bounds;
       const coords: MapCoords = {
         lat_max: bounds.ne.lat,
@@ -48,7 +46,6 @@ const MapCanvas: FC<IProps> = (props) => {
         long_max: bounds.ne.lng,
         long_min: bounds.sw.lng
       };
-
       dispatch({ type: 'setCoords', payload: coords });
     }
   };
@@ -57,6 +54,7 @@ const MapCanvas: FC<IProps> = (props) => {
     dispatch({ type: 'setCoords', payload: bounds });
   };
   const onDrag = () => {
+    hoverAction(0)
     setReadyToLoad(true);
   };
   return (
@@ -73,7 +71,7 @@ const MapCanvas: FC<IProps> = (props) => {
               zoomControl: false
             };
           }}
-          defaultZoom={15}
+          defaultZoom={16}
           onChange={onChangeMap}
           onDrag={onDrag}
           center={center}

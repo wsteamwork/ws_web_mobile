@@ -26,6 +26,7 @@ import SearchRoom from '@/components/SearchRoom';
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import { makeStyles } from '@material-ui/styles';
 import MapRoomListing from '@/components/Rooms/MapAndListing/MapRoomListing';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -56,6 +57,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const LongtermRooms: NextPage = (props) => {
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const { isMapOpen } = state;
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
@@ -66,18 +68,24 @@ const LongtermRooms: NextPage = (props) => {
   }, [router]);
   const handleOpenMap = () => {
     dispatch({ type: 'setMapOpen', isMapOpen: true });
+  }; 
+ const backRoomList = () => {
+    dispatch({ type: 'setMapOpen', isMapOpen: false });
+  };
+  const backHomePage = () => {
+    router.push('/')
   };
   const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
 
-  // if (router.pathname.includes('/long-term-rooms')) {
-  //   dispatchLeaseType({
-  //     type: 'setLeaseTypeGlobal',
-  //     leaseTypeGlobal: 1,
-  //     leaseTypePathName: router.pathname.includes('/long-term-rooms')
-  //       ? '/long-term-rooms'
-  //       : '/rooms'
-  //   });
-  // }
+  if (router.pathname.includes('/long-term-rooms')) {
+    dispatchLeaseType({
+      type: 'setLeaseTypeGlobal',
+      leaseTypeGlobal: 1,
+      leaseTypePathName: router.pathname.includes('/long-term-rooms')
+        ? '/long-term-rooms'
+        : '/rooms'
+    });
+  }
   return (
     <Fragment>
       <NextHead
@@ -106,18 +114,22 @@ const LongtermRooms: NextPage = (props) => {
                 <Grid item xs={12} className={classes.boxWrapper}>
                   <NavTop
                     isHidden={hideNavTop}
-                    textCenter={'Khám phá'}
+                    textCenter={t('rooms:searchRooms:explore')}
+                    handleBackAction={backHomePage}
                     handleLocationAction={handleOpenMap}
-                  />
+                    />
                 </Grid>
               </HeadRoom>
             ) : (
-              <NavTop
-                isHidden={false}
-                textCenter={'Bản đồ'}
-                showLocationAction={false}
-                showFilterAction={true}
-              />
+              <Grid item xs={12} className={classes.boxWrapper}>
+                <NavTop
+                  isHidden={false}
+                  handleBackAction={backRoomList}
+                  textCenter={t('rooms:map')}
+                  showLocationAction={false}
+                  showFilterAction={true}
+                />
+              </Grid>
             )}
             <Grid item xs={12}>
               <SearchRoom />

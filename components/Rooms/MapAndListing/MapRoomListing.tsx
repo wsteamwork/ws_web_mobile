@@ -1,24 +1,24 @@
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { Grid, Hidden, Theme } from '@material-ui/core';
 import React, { FC, useContext, useState, useEffect, useMemo } from 'react';
-import RoomListing from '../RoomListing';
 import MapCanvas from './MapCanvas';
-import LazyLoad from 'react-lazyload';
 import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
-import ListingLTRooms from '@/components/LTR/LTRooms/ListingLTRooms';
-import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 import CardRoomMap from '@/components/Cards/CardRoomMap';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { Coords } from 'google-map-react';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-
+import Slider, { Settings } from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import _ from 'lodash';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
-    roomInMap: {
+    listRoom: {
       position: 'relative',
-      bottom: '160px'
+      bottom: 140,
+      width: '100%',
+      display: 'block !important'
     }
   })
 );
@@ -31,11 +31,52 @@ const MapRoomListing: FC = (props) => {
     lat: 21.03011,
     lng: 105.853827
   });
-  const { width } = useContext(GlobalContext);
   const [hoverId, setHoverId] = useState<number>(-1);
+  const [slider, setSlider] = useState<any>(null);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
     (state) => state.searchFilter.leaseTypeGlobal
   );
+  useEffect(() => {
+    if (slider && longtermRooms.length && hoverId !== 0) {
+      let index = longtermRooms.findIndex((element) => element.id === hoverId);
+      slider.slickGoTo(index);
+    }
+  }, [hoverId]);
+  const setting: Settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    lazyLoad: 'ondemand',
+    swipeToSlide: true,
+    touchThreshold: 100,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          autoplay: false,
+          arrows: false,
+          autoplaySpeed: 5000,
+          touchThreshold: 100,
+          centerMode: true,
+          centerPadding: '20px'
+        }
+      },
+      {
+        breakpoint: 425,
+        settings: {
+          slidesToShow: 1,
+          autoplay: false,
+          autoplaySpeed: 5000,
+          touchThreshold: 100,
+          arrows: false,
+          centerMode: true,
+          centerPadding: '20px'
+        }
+      }
+    ]
+  };
   const hoverAction = (key: number) => {
     setHoverId(key);
   };
@@ -56,27 +97,9 @@ const MapRoomListing: FC = (props) => {
         lat: valid ? lat : 21.03011,
         lng: valid ? lng : 105.853827
       };
-
       setCenter(coords);
     }
-  }, [longtermRooms]);
-
-  const renderRoomsInMap = (room) => (
-    <CardRoomMap
-      room={room}
-      isHover={hoverId === room.id}
-      focus={() => focusRoomLocation(room)}
-      city={room.city}
-      district={room.district}
-      roomID={room.id}
-      roomName={room.about_room.name}
-      numberBedroom={room.bedrooms.number_bedroom}
-      roomType={room.accommodation_type_txt}
-      roomImage={room.avatar.images.length ? room.avatar.images[0].name : ''}
-      avg_rating={5}
-    />
-  );
-
+  }, [longtermRooms, hoverId]);
   return (
     <div className="mapRoomListing">
       <Grid className="mapListing">
@@ -89,16 +112,33 @@ const MapRoomListing: FC = (props) => {
       </Grid>
       {useMemo(
         () => (
-          <PropertyListHorizontalScroll
-            classCustom={classes.roomInMap}
-            itemWidth={width == 'sm' ? '45%' : '95%'}
-            gutter={6}
-            listData={leaseTypeGlobal ? longtermRooms : rooms}
-            itemRender={renderRoomsInMap}
-            sizeIcon={width == 'sm' ? 100 : 65}
-          />
+          <Grid container className={classes.listRoom}>
+            {longtermRooms.length > 0 ? (
+              <Slider ref={(slider) => setSlider(slider)} {...setting}>
+                {_.map(longtermRooms, (room, index) => (
+                  <div key={index}>
+                    <CardRoomMap
+                      room={room}
+                      isHover={hoverId === room.id}
+                      focus={() => focusRoomLocation(room)}
+                      city={room.city.data.name}
+                      district={room.district.data.name}
+                      roomID={room.id}
+                      roomName={room.about_room.name}
+                      numberBedroom={room.bedrooms.number_bedroom}
+                      roomType={room.accommodation_type_txt}
+                      roomImage={room.avatar.images.length ? room.avatar.images[0].name : ''}
+                      avg_rating={5}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              ''
+            )}
+          </Grid>
         ),
-        [longtermRooms]
+        [longtermRooms, hoverId]
       )}
     </div>
   );

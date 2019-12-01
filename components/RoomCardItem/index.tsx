@@ -68,9 +68,9 @@ const RoomCardItem: FC<IProps> = (props) => {
                       <Grid className="roomSubtitle">
                         <span className="roomType">{room.accommodation_type_txt}</span>
                         <span className="dotAmenties">.</span>&nbsp;
-                        <span className="address">{room.district}</span>&nbsp;
+                        <span className="address">{room.district.data.name}</span>&nbsp;
                         <span className="dotAmenties">.</span>&nbsp;
-                        <span className="address">{room.city}</span>
+                        <span className="address">{room.city.data.name}</span>
                       </Grid>
                       <Grid className="collectionAmenities">
                         <span className="address">
