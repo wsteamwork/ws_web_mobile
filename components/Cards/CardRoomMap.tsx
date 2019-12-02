@@ -46,14 +46,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       overflow: 'hidden',
       display: '-webkit-box'
     },
-    txtPrice: {
-      fontSize: 20,
-      lineHeight: '28px',
-      textAlign: 'right',
-      letterSpacing: 0.32,
-      fontWeight: 'bold',
-      color: '#252529'
-    },
     txtAddress: {
       fontStyle: 'normal',
       fontWeight: 'normal',
@@ -131,7 +123,7 @@ const CardRoomMap: FC<IProps> = (props) => {
                 <Grid className="boxTitle">
                   <Grid>
                     <Typography variant="subtitle2" className="roomName">
-                      {roomName.length > 35 ? roomName.substr(0, 36) : roomName}
+                      {roomName.length > 34 ? roomName.substr(0, 35) : roomName}
                       <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
                         <span>{t('rooms:exploreDetailsRoom')}</span>
                       </Link>
@@ -161,7 +153,7 @@ const CardRoomMap: FC<IProps> = (props) => {
 
                 <Grid className="boxPrice">
                   <Grid className="priceContainer">
-                    <Typography variant="subtitle1" className={classes.txtPrice}>
+                    <Typography variant="subtitle1" className="txtPrice">
                       {formatPrice(room.price_display)}
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>
