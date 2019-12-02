@@ -1,12 +1,15 @@
-import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { cleanAccents, formatPrice } from '@/utils/mixins';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Link, Theme, Typography } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import classNames from 'classnames';
 import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Theme, Grid, Typography, Link } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
 import Cookies from 'universal-cookie';
+import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { useTranslation } from 'react-i18next';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
+import classNames from 'classnames';
 interface IProps {
   classes?: any;
   city: string;
@@ -42,14 +45,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       WebkitBoxOrient: 'vertical',
       overflow: 'hidden',
       display: '-webkit-box'
-    },
-    txtPrice: {
-      fontSize: 20,
-      lineHeight: '28px',
-      textAlign: 'right',
-      letterSpacing: 0.32,
-      fontWeight: 'bold',
-      color: '#252529'
     },
     txtAddress: {
       fontStyle: 'normal',
@@ -128,7 +123,7 @@ const CardRoomMap: FC<IProps> = (props) => {
                 <Grid className="boxTitle">
                   <Grid>
                     <Typography variant="subtitle2" className="roomName">
-                      {roomName.length > 35 ? roomName.substr(0, 36) : roomName}
+                      {roomName.length > 34 ? roomName.substr(0, 35) : roomName}
                       <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
                         <span>{t('rooms:exploreDetailsRoom')}</span>
                       </Link>
@@ -158,7 +153,7 @@ const CardRoomMap: FC<IProps> = (props) => {
 
                 <Grid className="boxPrice">
                   <Grid className="priceContainer">
-                    <Typography variant="subtitle1" className={classes.txtPrice}>
+                    <Typography variant="subtitle1" className="txtPrice">
                       {formatPrice(room.price_display)}
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>

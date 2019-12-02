@@ -50,6 +50,7 @@ const MapRoomListing: FC = (props) => {
     lazyLoad: 'ondemand',
     swipeToSlide: true,
     touchThreshold: 100,
+    beforeChange: (current, next) => alert(next),
     responsive: [
       {
         breakpoint: 768,
