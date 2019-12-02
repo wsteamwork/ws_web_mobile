@@ -67,7 +67,7 @@ const MapMarker: ComponentType<IProps> = (props: LocalProps) => {
           classes.speechBubbleOver
         )}>
         <span>
-          {cookies.get('initLanguage') == 'en ' ? '$' : 'đ'}
+          {cookies.get('initLanguage') == 'en' ? '$' : 'đ'}
           {formatMoney(room.price_display, 0)}
         </span>
       </div>

@@ -32,7 +32,6 @@ const RoomCardItem: FC<IProps> = (props) => {
       ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
       : './static/ms-icon-310x310.png';
   const price = room.price_display ? formatPrice(room.price_display) : t('rooms:contactForPrice');
-  console.log(room);
   return (
     <Grid container item xs={12} className={classes.boxWrapper}>
       <Grid item xs={11}>
