@@ -1,3 +1,4 @@
+import CardSimpleWithIcon from "@/components/Cards/CardSimpleWithIcon";
 import { createStyles, Grid, makeStyles, Theme, Typography } from "@material-ui/core";
 import { FC, Fragment } from "react";
 
@@ -48,18 +49,11 @@ const WhyChoosingUs: FC<IProps> = (props) => {
                     <Typography className={classes.headTitle}>Why you choosing us</Typography>
                 </Grid>
                 <Grid container spacing={1} className={classes.container}>
-                    <Grid item xs={6}>
-                        <Grid item xs={12} className={classes.cardBase}></Grid>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid item xs={12} className={classes.cardBase}></Grid>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid item xs={12} className={classes.cardBase}></Grid>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Grid item xs={12} className={classes.cardBase}></Grid>
-                    </Grid>
+                    <CardSimpleWithIcon data={{ imageIcon: '/static/icons/search.svg', title: 'something', subtitle: 'something else' }} />
+                    <CardSimpleWithIcon data={{ imageIcon: '/static/icons/search.svg', title: 'something', subtitle: 'something else' }} />
+                    <CardSimpleWithIcon data={{ imageIcon: '/static/icons/search.svg', title: 'something', subtitle: 'something else' }} />
+                    <CardSimpleWithIcon data={{ imageIcon: '/static/icons/search.svg', title: 'something', subtitle: 'something else' }} />
+
                 </Grid>
             </Grid>
         </Fragment>

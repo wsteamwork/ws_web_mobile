@@ -81,10 +81,10 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const dataRoomOfAccommodation = {
-    bedrooms: { imageIcon: '/static/icons/bedroom.svg', title: t('longtermroom:bedrooms'), subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : ''} ${t('longtermroom:bedroomLower')}` },
-    kitchens: { imageIcon: '/static/icons/fridge.svg', title: t('longtermroom:kitchens'), subtitle: `${room && room.comforts ? room.comforts.kitchens.length : ''} ${t('longtermroom:amenities')}` },
-    bathrooms: { imageIcon: '/static/icons/bathroom.svg', title: t('longtermroom:bathrooms'), subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : ''} ${t('longtermroom:bathroomLower')}` },
-    totalArea: { imageIcon: '/static/icons/area.svg', title: t('longtermroom:totalArea'), subtitle: `${room ? room.total_area : ''}` },
+    bedrooms: { imageIcon: '/static/icons/bedroom.svg', title: t('longtermroom:bedrooms'), subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : '?'} ${t('longtermroom:bedroomLower')}` },
+    kitchens: { imageIcon: '/static/icons/fridge.svg', title: t('longtermroom:kitchens'), subtitle: `${room && room.comforts ? room.comforts.kitchens.length : '?'} ${t('longtermroom:amenities')}` },
+    bathrooms: { imageIcon: '/static/icons/bathroom.svg', title: t('longtermroom:bathrooms'), subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : '?'} ${t('longtermroom:bathroomLower')}` },
+    totalArea: { imageIcon: '/static/icons/area.svg', title: t('longtermroom:totalArea'), subtitle: `${room ? room.total_area : '?'}` },
   };
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
@@ -118,7 +118,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
         <RoomDescription
           isPreviewPage={isPreviewPage}
           description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
-          space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
+          space={checkAboutRoom ? t('room:notFoundCaontent') : room.about_room.space}
           note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
       </div>
 
