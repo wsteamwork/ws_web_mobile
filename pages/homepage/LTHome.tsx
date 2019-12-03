@@ -95,14 +95,13 @@ const LTHome: NextPage = () => {
   );
   const renderRoomsHot = (room) => (
     <CardRoom2
-      city={room.city.data.name}
-      district={room.district.data.name}
+      city={room.city}
+      district={room.district}
       // instantbook={room.instant_book}
       roomID={room.id}
-      roomName={room.room_name}
-      roomNumber={room.number_room}
-      roomType={room.room_type_txt}
-      roomImage={room.avatar_image}
+      roomName={room.about_room.name}
+      roomType={room.accommodation_type_txt}
+      roomImage={room.avatar.images[0].name}
       avg_rating={room.avg_rating}
     />
   );
@@ -151,14 +150,14 @@ const LTHome: NextPage = () => {
         />
 
         <PropertyListHorizontalScroll
-          itemWidth={width == 'sm' ? '50%' : '95%'}
+          itemWidth={width == 'sm' || width == 'md' ? '50%' : '95%'}
           gutter={6}
           listData={roomsCity}
           itemRender={renderCity}
         />
 
         <PropertyListHorizontalScroll
-          itemWidth={width == 'sm' ? '33.3%' : '66%'}
+          itemWidth={width == 'sm' || width == 'md' ? '33.3%' : '66%'}
           gutter={6}
           headTitle={t('home:topDestinations')}
           listData={roomsCity}
@@ -166,22 +165,20 @@ const LTHome: NextPage = () => {
         />
         <Grid style={{ padding: '14px 2px' }}>
           <PropertyListHorizontalScroll
-            itemWidth={'95%'}
-            itemHeight={width == 'sm' ? 200 : 170}
+            itemWidth={'90%'}
+            itemHeight={width == 'xs' ? 170 : 230}
+            paddingItem={'0 0 20px'}
             gutter={6}
             headTitle={t('home:topHomestay')}
             listData={roomsHot}
             itemRender={renderRoomsHot}
           />
-          {/* <CardRoom2 /> */}
         </Grid>
 
         <BottomNav />
       </Grid>
 
       <SearchDialog handleClose={handleCloseSearchDialog} open={openSearchDialog} />
-      {/* </Dialog> */}
-      {/*  */}
     </Fragment>
   );
 };

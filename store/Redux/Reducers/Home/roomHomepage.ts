@@ -13,7 +13,7 @@ import { Dispatch, Reducer } from 'react';
 import { ReducresActions } from '..';
 
 export type RoomHomepageAction =
-  | { type: 'setRoomHot'; rooms: RoomIndexRes[] }
+  | { type: 'setRoomHot'; rooms: any[] }
   | { type: 'setRoomCity'; rooms: NumberRoomCity[] }
   // | { type: 'setRoomNew'; rooms: RoomIndexRes[] }
   | { type: 'setApartment'; rooms: TypeApartment[] };
@@ -21,7 +21,7 @@ export type RoomHomepageAction =
 // | { type: 'setCollectionById'; collectionById: Collections };
 
 export type RoomHomepageState = {
-  readonly roomsHot: RoomIndexRes[];
+  readonly roomsHot: any[];
   readonly roomsCity: NumberRoomCity[] | null;
   // readonly roomsNew: RoomIndexRes[];
   readonly apartments: TypeApartment[];
@@ -58,6 +58,24 @@ export const roomHomepageReducer: Reducer<RoomHomepageState, RoomHomepageAction>
     default:
       return state;
   }
+};
+
+export const getRoomsHompageCollection = async (
+  initLanguage: string = 'vi',
+  type: string
+): Promise<any[]> => {
+  // const query: Partial<RoomIndexGetParams> = {
+  //   include: 'city,district',
+  //   hot: 1,
+  //   limit: 10
+  // };
+  const url = `long-term-rooms/home-page-collection/${type}`;
+
+  const res: AxiosRes<any[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
+
+  return res.data.data;
 };
 
 export const getRoomHot = async (initLanguage: string = 'vi'): Promise<RoomIndexRes[]> => {
@@ -142,7 +160,7 @@ export const getRoomsHomepage = async (
   initLanguage: string = 'vi'
 ): Promise<Omit<RoomHomepageState, 'collectionById'>> => {
   const res = await Promise.all([
-    getRoomHot(initLanguage),
+    getRoomsHompageCollection(initLanguage, 'editor_choice'),
     getRoomCity(initLanguage),
     getApartments(initLanguage)
     // getCollections(initLanguage)
