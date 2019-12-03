@@ -7,7 +7,6 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Divider, Theme, useTheme, Zoom } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';

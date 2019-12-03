@@ -1,14 +1,12 @@
-import React, { Fragment, FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography, Link, Tooltip } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import ButtonGlobal from '@/components/ButtonGlobal';
-import QuickBookIcon from '@material-ui/icons/OfflineBoltRounded';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import Cookies from 'universal-cookie';
 import { cleanAccents } from '@/utils/mixins';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { Grid, Link, Theme, Typography } from '@material-ui/core';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Rating from '@material-ui/lab/Rating';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import Cookies from 'universal-cookie';
 interface IProps {
   classes?: any;
   city: string;

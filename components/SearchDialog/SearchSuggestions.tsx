@@ -48,7 +48,7 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     getDataSearch(inputValue).then((data) => setDataSuggestions(data));
   }, [inputValue]);
 
-  console.log(dataSuggestions);
+  // console.log(dataSuggestions);
 
   const applySearch = (option: SearchSuggestData) => {
     let name = option.name;

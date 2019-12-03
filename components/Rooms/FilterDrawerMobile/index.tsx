@@ -1,30 +1,29 @@
-import React, { FC, Fragment, useState, useContext, forwardRef } from 'react';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import { Theme } from '@material-ui/core/styles';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import { TAB_LIST } from '@/components/Rooms/BottomNav';
-import DialogContent from '@material-ui/core/DialogContent';
-import Grid from '@material-ui/core/Grid';
-import PriceRangeMobile from './PriceRangeMobile/index';
-import AmentitesMobile from './AmentitesMobile/index';
-import DistrictsMobile from './DistrictsMobile/index';
-import BookingTypeMobile from './BookingTypeMobile/index';
-import InstantBookMobile from './InstantBookMobile/index';
-import DialogActions from '@material-ui/core/DialogActions/DialogActions';
-import Button from '@material-ui/core/Button/Button';
-import { updateObject } from '@/store/Context/utility';
-import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { useTranslation } from 'react-i18next';
-import { Divider, Dialog } from '@material-ui/core';
-import mainColor from '@/styles/constants/colors';
-import RoomTypeMobile from './RoomTypeMobile';
-import Slide, { SlideProps } from '@material-ui/core/Slide';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
+import { updateObject } from '@/store/Context/utility';
+import { ReducersList } from '@/store/Redux/Reducers';
+import mainColor from '@/styles/constants/colors';
+import { Divider } from '@material-ui/core';
+import Button from '@material-ui/core/Button/Button';
+import DialogActions from '@material-ui/core/DialogActions/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
+import IconButton from '@material-ui/core/IconButton';
+import Slide, { SlideProps } from '@material-ui/core/Slide';
+import { Theme } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC, forwardRef, Fragment, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import AmentitesMobile from './AmentitesMobile/index';
+import BookingTypeMobile from './BookingTypeMobile/index';
+import DistrictsMobile from './DistrictsMobile/index';
+import InstantBookMobile from './InstantBookMobile/index';
+import PriceRangeMobile from './PriceRangeMobile/index';
+import RoomTypeMobile from './RoomTypeMobile';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
@@ -173,99 +172,103 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <DialogTitle disableTypography>
-        <Typography variant="h6" className={classes.center}>
-          {t('rooms:filterRooms:filters')}
-        </Typography>
-        <IconButton className={classes.closeButton} onClick={() => setIndex()}>
-          <CloseIcon />
-        </IconButton>
-      </DialogTitle>
-      <DialogContent className={classes.dialog}>
-        <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
-          <Grid item xs={12} className={classes.sortMargin}>
-            <Typography variant="subtitle2" className={classes.titlePrice}>
-              {t('rooms:filterRooms:priceRange')}
+      <Grid container justify="center">
+        <Grid item xs={12} md={10}>
+          <DialogTitle disableTypography>
+            <Typography variant="h6" className={classes.center}>
+              {t('rooms:filterRooms:filters')}
             </Typography>
-            <PriceRangeMobile />
-            <Divider className={classes.divider} />
-          </Grid>
-          {leaseTypeGlobal ? (
-            ''
-          ) : (
-            <Grid container item xs={12}>
-              <Grid item xs={6} className={classes.inline}>
-                <Typography variant="subtitle2" className={classes.title}>
-                  {t('rooms:filterRooms:bookByHour')}
+            <IconButton className={classes.closeButton} onClick={() => setIndex()}>
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent className={classes.dialog}>
+            <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
+              <Grid item xs={12} className={classes.sortMargin}>
+                <Typography variant="subtitle2" className={classes.titlePrice}>
+                  {t('rooms:filterRooms:priceRange')}
                 </Typography>
-              </Grid>
-              <Grid item xs={6} className={classes.itemRight}>
-                <BookingTypeMobile />
-              </Grid>
-              <Grid container item xs={12}>
+                <PriceRangeMobile />
                 <Divider className={classes.divider} />
               </Grid>
-            </Grid>
-          )}
-          <Grid container item xs={12}>
-            <Grid item xs={6} className={classes.inline}>
-              <Typography variant="subtitle2" className={classes.title}>
-                {t('rooms:filterRooms:instantBook')}
-              </Typography>
-            </Grid>
-            <Grid item xs={6} className={classes.itemRight}>
-              <InstantBookMobile />
-            </Grid>
-            <Grid container item xs={12}>
-              <Divider className={classes.divider} />
-            </Grid>
-          </Grid>
+              {leaseTypeGlobal ? (
+                ''
+              ) : (
+                  <Grid container item xs={12}>
+                    <Grid item xs={6} className={classes.inline}>
+                      <Typography variant="subtitle2" className={classes.title}>
+                        {t('rooms:filterRooms:bookByHour')}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.itemRight}>
+                      <BookingTypeMobile />
+                    </Grid>
+                    <Grid container item xs={12}>
+                      <Divider className={classes.divider} />
+                    </Grid>
+                  </Grid>
+                )}
+              <Grid container item xs={12}>
+                <Grid item xs={6} className={classes.inline}>
+                  <Typography variant="subtitle2" className={classes.title}>
+                    {t('rooms:filterRooms:instantBook')}
+                  </Typography>
+                </Grid>
+                <Grid item xs={6} className={classes.itemRight}>
+                  <InstantBookMobile />
+                </Grid>
+                <Grid container item xs={12}>
+                  <Divider className={classes.divider} />
+                </Grid>
+              </Grid>
 
-          <Grid item xs={12} className={classes.sortMargin}>
-            <Typography variant="subtitle2" className={classes.titleRoomType}>
-              {t('rooms:filterRooms:roomsType')}
-            </Typography>
-            <RoomTypeMobile dataClick={dataRoomType} setDataClick={setDataRoomType} setOpen={setOpen}/>
-            <Grid container item xs={12}>
-              <Divider className={classes.divider} />
+              <Grid item xs={12} className={classes.sortMargin}>
+                <Typography variant="subtitle2" className={classes.titleRoomType}>
+                  {t('rooms:filterRooms:roomsType')}
+                </Typography>
+                <RoomTypeMobile dataClick={dataRoomType} setDataClick={setDataRoomType} setOpen={setOpen} />
+                <Grid container item xs={12}>
+                  <Divider className={classes.divider} />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} className={classes.sortMargin}>
+                <Typography variant="subtitle2" className={classes.title}>
+                  {t('rooms:filterRooms:districtsFilter')}
+                </Typography>
+                <DistrictsMobile dataClick={dataDistricts} setDataClick={setDataDistricts} setOpen={setOpen} />
+                <Grid container item xs={12}>
+                  <Divider className={classes.divider} />
+                </Grid>
+              </Grid>
+              <Grid item xs={12} className={classes.sortMargin}>
+                <AmentitesMobile dataClick={dataAmentites} setDataClick={setDataAmentites} setOpen={setOpen} />
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={12} className={classes.sortMargin}>
-            <Typography variant="subtitle2" className={classes.title}>
-              {t('rooms:filterRooms:districtsFilter')}
-            </Typography>
-            <DistrictsMobile dataClick={dataDistricts} setDataClick={setDataDistricts} setOpen={setOpen}/>
-            <Grid container item xs={12}>
-              <Divider className={classes.divider} />
-            </Grid>
-          </Grid>
-          <Grid item xs={12} className={classes.sortMargin}>
-            <AmentitesMobile dataClick={dataAmentites} setDataClick={setDataAmentites} setOpen={setOpen}/>
-          </Grid>
+          </DialogContent>
+          <DialogActions>
+            {leaseTypeGlobal ? (
+              <Button
+                variant="contained"
+                onClick={applyFilter}
+                classes={{
+                  root: classes.applyLT
+                }}>
+                {t('rooms:filterRooms:apply')}
+              </Button>
+            ) : (
+                <Button
+                  color="primary"
+                  variant="contained"
+                  onClick={applyFilter}
+                  classes={{
+                    root: classes.apply
+                  }}>
+                  {t('rooms:filterRooms:apply')}
+                </Button>
+              )}
+          </DialogActions>
         </Grid>
-      </DialogContent>
-      <DialogActions>
-        {leaseTypeGlobal ? (
-          <Button
-            variant="contained"
-            onClick={applyFilter}
-            classes={{
-              root: classes.applyLT
-            }}>
-            {t('rooms:filterRooms:apply')}
-          </Button>
-        ) : (
-          <Button
-            color="primary"
-            variant="contained"
-            onClick={applyFilter}
-            classes={{
-              root: classes.apply
-            }}>
-            {t('rooms:filterRooms:apply')}
-          </Button>
-        )}
-      </DialogActions>
+      </Grid>
     </Fragment>
   );
 };
