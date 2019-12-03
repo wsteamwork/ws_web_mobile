@@ -24,6 +24,21 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const LTHome: NextPage = (props) => {
   const classes = useStyles(props);
+  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+  //   (state) => state.roomHomepage.roomsHot
+  // );
+  // const renderRoomsHot = (room) => (
+  //   <CardRoom2
+  //     city={room.city}
+  //     district={room.district}
+  //     // instantbook={room.instant_book}
+  //     roomID={room.id}
+  //     roomName={room.about_room.name}
+  //     roomType={room.accommodation_type_txt}
+  //     roomImage={room.avatar.images[0].name}
+  //     avg_rating={room.avg_rating}
+  //   />
+  // );
 
   return (
     <Fragment>
@@ -67,8 +82,21 @@ const LTHome: NextPage = (props) => {
           <TopDestination />
         </Grid>
 
+        <Grid style={{ padding: '14px 2px' }}>
+          {/* <PropertyListHorizontalScroll
+            itemWidth={'90%'}
+            itemHeight={width == 'xs' ? 170 : 230}
+            paddingItem={'0 0 20px'}
+            gutter={6}
+            headTitle={t('home:topHomestay')}
+            listData={roomsHot}
+            itemRender={renderRoomsHot}
+          /> */}
+        </Grid>
+
         <BottomNav />
       </Grid>
+
     </Fragment>
   );
 };

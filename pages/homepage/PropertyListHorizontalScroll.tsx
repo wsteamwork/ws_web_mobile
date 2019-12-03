@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       margin: (props) => props.margin
     },
     propertyList: {
-      padding: (props) => props.paddingItem,
+      // padding: (props) => props.paddingItem,
     }
   })
 );
