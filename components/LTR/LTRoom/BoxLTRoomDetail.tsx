@@ -7,12 +7,12 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Divider, Theme, useTheme, Zoom } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import BoxInfoBasic from './BoxInfoBasic';
+import BoxRoomOfAccommodation from './BoxRoomOfAccommodation';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -92,6 +92,14 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           district={room.district.data.name}
           city={room.city.data.name}
           price={room.price_display}
+        />
+      </div>
+      <div className={classes.paper}>
+        <BoxRoomOfAccommodation
+          bedrooms={room.bedrooms}
+          kitchens={room.kitchens}
+          bathrooms={room.bathrooms}
+          totalArea={room.total_area}
         />
       </div>
       <Divider className={classes.divider} />

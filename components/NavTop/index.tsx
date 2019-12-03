@@ -35,7 +35,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       justifyContent: 'flex-end'
     },
     textCenter: {
-      fontSize: 18,
+      fontSize: '1rem',
       fontWeight: 'bold'
     }
   })

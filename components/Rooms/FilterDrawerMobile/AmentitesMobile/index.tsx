@@ -1,20 +1,14 @@
 import { useExpandableList } from '@/store/Hooks/filterHooks';
-import { makeStyles, Theme, Typography, Link, Grid, Divider } from '@material-ui/core';
+import mainColor from '@/styles/constants/colors';
+import { Divider, Grid, Link, makeStyles, Theme, Typography } from '@material-ui/core';
 import Checkbox from '@material-ui/core/Checkbox/Checkbox';
 import Blue from '@material-ui/core/colors/blue';
-import Grey from '@material-ui/core/colors/grey';
 import FormControlLabel from '@material-ui/core/FormControlLabel/FormControlLabel';
-import Paper from '@material-ui/core/Paper/Paper';
 import createStyles from '@material-ui/core/styles/createStyles';
+import { KeyboardArrowDownRounded, KeyboardArrowUpRounded } from '@material-ui/icons';
 import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  getDataFilter,
-  ResDataFilter,
-  useFilterRoom
-} from '../../FilterActions/FilterRoom/context';
-import mainColor from '@/styles/constants/colors';
-import { KeyboardArrowUpRounded, KeyboardArrowDownRounded } from '@material-ui/icons';
+import { getDataFilter, ResDataFilter, useFilterRoom } from '../../FilterActions/FilterRoom/context';
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   setDataClick: Dispatch<SetStateAction<number[]>>;
@@ -94,9 +88,9 @@ const AmentitesMobile: FC<IProps> = (props) => {
               <Typography variant="subtitle2" className={classes.title}>
                 {item[0]}
               </Typography>
-              <ul className={classes.ul}>
+              <Grid container className={classes.ul}>
                 {item[1].map((o) => (
-                  <li key={o.id}>
+                  <Grid item xs={12} md={4} key={o.id}>
                     <FormControlLabel
                       control={
                         <Checkbox
@@ -112,9 +106,9 @@ const AmentitesMobile: FC<IProps> = (props) => {
                       }
                       label={<Typography className={classes.customLabel}>{o.name}</Typography>}
                     />
-                  </li>
+                  </Grid>
                 ))}
-              </ul>
+              </Grid>
               {comfortChunks.length !== i + 1 && (
                 <Grid container item xs={12}>
                   <Divider className={classes.divider} />
@@ -133,16 +127,16 @@ const AmentitesMobile: FC<IProps> = (props) => {
                 <KeyboardArrowUpRounded />
               </Typography>
             ) : (
-              <Typography className={classes.iconMore}>
-                {t('rooms:readMore')}
-                <KeyboardArrowDownRounded />
-              </Typography>
-            )}
+                <Typography className={classes.iconMore}>
+                  {t('rooms:readMore')}
+                  <KeyboardArrowDownRounded />
+                </Typography>
+              )}
           </Link>
         </Fragment>
       ) : (
-        ''
-      )}
+          ''
+        )}
     </Fragment>
   );
 };

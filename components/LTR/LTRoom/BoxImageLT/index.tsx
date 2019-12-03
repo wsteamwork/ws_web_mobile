@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 import { Parallax } from 'react-parallax';
 import BoxInfoBasic from '../BoxInfoBasic';
 import '/styles/pages/LTR/room/index.scss';
-import ProgressiveImage from 'react-progressive-image';
 
 interface IProps {
   classes?: any,
@@ -20,13 +19,15 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
-      height: '100vh',
+      // height: '88vh',
       width: '100%',
       // backgroundImage: (props) => props.backgroundImage || 'url(@/../../../../static/images/room_demo.jpg)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      position: 'relative',
+      position: 'fixed',
+      top: 0,
+      bottom: 0
     },
     boxInfo: {
       position: 'absolute',

@@ -43,7 +43,6 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
   const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom, isDependencies } = props;
-
   const renderList = useMemo(
     () =>
       listData.map((item, index) => (

@@ -1,9 +1,8 @@
 import { updateObject } from '@/store/Context/utility';
-import { createContext, Dispatch, Reducer } from 'react';
+import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios } from '@/utils/axiosInstance';
-import Router from 'next/router';
-import { ImagesRes } from '@/types/Requests/LTR/Images/ImageResponses';
+import { createContext, Dispatch, Reducer } from 'react';
 
 export const ListingDetailContext = createContext<IListingDetailContext>(
   null as IListingDetailContext

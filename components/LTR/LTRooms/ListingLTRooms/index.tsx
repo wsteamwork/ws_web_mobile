@@ -23,6 +23,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     titleList: {
       marginTop: 48,
       fontWeight: 600
+    },
+    marginBottom: {
+      marginBottom: '16px'
     }
   })
 );
@@ -55,7 +58,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
           <Grid container item xs={12}>
             <LazyLoad>
               {longtermRooms.map((room, index) => (
-                <Grid item container xs={12} sm={6} key={index}>
+                <Grid item container xs={12} sm={6} key={index} className={classes.marginBottom}>
                   <RoomCardItem room={room} />
                 </Grid>
               ))}
@@ -74,8 +77,8 @@ const ListingLTRooms: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-        <NotFound height={250} width={250} />
-      )}
+            <NotFound height={250} width={250} />
+          )}
     </Grid>
   );
 };

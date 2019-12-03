@@ -126,8 +126,8 @@ const LongtermRoom: NextPage = () => {
                 </Collapse>
 
                 <Collapse in={viewDetail} >
-                  <Grid container>
-                    <Grid item xs={12} sm={12}>
+                  <Grid container justify="center">
+                    <Grid item xs={12} sm={12} md={10}>
                       <BoxLTRoomDetail room={ltroom} clickBook={handleView} />
                     </Grid>
 

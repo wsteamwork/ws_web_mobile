@@ -1,11 +1,11 @@
-import React, { Fragment, FC } from 'react';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Theme, Grid, Typography } from '@material-ui/core';
-import Rating from '@material-ui/lab/Rating';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import { useTranslation } from 'react-i18next';
 import { formatPrice } from '@/utils/mixins';
+import { Grid, Theme, Typography } from '@material-ui/core';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import Rating from '@material-ui/lab/Rating';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import React, { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
@@ -25,7 +25,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtName: {
       fontStyle: 'normal',
       fontWeight: 'bold',
-      fontSize: 22,
+      fontSize: '1.1875rem',
       lineHeight: '34px',
       letterSpacing: 0.36,
       color: (props) => (props.textColor ? props.textColor : 'white'),
@@ -36,7 +36,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: '-webkit-box'
     },
     txtPrice: {
-      fontSize: 22,
+      fontSize: '1.1875rem',
       lineHeight: '34px',
       textAlign: 'right',
       letterSpacing: 0.32,
@@ -46,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtAddress: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: 11,
+      fontSize: '0.88rem',
       lineHeight: '13px',
       letterSpacing: 0.07,
       color: (props) => (props.textColor ? props.subTextColor : 'white'),
@@ -54,7 +54,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtPer: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: 13,
+      fontSize: '0.95rem',
       lineHeight: '18px',
       letterSpacing: -0.08,
       color: (props) => (props.textColor ? props.subTextColor : 'white'),
@@ -72,7 +72,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtReview: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: 11,
+      fontSize: '0.88rem',
       lineHeight: '13px',
       letterSpacing: 0.07,
       color: '#FFFFFF',
