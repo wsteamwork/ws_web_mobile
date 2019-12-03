@@ -21,5 +21,9 @@
     "priceBasicMobile": "/per month",
     "notFoundData": "Not found data!",
     "depositFee": "Only furnitures guarantees deposit",
-    "moreDetails": "More details"
+    "moreDetails": "More details",
+    "totalArea": "Total area",
+    "amenitiesLower": "amenities",
+    "bathroomLower": "bathrooms",
+    "bedroomLower": "bedrooms"
 }

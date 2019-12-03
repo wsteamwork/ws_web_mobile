@@ -115,6 +115,7 @@ const LongtermRoom: NextPage = () => {
 
                 <Collapse in={!viewDetail} >
                   <BoxImageLT
+                    collapseClicked={viewDetail}
                     backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
                     room={ltroom}
                   >
@@ -126,7 +127,7 @@ const LongtermRoom: NextPage = () => {
                 </Collapse>
 
                 <Collapse in={viewDetail} >
-                  <Grid container justify="center">
+                  <Grid container justify="center" style={{ zIndex: 1000000 }}>
                     <Grid item xs={12} sm={12} md={10}>
                       <BoxLTRoomDetail room={ltroom} clickBook={handleView} />
                     </Grid>

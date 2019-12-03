@@ -13,7 +13,8 @@ interface IProps {
   isPreviewPage?: boolean,
   backgroundImage?: string;
   room: any;
-  scrollTo?: void
+  scrollTo?: void,
+  collapseClicked?: boolean;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -75,7 +76,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { isPreviewPage, room, scrollTo } = props;
+  const { isPreviewPage, room, scrollTo, collapseClicked } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const parallaxData = [
@@ -123,7 +124,7 @@ const BoxImageLT: FC<IProps> = (props) => {
       bgClassName={classes.imgRoom}
       className={classes.parallaxContainer}
       contentClassName={classes.contentParallax}>
-      <div className={classes.insideParalax}>
+      {!collapseClicked ? (<div className={classes.insideParalax}>
         <div className={classes.boxContainer}>
           <div className={classes.boxInfo}>
             <BoxInfoBasic showButtonBook
@@ -135,7 +136,7 @@ const BoxImageLT: FC<IProps> = (props) => {
           </div>
           {props.children}
         </div>
-      </div>
+      </div>) : ''}
     </Parallax>
   );
 };
