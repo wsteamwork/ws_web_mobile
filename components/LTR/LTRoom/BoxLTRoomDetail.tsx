@@ -22,6 +22,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         padding: '32px 38px 0',
       }
     },
+    paperCustomAccommodation: {
+      padding: '24px 20px 0',
+      [theme.breakpoints.up('sm')]: {
+        padding: '20px 20px 0',
+      }
+    },
     paperFullRight: {
       padding: '32px 0 0 28px',
       [theme.breakpoints.up('sm')]: {
@@ -40,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginTop: theme.spacing(4)
     },
     divider: {
-      margin: '32px 20px 0'
+      margin: '24px 20px 0'
     },
     extendedIcon: {
       marginRight: theme.spacing(1),
@@ -74,7 +80,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
   const theme = useTheme();
-
+  const dataRoomOfAccommodation = {
+    bedrooms: { imageIcon: '/static/icons/bedroom.svg', title: t('longtermroom:bedrooms'), subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : '?'} ${t('longtermroom:bedroomLower')}` },
+    kitchens: { imageIcon: '/static/icons/fridge.svg', title: t('longtermroom:kitchens'), subtitle: `${room && room.comforts ? room.comforts.kitchens.length : '?'} ${t('longtermroom:amenities')}` },
+    bathrooms: { imageIcon: '/static/icons/bathroom.svg', title: t('longtermroom:bathrooms'), subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : '?'} ${t('longtermroom:bathroomLower')}` },
+    totalArea: { imageIcon: '/static/icons/area.svg', title: t('longtermroom:totalArea'), subtitle: `${room ? room.total_area : '?'}` },
+  };
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
@@ -94,12 +105,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           price={room.price_display}
         />
       </div>
-      <div className={classes.paper}>
+      <div className={classes.paperCustomAccommodation}>
         <BoxRoomOfAccommodation
-          bedrooms={room.bedrooms}
-          kitchens={room.kitchens}
-          bathrooms={room.bathrooms}
-          totalArea={room.total_area}
+          bedrooms={dataRoomOfAccommodation.bedrooms}
+          kitchens={dataRoomOfAccommodation.kitchens}
+          bathrooms={dataRoomOfAccommodation.bathrooms}
+          totalArea={dataRoomOfAccommodation.totalArea}
         />
       </div>
       <Divider className={classes.divider} />
@@ -107,7 +118,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
         <RoomDescription
           isPreviewPage={isPreviewPage}
           description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
-          space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
+          space={checkAboutRoom ? t('room:notFoundCaontent') : room.about_room.space}
           note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
       </div>
 
