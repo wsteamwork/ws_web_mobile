@@ -15,7 +15,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
       marginBottom: 24,
-      marginTop: 69
+      marginTop: 18
     },
     roomList: {
       margin: '0 10px'

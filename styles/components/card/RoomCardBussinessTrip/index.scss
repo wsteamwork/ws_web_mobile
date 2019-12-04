@@ -21,10 +21,12 @@
       .imgSize {
         position: relative;
         object-fit: cover;
-        height: 234px;
+        height: 220px;
         vertical-align: middle;
         border-radius: 8px;
         width: 100%;
+        //xs
+        
         @keyframes fadein {
           from {
             opacity: 0;
@@ -37,6 +39,11 @@
         -webkit-animation: fadein 0.5s ease-in-out;
         animation: 500ms ease-in-out 0ms 1 normal none running fadein;
       }
+      @media (min-width: 320px) and (max-width: 374px) {
+        .imgSize {
+          height: 180px !important;
+        }
+      }
       .boxPrice {
         position: absolute;
         top: 5px;
@@ -48,7 +55,7 @@
         border: 1px solid;
         border-bottom-right-radius: 10px;
         .unitPrice {
-            font-size: 10px;
+          font-size: 10px;
         }
       }
   

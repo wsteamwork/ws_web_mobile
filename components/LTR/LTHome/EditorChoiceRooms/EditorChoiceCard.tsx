@@ -55,12 +55,12 @@ const EditorChoiceCard: FC<IProps> = (props) => {
                       <Grid item xs={12} container className="marginRoomName">
                         <Grid item xs={12} className="roomSubtitle">
                           <span>{room.accommodation_type_txt}</span>
-                          <span className="dotAmenties">.</span>
+                          {/* <span className="dotAmenties">.</span>
                           <span>
                             {cookies.get('initLanguage') == 'en'
                               ? cleanAccents(room.district)
                               : room.district}
-                          </span>
+                          </span> */}
                           <span className="dotAmenties">.</span>
                           <span>
                             {cookies.get('initLanguage') == 'en'
