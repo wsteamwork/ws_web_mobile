@@ -32,7 +32,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         container: {
             whiteSpace: 'nowrap',
             marginTop: '0px',
-            padding: '0 1rem'
+            padding: '0 1rem',
+            margin: '0 !important'
         },
         componentWrapper: {
             marginTop: '1rem'
