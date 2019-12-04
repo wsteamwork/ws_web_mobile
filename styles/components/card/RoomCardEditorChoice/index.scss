@@ -1,0 +1,144 @@
+.RoomCardEditorChoice {
+    position: relative;
+    color: #484848;
+    border: 1px solid #ffffff;
+    border-radius: 10px !important;
+    margin-bottom: 24px;
+  
+    &__wrapper {
+      height: 100%;
+      position: relative;
+    }
+  
+    .swiper-slide {
+      background-color: grey;
+    }
+  
+    .boxImg {
+  
+      // End Override Swiper
+      z-index: 0;
+      position: relative;
+      .imgSize {
+        position: relative;
+        object-fit: cover;
+        height: 280px;
+        vertical-align: middle;
+        border-radius: 10px;
+        width: 100%;
+        @keyframes fadein {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+  
+        -webkit-animation: fadein 0.5s ease-in-out;
+        animation: 500ms ease-in-out 0ms 1 normal none running fadein;
+      }
+  
+    }
+    .boxCard {
+      width: 100%;
+      vertical-align: middle;
+  
+      .cardWrapper {
+        height: 100%;
+        box-sizing: border-box;
+  
+        .cardContainer {
+          position: relative;
+          height: 100%;
+          width: 100%;
+          display: inline-block;
+  
+          .boxLink {
+            display: block;
+            color: #8A8A8F;
+            text-decoration: none !important;
+            cursor: pointer;
+            font-weight: 500;
+  
+            .boxTitle {
+              .marginRoomName {
+                margin-bottom: 5px;
+                .roomSubtitle {
+                    margin: 3px 0;
+                    font-size: 13px;
+                }
+                .roomSubtitle2 {
+                    font-size: 13px;
+                }
+              }
+  
+              .roomName {
+                overflow: hidden;
+                overflow-wrap: break-word;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 1.0375rem;
+                line-height: 22px;
+                letter-spacing: 0.065882px;
+                color: #484848;
+                display: -webkit-box;
+                -webkit-line-clamp: 1;
+                text-overflow: ellipsis;
+                -webkit-box-orient: vertical;
+                margin-top: 8px;
+              }
+  
+              .roomType {
+                text-transform: uppercase;
+                font-size: 0.7875rem;
+                font-weight: 600;
+                color: #673ab7;
+                display: inline-block;
+                margin-right: 3px;
+              }
+              .address {
+                font-weight: normal;
+                font-size: 0.7875rem;
+                line-height: 13px;
+                letter-spacing: 0.07px;
+                color: #767676;
+              }
+  
+              .dotAmenties {
+                display: inline-block;
+                vertical-align: text-bottom;
+                margin: 0 3px;
+                color: #8A8A8F;
+              }
+              
+            }
+  
+            .boxPriceContainer {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              @include smDown{
+                margin-top:8px;
+              }
+            }
+  
+            .boxPrice {
+              .priceBasic {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: 0.38px;
+                color: #484848;
+              }
+              .priceUnit {
+                font-size: 13px;
+                font-weight: 600;
+                color: #484848;
+              }
+            }
+          }
+        }
+      }
+    }
+  }

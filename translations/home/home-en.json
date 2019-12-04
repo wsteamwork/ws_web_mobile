@@ -60,6 +60,11 @@
     "shortTermTab": "Short term",
     "yourLocation": "Near by",
     "checkout": "Check-out",
-    "checkin": "Check-in"
+    "checkin": "Check-in",
+    "editor_choice": "Editor Choice",
+    "for_family": "For Family",
+    "high_end": "High End",
+    "business_trip": "Bussiness Trip",
+    "show_all": "Show all"
 
 }

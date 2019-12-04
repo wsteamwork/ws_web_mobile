@@ -78,6 +78,12 @@
       height: 100%;
       padding: 8px 12px;
       box-sizing: border-box;
+      //xs
+      @media (min-width: 320px) and (max-width: 375px) {
+        .cardWrapper {
+          padding: 5px 8px !important;
+        }
+      }
 
       .cardContainer {
         position: relative;
@@ -103,6 +109,7 @@
 
             .roomName {
               overflow: hidden;
+              margin-top: 5px;
               font-size: 13px;
               font-weight: 700;
               overflow: hidden;
@@ -306,9 +313,4 @@
     }
   }
 }
-//xs
-@media (min-width: 320px) and (max-width: 375px) {
-  .cardWrapper {
-    padding: 5px 8px !important;
-  }
-}
+

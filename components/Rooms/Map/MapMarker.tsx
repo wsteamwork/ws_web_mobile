@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     overBubble: {
       [theme.breakpoints.only('xs')]: {
-        minWidth: 110
+        minWidth: 75
       }
     }
   })

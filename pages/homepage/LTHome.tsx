@@ -27,6 +27,10 @@ import { useTranslation } from 'react-i18next';
 import SearchDialog from '@/components/SearchDialog';
 import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
 import { TransitionProps } from '@material-ui/core/transitions';
+import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
+import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
+import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
+import HighEndRooms from '@/components/LTR/LTHome/HighEndRooms';
 
 const LTHome: NextPage = () => {
   const { router, width } = useContext(GlobalContext);
@@ -55,7 +59,6 @@ const LTHome: NextPage = () => {
         }))
       )
       .then((list) => setRoomTypesData(list));
-    // console.log(listing);
   }, []);
 
   const renderRoomTypeItem = (item, size) => (
@@ -137,7 +140,7 @@ const LTHome: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg"
       />
 
-      <Grid xs={12} style={{ padding: '44px 0 100px' }}>
+      <Grid item xs={12} style={{ padding: '44px 0 100px' }}>
         <Grid style={{ padding: '14px 22px' }}>
           <SearchInput displayOnlyForModal onClick={handleOpenSearchDialog} />
         </Grid>
@@ -173,15 +176,15 @@ const LTHome: NextPage = () => {
             listData={roomsHot}
             itemRender={renderRoomsHot}
           />
-          {/* <CardRoom2 /> */}
         </Grid>
-
+        <EditorChoiceRooms />  
+        <ForFamilyRooms />
+        <BusinessTripRooms />
+        <HighEndRooms />
         <BottomNav />
       </Grid>
 
       <SearchDialog handleClose={handleCloseSearchDialog} open={openSearchDialog} />
-      {/* </Dialog> */}
-      {/*  */}
     </Fragment>
   );
 };
