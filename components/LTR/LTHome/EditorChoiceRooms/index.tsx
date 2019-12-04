@@ -26,7 +26,7 @@ const EditorChoiceRooms: FC<IProps> = (props) => {
         listData={dataRooms}
         itemRender={renderEditorChoiceRoom}
       />
-      <ShowMoreHome />
+      <ShowMoreHome top="-15px" />
     </Fragment>
   );
 };

@@ -26,7 +26,7 @@ const ForFamilyRooms: FC<IProps> = (props) => {
         listData={dataRooms}
         itemRender={renderForFamilyRoom}
       />
-      <ShowMoreHome top="-50px"/>
+      <ShowMoreHome top="-15px"/>
     </Fragment>
   );
 };
