@@ -1,4 +1,8 @@
+import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
+import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
 import FeatureRooms from '@/components/LTR/LTHome/FeatureRooms';
+import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
+import HighEndRooms from '@/components/LTR/LTHome/HighEndRooms';
 import NavTopSearch from '@/components/LTR/LTHome/NavTopSearch';
 import RoomTypeList from '@/components/LTR/LTHome/RoomTypeList';
 import TopDestination from '@/components/LTR/LTHome/TopDestinations';
@@ -79,21 +83,17 @@ const LTHome: NextPage = (props) => {
           <WhyChoosingUs />
         </Grid>
         <Grid item xs={12}>
-          <TopDestination />
+          <EditorChoiceRooms />
         </Grid>
-
-        <Grid style={{ padding: '14px 2px' }}>
-          {/* <PropertyListHorizontalScroll
-            itemWidth={'90%'}
-            itemHeight={width == 'xs' ? 170 : 230}
-            paddingItem={'0 0 20px'}
-            gutter={6}
-            headTitle={t('home:topHomestay')}
-            listData={roomsHot}
-            itemRender={renderRoomsHot}
-          /> */}
+        <Grid item xs={12}>
+          <ForFamilyRooms />
         </Grid>
-
+        <Grid item xs={12}>
+          <BusinessTripRooms />
+        </Grid>
+        <Grid item xs={12}>
+          <HighEndRooms />
+        </Grid>
         <BottomNav />
       </Grid>
 

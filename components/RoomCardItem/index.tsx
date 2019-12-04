@@ -88,7 +88,6 @@ const RoomCardItem: FC<IProps> = (props) => {
                           <Typography variant="subtitle2" className="priceUnit">
                             /{t('rooms:month')}
                           </Typography>
-
                         </Grid>
                       </Grid>
 
