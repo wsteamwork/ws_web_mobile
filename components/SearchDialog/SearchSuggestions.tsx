@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState, useEffect } from 'react';
+import React, { FC, Fragment, useState, useEffect, Dispatch } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import {
   InputAdornment,
@@ -23,6 +23,8 @@ import PlaceRoundedIcon from '@material-ui/icons/PlaceRounded';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
+import { useDispatch } from 'react-redux';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 interface Iprops {
   inputValue: string;
 }
@@ -44,14 +46,16 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
   const { inputValue } = props;
   const classes = useStyles(props);
   const [dataSuggestions, setDataSuggestions] = useState<SearchSuggestData[]>([]);
-
+  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   useEffect(() => {
     getDataSearch(inputValue).then((data) => setDataSuggestions(data));
   }, [inputValue]);
 
-  // console.log(dataSuggestions);
-
   const applySearch = (option: SearchSuggestData) => {
+    dispatch({
+      type: 'SET_SEARCH_TEXT',
+      searchText: option.name
+    });
     let name = option.name;
     let cityId;
     let districtId;
@@ -74,7 +78,6 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };
-
     Router.push({
       pathname: '/long-term-rooms',
       query: pushQuery

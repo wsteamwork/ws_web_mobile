@@ -2,10 +2,12 @@ import { Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@material-
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchInput from '../LTR/ReusableComponents/SearchInput';
 import SearchSuggestions from './SearchSuggestions';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface Iprops {
   handleClose: () => void;
@@ -48,8 +50,8 @@ const SearchDialog: FC<Iprops> = (props: Iprops) => {
   const { t } = useTranslation();
   const { handleClose, open } = props;
   const classes = useStyles(props);
-  const [inputValue, setInputValue] = useState<string>('');
-
+  const searchText = useSelector<ReducersList, string>((state) => state.searchFilter.searchText);
+  const [inputValue, setInputValue] = useState<string>(searchText);
   const handleChange = (e) => {
     setInputValue(e.target.value);
   };
