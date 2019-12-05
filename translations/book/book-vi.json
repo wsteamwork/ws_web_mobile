@@ -1,10 +1,12 @@
 {
     "bookingInfoDetail": {
-        "checkInDate": "Ngày nhận phòng",
-        "checkOutDate": "Ngày trả phòng",
-        "guestNumber": "Số khách",
+        "checkInDate": "Nhận phòng",
+        "checkOutDate": "Trả phòng",
+        "guestNumber": "Khách",
         "guest": "khách",
         "price": "Giá",
+        "priceOriginal": "Giá gốc",
+        "priceDeposit": "Giá đặt cọc",
         "serviceFee": "Phí dịch vụ",
         "total": "Tổng cộng:",
         "noCancel1": "Khi đặt chỗ của quý khách đã được xác nhận, Quý khách sẽ phải trả 50% số tiền đặt phòng",

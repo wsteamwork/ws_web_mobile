@@ -7,14 +7,14 @@ import { useTranslation } from 'react-i18next';
 import { Parallax } from 'react-parallax';
 import BoxInfoBasic from '../BoxInfoBasic';
 import '/styles/pages/LTR/room/index.scss';
-import ProgressiveImage from 'react-progressive-image';
 
 interface IProps {
   classes?: any,
   isPreviewPage?: boolean,
   backgroundImage?: string;
   room: any;
-  scrollTo?: void
+  scrollTo?: void;
+  onBook ?: ()=> any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -74,7 +74,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { isPreviewPage, room, scrollTo } = props;
+  const { isPreviewPage, room, scrollTo, onBook } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const parallaxData = [
@@ -130,6 +130,7 @@ const BoxImageLT: FC<IProps> = (props) => {
               district={room.district.data.name}
               city={room.city.data.name}
               price={room.price_display}
+              onBook={onBook}
             />
           </div>
           {props.children}

@@ -1,10 +1,12 @@
 {
     "bookingInfoDetail": {
-        "checkInDate": "Check-in date",
-        "checkOutDate": "Check-out date",
+        "checkInDate": "Check-in",
+        "checkOutDate": "Check-out",
         "guestNumber": "Number of guest",
         "guest": "guest(s)",
         "price": "Price",
+        "priceOriginal": "Price Original",
+        "priceDeposit": "Price Deposit",
         "serviceFee": "Service charge",
         "total": "Total",
         "noCancel1": "Once your booking has been confirmed, you will be charged 50% of the booking amount",
@@ -57,5 +59,5 @@
         "choosePayment": "Choose 1 payment method",
         "transferMoney": "Transfer money via",
         "directTransfer": "Direct transfer"
-    }   
+    }
 }

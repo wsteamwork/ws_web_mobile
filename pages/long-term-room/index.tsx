@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+import { TransitionCustom } from '@/components/Rooms/BottomNav';
 
 const LongtermRoom: NextPage = () => {
   const { router, width } = useContext(GlobalContext);
@@ -117,6 +118,7 @@ const LongtermRoom: NextPage = () => {
                   <BoxImageLT
                     backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
                     room={ltroom}
+                    onBook={handleOpenBookingDialog}
                   >
                     <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' onClick={handleView}>
                       <span style={{ color: '#fff' }}>{t('longtermroom:moreDetails')}</span>
@@ -130,15 +132,6 @@ const LongtermRoom: NextPage = () => {
                     <Grid item xs={12} sm={12}>
                       <BoxLTRoomDetail room={ltroom} clickBook={handleView} />
                     </Grid>
-
-                    <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                      <Grid container className="roomPage__boxBookingMoblie">
-                        <BoxBottomBooking
-                          priceBasic={ltroom.price_display}
-                          handleOpenBookingDialog={handleOpenBookingDialog}
-                        />
-                      </Grid>
-                    </Grid>
                   </Grid>
                 </Collapse>
               </GridContainer>
@@ -148,9 +141,11 @@ const LongtermRoom: NextPage = () => {
         [ltroom, viewDetail]
       )}
       <Dialog
-        fullScreen
+        BackdropProps={{classes: {root: "roomPage__backdropDialog"} }}
+        classes={{paper: "roomPage__dialogCalendar"}}
         open={openBookingDialog}
         onClose={handleCloseBookingDialog}
+        TransitionComponent={TransitionCustom}
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>
