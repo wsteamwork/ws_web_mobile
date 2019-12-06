@@ -17,6 +17,9 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import TooltipPayment from './TooltipPayment';
+import { UserProfileState } from '@/store/Redux/Reducers/Profile/userProfile';
+import { ProfileViewInfoRes, ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
+import mainColor from '@/styles/constants/colors';
 
 type PaymentMethod = 'payment1' | 'payment2';
 
@@ -66,18 +69,6 @@ const useValidata = () => {
       .min(5, t('book:bookingForm:min5character'))
       .max(500, t('book:bookingForm:max500character')),
     paymentMethod: Yup.string().oneOf(['payment1', 'payment2'])
-    // country: Yup.number()
-    //   .required('Vui lòng chọn thành phố')
-    //   .min(1, 'Vui lòng chọn thành phố'),
-    // isSomeOneElse: Yup.boolean(),
-    // guestName: Yup.string().when('isSomeOneElse', (status: boolean, schema: Yup.StringSchema) => {
-    //   return status
-    //     ? schema
-    //         .required(t('book:bookingForm:enterName'))
-    //         .min(2, t('book:bookingForm:min2character'))
-    //         .max(50, t('book:bookingForm:max50character'))
-    //     : schema;
-    // })
   });
 
   return FormValidationSchema;
@@ -86,26 +77,27 @@ const useValidata = () => {
 const LTTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: '#673ab7',
+      color: mainColor.primaryLT,
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: '#975cff',
     },
     '& label.MuiFormLabel-root': {
-      color: '#673ab7'
+      color: mainColor.primaryLT,
+      fontSize: 16
     },
     '& .MuiOutlinedInput-root': {
-      boxShadow: '0px 9px 20px rgba(0, 0, 0, 0.06)',
+      boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1)',
       borderRadius: '16px',
       width:'100%',
       '& .MuiOutlinedInput-notchedOutline': {
         border: 'none',
       },
       '&:hover fieldset': {
-        borderColor: '#673ab7',
+        borderColor: mainColor.primaryLT,
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#673ab7',
+        borderColor: mainColor.primaryLT,
       },
     },
   },
@@ -113,12 +105,13 @@ const LTTextField = withStyles({
 
 const BookingForm: FC = () => {
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
+  const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);
   const { movein, moveout, numberOfGuests } = useSelector<ReducersList, LTBookingReducerState>(
     (state) => state.ltBooking
   );
   const [openDialog, setOpenDialog] = useState(false);
   // const [isRequest, setIsRequest] = useState(false);
-  const { router, width } = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
   const { t } = useTranslation();
 
   const FormValidationSchema = useValidata();
@@ -170,7 +163,11 @@ const BookingForm: FC = () => {
       actions.setSubmitting(false);
     }
   };
-  console.log(ltroom);
+
+  let fullName = profile ? profile.name : '';
+  let fName = fullName.split(' ').slice(1).join(' ');
+  let lName = fullName.split(' ').slice(0, 1).join(' ');
+
   return (
     <Fragment>
       <Paper elevation={0}>
@@ -180,10 +177,10 @@ const BookingForm: FC = () => {
           validationSchema={FormValidationSchema}
           initialValues={{
             paymentMethod: 'payment1',
-            firstName: '',
-            lastName: '',
-            phone: '',
-            email: '',
+            firstName: fName,
+            lastName: lName,
+            phone: profile ? profile.phone : '',
+            email: profile ? profile.email : '',
             additionalNote: ''
           }}
           onSubmit={handleSubmitForm}
@@ -298,11 +295,57 @@ const BookingForm: FC = () => {
                     {/* </Collapse> */}
                   </Grid>
 
+
+                    <Grid item xs={12} className="formBooking">
+                      <Grid container>
+                        <Grid item>
+                          <FormControl
+                            error={!!(errors.paymentMethod && touched.paymentMethod)}
+                            component="fieldset">
+                            <Typography variant="h6">
+                              {t('book:bookingForm:choosePayment')}
+                            </Typography>
+                            <RadioGroup
+                              name="paymentMethod"
+                              onBlur={handleBlur}
+                              value={values.paymentMethod}
+                              onChange={handleChange}>
+                              <FormControlLabel
+                                value="payment1"
+                                control={<Radio style={{ color: '#673ab7' }} />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:directTransfer')}{' '}
+                                    <TooltipPayment/>
+                                  </p>
+                                }
+                              />
+                              <FormControlLabel
+                                value="payment2"
+                                control={<Radio style={{ color: '#673ab7' }} />}
+                                label={
+                                  <p>
+                                    {t('book:bookingForm:transferMoney')}{' '}
+                                    <a href="https://www.baokim.vn/" target="_blank">
+                                      Bảo Kim
+                                    </a>
+                                  </p>
+                                }
+                              />
+                            </RadioGroup>
+                            <FormHelperText>
+                              {touched.paymentMethod ? errors.paymentMethod : ''}
+                            </FormHelperText>
+                          </FormControl>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+
                   <Grid item xs={12}>
                     <Grid container justify="center">
                       <Grid item>
                         <ButtonGlobal
-                          background="linear-gradient(to right, #667eea, #764ba2);"
+                          background="linear-gradient(to right, #667eea, #764ba2)"
                           variant="contained"
                           name="confirm-information"
                           size="large"

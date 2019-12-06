@@ -31,24 +31,14 @@ const Direct: NextPage = () => {
 
   return (
     <Fragment>
-      {/* {!!room && (
-        <NextHead
-          googleMapApiRequire={false}
-          ogSitename="Westay - Đặt phòng homestay trực tuyến"
-          title={`Thanh toán booking của phòng ${longTermRoom.about_room.name}`}
-          description={`Thanh toán booking của phòng ${longTermRoom.about_room.name}`}
-          url={`/payment/invoice/${lists.uuid}`}
-          ogImage={`${IMAGE_STORAGE_LG}${longTermRoom.media.data[0].image}`}></NextHead>
-      )} */}
-
       {useMemo(
         () => (
           <Grid className="directPayment">
-            <NavHeader></NavHeader>
+            <NavHeader/>
             <GridContainer xs={11} md={8} classNameItem="directPayment__content">
-              <DirectPayment></DirectPayment>
+              <DirectPayment/>
             </GridContainer>
-            <Footer></Footer>
+            <Footer/>
           </Grid>
         ),
         []

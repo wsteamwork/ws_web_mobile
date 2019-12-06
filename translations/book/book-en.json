@@ -56,7 +56,7 @@
         "noInstantBook": "Your reservation has been sent to the landlord for confirmation. If the room is available, we will send payment information to your email.",
         "instantBook": "Please wait a moment, we will redirect you to the payment page",
         "submit": "Submit",
-        "choosePayment": "Choose 1 payment method",
+        "choosePayment": "Payment method",
         "transferMoney": "Transfer money via",
         "directTransfer": "Direct transfer"
     }

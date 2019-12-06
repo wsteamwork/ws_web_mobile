@@ -56,7 +56,7 @@
         "noInstantBook": "Đơn đặt phòng của bạn đã được gửi đến chủ nhà để chờ xác nhận.Nếu phòng còn trống, chúng tôi sẽ gửi thông tin thanh toán tới email của bạn",
         "instantBook": "Xin chờ trong giây lát, chúng tôi sẽ chuyển hướng đến trang thanh toán",
         "submit": "Xác nhận",
-        "choosePayment": "Chọn 1 phương thức thanh toán",
+        "choosePayment": "Phương thức thanh toán",
         "transferMoney": "Chuyển khoản qua",
         "directTransfer": "Chuyển khoản trực tiếp"
     }
