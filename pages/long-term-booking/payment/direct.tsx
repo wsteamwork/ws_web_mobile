@@ -35,7 +35,7 @@ const Direct: NextPage = () => {
         () => (
           <Grid className="directPayment">
             <NavHeader/>
-            <GridContainer xs={11} md={8} classNameItem="directPayment__content">
+            <GridContainer xs={10} md={9} classNameItem="directPayment__content">
               <DirectPayment/>
             </GridContainer>
             <Footer/>

@@ -66,7 +66,6 @@ const useValidata = () => {
       .max(11, t('book:bookingForm:beetwen10_11'))
       .test('checkNaN', t('book:bookingForm:notSymbol'), (value) => !isNaN(value)),
     additionalNote: Yup.string()
-      .min(5, t('book:bookingForm:min5character'))
       .max(500, t('book:bookingForm:max500character')),
     paymentMethod: Yup.string().oneOf(['payment1', 'payment2'])
   });
@@ -127,7 +126,7 @@ const BookingForm: FC = () => {
       // booking_type: dataCalculate.booking_type,
       phone: values.phone.replace(/\s/g, ''),
       guests: { total_guests: numberOfGuests },
-      note: values.additionalNote ? values.additionalNote : null,
+      note: values.additionalNote,
       // payment_method: INTERNET_BANKING,
       // payment_status: PENDING,
       source: WEBSITE_SRC
@@ -194,7 +193,7 @@ const BookingForm: FC = () => {
             isSubmitting
           }: FormikProps<MyFormValues>) => (
               <form onSubmit={handleSubmit}>
-                <Grid container spacing={2}>
+                <Grid container spacing={1}>
                   <Grid item xs={12}>
                     <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
                     <Typography variant="body2" style={{ color: '#b9b8b8' }}>

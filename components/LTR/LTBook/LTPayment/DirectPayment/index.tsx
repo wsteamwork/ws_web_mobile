@@ -164,7 +164,7 @@ const DirectPayment: FC = () => {
         <Grid item xs={12} md={6}>
           <Typography variant="h6">{t('payment:directPayment:apartmentInfo')}</Typography>
 
-          <Grid container spacing={3}>
+          <Grid container spacing={2} justify='center' alignItems='center'>
             <Grid item xs={4}>
               <img
                 className="image"
@@ -176,7 +176,7 @@ const DirectPayment: FC = () => {
               <Grid>
                 <p className="nameRoom">{longTermRoom.about_room.name}</p>
                 <p>
-                  <FontAwesomeIcon icon={faMapMarkerAlt} size="1x"></FontAwesomeIcon>{' '}
+                  <FontAwesomeIcon icon={faMapMarkerAlt} size="1x"/>{' '}
                   {longTermRoom.district.data.name}, {longTermRoom.city.data.name}
                 </p>
               </Grid>
@@ -227,10 +227,8 @@ const DirectPayment: FC = () => {
             </Grid>
             <Grid item xs={7} className="textRight">
               <p>
-                {t('shared:paymentTransferContent')}{' '}
+                {t('payment:directPayment:paymentTransferContent')}{' '}
                 <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span>
-                <span>{t('shared:amountMoney')}:{' '}</span>
-                {t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}
               </p>
             </Grid>
           </Grid>
@@ -238,8 +236,6 @@ const DirectPayment: FC = () => {
       </Grid>
 
       <Grid container className="margintop">
-        <Grid item xs={12} md={6}></Grid>
-
         <Grid item xs={12} md={6}>
           <Typography variant="h6">{t('payment:directPayment:roomRateBook')}</Typography>
 
@@ -251,23 +247,15 @@ const DirectPayment: FC = () => {
               </p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].price_original).format('0,0')}</p>
+              <p>{t('home:currency')}&nbsp;{numeral(LTDataInvoice.contracts.data[0].price_original).format('0,0')}</p>
             </Grid>
           </Grid>
-          {/* <Grid container>
-            <Grid item xs={5}>
-              <p>{t('payment:directPayment:surcharge')}</p>
-            </Grid>
-            <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.service_fee).format('0,0')}đ</p>
-            </Grid>
-          </Grid> */}
           <Grid container>
             <Grid item xs={5}>
               <p>{t('payment:directPayment:totalRevenue')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{t('payment:currency')}{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}</p>
+              <p>{t('home:currency')}&nbsp;{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>
