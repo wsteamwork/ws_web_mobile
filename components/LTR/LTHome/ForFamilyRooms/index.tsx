@@ -48,7 +48,7 @@ const ForFamilyRooms: FC<IProps> = (props) => {
       ) : (
         <Fragment>
           <Grid container item xs={12} className={classes.skeleton}>
-            <Skeleton variant="rect" width={150} height={30} />
+            <Skeleton variant="text" width={150} height={30} />
           </Grid>
           <Grid container item xs={12} spacing={2} className={classes.roomList}>
             {[1, 2].map((item, index) => (
