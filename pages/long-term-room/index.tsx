@@ -25,7 +25,6 @@ import { useTranslation } from 'react-i18next';
 // import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-
 const LongtermRoom: NextPage = () => {
   const { router, width } = useContext(GlobalContext);
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
@@ -75,7 +74,7 @@ const LongtermRoom: NextPage = () => {
   }
 
   const handleBackButtonDetailPage = () => {
-    return viewDetail ? setViewDetail(!viewDetail) : router.back();
+    return viewDetail ? setViewDetail(!viewDetail) : router.push('/long-term-rooms');
   }
 
   return (

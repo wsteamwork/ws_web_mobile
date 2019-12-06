@@ -102,7 +102,6 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { handleClose, open } = props;
   const { state, dispatch } = useContext(RoomFilterContext);
-  console.log(state);
   const { router } = useContext(GlobalContext);
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);

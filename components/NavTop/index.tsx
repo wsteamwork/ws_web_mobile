@@ -1,8 +1,9 @@
 import { Dialog, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Sort } from '@material-ui/icons';
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useState, useReducer } from 'react';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 
 interface IProps {
   classes?: any;
@@ -43,6 +44,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NavTop: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
+  const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const handleCloseFilter = () => {
     setOpenFilter(false);
   };
@@ -63,6 +65,8 @@ const NavTop: FC<IProps> = (props) => {
     handleFilterAction
   } = props;
   return !isHidden ? (
+    <RoomFilterContext.Provider
+    value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
     <Grid container item xs={11} className={classes.boxWrapper}>
       <Grid item xs={4} className={classes.boxLeft}>
         {showBackAction ? (
@@ -101,6 +105,7 @@ const NavTop: FC<IProps> = (props) => {
       </Grid>
       <FilterDrawerMobile handleClose={handleCloseFilter} open={openFilter} />
     </Grid>
+    </RoomFilterContext.Provider>
   ) : (
     <Fragment></Fragment>
   );
