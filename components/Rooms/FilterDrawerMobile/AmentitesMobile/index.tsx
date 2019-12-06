@@ -10,7 +10,7 @@ import React, { Dispatch, FC, Fragment, SetStateAction, useEffect, useState } fr
 import { useTranslation } from 'react-i18next';
 import { getDataFilter, ResDataFilter, useFilterRoom } from '../../FilterActions/FilterRoom/context';
 interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
   setDataClick: Dispatch<SetStateAction<number[]>>;
   dataClick: number[];
 }

@@ -1,11 +1,12 @@
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import mainColor from '@/styles/constants/colors';
-import { Dialog, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { Dialog, Grid, IconButton, makeStyles, Theme, Typography, Slide } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Sort } from '@material-ui/icons';
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile/index';
+import { TransitionProps } from '@material-ui/core/transitions';
 interface IProps {
   classes?: any;
 }
@@ -44,11 +45,14 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const { state } = useContext(RoomIndexContext);
   const { meta } = state;
-  const [open, setOpen] = useState<boolean>(false)
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
 
-  const handleFilter = () => {
-    setOpen(!open);
-  }
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   return (
     <Grid container item xs={11} className={classes.boxWrapper}>
@@ -59,17 +63,11 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
       </Grid>
       <Grid item xs={6} className={classes.boxRight}>
         <Typography className={classes.textRight}>{t('rooms:searchRooms:filterRooms')}</Typography>
-        <IconButton onClick={() => handleFilter()}>
+        <IconButton onClick={handleOpenDialog}>
           <Sort className={classes.btnRight} />
         </IconButton>
       </Grid>
-      <Dialog
-        fullScreen
-        scroll="paper"
-        open={open}
-        onClose={() => setOpen(false)}>
-        <FilterDrawerMobile setIndex={handleFilter} />
-      </Dialog>
+      <FilterDrawerMobile handleClose={handleCloseDialog} open={openDialog} />
     </Grid>
   );
 };

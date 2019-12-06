@@ -3,7 +3,7 @@ import { RoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
 import { updateObject } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import mainColor from '@/styles/constants/colors';
-import { Divider } from '@material-ui/core';
+import { Divider, Dialog } from '@material-ui/core';
 import Button from '@material-ui/core/Button/Button';
 import DialogActions from '@material-ui/core/DialogActions/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,7 +15,7 @@ import { Theme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, forwardRef, Fragment, useContext, useState } from 'react';
+import React, { FC, forwardRef, Fragment, useContext, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import AmentitesMobile from './AmentitesMobile/index';
@@ -24,6 +24,8 @@ import DistrictsMobile from './DistrictsMobile/index';
 import InstantBookMobile from './InstantBookMobile/index';
 import PriceRangeMobile from './PriceRangeMobile/index';
 import RoomTypeMobile from './RoomTypeMobile';
+import { TransitionProps } from '@material-ui/core/transitions';
+import { TransitionCustom } from '@/components/Book/BookingForm';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
@@ -92,15 +94,16 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 interface IProps {
   classes?: any;
-  setIndex?: () => void;
+  handleClose: () => void;
+  open: boolean;
 }
 const FilterDrawerMobile: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { setIndex } = props;
+  const { handleClose, open } = props;
   const { state, dispatch } = useContext(RoomFilterContext);
+  console.log(state);
   const { router } = useContext(GlobalContext);
-  const [open, setOpen] = useState(false);
   const { price_day_from, price_day_to, instant_book } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
@@ -126,9 +129,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const [dataRoomType, setDataRoomType] = useState<number[]>(roomTypeInit);
   const [dataAmentites, setDataAmentites] = useState<number[]>(amenitiesInit);
   const [dataDistricts, setDataDistricts] = useState<number[]>(districtInit);
-  const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
-    <Slide timeout={300} direction="up" ref={ref} {...props} />
-  ));
+  
   const filterRoomType = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataRoomType });
   };
@@ -159,7 +160,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   };
 
   const applyFilter = () => {
-    setIndex();
+    handleClose();
     filterRoomType();
     filterAmentites();
     filterDistricts();
@@ -174,99 +175,108 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     <Fragment>
       <Grid container justify="center">
         <Grid item xs={12} md={10}>
-          <DialogTitle disableTypography>
-            <Typography variant="h6" className={classes.center}>
-              {t('rooms:filterRooms:filters')}
-            </Typography>
-            <IconButton className={classes.closeButton} onClick={() => setIndex()}>
-              <CloseIcon />
-            </IconButton>
-          </DialogTitle>
-          <DialogContent className={classes.dialog}>
-            <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
-              <Grid item xs={12} className={classes.sortMargin}>
-                <Typography variant="subtitle2" className={classes.titlePrice}>
-                  {t('rooms:filterRooms:priceRange')}
+          <div>
+            <Dialog
+              fullScreen
+              scroll="body"
+              TransitionComponent={TransitionCustom}
+              open={open}
+              onClose={handleClose}>
+              <DialogTitle disableTypography>
+                <Typography variant="h6" className={classes.center}>
+                  {t('rooms:filterRooms:filters')}
                 </Typography>
-                <PriceRangeMobile />
-                <Divider className={classes.divider} />
-              </Grid>
-              {leaseTypeGlobal ? (
-                ''
-              ) : (
+                <IconButton className={classes.closeButton} onClick={handleClose}>
+                  <CloseIcon />
+                </IconButton>
+              </DialogTitle>
+              <DialogContent className={classes.dialog}>
+                <Grid item xs={12} container className={classes.sortMargin} spacing={0}>
+                  <Grid item xs={12} className={classes.sortMargin}>
+                    <Typography variant="subtitle2" className={classes.titlePrice}>
+                      {t('rooms:filterRooms:priceRange')}
+                    </Typography>
+                    <PriceRangeMobile />
+                    <Divider className={classes.divider} />
+                  </Grid>
+                  {leaseTypeGlobal ? (
+                    ''
+                  ) : (
+                    <Grid container item xs={12}>
+                      <Grid item xs={6} className={classes.inline}>
+                        <Typography variant="subtitle2" className={classes.title}>
+                          {t('rooms:filterRooms:bookByHour')}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={6} className={classes.itemRight}>
+                        <BookingTypeMobile />
+                      </Grid>
+                      <Grid container item xs={12}>
+                        <Divider className={classes.divider} />
+                      </Grid>
+                    </Grid>
+                  )}
                   <Grid container item xs={12}>
                     <Grid item xs={6} className={classes.inline}>
                       <Typography variant="subtitle2" className={classes.title}>
-                        {t('rooms:filterRooms:bookByHour')}
+                        {t('rooms:filterRooms:instantBook')}
                       </Typography>
                     </Grid>
                     <Grid item xs={6} className={classes.itemRight}>
-                      <BookingTypeMobile />
+                      <InstantBookMobile />
                     </Grid>
                     <Grid container item xs={12}>
                       <Divider className={classes.divider} />
                     </Grid>
                   </Grid>
-                )}
-              <Grid container item xs={12}>
-                <Grid item xs={6} className={classes.inline}>
-                  <Typography variant="subtitle2" className={classes.title}>
-                    {t('rooms:filterRooms:instantBook')}
-                  </Typography>
-                </Grid>
-                <Grid item xs={6} className={classes.itemRight}>
-                  <InstantBookMobile />
-                </Grid>
-                <Grid container item xs={12}>
-                  <Divider className={classes.divider} />
-                </Grid>
-              </Grid>
 
-              <Grid item xs={12} className={classes.sortMargin}>
-                <Typography variant="subtitle2" className={classes.titleRoomType}>
-                  {t('rooms:filterRooms:roomsType')}
-                </Typography>
-                <RoomTypeMobile dataClick={dataRoomType} setDataClick={setDataRoomType} setOpen={setOpen} />
-                <Grid container item xs={12}>
-                  <Divider className={classes.divider} />
+                  <Grid item xs={12} className={classes.sortMargin}>
+                    <Typography variant="subtitle2" className={classes.titleRoomType}>
+                      {t('rooms:filterRooms:roomsType')}
+                    </Typography>
+                    <RoomTypeMobile dataClick={dataRoomType} setDataClick={setDataRoomType} />
+                    <Grid container item xs={12}>
+                      <Divider className={classes.divider} />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} className={classes.sortMargin}>
+                    <Typography variant="subtitle2" className={classes.title}>
+                      {t('rooms:filterRooms:districtsFilter')}
+                    </Typography>
+                    <DistrictsMobile dataClick={dataDistricts} setDataClick={setDataDistricts} />
+                    <Grid container item xs={12}>
+                      <Divider className={classes.divider} />
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} className={classes.sortMargin}>
+                    <AmentitesMobile dataClick={dataAmentites} setDataClick={setDataAmentites} />
+                  </Grid>
                 </Grid>
-              </Grid>
-              <Grid item xs={12} className={classes.sortMargin}>
-                <Typography variant="subtitle2" className={classes.title}>
-                  {t('rooms:filterRooms:districtsFilter')}
-                </Typography>
-                <DistrictsMobile dataClick={dataDistricts} setDataClick={setDataDistricts} setOpen={setOpen} />
-                <Grid container item xs={12}>
-                  <Divider className={classes.divider} />
-                </Grid>
-              </Grid>
-              <Grid item xs={12} className={classes.sortMargin}>
-                <AmentitesMobile dataClick={dataAmentites} setDataClick={setDataAmentites} setOpen={setOpen} />
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions>
-            {leaseTypeGlobal ? (
-              <Button
-                variant="contained"
-                onClick={applyFilter}
-                classes={{
-                  root: classes.applyLT
-                }}>
-                {t('rooms:filterRooms:apply')}
-              </Button>
-            ) : (
-                <Button
-                  color="primary"
-                  variant="contained"
-                  onClick={applyFilter}
-                  classes={{
-                    root: classes.apply
-                  }}>
-                  {t('rooms:filterRooms:apply')}
-                </Button>
-              )}
-          </DialogActions>
+              </DialogContent>
+              <DialogActions>
+                {leaseTypeGlobal ? (
+                  <Button
+                    variant="contained"
+                    onClick={applyFilter}
+                    classes={{
+                      root: classes.applyLT
+                    }}>
+                    {t('rooms:filterRooms:apply')}
+                  </Button>
+                ) : (
+                  <Button
+                    color="primary"
+                    variant="contained"
+                    onClick={applyFilter}
+                    classes={{
+                      root: classes.apply
+                    }}>
+                    {t('rooms:filterRooms:apply')}
+                  </Button>
+                )}
+              </DialogActions>
+            </Dialog>
+          </div>
         </Grid>
       </Grid>
     </Fragment>

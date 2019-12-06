@@ -90,7 +90,6 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
         dataSuggestions.map((suggestion: SearchSuggestData, index) => {
           const matches = match(suggestion.name, inputValue);
           const parts = parse(suggestion.name, matches);
-          // console.log(parts);
           return (
             <Grid className={classes.option} key={index} onClick={() => applySearch(suggestion)}>
               <Grid className={classes.icon}>

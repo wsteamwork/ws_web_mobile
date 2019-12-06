@@ -43,8 +43,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NavTop: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const handleFilter = () => {
-    setOpenFilter(!openFilter);
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
   };
   const {
     isHidden,
@@ -67,8 +70,8 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/left-arrow.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
       <Grid item xs={4} className={classes.boxCenter}>
         {showTextCenter ? <Typography className={classes.textCenter}>{textCenter}</Typography> : ''}
@@ -79,30 +82,28 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/Heart.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
         {showLocationAction ? (
           <IconButton onClick={handleLocationAction}>
             <img src={'/static/images/maps-and-flags.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
         {showFilterAction ? (
-          <IconButton onClick={() => handleFilter()}>
+          <IconButton onClick={handleOpenFilter}>
             <Sort className={classes.btnRight} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
-      <Dialog fullScreen scroll="paper" open={openFilter} onClose={() => setOpenFilter(false)}>
-        <FilterDrawerMobile setIndex={handleFilter} />
-      </Dialog>
+      <FilterDrawerMobile handleClose={handleCloseFilter} open={openFilter} />
     </Grid>
   ) : (
-      <Fragment></Fragment>
-    );
+    <Fragment></Fragment>
+  );
 };
 NavTop.defaultProps = {
   isHidden: false,

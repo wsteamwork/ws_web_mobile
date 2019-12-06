@@ -2,7 +2,7 @@ import { Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@material-
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { FC, useState, useMemo } from 'react';
+import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchInput from '../LTR/ReusableComponents/SearchInput';
 import SearchSuggestions from './SearchSuggestions';
