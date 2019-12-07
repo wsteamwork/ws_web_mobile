@@ -17,8 +17,8 @@ const Host: NextPage = () => {
     router.push('/host/room-list');
   }
   useEffect(() => {
-    !!error && router.push('/auth/signin');
-    !cookies._token && router.push('/auth/signin');
+    !!error && router.push('/auth');
+    !cookies._token && router.push('/auth');
   }, [error]);
   // const _renderDayContents = (day: Moment) => <RenderDay day={day} priceByDay={priceByDay} />;
   return (

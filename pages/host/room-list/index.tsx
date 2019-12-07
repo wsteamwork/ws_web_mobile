@@ -29,8 +29,8 @@ const RoomList: NextPage = (props) => {
   const { router } = useContext(GlobalContext);
 
   useEffect(() => {
-    !!error && router.push('/auth/signin');
-    !cookies._token && router.push('/auth/signin');
+    !!error && router.push('/auth');
+    !cookies._token && router.push('/auth');
   }, [error]);
   return (
     <Fragment>

@@ -10,7 +10,7 @@ export interface RegisterReq {
   password: string;
   password_confirmation: string;
   gender: number;
-  birthday: string;
+  birthday?: string;
 }
 
 export interface ForgetPasswordReq {

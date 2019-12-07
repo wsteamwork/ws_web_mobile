@@ -1,17 +1,15 @@
-import React, { FC, useMemo, useContext, useState, useEffect } from 'react';
-import { Grid, FormControl, TextField, FormHelperText, Typography } from '@material-ui/core';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { useTranslation } from 'react-i18next';
-import moment from 'moment';
 import ButtonGlobal from '@/components/ButtonGlobal';
-import Link from 'next/link';
-import * as Yup from 'yup';
-import { RegisterReq } from '@/types/Requests/Account/AccountRequests';
-import { registerAccount } from './context';
-import { useCookies } from 'react-cookie';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import SimpleLoader from '@/components/Loading/SimpleLoader';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { RegisterReq } from '@/types/Requests/Account/AccountRequests';
+import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
+import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
+import { Formik, FormikHelpers, FormikProps } from 'formik';
+import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
+import * as Yup from 'yup';
+import { registerAccount } from './context';
 // import ButtonLoginSocial from '../ButtonLoginSocial';
 
 interface MyFormValues {
@@ -21,7 +19,7 @@ interface MyFormValues {
   phone: string;
   password: string;
   password_confirmation: string;
-  birthday: string;
+  // birthday: string;
 }
 
 const useValidata = () => {
@@ -53,7 +51,7 @@ const useValidata = () => {
       .min(6, t('auth:min6Characters'))
       .max(50, t('auth:max50Characters'))
       .oneOf([Yup.ref('password')], t('auth:passNotMatch')),
-    birthday: Yup.date().required(t('auth:enterBirthday'))
+    // birthday: Yup.date().required(t('auth:enterBirthday'))
   });
 
   return FormValidationSchema;
@@ -78,7 +76,7 @@ const FormSignup: FC = () => {
       gender: 1,
       phone: values.phone,
       email: values.email,
-      birthday: values.birthday,
+      // birthday: values.birthday,
       password: values.password,
       password_confirmation: values.password_confirmation
     };
@@ -102,7 +100,7 @@ const FormSignup: FC = () => {
       firstName: '',
       lastName: '',
       phone: '',
-      birthday: '',
+      // birthday: '',
       email: '',
       password: '',
       password_confirmation: ''
@@ -110,7 +108,7 @@ const FormSignup: FC = () => {
   }, []);
 
   return (
-    <Grid className="formSignup">
+    <Grid item xs={12} md={7} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
       <Formik
         enableReinitialize={false}
         validateOnChange={false}
@@ -197,7 +195,7 @@ const FormSignup: FC = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                   <FormControl error={!!(errors.birthday && touched.birthday)} fullWidth>
                     <TextField
                       variant="outlined"
@@ -216,7 +214,7 @@ const FormSignup: FC = () => {
                     />
                     <FormHelperText>{touched.birthday ? errors.birthday : ''}</FormHelperText>
                   </FormControl>
-                </Grid>
+                </Grid> */}
 
                 <Grid item xs={12}>
                   <FormControl error={!!(errors.password && touched.password)} fullWidth>
@@ -266,28 +264,6 @@ const FormSignup: FC = () => {
                         )}
                     </ButtonGlobal>
                     <FormHelperText>{!!error && error}</FormHelperText>
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12} container justify="center">
-                  <FormControl fullWidth>
-                    <p className="haveAccount">
-                      {t('auth:haveAccount')}{' '}
-                      <Link href="/auth/signin">
-                        <a>{t('auth:singin')}</a>
-                      </Link>
-                    </p>
-                    <p className="agreeRules">
-                      {t('auth:iAgree')}{' '}
-                      <Link href="/terms-and-conditions">
-                        <a>{t('auth:security')}</a>
-                      </Link>{' '}
-                      {t('auth:and')}{' '}
-                      <Link href="/privacy-policy">
-                        <a>{t('auth:privatePoli')}</a>
-                      </Link>{' '}
-                      {t('auth:ofWstay')}
-                    </p>
                   </FormControl>
                 </Grid>
 

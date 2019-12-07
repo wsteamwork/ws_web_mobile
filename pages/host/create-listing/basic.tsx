@@ -33,7 +33,7 @@ const RoomCreateListing: FC<IProps> = (props) => {
 
   useEffect(() => {
     if (!isLogin) {
-      router.push('/auth/signin');
+      router.push('/auth');
     }
   }, [isLogin])
 

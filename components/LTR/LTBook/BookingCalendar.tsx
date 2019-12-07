@@ -74,7 +74,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
       });
     } else {
       Router.push({
-        pathname: '/auth/signin'
+        pathname: '/auth'
       });
     }
   };

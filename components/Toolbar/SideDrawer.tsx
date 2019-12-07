@@ -149,7 +149,7 @@ const SideDrawer: FC<IProps> = (props) => {
                 }}
                 button
                 onClick={() => {
-                  router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth/signin'}`);
+                  router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth'}`);
                 }}>
                 <ListItemText
                   primary={t('home:becomeAHost')}
@@ -180,7 +180,7 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                   button
                   onClick={() => {
-                    router.push('/auth/signin');
+                    router.push('/auth');
                   }}>
                   <ListItemText
                     primary={t('home:signIn')}
@@ -195,7 +195,7 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                   button
                   onClick={() => {
-                    router.push('/auth/signup');
+                    router.push('/auth');
                   }}>
                   <ListItemText
                     primary={t('home:signUp')}
@@ -210,7 +210,7 @@ const SideDrawer: FC<IProps> = (props) => {
                   }}
                   button
                   onClick={() => {
-                    router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth/signin'}`);
+                    router.push(`${cookies.get('_token') ? '/host/room-list' : '/auth'}`);
                   }}>
                   <ListItemText
                     primary={t('home:becomeAHost')}

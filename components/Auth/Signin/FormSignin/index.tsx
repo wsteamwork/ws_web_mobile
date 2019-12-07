@@ -5,9 +5,8 @@ import { LoginRequest } from '@/types/Requests/Account/AccountRequests';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
 import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import Link from 'next/link';
 import Router from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { Fragment, useContext, useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useTranslation } from 'react-i18next';
 // import ButtonLoginSocial from '../../Signup/ButtonLoginSocial';
@@ -60,92 +59,81 @@ const FormSignin = () => {
   };
 
   return (
-    <Grid className="formSignin">
-      <Formik
-        enableReinitialize={false}
-        validateOnChange={false}
-        validationSchema={FormValidationSchema}
-        initialValues={{ email: '', password: '' }}
-        onSubmit={handleSubmitForm}
-        render={({
-          values,
-          handleSubmit,
-          touched,
-          errors,
-          handleChange,
-          handleBlur,
-          isSubmitting
-        }: FormikProps<MyFormValues>) => (
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Typography variant="h6">{t('auth:loginInfo')}</Typography>
-                </Grid>
+    <Fragment>
+      <Grid item xs={12} md={7} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
+        <Formik
+          enableReinitialize={false}
+          validateOnChange={false}
+          validationSchema={FormValidationSchema}
+          initialValues={{ email: '', password: '' }}
+          onSubmit={handleSubmitForm}
+          render={({
+            values,
+            handleSubmit,
+            touched,
+            errors,
+            handleChange,
+            handleBlur,
+            isSubmitting
+          }: FormikProps<MyFormValues>) => (
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Typography variant="h6">{t('auth:loginInfo')}</Typography>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl error={!!(errors.email && touched.email)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      id="email-booking"
-                      type="email"
-                      name="email"
-                      label="Email"
-                      placeholder={t('book:bookingForm:placeEmail')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.email}
-                    />
-                    <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12}>
+                    <FormControl error={!!(errors.email && touched.email)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        id="email-booking"
+                        type="email"
+                        name="email"
+                        label="Email"
+                        placeholder={t('book:bookingForm:placeEmail')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                      />
+                      <FormHelperText>{touched.email ? errors.email : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl error={!!(errors.password && touched.password)} fullWidth>
-                    <TextField
-                      variant="outlined"
-                      // id="email-booking"
-                      type="password"
-                      name="password"
-                      label={t('auth:password')}
-                      placeholder={t('auth:password')}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password}
-                    />
-                    <FormHelperText>{touched.password ? errors.password : ''}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12}>
+                    <FormControl error={!!(errors.password && touched.password)} fullWidth>
+                      <TextField
+                        variant="outlined"
+                        // id="email-booking"
+                        type="password"
+                        name="password"
+                        label={t('auth:password')}
+                        placeholder={t('auth:password')}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                      />
+                      <FormHelperText>{touched.password ? errors.password : ''}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <FormControl fullWidth error={!!error}>
-                    <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
-                      {!isSubmitting ? (
-                        t('auth:singin')
-                      ) : (
-                          <SimpleLoader height="45px" width="100%"></SimpleLoader>
-                        )}
-                    </ButtonGlobal>
-                    <FormHelperText>{!!error && error}</FormHelperText>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12}>
+                    <FormControl fullWidth error={!!error}>
+                      <ButtonGlobal disabled={isSubmitting} width="100%" type="submit">
+                        {!isSubmitting ? (
+                          t('auth:singin')
+                        ) : (
+                            <SimpleLoader height="45px" width="100%"></SimpleLoader>
+                          )}
+                      </ButtonGlobal>
+                      <FormHelperText>{!!error && error}</FormHelperText>
+                    </FormControl>
+                  </Grid>
 
-                <Grid item xs={12} container justify="center">
-                  <FormControl fullWidth>
-                    <p className="noAccount">
-                      {t('auth:noAccount')}{' '}
-                      <Link href="/auth/signup">
-                        <a>{t('auth:signup')}</a>
-                      </Link>{' '}
-                      {t('auth:now')}
-                    </p>
-                  </FormControl>
                 </Grid>
-
-                {/* <ButtonLoginSocial></ButtonLoginSocial> */}
-              </Grid>
-            </form>
-          )}></Formik>
-    </Grid>
+              </form>
+            )}></Formik>
+      </Grid>
+    </Fragment>
   );
 };
 

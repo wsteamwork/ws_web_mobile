@@ -182,11 +182,11 @@ const NavHeader: FunctionComponent<IProps> = (props) => {
   };
 
   const loginButtonClick = () => {
-    router.push('/auth/signin');
+    router.push('/auth');
   };
 
   const signUpButtonClick = () => {
-    router.push('/auth/signup');
+    router.push('/auth');
   };
 
   const handleClose = () => {
