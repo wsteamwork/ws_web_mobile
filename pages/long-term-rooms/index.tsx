@@ -1,7 +1,6 @@
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
-import GridContainer from '@/components/Layout/Grid/Container'
 import BottomNav from '@/components/Rooms/BottomNav';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchRoom from '@/components/SearchRoom';
@@ -92,56 +91,54 @@ const LongtermRooms: NextPage = (props) => {
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
-          <GridContainer xs={12} md={10}>
-            <Grid item xs={12} md={isMapOpen ? 12 : 10} className={isMapOpen ? classes.boxSearchMap : classes.boxSearch}>
-              {!isMapOpen ? (
-                <HeadRoom
-                  style={{
-                    WebkitTransition: 'all 0.3s ease-in-out',
-                    MozTransition: 'all 0.3s ease-in-out',
-                    OTransition: 'all 0.3s ease-in-out',
-                    transition: 'all 0.3s ease-in-out'
-                  }}
-                  onPin={() => setHideNavTop(false)}
-                  onUnpin={() => setHideNavTop(true)}>
-                  <Grid item xs={12} className={classes.boxWrapper}>
-                    <NavTop
-                      isHidden={hideNavTop}
-                      textCenter={t('rooms:searchRooms:explore')}
-                      handleBackAction={backHomePage}
-                      handleLocationAction={handleOpenMap}
-                      showLocationAction={true}
-                    />
-                  </Grid>
-                </HeadRoom>
-              ) : (
-                  <Grid item xs={12} className={classes.boxWrapper}>
-                    <NavTop
-                      isHidden={false}
-                      handleBackAction={backRoomList}
-                      textCenter={t('rooms:map')}
-                      showLocationAction={false}
-                      showFilterAction={true}
-                    />
-                  </Grid>
-                )}
-              <Grid item xs={12}>
-                <SearchRoom />
-              </Grid>
-              {!isMapOpen ? (
+          <Grid item xs={12} className={isMapOpen ? classes.boxSearchMap : classes.boxSearch}>
+            {!isMapOpen ? (
+              <HeadRoom
+                style={{
+                  WebkitTransition: 'all 0.3s ease-in-out',
+                  MozTransition: 'all 0.3s ease-in-out',
+                  OTransition: 'all 0.3s ease-in-out',
+                  transition: 'all 0.3s ease-in-out'
+                }}
+                onPin={() => setHideNavTop(false)}
+                onUnpin={() => setHideNavTop(true)}>
                 <Grid item xs={12} className={classes.boxWrapper}>
-                  <ButtonFilterRoom />
+                  <NavTop
+                    isHidden={hideNavTop}
+                    textCenter={t('rooms:searchRooms:explore')}
+                    handleBackAction={backHomePage}
+                    handleLocationAction={handleOpenMap}
+                    showLocationAction={true}
+                  />
                 </Grid>
-              ) : (
-                  ''
-                )}
+              </HeadRoom>
+            ) : (
+                <Grid item xs={12} className={classes.boxWrapper}>
+                  <NavTop
+                    isHidden={false}
+                    handleBackAction={backRoomList}
+                    textCenter={t('rooms:map')}
+                    showLocationAction={false}
+                    showFilterAction={true}
+                  />
+                </Grid>
+              )}
+            <Grid item xs={12}>
+              <SearchRoom />
             </Grid>
-            <Grid item xs={12} className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
-              <Grid item xs={12}>
-                <MapAndListing />
+            {!isMapOpen ? (
+              <Grid item xs={12} className={classes.boxWrapper}>
+                <ButtonFilterRoom />
               </Grid>
+            ) : (
+                ''
+              )}
+          </Grid>
+          <Grid item xs={12} className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
+            <Grid item xs={12}>
+              <MapAndListing />
             </Grid>
-          </GridContainer>
+          </Grid>
           <Grid item xs={12}>
             <BottomNav />
           </Grid>

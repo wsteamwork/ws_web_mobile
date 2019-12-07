@@ -1,16 +1,18 @@
 import { ICardIntro } from '@/types/Interfaces/Components/Card';
 import { cleanAccents } from '@/utils/mixins';
-import { Grid, makeStyles, Theme } from '@material-ui/core';
+import { makeStyles, Theme, Typography, Grid } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import classNames from 'classnames';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import LazyLoad from 'react-lazyload';
 import Cookies from 'universal-cookie';
 
 interface IProps extends ICardIntro {
   classes?: any;
   //   showPrice?: boolean;
-  recommendedPrice?: string | number;
+  recommendedPrice?: string;
   subTitle?: string;
   subTitleContent?: string;
   onClickCard?: () => void;
@@ -62,7 +64,7 @@ const CardItem: FunctionComponent<IProps> = (props) => {
             'card-item__sub-title',
             bigTitle ? 'card-item__big-sub-title' : ''
           )}>
-          {subTitle ? (cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle) : ''}
+          {cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle} {' '}
           {recommendedPrice}/{t('home:night')}
         </Grid>
       </Grid>

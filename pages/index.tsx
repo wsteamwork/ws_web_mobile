@@ -1,14 +1,20 @@
+import SearchHome from '@/components/Home/SearchComponent/SearchHome';
+import FooterComponent from '@/components/Layout/FooterComponent';
+import GridContainer from '@/components/Layout/Grid/Container';
+import MetroGridImage from '@/components/Layout/MetroGridImage';
+import ListRoom from '@/components/ListRoom';
 import NextHead from '@/components/NextHead';
 import RoomCard from '@/components/RoomCard';
+import SliderTypeApartment from '@/components/Slider/HomePage/SliderTypeApartment';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
-import { Grid } from '@material-ui/core';
+import { Hidden } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
-import { forceCheck } from 'react-lazyload';
+import LazyLoad, { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
 import LTHome from './homepage/LTHome';
 
@@ -42,11 +48,9 @@ const Home: NextPage = () => {
         url="https://westay.vn"
         ogImage="/static/images/Bg_home.4023648f.jpg" />
 
-      <Grid container justify="center" style={{ marginBottom: 100 }}>
-        <Grid item xs={12} md={10}>
-          <LTHome />
-        </Grid>
-      </Grid>
+      {/* <GridContainer xs={12}> */}
+        <LTHome />
+      {/* </GridContainer> */}
     </Fragment>
   );
 };

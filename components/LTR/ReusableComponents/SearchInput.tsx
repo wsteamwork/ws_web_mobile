@@ -1,7 +1,10 @@
-import { InputAdornment, InputBase } from '@material-ui/core';
+import React, { FC, Fragment, useState, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import React, { FC, Fragment } from 'react';
+import { InputAdornment, InputBase } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import SearchAutoSuggestion, { getDataSearch } from '@/components/Home/SearchAutoSuggestion';
+import { SearchSuggestData } from '@/types/Requests/Search/SearchResponse';
 interface Iprops {
   onClick?: () => void;
   displayOnlyForModal?: boolean;
@@ -16,10 +19,9 @@ const useStyles = makeStyles((theme: Theme) =>
       flexWrap: 'wrap'
     },
     InputBaseRoot: {
-      boxShadow: '0px 9px 20px #0000001a',
-      backgroundColor: 'white',
+      boxShadow: '0px 9px 20px #f3ecec',
       width: '100%',
-      padding: '8px 16px',
+      padding: '10px 16px',
       borderRadius: 100
     },
     startAdornmentt: {
@@ -50,21 +52,21 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
           onClick={onClick}
         />
       ) : (
-          <InputBase
-            value={value}
-            onChange={handleChange}
-            placeholder={t('home:SearchAutocomplete:toGo')}
-            id="input-with-icon-textfield"
-            classes={{ root: classes.InputBaseRoot }}
-            startAdornment={
-              <InputAdornment position="start" className={classes.startAdornmentt}>
-                <img src="/static/icons/search.svg" alt="search icon" />
-              </InputAdornment>
-            }
-            fullWidth
+        <InputBase
+          value={value}
+          onChange={handleChange}
+          placeholder={t('home:SearchAutocomplete:toGo')}
+          id="input-with-icon-textfield"
+          classes={{ root: classes.InputBaseRoot }}
+          startAdornment={
+            <InputAdornment position="start" className={classes.startAdornmentt}>
+              <img src="/static/icons/search.svg" alt="search icon" />
+            </InputAdornment>
+          }
+          fullWidth
           // onClick={onClick}
-          />
-        )}
+        />
+      )}
     </Fragment>
   );
 };

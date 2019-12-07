@@ -29,6 +29,7 @@ const LTRoomCardListing: FC<IProps> = (props) => {
 
   const imgRoom = room.avatar.images && room.avatar.images.length ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}` : "./static/images/westay-avatar.jpg";
   const price = room.price_display ? `${width === 'sm' || width === 'xs' ? formatPrice(room.price_display) : t('rooms:currency') + formatMoney(room.price_display)}` : `${t('rooms:contactForPrice')}}`;
+  console.log('price: ' + price)
   return (
     <Paper elevation={0} className='ltRoomCardListing'>
       <Grid container className='roomCardListing__wrapper'>

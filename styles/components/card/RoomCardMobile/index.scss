@@ -3,7 +3,7 @@
   color: #484848;
   border: 1px solid #ebebeb;
   border-radius: 16px !important;
-  // margin-bottom: 24px;
+  margin-bottom: 24px;
   transition: all 300ms !important;
   transition-property: all !important;
   transition-duration: 0.4s !important;
@@ -179,7 +179,7 @@
               overflow-wrap: break-word;
               font-style: normal;
               font-weight: bold;
-              font-size: 1rem;
+              font-size: 0.9rem;
               line-height: 22px;
               letter-spacing: 0.065882px;
               color: #484848;
@@ -191,8 +191,8 @@
               text-overflow: ellipsis;
               -webkit-box-orient: vertical;
               @include smUp {
-                max-height: 2.625rem;
-                height: 2.625rem;
+                max-height: 52px;
+                height: 2.625;
                 max-width: 420px;
               }
               // @include xs {

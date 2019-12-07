@@ -136,16 +136,3 @@ export interface detailOfRoom {
     note: string;
   };
 }
-
-export interface LTRoomCollectionRes {
-  id: number;
-  price_display: number | null;
-  bedrooms: any;
-  bathrooms: any;
-  avatar: ImagesRes;
-  about_room: aboutRoom;
-  accommodation_type_txt: string;
-  total_area: number | null;
-  city: string | null;
-  district: string | null;
-}

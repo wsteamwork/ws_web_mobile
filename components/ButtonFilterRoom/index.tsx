@@ -1,9 +1,9 @@
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import mainColor from '@/styles/constants/colors';
-import { Dialog, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles, Theme, Typography, Grid, IconButton, Dialog } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
-import { Sort } from '@material-ui/icons';
 import React, { FC, useContext, useState } from 'react';
+import { Sort } from '@material-ui/icons';
+import mainColor from '@/styles/constants/colors';
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile/index';
 interface IProps {
@@ -45,7 +45,7 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
   const { state } = useContext(RoomIndexContext);
   const { meta } = state;
   const [open, setOpen] = useState<boolean>(false)
-
+  
   const handleFilter = () => {
     setOpen(!open);
   }

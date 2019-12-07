@@ -25,7 +25,7 @@ const RoomListingInfinite: FC<IProps> = (props: IProps) => {
   const {classes}               = props;
   const { state: stateIndexRoom } = useContext(RoomIndexContext);
   const { longtermRooms, meta, isLoading } = stateIndexRoom;
-  // console.log(longtermRooms);
+  console.log(longtermRooms);
 
   // const [isEmpty, setIsEmpty]   = useState<boolean>(false);
   // const [isLoading, setLoading] = useState<boolean>(false);

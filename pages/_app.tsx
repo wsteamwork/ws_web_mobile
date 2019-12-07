@@ -1,6 +1,5 @@
 import { makeStore, windowExist } from '@/store/Redux';
 import { getProfile } from '@/store/Redux/Reducers/Profile/profile';
-import '@/styles/index.scss';
 import ProviderGlobal from '@/utils/ProviderGlobal';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -12,6 +11,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'tippy.js/themes/light-border.css';
+import '@/styles/index.scss';
 
 config.autoAddCss = false;
 

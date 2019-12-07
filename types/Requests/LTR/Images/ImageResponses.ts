@@ -1,5 +1,5 @@
 export interface ImagesRes {
-  images: Images[];
+  images:Images[];
 }
 export interface Images {
   name: string;

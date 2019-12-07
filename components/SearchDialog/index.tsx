@@ -1,9 +1,20 @@
-import { Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@material-ui/core';
+import React, { FC, Fragment, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { TransitionProps } from '@material-ui/core/transitions';
-import CloseIcon from '@material-ui/icons/Close';
-import React, { FC, useState } from 'react';
+import {
+  InputAdornment,
+  InputBase,
+  Dialog,
+  AppBar,
+  Toolbar,
+  IconButton,
+  Button,
+  Typography,
+  Grid
+} from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import { TransitionProps } from '@material-ui/core/transitions';
 import SearchInput from '../LTR/ReusableComponents/SearchInput';
 import SearchSuggestions from './SearchSuggestions';
 
@@ -40,9 +51,6 @@ const useStyles = makeStyles((theme: Theme) =>
     }
   })
 );
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
 
 const SearchDialog: FC<Iprops> = (props: Iprops) => {
   const { t } = useTranslation();
@@ -55,7 +63,7 @@ const SearchDialog: FC<Iprops> = (props: Iprops) => {
   };
 
   return (
-    <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+    <Dialog fullScreen open={open} onClose={handleClose}>
       <Grid container direction="column" className={classes.dialogWrapper}>
         <Grid item className={classes.topSticky}>
           <Toolbar disableGutters className={classes.toolbar}>

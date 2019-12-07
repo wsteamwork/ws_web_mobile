@@ -13,22 +13,20 @@ interface IProps {
   isPreviewPage?: boolean,
   backgroundImage?: string;
   room: any;
-  scrollTo?: void,
-  collapseClicked?: boolean;
+  scrollTo?: void;
+  onBook ?: ()=> any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     boxContainer: {
-      // height: '88vh',
+      height: '100vh',
       width: '100%',
       // backgroundImage: (props) => props.backgroundImage || 'url(@/../../../../static/images/room_demo.jpg)',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'center',
-      position: 'fixed',
-      top: 0,
-      bottom: 0
+      position: 'relative',
     },
     boxInfo: {
       position: 'absolute',
@@ -76,7 +74,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { isPreviewPage, room, scrollTo, collapseClicked } = props;
+  const { isPreviewPage, room, scrollTo, onBook } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const parallaxData = [
@@ -124,7 +122,7 @@ const BoxImageLT: FC<IProps> = (props) => {
       bgClassName={classes.imgRoom}
       className={classes.parallaxContainer}
       contentClassName={classes.contentParallax}>
-      {!collapseClicked ? (<div className={classes.insideParalax}>
+      <div className={classes.insideParalax}>
         <div className={classes.boxContainer}>
           <div className={classes.boxInfo}>
             <BoxInfoBasic showButtonBook
@@ -132,11 +130,12 @@ const BoxImageLT: FC<IProps> = (props) => {
               district={room.district.data.name}
               city={room.city.data.name}
               price={room.price_display}
+              onBook={onBook}
             />
           </div>
           {props.children}
         </div>
-      </div>) : ''}
+      </div>
     </Parallax>
   );
 };

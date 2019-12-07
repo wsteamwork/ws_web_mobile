@@ -1,11 +1,11 @@
-import ButtonGlobal from '@/components/ButtonGlobal';
-import { formatPrice } from '@/utils/mixins';
-import { Grid, Theme, Typography } from '@material-ui/core';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import React, { Fragment, FC } from 'react';
+import { makeStyles, createStyles } from '@material-ui/styles';
+import { Theme, Grid, Typography } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC } from 'react';
+import StarBorderIcon from '@material-ui/icons/StarBorder';
+import ButtonGlobal from '@/components/ButtonGlobal';
 import { useTranslation } from 'react-i18next';
+import { formatPrice } from '@/utils/mixins';
 
 interface IProps {
   classes?: any,
@@ -17,7 +17,8 @@ interface IProps {
   isPreviewPage?: boolean,
   district: string,
   city: string,
-  price: number
+  price: number,
+  onBook?: ()=>any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -25,7 +26,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtName: {
       fontStyle: 'normal',
       fontWeight: 'bold',
-      fontSize: '1.1875rem',
+      fontSize: 22,
       lineHeight: '34px',
       letterSpacing: 0.36,
       color: (props) => (props.textColor ? props.textColor : 'white'),
@@ -36,7 +37,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: '-webkit-box'
     },
     txtPrice: {
-      fontSize: '1.1875rem',
+      fontSize: 22,
       lineHeight: '34px',
       textAlign: 'right',
       letterSpacing: 0.32,
@@ -46,7 +47,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtAddress: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: '0.88rem',
+      fontSize: 11,
       lineHeight: '13px',
       letterSpacing: 0.07,
       color: (props) => (props.textColor ? props.subTextColor : 'white'),
@@ -54,7 +55,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtPer: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: '0.95rem',
+      fontSize: 13,
       lineHeight: '18px',
       letterSpacing: -0.08,
       color: (props) => (props.textColor ? props.subTextColor : 'white'),
@@ -72,7 +73,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     txtReview: {
       fontStyle: 'normal',
       fontWeight: 'normal',
-      fontSize: '0.88rem',
+      fontSize: 11,
       lineHeight: '13px',
       letterSpacing: 0.07,
       color: '#FFFFFF',
@@ -83,7 +84,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxInfoBasic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { showButtonBook, showRating, name, isPreviewPage, district, city, price } = props;
+  const { showButtonBook, showRating, name, isPreviewPage, district, city, price, onBook } = props;
   const { t } = useTranslation();
 
   return (
@@ -135,7 +136,7 @@ const BoxInfoBasic: FC<IProps> = (props) => {
             width='100%'
             textColor='#fff'
             background='#54D3C2'
-            onClick={() => { alert('ok') }}
+            onClick={onBook}
           >
             {t('longtermroom:viewSchedule')}
           </ButtonGlobal>
