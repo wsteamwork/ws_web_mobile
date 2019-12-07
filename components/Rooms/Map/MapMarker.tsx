@@ -39,11 +39,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         easing: 'ease-in-out'
       })
     },
-    overBubble: {
-      [theme.breakpoints.only('xs')]: {
-        minWidth: 75
-      }
-    }
+    // overBubble: {
+    //   [theme.breakpoints.only('xs')]: {
+    //     minWidth: 75
+    //   }
+    // }
   })
 );
 

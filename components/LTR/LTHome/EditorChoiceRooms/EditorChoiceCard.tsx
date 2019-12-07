@@ -4,9 +4,10 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { formatPrice, cleanAccents } from '@/utils/mixins';
 import Cookies from 'universal-cookie';
+import ProgressiveImage from 'react-progressive-image';
 interface IProps {
   classes?: any;
   room: any;
@@ -28,9 +29,13 @@ const EditorChoiceCard: FC<IProps> = (props) => {
   const { room, showDetail } = props;
   const { t } = useTranslation();
   const cookies = new Cookies();
-  const imgRoom =
+  const imgRoomSM =
     room.avatar.images && room.avatar.images.length
       ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
+      : './static/ms-icon-310x310.png';
+  const imgRoomXS =
+    room.avatar.images && room.avatar.images.length
+      ? `${IMAGE_STORAGE_XS + room.avatar.images[0].name}`
       : './static/ms-icon-310x310.png';
   return (
     <Grid container item xs={12} className={classes.boxWrapper}>
@@ -38,9 +43,16 @@ const EditorChoiceCard: FC<IProps> = (props) => {
         <Paper elevation={0} className="RoomCardEditorChoice">
           <Grid container className="__wrapper">
             <Grid item xs={12} className="boxImg">
-              <LazyLoad>
-                <img src={imgRoom} className="imgSize" />
-              </LazyLoad>
+              <ProgressiveImage src={imgRoomSM} placeholder={imgRoomXS}>
+                {(src, loading) => (
+                  <img
+                    style={{ opacity: loading ? 0.5 : 1 }}
+                    src={src}
+                    alt="Westay"
+                    className="imgSize"
+                  />
+                )}
+              </ProgressiveImage>
             </Grid>
             <Grid item xs={12} className="boxCard">
               <Grid className="cardWrapper">
@@ -68,21 +80,27 @@ const EditorChoiceCard: FC<IProps> = (props) => {
                               : room.city}
                           </span>
                         </Grid>
-                        {showDetail && <Grid item xs={12} className="roomSubtitle">
-                          {room.total_area && room.total_area > 0 ? (
+                        {showDetail && (
+                          <Grid item xs={12} className="roomSubtitle">
+                            {room.total_area && room.total_area > 0 ? (
+                              <span>
+                                {room.total_area ? room.total_area : '?'} m<sup>2</sup>
+                              </span>
+                            ) : (
+                              <span>
+                                ? m<sup>2</sup>
+                              </span>
+                            )}
+                            <span className="dotAmenties">.</span>
                             <span>
-                              {room.total_area ? room.total_area : '?'} m<sup>2</sup>
+                              {room.bathrooms.number_bathroom} {t('rooms:bathrooms')}
                             </span>
-                          ) : (
+                            <span className="dotAmenties">.</span>
                             <span>
-                              ? m<sup>2</sup>
+                              {room.bedrooms.number_bedroom} {t('rooms:rooms')}
                             </span>
-                          )}
-                          <span className="dotAmenties">.</span>
-                          <span>{room.bathrooms.number_bathroom} {t('rooms:bathrooms')}</span>
-                          <span className="dotAmenties">.</span>
-                          <span>{room.bedrooms.number_bedroom} {t('rooms:rooms')}</span>
-                          </Grid> }
+                          </Grid>
+                        )}
                       </Grid>
                       <Grid item xs={12}>
                         <Grid className="boxPrice">
@@ -105,7 +123,7 @@ const EditorChoiceCard: FC<IProps> = (props) => {
 };
 
 EditorChoiceCard.defaultProps = {
-  showDetail: false,
+  showDetail: false
 };
 
 export default EditorChoiceCard;

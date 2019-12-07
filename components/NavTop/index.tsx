@@ -1,8 +1,9 @@
 import { Dialog, Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Sort } from '@material-ui/icons';
-import React, { FC, Fragment, useState } from 'react';
+import React, { FC, Fragment, useState, useReducer } from 'react';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
 
 interface IProps {
   classes?: any;
@@ -43,8 +44,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NavTop: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const [openFilter, setOpenFilter] = useState<boolean>(false);
-  const handleFilter = () => {
-    setOpenFilter(!openFilter);
+  const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
+  const handleCloseFilter = () => {
+    setOpenFilter(false);
+  };
+  const handleOpenFilter = () => {
+    setOpenFilter(true);
   };
   const {
     isHidden,
@@ -60,6 +65,8 @@ const NavTop: FC<IProps> = (props) => {
     handleFilterAction
   } = props;
   return !isHidden ? (
+    <RoomFilterContext.Provider
+    value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
     <Grid container item xs={11} className={classes.boxWrapper}>
       <Grid item xs={4} className={classes.boxLeft}>
         {showBackAction ? (
@@ -67,8 +74,8 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/left-arrow.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
       <Grid item xs={4} className={classes.boxCenter}>
         {showTextCenter ? <Typography className={classes.textCenter}>{textCenter}</Typography> : ''}
@@ -79,30 +86,29 @@ const NavTop: FC<IProps> = (props) => {
             <img src={'/static/images/Heart.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
         {showLocationAction ? (
           <IconButton onClick={handleLocationAction}>
             <img src={'/static/images/maps-and-flags.svg'} width={24} height={24} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
         {showFilterAction ? (
-          <IconButton onClick={() => handleFilter()}>
+          <IconButton onClick={handleOpenFilter}>
             <Sort className={classes.btnRight} />
           </IconButton>
         ) : (
-            ''
-          )}
+          ''
+        )}
       </Grid>
-      <Dialog fullScreen scroll="paper" open={openFilter} onClose={() => setOpenFilter(false)}>
-        <FilterDrawerMobile setIndex={handleFilter} />
-      </Dialog>
+      <FilterDrawerMobile handleClose={handleCloseFilter} open={openFilter} />
     </Grid>
+    </RoomFilterContext.Provider>
   ) : (
-      <Fragment></Fragment>
-    );
+    <Fragment></Fragment>
+  );
 };
 NavTop.defaultProps = {
   isHidden: false,

@@ -2,11 +2,12 @@ import React, { FC, useState, useEffect, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import ShowMoreHome from '../ShowMoreHome';
 import { getHomePageCollection } from '@/store/Hooks/CardRoomHooks';
-import { Grid, createStyles, Typography } from '@material-ui/core';
+import { Grid, createStyles, Typography, Box } from '@material-ui/core';
 import BussinessTripCard from './BusinessTripCard';
 import { makeStyles } from '@material-ui/styles';
 import { Theme } from '@fullcalendar/core';
 import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
+import Skeleton from '@material-ui/lab/Skeleton';
 interface IProps {
   classes?: any;
 }
@@ -62,13 +63,22 @@ const BusinessTripRooms: FC<IProps> = (props) => {
               <Grid container item xs={12} spacing={2} className={classes.roomList}>
                 {dataRooms.map((room, index) => (
                   <Grid item container xs={6} key={index} className={classes.roomItem}>
-                    <BussinessTripCard room={room}/>
+                    <BussinessTripCard room={room} />
                   </Grid>
                 ))}
               </Grid>
             </Fragment>
           ) : (
-            <LoadingSkeleton type={'rooms'} duplicate={2} />
+            <Grid container item xs={12} spacing={2} className={classes.roomList}>
+              {[1, 2, 3, 4].map((item, index) => (
+                <Grid item container xs={6} key={index} className={classes.roomItem}>
+                  <Skeleton variant="rect" width="100%" height={220} />
+                  <Skeleton variant="text" width="100%" height={8} />
+                  <Skeleton variant="text" width="80%" height={8} />
+                  <Skeleton variant="text" width="30%" height={8} />
+                </Grid>
+              ))}
+            </Grid>
           )}
         </Grid>
         <ShowMoreHome top="0px" />

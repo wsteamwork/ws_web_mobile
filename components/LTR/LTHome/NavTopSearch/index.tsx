@@ -13,7 +13,6 @@ interface IProps {
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     createStyles({
         boxWrapper: {
-            // backgroundColor: 'red',
             display: 'flex',
             alignItems: 'center',
             margin: '0 auto'
@@ -30,7 +29,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NavTopSearch: FC<IProps> = (props) => {
     const classes = useStyles(props);
     const [openSearchDialog, setOpenSearchDialog] = React.useState<boolean>(false);
-
     const handleOpenSearchDialog = () => {
         setOpenSearchDialog(true);
     };

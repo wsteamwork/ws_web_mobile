@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { getDataFilter, ResDataFilter, useFilterRoom } from '../../FilterActions/FilterDistrict/context';
 
 interface IProps {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen?: Dispatch<SetStateAction<boolean>>;
   setDataClick: Dispatch<SetStateAction<number[]>>;
   dataClick: number[];
 }

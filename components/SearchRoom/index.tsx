@@ -1,12 +1,15 @@
 import { makeStyles, Theme, Grid, TextField } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC } from 'react';
+import React, { FC, useState, useContext, useEffect } from 'react';
 import mainColor from '@/styles/constants/colors';
 import { useTranslation } from 'react-i18next';
+import SearchDialog from '../SearchDialog';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   classes?: any;
-  handleOpenSearch?: () => void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -37,7 +40,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       fontWeight: theme.typography.fontWeightBold
     },
     inputCustom: {
-      height:13,
+      height: 13,
       marginLeft: 8,
       zIndex: 2
     }
@@ -46,15 +49,30 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SearchRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { handleOpenSearch } = props;
+  const [openSearchDialog, setOpenSearchDialog] = useState<boolean>(false);
+  const { router } = useContext(GlobalContext);
+  const searchText = useSelector<ReducersList, string>((state) => state.searchFilter.searchText);
+
   const { t } = useTranslation();
+
+  const handleOpenSearchDialog = () => {
+    setOpenSearchDialog(true);
+  };
+
+  const handleCloseSearchDialog = () => {
+    setOpenSearchDialog(false);
+  };
+  useEffect(() => {
+    handleCloseSearchDialog();
+  }, [router.query])
   return (
     <Grid container item xs={12} className={classes.boxWrapper}>
       <Grid item xs={11}>
         <TextField
+          value={searchText}
           className={classes.customTextField}
           fullWidth={true}
-          onFocus={handleOpenSearch}
+          onClick={handleOpenSearchDialog}
           variant="outlined"
           id="search"
           type="search"
@@ -68,6 +86,7 @@ const SearchRoom: FC<IProps> = (props) => {
           }}
         />
       </Grid>
+      <SearchDialog handleClose={handleCloseSearchDialog} open={openSearchDialog} />
     </Grid>
   );
 };
