@@ -79,45 +79,6 @@ const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { isPreviewPage, room, scrollTo, collapseClicked, onBook } = props;
   const { t } = useTranslation();
-  const { width } = useContext(GlobalContext);
-  const parallaxData = [
-    {
-      start: 0,
-      duration: width === 'sm' ? 1800 : width === 'md' ? 3800 : 1000,
-      properties: [
-        {
-          startValue: 0,
-          endValue: 500,
-          property: "translateY"
-        },
-        {
-          startValue: 1,
-          endValue: 0.05,
-          property: "scaleY"
-        },
-        {
-          startValue: 1,
-          endValue: -1,
-          property: "opacity"
-        }
-      ]
-    },
-  ];
-
-  const parallaxData2 = [
-    {
-      start: 0,
-      end: 900,
-      properties: [
-        {
-          startValue: 660,
-          endValue: 0,
-          property: "translateY"
-        },
-      ]
-    },
-  ];
-
   return (
     <Parallax
       bgImage={props.backgroundImage}
