@@ -7,6 +7,7 @@ import BoxLTRoomDetail from '@/components/LTR/LTRoom/BoxLTRoomDetail';
 import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
 import ContentPlaceHolder from '@/components/PlaceHolder/ContentPlaceHolder';
+import { TransitionCustom } from '@/components/Rooms/BottomNav';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
@@ -118,6 +119,7 @@ const LongtermRoom: NextPage = () => {
                     collapseClicked={viewDetail}
                     backgroundImage={`${IMAGE_STORAGE_LG}${ltroom.avatar.images[0].name}`}
                     room={ltroom}
+                    onBook={handleOpenBookingDialog}
                   >
                     <Grid container justify='center' alignItems='center' className='roomPage__boxViewMore' onClick={handleView}>
                       <span style={{ color: '#fff' }}>{t('longtermroom:moreDetails')}</span>
@@ -149,9 +151,11 @@ const LongtermRoom: NextPage = () => {
         [ltroom, viewDetail]
       )}
       <Dialog
-        fullScreen
+        BackdropProps={{ classes: { root: "roomPage__backdropDialog" } }}
+        classes={{ paper: "roomPage__dialogCalendar" }}
         open={openBookingDialog}
         onClose={handleCloseBookingDialog}
+        TransitionComponent={TransitionCustom}
       >
         <BookingCalendar handleCloseBookingDialog={handleCloseBookingDialog} />
       </Dialog>
@@ -160,7 +164,7 @@ const LongtermRoom: NextPage = () => {
 };
 
 LongtermRoom.getInitialProps = async ({ store, query, req }: NextContextPage) => {
-  const initLanguage = getCookieFromReq(req, 'initLanguage');
+  const initLanguage = getCookieFromReq(req, 'initLanguage') || 'en';
   const data = await getDataLTRoom(store.dispatch, query, initLanguage);
   return {};
 };

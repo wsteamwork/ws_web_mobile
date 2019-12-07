@@ -23,7 +23,7 @@ interface IProps {
 const cookies = new Cookies();
 const format = 'YYYY-MM-DD';
 type Language = 'vi' | 'en';
-const vi: Language = cookies.get('initLanguage') || 'vi';
+const vi: Language = cookies.get('initLanguage') || 'en';
 const now = moment();
 
 if (vi === 'vi') {

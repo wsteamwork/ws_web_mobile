@@ -89,7 +89,7 @@ export const getLTCalculatedBookingPrice = async (
 export const getLTBookingData = async (
   query: any,
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<Omit<LTBookState, 'error'>> => {
   const { room_id } = query;
   const body = {
@@ -127,7 +127,7 @@ export const createLTBooking = async (req: LTBookingCreateReq): Promise<LTBookin
 export const getLTInvoice = async (
   query: any,
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<PaymentBankListRes> => {
   const { uuid } = query;
 

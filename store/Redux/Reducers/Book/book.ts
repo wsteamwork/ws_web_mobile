@@ -56,7 +56,7 @@ export const bookReducer: Reducer<BookState, BookActions> = (
 
 export const getRoomDetails = async (
   id: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(`rooms/${id}?include=details,district,city`, {
     headers: { 'Accept-Language': initLanguage }
@@ -67,7 +67,7 @@ export const getRoomDetails = async (
 
 export const getDataCalculate = async (
   query: BookingPriceCalculatorReq,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<BookingPriceCalculatorRes> => {
   const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
     'bookings/calculate-price-with-specific-day-price',
@@ -81,7 +81,7 @@ export const getDataCalculate = async (
 export const getDataBook = async (
   query: any,
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<Omit<BookState, 'error' | 'dataInvoice'>> => {
   const body = {
     booking_type: parseInt(query.booking_type, 10),
@@ -121,7 +121,7 @@ export const createBooking = async (data: BookingCreateReq): Promise<BookingInde
 export const getInvoice = async (
   query: any,
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<PaymentBankListRes> => {
   const { uuid } = query;
 

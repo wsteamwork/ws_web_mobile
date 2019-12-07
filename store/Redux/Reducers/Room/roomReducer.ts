@@ -58,7 +58,7 @@ export const roomReducer: Reducer<RoomReducerState, RoomReducerAction> = (
   }
 };
 
-export const getRoom = async (idRoom: any, initLanguage: string = 'vi'): Promise<RoomIndexRes> => {
+export const getRoom = async (idRoom: any, initLanguage: string =  'en'): Promise<RoomIndexRes> => {
   const res: AxiosRes<RoomIndexRes> = await axios.get(
     `rooms/${idRoom}?include=details,merchant,comforts.details,media,district,city,places.guidebook,reviews.user,prices`,
     { headers: { 'Accept-Language': initLanguage } }
@@ -69,7 +69,7 @@ export const getRoom = async (idRoom: any, initLanguage: string = 'vi'): Promise
 
 const getRoomRecommend = async (
   idRoom: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<RoomIndexRes[]> => {
   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
     `rooms/room_recommend/${idRoom}?include=media,details,city,district`,
@@ -81,7 +81,7 @@ const getRoomRecommend = async (
 
 export const getRoomSchedule = async (
   idRoom: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<string[]> => {
   const res: AxiosRes<RoomScheduleRes> = await axios.get(`rooms/schedule/${idRoom}`, {
     headers: { 'Accept-Language': initLanguage }
@@ -96,7 +96,7 @@ export const getPriceByDay = async (
     .add(6, 'month')
     .endOf('month')
     .format(DEFAULT_DATE_FORMAT),
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<PriceByDayRes[]> => {
   const query: BodyRequestPriceByDayRes = { date_start, date_end };
 
@@ -111,7 +111,7 @@ export const getPriceByDay = async (
 export const getDataRoom = async (
   dispatch: Dispatch<ReducresActions>,
   query: ParsedUrlQuery,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<Omit<RoomReducerState, 'error'>> => {
   const { id } = query;
   try {

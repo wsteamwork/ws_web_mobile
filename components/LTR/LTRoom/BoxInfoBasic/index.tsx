@@ -17,7 +17,8 @@ interface IProps {
   isPreviewPage?: boolean,
   district: string,
   city: string,
-  price: number
+  price: number,
+  onBook?: () => any
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -83,7 +84,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxInfoBasic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { showButtonBook, showRating, name, isPreviewPage, district, city, price } = props;
+  const { showButtonBook, showRating, name, isPreviewPage, district, city, price, onBook } = props;
   const { t } = useTranslation();
 
   return (
@@ -135,7 +136,7 @@ const BoxInfoBasic: FC<IProps> = (props) => {
             width='100%'
             textColor='#fff'
             background='#54D3C2'
-            onClick={() => { alert('ok') }}
+            onClick={onBook}
           >
             {t('longtermroom:viewSchedule')}
           </ButtonGlobal>

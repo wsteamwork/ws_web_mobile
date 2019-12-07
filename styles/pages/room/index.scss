@@ -29,6 +29,23 @@
     }
   }
 
+  &__dialogCalendar{
+    border-radius: 20px !important;
+    overflow: hidden;
+    @media screen and (max-width: 320px){
+      width: 100%;
+      margin: 0px !important;
+      max-height: none !important;
+      height: 100%;
+    }
+  }
+
+  &__backdropDialog{
+    background-color: rgba(0, 0, 0, 0) !important;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(27.1828px);
+  }
+
   &__boxBooking {
     @include xs {
       display: none;

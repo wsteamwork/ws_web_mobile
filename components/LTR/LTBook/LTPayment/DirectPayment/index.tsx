@@ -6,11 +6,10 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Typography } from '@material-ui/core';
 import moment from 'moment';
-import numeral from 'numeral';
 import React, { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
+import numeral from 'numeral'
 const DirectPayment: FC = () => {
   const { t } = useTranslation();
   const LTDataInvoice = useSelector<ReducersList, PaymentBankListRes>(
@@ -33,34 +32,8 @@ const DirectPayment: FC = () => {
 
   return (
     <Grid>
-      <Grid container>
-        <Grid item xs={12} md={4}>
-          <Typography variant="h6">{t('payment:directPayment:bookingInfo')}</Typography>
-
-          <Grid container>
-            <Grid item xs={5}>
-              <p>{t('payment:directPayment:codeBooking')}</p>
-            </Grid>
-            <Grid item xs={7} className="textRight">
-              <p>
-                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span>
-              </p>
-            </Grid>
-          </Grid>
-
-          <Grid container>
-            <Grid item xs={3}>
-              <p>{t('payment:directPayment:dateCreated')}</p>
-            </Grid>
-            {/* <Grid item xs={9} className="textRight">
-              <p>{moment(LTDataInvoice.created_at).format('MMMM Do YYYY, h:mm (dddd)')}</p>
-            </Grid> */}
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid container justify="space-between">
-        <Grid item xs={12} md={3} className="margintop">
+      <Grid container justify="space-between" spacing={2}>
+        <Grid item xs={12} md={6} className="margintop">
           <Grid container spacing={1}>
             <Typography variant="h6">{t('payment:directPayment:customerInfo')}</Typography>
 
@@ -91,7 +64,7 @@ const DirectPayment: FC = () => {
           </Grid>
         </Grid>
 
-        <Grid item xs={12} md={4} className="margintop">
+        <Grid item xs={12} md={6} className="margintop">
           <Grid container spacing={1}>
             <Typography variant="h6">{t('payment:directPayment:billInfo')}</Typography>
 
@@ -115,10 +88,19 @@ const DirectPayment: FC = () => {
         </Grid>
       </Grid>
 
-      <Grid container className="margintop">
-        <Grid item xs={12} md={4}>
+      <Grid container className="margintop" spacing={2}>
+        <Grid item xs={12} md={6}>
           <Typography variant="h6">{t('payment:directPayment:bookingInfo1')}</Typography>
-
+          <Grid container>
+            <Grid item xs={5}>
+              <p>{t('payment:directPayment:codeBooking')}</p>
+            </Grid>
+            <Grid item xs={7} className="textRight">
+              <p>
+                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span>
+              </p>
+            </Grid>
+          </Grid>
           <Grid item container>
             <Grid item xs={6}>
               <p>{t('payment:directPayment:guestNumber')}</p>
@@ -158,34 +140,6 @@ const DirectPayment: FC = () => {
             </Grid>
           </Grid>
         </Grid>
-      </Grid>
-
-      <Grid container className="margintop">
-        <Grid item xs={12} md={6}>
-          <Typography variant="h6">{t('payment:directPayment:apartmentInfo')}</Typography>
-
-          <Grid container spacing={3}>
-            <Grid item xs={4}>
-              <img
-                className="image"
-                src={`${IMAGE_STORAGE_LG}${longTermRoom.avatar.images.length ? longTermRoom.avatar.images[0].name : ''}`}
-                alt={longTermRoom.about_room.name}
-              />
-            </Grid>
-            <Grid item xs={8}>
-              <Grid>
-                <p className="nameRoom">{longTermRoom.about_room.name}</p>
-                <p>
-                  <FontAwesomeIcon icon={faMapMarkerAlt} size="1x"></FontAwesomeIcon>{' '}
-                  {longTermRoom.district.data.name}, {longTermRoom.city.data.name}
-                </p>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
-
-      <Grid container className="margintop">
         <Grid item xs={12} md={6}>
           <Typography variant="h6">{t('payment:directPayment:transferMoneyInfo')}</Typography>
 
@@ -218,7 +172,7 @@ const DirectPayment: FC = () => {
               <p>{t('payment:directPayment:accountHolder')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>Lưu Thị Linh Trang</p>
+              <p>Luu Thi Linh Trang</p>
             </Grid>
           </Grid>
           <Grid container>
@@ -227,18 +181,36 @@ const DirectPayment: FC = () => {
             </Grid>
             <Grid item xs={7} className="textRight">
               <p>
-                Thanh toán mã booking{' '}
-                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span> số tiền:{' '}
-                {numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}đ
+                {t('payment:directPayment:paymentTransferContent')}{' '}
+                <span style={{ textTransform: 'uppercase' }}>#{LTDataInvoice.uuid}</span>
               </p>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
 
-      <Grid container className="margintop">
-        <Grid item xs={12} md={6}></Grid>
-
+      <Grid container className="margintop" spacing={2}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h6">{t('payment:directPayment:apartmentInfo')}</Typography>
+          <Grid container spacing={2} justify='center' alignItems='center'>
+            <Grid item xs={4}>
+              <img
+                className="image"
+                src={`${IMAGE_STORAGE_LG}${longTermRoom.avatar.images[0].name}`}
+                alt={longTermRoom.about_room.name}
+              />
+            </Grid>
+            <Grid item xs={8}>
+              <Grid>
+                <p className="nameRoom">{longTermRoom.about_room.name}</p>
+                <p>
+                  <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" />{' '}
+                  {longTermRoom.district.data.name}, {longTermRoom.city.data.name}
+                </p>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
         <Grid item xs={12} md={6}>
           <Typography variant="h6">{t('payment:directPayment:roomRateBook')}</Typography>
 
@@ -250,23 +222,15 @@ const DirectPayment: FC = () => {
               </p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.price_and_contract[0].price_original).format('0,0')}đ</p>
+              <p>{t('home:currency')}&nbsp;{numeral(LTDataInvoice.contracts.data[0].price_original).format('0,0')}</p>
             </Grid>
           </Grid>
-          {/* <Grid container>
-            <Grid item xs={5}>
-              <p>{t('payment:directPayment:surcharge')}</p>
-            </Grid>
-            <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.service_fee).format('0,0')}đ</p>
-            </Grid>
-          </Grid> */}
           <Grid container>
             <Grid item xs={5}>
               <p>{t('payment:directPayment:totalRevenue')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(LTDataInvoice.price_and_contract[0].price_with_fee).format('0,0')}đ</p>
+              <p>{t('home:currency')}&nbsp;{numeral(LTDataInvoice.contracts.data[0].next_payment_due.payment_amount).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>

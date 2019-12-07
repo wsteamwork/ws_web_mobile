@@ -118,7 +118,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
         <RoomDescription
           isPreviewPage={isPreviewPage}
           description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
-          space={checkAboutRoom ? t('room:notFoundCaontent') : room.about_room.space}
+          space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
           note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
       </div>
 
