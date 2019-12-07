@@ -14,6 +14,7 @@ interface IProps {
   backgroundImage?: string;
   room: any;
   scrollTo?: void,
+  onBook?: () => any;
   collapseClicked?: boolean;
 }
 
@@ -76,7 +77,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const BoxImageLT: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { isPreviewPage, room, scrollTo, collapseClicked } = props;
+  const { isPreviewPage, room, scrollTo, collapseClicked, onBook } = props;
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const parallaxData = [
@@ -132,6 +133,7 @@ const BoxImageLT: FC<IProps> = (props) => {
               district={room.district.data.name}
               city={room.city.data.name}
               price={room.price_display}
+              onBook={onBook}
             />
           </div>
           {props.children}

@@ -35,7 +35,7 @@ export const promotionReducer: Reducer<PomotionState, PomotionActions> = (
 
 export const getDataPromotions = async (
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<PromotionRes[]> => {
   const res: AxiosRes<PromotionRes[]> = await axios.get('promotions?include=coupons', {
     headers: { 'Accept-Language': initLanguage }
@@ -47,7 +47,7 @@ export const getDataPromotions = async (
 export const getPromotionsById = async (
   dispatch: Dispatch<ReducresActions>,
   id: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<PromotionRes> => {
   const res: AxiosRes<PromotionRes> = await axios.get(`promotions/${id}?include=coupons`, {
     headers: { 'Accept-Language': initLanguage }

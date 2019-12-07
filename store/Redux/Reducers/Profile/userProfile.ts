@@ -42,7 +42,7 @@ export const userProfileReducer: Reducer<UserProfileState, UserProfileActions> =
 
 export const getProfileById = async (
   idUser: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<ProfileViewInfoRes> => {
   const res: AxiosRes<ProfileViewInfoRes> = await axios.get(`/profile/${idUser}`, {
     headers: { 'Accept-Language': initLanguage }
@@ -52,7 +52,7 @@ export const getProfileById = async (
 
 export const getRoomMerchantById = async (
   idUser: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<RoomIndexRes[]> => {
   const res: AxiosRes<RoomIndexRes[]> = await axios.get(
     `rooms?merchant=${idUser}&include=reviews.user,details,media,city,district&limit=30`,
@@ -64,7 +64,7 @@ export const getRoomMerchantById = async (
 export const getDataViewProfile = async (
   id: any,
   dispatch: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<Omit<UserProfileState, 'error'>> => {
   try {
     const res = await Promise.all([

@@ -37,7 +37,7 @@ export const roomListReducer: Reducer<RoomListReducerState, RoomListReducerActio
 
 export const getRoomList = async (
   dispatch: Dispatch<RoomListReducerAction>,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   token?: string
 ): Promise<any> => {
   const headers = token && {

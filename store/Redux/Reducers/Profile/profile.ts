@@ -83,7 +83,7 @@ export const iProfileReducer: Reducer<ProfileState, ProfileAction> = (
 
 export const getProfile = async (
   dispath: Dispatch<ReducresActions>,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   token?: string
 ): Promise<ProfileInfoRes> => {
   const headers = token && {
@@ -117,7 +117,7 @@ export const getUserBookingList = async (
 export const getReviews = async (
   dispath: Dispatch<ReducresActions>,
   id: any,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   token?: string
 ): Promise<RoomReviewInfoRes> => {
   const headers = token && {
@@ -143,7 +143,7 @@ export const getReviews = async (
 
 export const getBookingById = async (
   id: any,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   token?: string
 ): Promise<BookingIndexRes> => {
   const headers = token && {
@@ -160,7 +160,7 @@ export const getBookingById = async (
   return res.data.data;
 };
 
-export const getTypeCancel = async (initLanguage: string = 'vi'): Promise<CancelReasonList[]> => {
+export const getTypeCancel = async (initLanguage: string =  'en'): Promise<CancelReasonList[]> => {
   const res: AxiosResponse<CancelReasonList[]> = await axios.get(`bookings/cancel-reason-list`, {
     headers: { 'Accept-Language': initLanguage }
   });
@@ -170,7 +170,7 @@ export const getTypeCancel = async (initLanguage: string = 'vi'): Promise<Cancel
 export const getPageBookingCancel = async (
   dispath: Dispatch<ReducresActions>,
   id: any,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   token?: string
 ): Promise<Pick<ProfileState, 'bookingById' | 'typeCancel'>> => {
   try {

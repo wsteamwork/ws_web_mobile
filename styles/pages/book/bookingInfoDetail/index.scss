@@ -1,9 +1,13 @@
 .bookingInfoDetail {
-  .paperCustom {
-    padding: 1rem;
-    box-shadow: none !important;
-  }
 
+  .boxInfoCus{
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 12px 0;
+    .titleInfo{
+      font-weight: 600;
+    }
+  }
   .card {
     display: flex;
     border-radius: 2px;
@@ -35,17 +39,12 @@
   }
 
   .timeCheck {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #eee;
   }
 
   .dividerMargin {
     margin-top: 15px;
     margin-bottom: 15px;
-  }
-
-  .gridInfo {
-    position: sticky;
-    top: 0;
   }
 
   .flexCenter {
@@ -74,24 +73,28 @@
 
   .infoRoom {
     cursor: pointer;
+    margin-bottom: 8px;
 
     &__name {
-      margin-top: 8px;
-
-      > a {
+      > p {
         font-weight: 600;
-        font-weight: 1rem;
         cursor: pointer;
-        color: #000;
+        overflow: hidden;
+        font-size: 15px;
+        overflow-wrap: break-word;
+        color: #484848;
+        line-height: 24px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        text-overflow: ellipsis;
+        -webkit-box-orient: vertical;
       }
     }
 
     .imgSize {
-      background-repeat: no-repeat;
-      background-position: center;
       object-fit: cover;
       width: 100%;
-      height: 220px;
+      border-radius: 8px;
       vertical-align: middle;
     }
 

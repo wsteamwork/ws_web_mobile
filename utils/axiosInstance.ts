@@ -10,7 +10,7 @@ const cookies = new Cookies();
 
 const headers = {
   Accept: 'application/json',
-  'Accept-Language': cookies.get('initLanguage') || 'vi',
+  'Accept-Language': cookies.get('initLanguage') || 'en',
   Authorization: 'Bearer ' + cookies.get('_token'),
   'Content-Language': 'en-EN'
 };

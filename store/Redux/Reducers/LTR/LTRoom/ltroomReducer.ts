@@ -44,7 +44,7 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
 
 export const getLTRoom = async (
   idRoom: any,
-  initLanguage: string = 'vi'
+  initLanguage: string =  'en'
 ): Promise<LTRoomIndexRes> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
@@ -56,7 +56,7 @@ export const getLTRoom = async (
 
 export const getRoomAvailableDate = async (
   idRoom: any,
-  initLanguage: string = 'vi',
+  initLanguage: string =  'en',
   date_start: string = moment().format(DEFAULT_DATE_FORMAT)
 ): Promise<LTRoomAvailableRes> => {
   const res: AxiosRes<LTRoomAvailableRes> = await axios.get(
@@ -78,7 +78,7 @@ export const getRoomAvailableDate = async (
 //     .add(6, 'month')
 //     .endOf('month')
 //     .format(DEFAULT_DATE_FORMAT),
-//   initLanguage: string = 'vi'
+//   initLanguage: string =  'en'
 // ): Promise<PriceByDayRes[]> => {
 //   const query: BodyRequestPriceByDayRes = { date_start, date_end };
 //
@@ -93,7 +93,7 @@ export const getRoomAvailableDate = async (
 export const getDataLTRoom = async (
   dispatch: Dispatch<ReducresActions>,
   query: ParsedUrlQuery,
-  initLanguage: string = 'vi'
+  initLanguage: string = 'en'
 ): Promise<Omit<LTRoomReducerState, 'error'>> => {
   const { id } = query;
 

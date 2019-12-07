@@ -18,7 +18,7 @@ import { BaseRouter } from 'next-server/dist/lib/router/router';
 import { NextRouter } from 'next/router';
 import qs from 'query-string';
 import { createContext, Dispatch, Reducer } from 'react';
-
+import Cookies from 'universal-cookie';
 export const MIN_PRICE = 0;
 export const MAX_PRICE = 50000000;
 export const STEP_PRICE = 100000;
@@ -151,8 +151,9 @@ export const getLTRooms = async (
   router: NextRouter,
   coords?: MapCoords
 ): Promise<BaseResponse<LTRoomIndexRes[]>> => {
+  const cookies = new Cookies();
+  const initLanguage = cookies.get('initLanguage') || 'en';
   let params: LTRoomUrlParams = router.query;
-
   let query: Partial<LTRoomIndexGetParams> = {
     include: 'city,district',
     name: params.name,
@@ -166,8 +167,8 @@ export const getLTRooms = async (
     comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
     discount: params.discount === null ? 1 : undefined, // 0,1
     instant_book: params.instant_book, // 1,2
-    limit:20,
-    page: params.page,
+    limit: 20,
+    page: params.page
   };
 
   if (coords) {
@@ -175,6 +176,8 @@ export const getLTRooms = async (
   }
   const signature = 'long-term-rooms';
   const url = `${signature}?${qs.stringify(query)}`;
-  const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(url);
+  const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(url, {
+    headers: { 'Accept-Language': initLanguage }
+  });
   return res.data;
 };
