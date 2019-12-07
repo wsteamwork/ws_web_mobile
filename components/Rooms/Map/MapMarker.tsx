@@ -41,7 +41,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     overBubble: {
       [theme.breakpoints.only('xs')]: {
-        minWidth: 110
+        minWidth: 75
       }
     }
   })
@@ -67,7 +67,7 @@ const MapMarker: ComponentType<IProps> = (props: LocalProps) => {
           classes.speechBubbleOver
         )}>
         <span>
-          {cookies.get('initLanguage') == 'en ' ? '$' : 'đ'}
+          {cookies.get('initLanguage') == 'en' ? '$' : 'đ'}
           {formatMoney(room.price_display, 0)}
         </span>
       </div>

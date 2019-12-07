@@ -1,131 +1,49 @@
-import SearchAutoSuggestion from '@/components/Home/SearchAutoSuggestion';
-import GridContainer from '@/components/Layout/Grid/Container';
+import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
+import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
+import FeatureRooms from '@/components/LTR/LTHome/FeatureRooms';
+import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
+import HighEndRooms from '@/components/LTR/LTHome/HighEndRooms';
+import NavTopSearch from '@/components/LTR/LTHome/NavTopSearch';
+import RoomTypeList from '@/components/LTR/LTHome/RoomTypeList';
+import TopDestination from '@/components/LTR/LTHome/TopDestinations';
+import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { getCookieFromReq } from '@/utils/mixins';
-import { NextPage } from 'next';
-import React, { Fragment, useEffect, useState, useContext } from 'react';
-import Antd_SearchInput from '@/components/LTR/ReusableComponents/SearchInput';
-import SearchInput from '@/components/LTR/ReusableComponents/SearchInput';
-import PropertyListHorizontalScroll from './PropertyListHorizontalScroll';
-import MetroGridImage from '@/components/Layout/MetroGridImage';
-import { getRoomType } from '@/components/Rooms/FilterActions/RoomType/context';
-import { Grid, Typography, Dialog, Slide } from '@material-ui/core';
-import { NumberRoomCity, RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import CardIntro from '@/components/Cards/CardIntro';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateRouter } from '@/store/Context/utility';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { Dispatch } from 'redux';
-import numeral from 'numeral';
-import CardItem from '@/components/Cards/CardItem';
 import BottomNav from '@/components/Rooms/BottomNav';
-import CardRoom2 from '@/components/Cards/CardRoom2';
+import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useTranslation } from 'react-i18next';
-import SearchDialog from '@/components/SearchDialog';
-import BookingCalendar from '@/components/LTR/LTBook/BookingCalendar';
-import { TransitionProps } from '@material-ui/core/transitions';
+import { getCookieFromReq } from '@/utils/mixins';
+import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
+import { NextPage } from 'next';
+import React, { Fragment } from 'react';
+import HeadRoom from 'react-headroom';
+const useStyles = makeStyles<Theme>((theme: Theme) =>
+  createStyles({
+    boxWrapper: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'white'
+    }
+  })
+);
+const LTHome: NextPage = (props) => {
+  const classes = useStyles(props);
+  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+  //   (state) => state.roomHomepage.roomsHot
+  // );
+  // const renderRoomsHot = (room) => (
+  //   <CardRoom2
+  //     city={room.city}
+  //     district={room.district}
+  //     // instantbook={room.instant_book}
+  //     roomID={room.id}
+  //     roomName={room.about_room.name}
+  //     roomType={room.accommodation_type_txt}
+  //     roomImage={room.avatar.images[0].name}
+  //     avg_rating={room.avg_rating}
+  //   />
+  // );
 
-const LTHome: NextPage = () => {
-  const { router, width } = useContext(GlobalContext);
-  const { t } = useTranslation();
-  const [roomTypesData, setRoomTypesData] = useState<any[]>([]);
-  const roomsCity = useSelector<ReducersList, NumberRoomCity[]>(
-    (state) => state.roomHomepage.roomsCity
-  );
-  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-    (state) => state.roomHomepage.roomsHot
-  );
-  const [openSearchDialog, setOpenSearchDialog] = React.useState<boolean>(false);
-  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
-
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
-    (state) => state.searchFilter.leaseTypeGlobal
-  );
-  const propertyImgs = ['house', 'apartment', 'villa', 'room', 'hotels'];
-
-  useEffect(() => {
-    getRoomType()
-      .then((res) =>
-        res.map((item, index) => ({
-          ...item,
-          img: `/static/images/property/${propertyImgs[index]}.jpg`
-        }))
-      )
-      .then((list) => setRoomTypesData(list));
-    // console.log(listing);
-  }, []);
-
-  const renderRoomTypeItem = (item, size) => (
-    <Grid>
-      <Grid className="propery-item-icon">
-        <img className="item-icon" style={{ width: size, height: size }} src={item.img}></img>
-      </Grid>
-      <Typography style={{ textAlign: 'center' }}>{item.value}</Typography>
-    </Grid>
-  );
-
-  const renderCity = (city: NumberRoomCity) => (
-    <div>
-      <CardItem
-        title={city.name_city}
-        imgSrc={city.image}
-        subTitle={t('home:fromPrice')}
-        bigTitle={true}
-        recommendedPrice={numeral(city.average_price).format('0,0')}
-        // imgHeight={290}
-        onClickCard={() => locationRoom(city.name_city)}
-      />
-    </div>
-  );
-
-  const renderDestinations = (city: NumberRoomCity) => (
-    <div>
-      <CardItem
-        centerTitle={true}
-        title={city.name_city}
-        imgSrc={city.image}
-        subTitle={t('home:fromPrice')}
-        recommendedPrice={numeral(city.average_price).format('0,0')}
-        onClickCard={() => locationRoom(city.name_city)}
-      />
-    </div>
-  );
-  const renderRoomsHot = (room) => (
-    <CardRoom2
-      city={room.city.data.name}
-      district={room.district.data.name}
-      // instantbook={room.instant_book}
-      roomID={room.id}
-      roomName={room.room_name}
-      roomNumber={room.number_room}
-      roomType={room.room_type_txt}
-      roomImage={room.avatar_image}
-      avg_rating={room.avg_rating}
-    />
-  );
-
-  const locationRoom = (nameCity: string) => {
-    updateRouter(`${leaseTypeGlobal} ? '/long-term-rooms' : '/rooms'`, true, 'name', nameCity);
-    dispatch({
-      type: 'SET_SEARCH_TEXT',
-      searchText: nameCity
-    });
-  };
-
-  const handleOpenSearchDialog = () => {
-    setOpenSearchDialog(true);
-  };
-
-  const handleCloseSearchDialog = () => {
-    setOpenSearchDialog(false);
-  };
-
-  const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
   return (
     <Fragment>
       <NextHead
@@ -137,51 +55,48 @@ const LTHome: NextPage = () => {
         ogImage="/static/images/Bg_home.4023648f.jpg"
       />
 
-      <Grid xs={12} style={{ padding: '44px 0 100px' }}>
-        <Grid style={{ padding: '14px 22px' }}>
-          <SearchInput displayOnlyForModal onClick={handleOpenSearchDialog} />
+      <Grid container justify="center">
+        <Grid item xs={12}>
+          <HeadRoom
+            style={{
+              WebkitTransition: 'all 0.35s ease-in-out',
+              MozTransition: 'all 0.35s ease-in-out',
+              OTransition: 'all 0.35s ease-in-out',
+              transition: 'all 0.35s ease-in-out'
+            }}
+          >
+            <Grid item xs={12} className={classes.boxWrapper}>
+              <NavTopSearch />
+            </Grid>
+          </HeadRoom>
         </Grid>
-
-        <PropertyListHorizontalScroll
-          itemWidth={width == 'sm' ? '20%' : '25%'}
-          gutter={6}
-          listData={roomTypesData}
-          itemRender={renderRoomTypeItem}
-          sizeIcon={width == 'sm' ? 100 : 65}
-        />
-
-        <PropertyListHorizontalScroll
-          itemWidth={width == 'sm' ? '50%' : '95%'}
-          gutter={6}
-          listData={roomsCity}
-          itemRender={renderCity}
-        />
-
-        <PropertyListHorizontalScroll
-          itemWidth={width == 'sm' ? '33.3%' : '66%'}
-          gutter={6}
-          headTitle={t('home:topDestinations')}
-          listData={roomsCity}
-          itemRender={renderDestinations}
-        />
-        <Grid style={{ padding: '14px 2px' }}>
-          <PropertyListHorizontalScroll
-            itemWidth={'95%'}
-            itemHeight={width == 'sm' ? 200 : 170}
-            gutter={6}
-            headTitle={t('home:topHomestay')}
-            listData={roomsHot}
-            itemRender={renderRoomsHot}
-          />
-          {/* <CardRoom2 /> */}
+        <Grid item xs={12}>
+          <RoomTypeList />
         </Grid>
-
+        <Grid item xs={12}>
+          <TopDestination />
+        </Grid>
+        <Grid item xs={12}>
+          <FeatureRooms />
+        </Grid>
+        <Grid item xs={12}>
+          <WhyChoosingUs />
+        </Grid>
+        <Grid item xs={12}>
+          <EditorChoiceRooms />
+        </Grid>
+        <Grid item xs={12}>
+          <ForFamilyRooms />
+        </Grid>
+        <Grid item xs={12}>
+          <BusinessTripRooms />
+        </Grid>
+        <Grid item xs={12}>
+          <HighEndRooms />
+        </Grid>
         <BottomNav />
       </Grid>
 
-      <SearchDialog handleClose={handleCloseSearchDialog} open={openSearchDialog} />
-      {/* </Dialog> */}
-      {/*  */}
     </Fragment>
   );
 };

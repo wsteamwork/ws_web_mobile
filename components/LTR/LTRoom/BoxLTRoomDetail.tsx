@@ -7,12 +7,12 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { Divider, Theme, useTheme, Zoom } from '@material-ui/core';
 import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import BoxInfoBasic from './BoxInfoBasic';
+import BoxRoomOfAccommodation from './BoxRoomOfAccommodation';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -20,6 +20,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       padding: '32px 28px 0',
       [theme.breakpoints.up('sm')]: {
         padding: '32px 38px 0',
+      }
+    },
+    paperCustomAccommodation: {
+      padding: '24px 20px 0',
+      [theme.breakpoints.up('sm')]: {
+        padding: '20px 20px 0',
       }
     },
     paperFullRight: {
@@ -40,7 +46,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       marginTop: theme.spacing(4)
     },
     divider: {
-      margin: '32px 20px 0'
+      margin: '24px 20px 0'
     },
     extendedIcon: {
       marginRight: theme.spacing(1),
@@ -74,7 +80,12 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
   const theme = useTheme();
-
+  const dataRoomOfAccommodation = {
+    bedrooms: { imageIcon: '/static/icons/bedroom.svg', title: t('longtermroom:bedrooms'), subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : '?'} ${t('longtermroom:bedroomLower')}` },
+    kitchens: { imageIcon: '/static/icons/fridge.svg', title: t('longtermroom:kitchens'), subtitle: `${room && room.comforts ? room.comforts.kitchens.length : '?'} ${t('longtermroom:amenities')}` },
+    bathrooms: { imageIcon: '/static/icons/bathroom.svg', title: t('longtermroom:bathrooms'), subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : '?'} ${t('longtermroom:bathroomLower')}` },
+    totalArea: { imageIcon: '/static/icons/area.svg', title: t('longtermroom:totalArea'), subtitle: `${room ? room.total_area : '?'}` },
+  };
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
     exit: theme.transitions.duration.leavingScreen,
@@ -94,12 +105,20 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           price={room.price_display}
         />
       </div>
+      <div className={classes.paperCustomAccommodation}>
+        <BoxRoomOfAccommodation
+          bedrooms={dataRoomOfAccommodation.bedrooms}
+          kitchens={dataRoomOfAccommodation.kitchens}
+          bathrooms={dataRoomOfAccommodation.bathrooms}
+          totalArea={dataRoomOfAccommodation.totalArea}
+        />
+      </div>
       <Divider className={classes.divider} />
       <div className={classes.paper}>
         <RoomDescription
           isPreviewPage={isPreviewPage}
           description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
-          space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
+          space={checkAboutRoom ? t('room:notFoundCaontent') : room.about_room.space}
           note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
       </div>
 

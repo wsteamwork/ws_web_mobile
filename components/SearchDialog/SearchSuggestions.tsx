@@ -21,7 +21,8 @@ import { SearchSuggestData } from '@/types/Requests/Search/SearchResponse';
 import Router from 'next/router';
 import PlaceRoundedIcon from '@material-ui/icons/PlaceRounded';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
 interface Iprops {
   inputValue: string;
 }
@@ -48,7 +49,7 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     getDataSearch(inputValue).then((data) => setDataSuggestions(data));
   }, [inputValue]);
 
-  console.log(dataSuggestions);
+  // console.log(dataSuggestions);
 
   const applySearch = (option: SearchSuggestData) => {
     let name = option.name;
@@ -83,14 +84,27 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
   return (
     <Fragment>
       {dataSuggestions &&
-        dataSuggestions.map((suggestion: SearchSuggestData, index) => (
-          <Grid className={classes.option} key={index} onClick={() => applySearch(suggestion)}>
-            <Grid className={classes.icon}>
-              {suggestion.type == 3 ? <HomeRoundedIcon /> : <PlaceRoundedIcon />}
+        dataSuggestions.map((suggestion: SearchSuggestData, index) => {
+          const matches = match(suggestion.name, inputValue);
+          const parts = parse(suggestion.name, matches);
+          // console.log(parts);
+          return (
+            <Grid className={classes.option} key={index} onClick={() => applySearch(suggestion)}>
+              <Grid className={classes.icon}>
+                {suggestion.type == 3 ? <HomeRoundedIcon /> : <PlaceRoundedIcon />}
+              </Grid>
+              <Grid>
+                {parts.map((part, index) => (
+                  <span key={index} style={{ fontWeight: part.highlight && 700 }}>
+                    {part.text}
+                  </span>
+                ))}
+              </Grid>
+
+              {/* {suggestion.name} */}
             </Grid>
-            {suggestion.name}
-          </Grid>
-        ))}
+          );
+        })}
     </Fragment>
   );
 };

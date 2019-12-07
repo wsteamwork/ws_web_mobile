@@ -1,270 +1,316 @@
 .roomCardMap {
+  height: 100%;
+  position: relative;
+  color: #484848;
+  border: 1px solid #ebebeb;
+  border-radius: 15px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.151825);
+
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
+  }
+
+  &__wrapper {
     height: 100%;
+    display: flex;
+  }
+
+  .boxImg {
+    z-index: 0;
     position: relative;
-    color: #484848;
-    border: 1px solid #ebebeb;
-    border-radius: 15px;
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.151825);
-  
-    &:hover {
-      box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 12px;
-    }
-  
-    &__wrapper {
-      height: 100%;
-      display: flex;
-    }
-  
-    .boxImg {
-      z-index: 0;
+    height: auto;
+    .imgSize {
       position: relative;
-      height: auto;
-      .imgSize {
-        position: relative;
-        object-fit: cover;
-        height: 122px;
-        vertical-align: middle;
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
-        width: 100%;
-  
-        @keyframes fadein {
-          from {
-            opacity: 0;
-          }
-  
-          to {
-            opacity: 1;
-          }
-        }
-  
-        -webkit-animation: fadein 0.5s ease-in-out;
-        animation: 500ms ease-in-out 0ms 1 normal none running fadein;
-      }
-    }
-  
-    .boxSave {
-      position: absolute;
-      top: -22px;
-      right: -22px;
-      width: 60px;
-      height: 60px;
-      text-align: center;
-    }
-  
-    .Lottie_iconHeart {
-      cursor: pointer;
-    }
-  
-    .iconCompare {
-      color: #08c299;
-      padding: 6px;
-      font-size: 1.15rem;
-      transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
-    }
-  
-    .boxCard {
-      width: 100%;
-      min-height: 120px;
+      object-fit: cover;
+      height: 122px;
       vertical-align: middle;
-      background-color: #ffffff;
-      border: 1px solid;
-      border-color: #ffffff;
-      border-bottom-right-radius: 15px;
-      border-top-right-radius: 15px;
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
+      width: 100%;
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      -webkit-animation: fadein 0.5s ease-in-out;
+      animation: 500ms ease-in-out 0ms 1 normal none running fadein;
+    }
+  }
   
-      .cardWrapper {
+
+  .boxSave {
+    position: absolute;
+    top: -22px;
+    right: -22px;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+  }
+
+  .Lottie_iconHeart {
+    cursor: pointer;
+  }
+
+  .iconCompare {
+    color: #08c299;
+    padding: 6px;
+    font-size: 1.15rem;
+    transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  }
+
+  .boxCard {
+    width: 100%;
+    min-height: 120px;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #ffffff;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+
+    .cardWrapper {
+      height: 100%;
+      padding: 8px 12px;
+      box-sizing: border-box;
+      //xs
+      @media (min-width: 320px) and (max-width: 375px) {
+        .cardWrapper {
+          padding: 5px 8px !important;
+        }
+      }
+
+      .cardContainer {
+        position: relative;
         height: 100%;
-        padding: 12px 16px;
-        box-sizing: border-box;
-  
-        .cardContainer {
-          position: relative;
-          height: 100%;
-          width: 100%;
-          display: inline-block;
-  
-          .boxLink {
-            display: block;
-            color: #484848;
-            text-decoration: none !important;
-            cursor: pointer;
-            font-weight: 500;
-  
-            .boxTitle {
-              @include smUp {
-                margin-bottom: 5px;
+        width: 100%;
+        display: inline-block;
+
+        .boxLink {
+          display: block;
+          color: #484848;
+          text-decoration: none !important;
+          cursor: pointer;
+          font-weight: 500;
+
+          .boxTitle {
+            @include smUp {
+              margin-bottom: 5px;
+            }
+
+            @include xs {
+              margin-bottom: 20px;
+            }
+
+            .roomName {
+              overflow: hidden;
+              margin-top: 5px;
+              font-size: 13px;
+              font-weight: 700;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              color: #484848;
+              line-height: 24px;
+              .linkRoom {
+                color: #54D3C2;
               }
-  
-              @include xs {
-                margin-bottom: 20px;
-              }
-  
+            }
+            //xs
+            @media (min-width: 320px) and (max-width: 374px) {
               .roomName {
-                overflow: hidden;
-                font-size: 13px;
-                font-weight: 700;
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                color: #484848;
-                line-height: 24px;
-                .linkRoom {
-                  color: #54D3C2;
-                }
-              }
-              .address {
-                color: #767676;
                 font-size: 10px;
               }
-  
-              .roomType {
-                text-transform: uppercase;
-                font-size: 11px;
-                font-weight: 600;
-                color: #fa991c;
-                display: inline-block;
-                margin-right: 3px;
-              }
-  
-              .dotAmenties {
-                display: inline-block;
-                vertical-align: text-bottom;
-                margin: 0 3px;
-                font-weight: 700;
-              }
-  
-              .collectionAmenities {
-                overflow-wrap: break-word;
-                font-size: 14px;
-                color: #484848;
-              }
-  
-              .ul {
-                display: flex;
-                padding: 0;
-                margin: 6px 0 0 0;
-                list-style-type: none;
-  
-                .list {
-                  padding-right: 4px;
-                }
-              }
-  
-              .tooltip {
-                font-size: 0.8rem;
-                max-width: 200px;
-                padding: 5px;
-                .borderblue {
-                  border: 1px solid #7676768a;
-                }
+            }
+            //xs
+            @media (width: 375px) {
+              .roomName {
+                font-size: 12px;
               }
             }
-  
-            .boxRating {
-              position: absolute;
-              bottom: 0px !important;
-              left: 0px !important;
-              right: 70px !important;
+            .address {
+              color: #767676;
+              font-size: 10px;
+            }
+
+            .roomType {
+              text-transform: uppercase;
+              font-size: 11px;
+              font-weight: 600;
+              color: #fa991c;
+              display: inline-block;
+              margin-right: 3px;
+            }
+
+            .dotAmenties {
+              display: inline-block;
+              vertical-align: text-bottom;
+              margin: 0 3px;
+              font-weight: 700;
+            }
+
+            .collectionAmenities {
+              overflow-wrap: break-word;
+              font-size: 14px;
+              color: #484848;
+            }
+
+            .ul {
               display: flex;
-              font-size: 13px;
-              align-items: flex-end;
-  
-              .starIcon {
-                width: 20px;
-                height: 20px;
-                color: #ffc212;
-              }
-  
-              .totalReview {
-                color: #767676;
-                font-weight: 300;
-              }
-  
-              .totalReviewText {
-                margin-left: 10px;
-                color: #fa991c;
-                font-weight: 500;
-              }
-  
-              .avgRating {
-                font-weight: 700;
+              padding: 0;
+              margin: 6px 0 0 0;
+              list-style-type: none;
+
+              .list {
+                padding-right: 4px;
               }
             }
-  
-            .boxPrice {
-              right: 0;
-              bottom: 0;
-              text-align: right;
-  
-              position: absolute;
-  
-              .priceContainer {
-                @include lgUp {
-                  display: flex;
-                }
-  
-                @include xs {
-                  justify-content: flex-end;
-                }
+
+            .tooltip {
+              font-size: 0.8rem;
+              max-width: 200px;
+              padding: 5px;
+              .borderblue {
+                border: 1px solid #7676768a;
               }
-  
-              .hourPrice {
-                @media (min-width: 700px) {
-                  display: inline-block;
-                }
-              }
-  
-              .dayPrice {
-                @include sm {
-                  display: inline-block;
-                }
-              }
-  
-              .priceText {
-                font-size: 14px;
-                margin-left: 20px;
-                color: #fa991c;
-                font-weight: 700;
-              }
-  
-              .discountPriceText {
+            }
+          }
+
+          .boxRating {
+            position: absolute;
+            bottom: 0px !important;
+            left: 0px !important;
+            right: 64px !important;
+            display: flex;
+            font-size: 13px;
+            align-items: flex-end;
+            //xs
+            @media (min-width: 320px) and (max-width: 374px) {
+              .roomName {
                 font-size: 13px;
-                color: #7d7d7db3;
-                text-decoration: line-through;
-                font-weight: 700;
               }
-  
-              .discountPriceBadge {
-                width: calc(100% + 22px);
-                position: relative;
+            }
+            .starIcon {
+              width: 20px;
+              height: 20px;
+              color: #ffc212;
+            }
+
+            .totalReview {
+              color: #767676;
+              font-weight: 300;
+            }
+
+            .totalReviewText {
+              margin-left: 10px;
+              color: #fa991c;
+              font-weight: 500;
+            }
+
+            .avgRating {
+              font-weight: 700;
+            }
+          }
+
+          .boxPrice {
+            right: 0;
+            bottom: 0;
+            text-align: right;
+
+            position: absolute;
+
+            .priceContainer {
+              @include lgUp {
+                display: flex;
+              }
+
+              @include xs {
+                justify-content: flex-end;
+              }
+              .txtPrice {
+                font-size: 18px;
+                line-height: 24px;
                 text-align: right;
-                border-radius: 2px;
-                margin-bottom: 9px;
-  
-                .discountBox {
-                  color: #fff;
-                  padding: 4px 10px 4px 8px;
-                  display: inline-block;
-                  font-size: 14px;
-                  font-weight: 700;
-                  border-radius: 2px;
-                  background-color: #ff9800;
+                letter-spacing: 0.32;
+                font-weight: bold;
+                color: #252529
+              }
+              //xs
+              @media (min-width: 320px) and (max-width: 374px) {
+                .txtPrice {
+                  font-size: 16px;
+                  line-height: 20px;
+                }
+              @media (min-width: 375px) and (max-width: 423px) {
+                .txtPrice {
+                  font-size: 18px;
+                  line-height: 20px;
                 }
               }
+              }
             }
-  
-            .boxsave {
-              position: absolute;
-              top: -10;
-              right: -12;
-              width: 40px;
-              height: 40px;
+
+            .hourPrice {
+              @media (min-width: 700px) {
+                display: inline-block;
+              }
             }
+
+            .dayPrice {
+              @include sm {
+                display: inline-block;
+              }
+            }
+
+            .priceText {
+              font-size: 14px;
+              margin-left: 20px;
+              color: #fa991c;
+              font-weight: 700;
+            }
+
+            .discountPriceText {
+              font-size: 13px;
+              color: #7d7d7db3;
+              text-decoration: line-through;
+              font-weight: 700;
+            }
+
+            .discountPriceBadge {
+              width: calc(100% + 22px);
+              position: relative;
+              text-align: right;
+              border-radius: 2px;
+              margin-bottom: 9px;
+
+              .discountBox {
+                color: #fff;
+                padding: 4px 10px 4px 8px;
+                display: inline-block;
+                font-size: 14px;
+                font-weight: 700;
+                border-radius: 2px;
+                background-color: #ff9800;
+              }
+            }
+          }
+
+          .boxsave {
+            position: absolute;
+            top: -10;
+            right: -12;
+            width: 40px;
+            height: 40px;
           }
         }
       }
     }
   }
-  
+}
+

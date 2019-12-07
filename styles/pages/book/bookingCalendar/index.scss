@@ -1,24 +1,61 @@
-.button-clear-dates {
-  color: #673ab7;
-  border-color: #673ab7;
-  margin-left: 8px !important;
-  padding: 0 !important;
+.box-button-clear-dates {
+  position: absolute;
+
+  @include lgDown {
+    top: -24px;
+  }
+
+  @include lgUp {
+    top: 8px;
+  }
+
+  right: 20px;
+
+  .button-clear-dates {
+    color: #673ab7;
+    // font-size: 16px;
+    // cursor: pointer;
+    // text-decoration: none;
+    // background: transparent;
+    // border-width: 0px;
+    // border-style: initial;
+    border-color: #673ab7;
+    // border-image: initial;
+    // margin: 0px;
+    // padding: 0px;
+  }
+
+  .button-clear-dates:hover {
+    text-decoration: underline;
+  }
 }
 
 .booking-calendar {
   &__box-title {
     width: 100%;
+    height: 150px;
+    position: absolute;
+    z-index: 10;
     border-bottom: 1px solid rgb(235, 235, 235);
     border-color: rgb(235, 235, 235);
 
+    @include lgDown {
+      position: fixed;
+      background: white;
+    }
+
     .box-title__wrapper {
       position: relative;
-      padding: 16px;
+      max-width: 1080px;
+      margin: 40px auto 44px;
+      width: auto;
+      padding-right: 24px;
+      padding-left: 24px;
     }
 
     .box-title__title {
       overflow-wrap: break-word;
-      font-size: 1.275rem;
+      font-size: 32px;
       font-weight: 800;
       line-height: 1.125em;
       color: inherit;
@@ -43,31 +80,48 @@
         // position: relative;
         height: 95%;
       }
+
+      padding-top: 126px;
+      height: 800px;
       margin: 0px;
     }
 
     .calendar-picker {
+      @include lgDown {
+        // padding-bottom: 140px;
+        // padding-bottom: 100px;
+      }
+
       padding-left: 8px;
       padding-right: 8px;
       min-height: 1px;
       position: relative;
       width: 100%;
       float: left;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 8px;
+
+      // CUSTOMIZE AIRBNB CALENDAR
+      // .CalendarMonthGrid__vertical_scrollable {
+      //   overflow-y: auto;
+      // }
 
       .CalendarDay__default {
-        border: none !important;
-        border-radius: 50%; 
+        border: none;
       }
 
       .DayPicker_weekHeader__verticalScrollable {
         z-index: 999;
       }
+
+      // .CalendarDay__selected_span {
+      //   background: #ff9800;
+      // }
     }
   }
 
   .box-price {
+    position: absolute;
+    // position: fixed;
+    padding-bottom: 15px;
     align-items: center;
 
     @include lgUp {
@@ -76,11 +130,15 @@
       right: 0px;
     }
 
+    @include lgDown {
       bottom: 0;
       z-index: 99;
       width: 100%;
       background: white;
-      padding: 8px 16px 16px;
+      // padding: 0 24px;
+      padding: 0 8px;
+      // position: fixed;
+    }
 
     .price-title {
       padding-bottom: 16px;
@@ -114,6 +172,7 @@
       -webkit-box-align: center;
       -webkit-box-pack: justify;
       display: flex;
+      // margin-right: 24px;
       justify-content: space-between;
     }
 
@@ -121,55 +180,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding-bottom: 8px;
     }
-  }
-
-  .DayPicker_weekHeaders{
-    .DayPicker_weekHeader_ul{
-      min-width: 280px;
-      
-    }
-  }
-
-  .DayPicker_transitionContainer__vertical{
-    .CalendarMonthGrid {
-      width: 100% !important;
-      .CalendarMonth_table{
-        margin: 0 auto;
-      }
-  }
-  }
-
-  .DayPickerNavigation__verticalDefault {
-    display: flex;
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    top: 18px;
-    left: 0;
-    justify-content: space-between;
-    align-items: center;
-
-    @include smUp{
-      height: 0px;
-      top: 50%;
-    }
-
-    .DayPickerNavigation_button__verticalDefault{
-      box-shadow: none;
-      border: none;
-      background: none;
-      width: 25%;
-
-      @include smUp{
-        width: 30%;
-      }
-    }
-  }
-
-  .DayPickerNavigation_svg__vertical{
-    height: 22px;
-    width: 22px;
   }
 }
 
@@ -184,6 +196,6 @@
 }
 
 .price {
-  font-size: 1rem !important;
+  font-size: 0.9rem !important;
   font-weight: 700 !important;
 }

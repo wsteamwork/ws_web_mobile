@@ -2,7 +2,9 @@
   background: $backgroundPrimary;
 
   &__content {
+    background: white;
     margin-top: 30px !important;
+    padding: 40px;
 
     .textRight {
       text-align: right;

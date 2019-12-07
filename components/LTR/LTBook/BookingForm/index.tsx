@@ -12,14 +12,11 @@ import { SlideProps } from '@material-ui/core/Slide';
 import { withStyles } from '@material-ui/styles';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import Link from 'next/link';
-import React, { FC, forwardRef, useContext, useState, Fragment } from 'react';
+import React, { FC, forwardRef, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import TooltipPayment from './TooltipPayment';
-import { UserProfileState } from '@/store/Redux/Reducers/Profile/userProfile';
-import { ProfileViewInfoRes, ProfileInfoRes } from '@/types/Requests/Profile/ProfileResponse';
-import mainColor from '@/styles/constants/colors';
 
 type PaymentMethod = 'payment1' | 'payment2';
 
@@ -66,8 +63,21 @@ const useValidata = () => {
       .max(11, t('book:bookingForm:beetwen10_11'))
       .test('checkNaN', t('book:bookingForm:notSymbol'), (value) => !isNaN(value)),
     additionalNote: Yup.string()
+      .min(5, t('book:bookingForm:min5character'))
       .max(500, t('book:bookingForm:max500character')),
     paymentMethod: Yup.string().oneOf(['payment1', 'payment2'])
+    // country: Yup.number()
+    //   .required('Vui lòng chọn thành phố')
+    //   .min(1, 'Vui lòng chọn thành phố'),
+    // isSomeOneElse: Yup.boolean(),
+    // guestName: Yup.string().when('isSomeOneElse', (status: boolean, schema: Yup.StringSchema) => {
+    //   return status
+    //     ? schema
+    //         .required(t('book:bookingForm:enterName'))
+    //         .min(2, t('book:bookingForm:min2character'))
+    //         .max(50, t('book:bookingForm:max50character'))
+    //     : schema;
+    // })
   });
 
   return FormValidationSchema;
@@ -76,57 +86,61 @@ const useValidata = () => {
 const LTTextField = withStyles({
   root: {
     '& label.Mui-focused': {
-      color: mainColor.primaryLT,
+      color: '#673ab7',
     },
     '& .MuiInput-underline:after': {
       borderBottomColor: '#975cff',
     },
     '& label.MuiFormLabel-root': {
-      color: mainColor.primaryLT,
-      fontSize: 16
+      color: '#673ab7'
     },
     '& .MuiOutlinedInput-root': {
-      boxShadow: '0px 4px 16px rgba(0, 0, 0, 0.1)',
-      borderRadius: '16px',
-      width:'100%',
-      '& .MuiOutlinedInput-notchedOutline': {
-        border: 'none',
-      },
+      // '& fieldset': {
+      //   borderColor: 'red',
+      // },
       '&:hover fieldset': {
-        borderColor: mainColor.primaryLT,
+        borderColor: '#673ab7',
       },
       '&.Mui-focused fieldset': {
-        borderColor: mainColor.primaryLT,
+        borderColor: '#673ab7',
       },
     },
   },
 })(TextField);
 
 const BookingForm: FC = () => {
+
   const ltroom = useSelector<ReducersList, LTRoomIndexRes>((state) => state.ltroomPage.room);
-  const profile = useSelector<ReducersList, ProfileInfoRes>((state) => state.iProfile.profile);
+  // const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
+  //   (state) => state.ltBooking.LTBookingPriceCalculate
+  // );
   const { movein, moveout, numberOfGuests } = useSelector<ReducersList, LTBookingReducerState>(
     (state) => state.ltBooking
   );
-  const [openDialog, setOpenDialog] = useState(false);
-  // const [isRequest, setIsRequest] = useState(false);
-  const { router } = useContext(GlobalContext);
+  const { router, width } = useContext(GlobalContext);
   const { t } = useTranslation();
-
   const FormValidationSchema = useValidata();
+
+  // const [isRequest, setIsRequest] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+  const { long_term_room_id }: any = router.query;
+  // const toggleRequest = () => {
+  //   setIsRequest(!isRequest);
+  // };
 
   const handleSubmitForm = async (values: MyFormValues, actions: FormikHelpers<MyFormValues>) => {
     const data: LTBookingCreateReq = {
       name: `${values.lastName} ${values.firstName}`,
       email: values.email,
-      long_term_room_id: ltroom.id,
+      // name_received: values.guestName,
+      long_term_room_id: parseInt(long_term_room_id),
       // coupon: '',
       move_in: movein,
       move_out: moveout,
       // booking_type: dataCalculate.booking_type,
       phone: values.phone.replace(/\s/g, ''),
       guests: { total_guests: numberOfGuests },
-      note: values.additionalNote,
+      note: values.additionalNote ? values.additionalNote : null,
       // payment_method: INTERNET_BANKING,
       // payment_status: PENDING,
       source: WEBSITE_SRC
@@ -141,6 +155,7 @@ const BookingForm: FC = () => {
       if (ltroom && ltroom.instant_book === 0) {
         setOpenDialog(true);
       } else if (res) {
+        // console.log(values.paymentMethod);
         let query = {
           uuid: res.contracts.data[0].uuid
         };
@@ -159,27 +174,25 @@ const BookingForm: FC = () => {
 
       actions.setSubmitting(false);
     } catch (error) {
+      // console.log(error);
+      // router.push(`/long-term-room/${data.long_term_room_id}`);
       actions.setSubmitting(false);
     }
   };
 
-  let fullName = profile ? profile.name : '';
-  let fName = fullName.split(' ').slice(1).join(' ');
-  let lName = fullName.split(' ').slice(0, 1).join(' ');
-
   return (
-    <Fragment>
-      <Paper elevation={0}>
+    <Paper square className={'paperCustomOuter'}>
+      <Paper square className={'paperCustom'}>
         <Formik
           // enableReinitialize={false}
           validateOnChange={false}
           validationSchema={FormValidationSchema}
           initialValues={{
             paymentMethod: 'payment1',
-            firstName: fName,
-            lastName: lName,
-            phone: profile ? profile.phone : '',
-            email: profile ? profile.email : '',
+            firstName: '',
+            lastName: '',
+            phone: '',
+            email: '',
             additionalNote: ''
           }}
           onSubmit={handleSubmitForm}
@@ -193,7 +206,7 @@ const BookingForm: FC = () => {
             isSubmitting
           }: FormikProps<MyFormValues>) => (
               <form onSubmit={handleSubmit}>
-                <Grid container spacing={1}>
+                <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Typography variant="h6">{t('book:bookingForm:infoBooking')}</Typography>
                     <Typography variant="body2" style={{ color: '#b9b8b8' }}>
@@ -270,6 +283,86 @@ const BookingForm: FC = () => {
                     </FormControl>
                   </Grid>
 
+                  {/* <Grid item xs={6}>
+                  <FormControl>
+                    <FormControlLabel
+                      control={
+                        <CheckBoxCustom
+                          id="on-work"
+                          name="isWork"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          checked={values.isWork}
+                          value="1"
+                          color="primary"
+                        />
+                      }
+                      label={t('book:bookingForm:toWork')}
+                    />
+                  </FormControl>
+                </Grid> */}
+
+                  {/* <Grid item xs={6}>
+                  <FormControl>
+                    <FormControlLabel
+                      control={
+                        <CheckBoxCustom
+                          id="booking-for-someone"
+                          name="isSomeOneElse"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          checked={values.isSomeOneElse}
+                          value="1"
+                          color="primary"
+                        />
+                      }
+                      label={t('book:bookingForm:bookOther')}
+                    />
+                  </FormControl>
+                </Grid> */}
+
+                  {/* <Grid item xs={12}>
+                  <Collapse in={values.isSomeOneElse}>
+                    <Paper className="paperCustom grayPaper" elevation={0} square>
+                      <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                          <Typography variant="h6">{t('book:bookingForm:infoRecevier')}</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <FormControl error={!!(errors.guestName && touched.guestName)} fullWidth>
+                            <LTTextField
+                            style={{color: '#673ab7 !important'}}
+                              variant="outlined"
+                              id="guest-name"
+                              name="guestName"
+                              //   inputRef={guestNameRef}
+                              onChange={handleChange}
+                              label={t('book:bookingForm:fullName')}
+                              placeholder={t('book:bookingForm:placeFullName')}
+                              onBlur={handleBlur}
+                              value={values.guestName}
+                            />
+                            <FormHelperText>
+                              {touched.guestName ? errors.guestName : ''}
+                            </FormHelperText>
+                          </FormControl>
+                        </Grid>
+                      </Grid>
+                    </Paper>
+                  </Collapse>
+                </Grid> */}
+
+                  {/* <Grid item xs={12}>
+                  <Button
+                    name="addition-services"
+                    color="primary"
+                    style={{ paddingLeft: 0 }}
+                    onClick={toggleRequest}>
+                    {isRequest ? <Remove /> : <Add />}
+                    {t('book:bookingForm:specialRequirements')}
+                  </Button>
+                </Grid> */}
+
                   <Grid item xs={12}>
                     {/* <Collapse in={isRequest}> */}
                     <Grid container spacing={3}>
@@ -277,6 +370,7 @@ const BookingForm: FC = () => {
                         <FormControl fullWidth>
                           <LTTextField
                             margin="normal"
+
                             variant="outlined"
                             id="additional-note"
                             name="additionalNote"
@@ -294,8 +388,8 @@ const BookingForm: FC = () => {
                     {/* </Collapse> */}
                   </Grid>
 
-
-                    <Grid item xs={12} className="formBooking">
+                  {ltroom.instant_book && ltroom.instant_book === 1 ? (
+                    <Grid item xs={12}>
                       <Grid container>
                         <Grid item>
                           <FormControl
@@ -315,7 +409,7 @@ const BookingForm: FC = () => {
                                 label={
                                   <p>
                                     {t('book:bookingForm:directTransfer')}{' '}
-                                    <TooltipPayment/>
+                                    <TooltipPayment></TooltipPayment>
                                   </p>
                                 }
                               />
@@ -327,7 +421,7 @@ const BookingForm: FC = () => {
                                     {t('book:bookingForm:transferMoney')}{' '}
                                     <a href="https://www.baokim.vn/" target="_blank">
                                       Bảo Kim
-                                    </a>
+                                  </a>
                                   </p>
                                 }
                               />
@@ -339,12 +433,13 @@ const BookingForm: FC = () => {
                         </Grid>
                       </Grid>
                     </Grid>
+                  ) : ''}
 
                   <Grid item xs={12}>
-                    <Grid container justify="center">
+                    <Grid container justify="flex-end">
                       <Grid item>
                         <ButtonGlobal
-                          background="linear-gradient(to right, #667eea, #764ba2)"
+                          background="linear-gradient(to right, #667eea, #764ba2);"
                           variant="contained"
                           name="confirm-information"
                           size="large"
@@ -354,7 +449,7 @@ const BookingForm: FC = () => {
                           {ltroom && !isSubmitting ? (
                             t('book:bookingForm:confirmInfo')
                           ) : (
-                              <SimpleLoader height="28px" width="100%"/>
+                              <SimpleLoader height="45px" width="100%"></SimpleLoader>
                             )}
                         </ButtonGlobal>
                       </Grid>
@@ -362,7 +457,7 @@ const BookingForm: FC = () => {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <Grid container justify="center">
+                    <Grid container justify="flex-end">
                       <Grid item>
                         <Typography variant="subtitle2" style={{ color: '#b3b3b3' }}>
                           {t('book:bookingForm:notPayment')}
@@ -375,7 +470,6 @@ const BookingForm: FC = () => {
             )}
         />
       </Paper>
-
       <Grid item xs={12}>
         <Grid container justify="flex-start">
           <Grid item>
@@ -389,7 +483,44 @@ const BookingForm: FC = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Fragment>
+
+      {ltroom && (
+        <Dialog
+          TransitionComponent={TransitionCustom}
+          keepMounted
+          disableBackdropClick={true}
+          disableEscapeKeyDown={true}
+          scroll="body"
+          fullScreen={width === 'xs'}
+          maxWidth="sm"
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}>
+          <DialogContent classes={{ root: 'dialogContent' }}>
+            <div style={{ textAlign: 'center' }}>
+              <CheckSuccess
+                width={250}
+                height={250}
+                message={
+                  ltroom!.instant_book === 0
+                    ? t('book:bookingForm:noInstantBook')
+                    : t('book:bookingForm:instantBook')
+                }
+              />
+              {ltroom!.instant_book === 0 && (
+                <ButtonGlobal
+                  variant="contained"
+                  name="confirm_information"
+                  color="primary"
+                  type="submit"
+                  onClick={() => router.push(`/`)}>
+                  {t('book:bookingForm:submit')}
+                </ButtonGlobal>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
+    </Paper>
   );
 };
 

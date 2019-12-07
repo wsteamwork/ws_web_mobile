@@ -34,7 +34,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       margin: (props) => props.margin
     },
     propertyList: {
-      padding: (props) => props.paddingItem,
+      // padding: (props) => props.paddingItem,
     }
   })
 );
@@ -43,7 +43,6 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
   const { headTitle, listData, itemRender, itemHeight, sizeIcon, classCustom, isDependencies } = props;
-
   const renderList = useMemo(
     () =>
       listData.map((item, index) => (

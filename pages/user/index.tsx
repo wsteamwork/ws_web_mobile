@@ -33,7 +33,7 @@ const UserPage: NextPage = (props) => {
               title={`Thông tin cá nhân ${profile.name} | Westay - Đặt phòng homestay trực tuyến`}
               description={`Thông tin cá nhân ${profile.name} | Westay - Đặt phòng homestay trực tuyến`}
               url={`/user/${profile.id}`}
-              ogImage={profile.avatar_url}/>
+              ogImage={profile.avatar_url}></NextHead>
           ),
         [profile]
       )}
@@ -41,9 +41,9 @@ const UserPage: NextPage = (props) => {
       {useMemo(
         () => (
           <Fragment>
-            <NavHeader/>
-            <MainProfile/>
-            <Footer/>
+            <NavHeader></NavHeader>
+            <MainProfile></MainProfile>
+            <Footer></Footer>
           </Fragment>
         ),
         []

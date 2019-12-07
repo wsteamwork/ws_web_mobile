@@ -1,12 +1,10 @@
 {
     "bookingInfoDetail": {
-        "checkInDate": "Nhận phòng",
-        "checkOutDate": "Trả phòng",
-        "guestNumber": "Khách",
+        "checkInDate": "Ngày nhận phòng",
+        "checkOutDate": "Ngày trả phòng",
+        "guestNumber": "Số khách",
         "guest": "khách",
         "price": "Giá",
-        "priceOriginal": "Giá gốc",
-        "priceDeposit": "Giá đặt cọc",
         "serviceFee": "Phí dịch vụ",
         "total": "Tổng cộng:",
         "noCancel1": "Khi đặt chỗ của quý khách đã được xác nhận, Quý khách sẽ phải trả 50% số tiền đặt phòng",
@@ -56,7 +54,7 @@
         "noInstantBook": "Đơn đặt phòng của bạn đã được gửi đến chủ nhà để chờ xác nhận.Nếu phòng còn trống, chúng tôi sẽ gửi thông tin thanh toán tới email của bạn",
         "instantBook": "Xin chờ trong giây lát, chúng tôi sẽ chuyển hướng đến trang thanh toán",
         "submit": "Xác nhận",
-        "choosePayment": "Phương thức thanh toán",
+        "choosePayment": "Chọn 1 phương thức thanh toán",
         "transferMoney": "Chuyển khoản qua",
         "directTransfer": "Chuyển khoản trực tiếp"
     }
