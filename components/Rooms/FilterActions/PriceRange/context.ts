@@ -13,6 +13,8 @@ import {
   useState
 } from 'react';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
+import { useTranslation } from 'react-i18next';
 
 type ReturnUsePriceRange = {
   open: boolean;
@@ -29,6 +31,8 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const { router } = useContext(GlobalContext);
   const { query } = router;
   const { price_day_from, price_day_to } = state;
+  const { t } = useTranslation();
+
   const leaseTypePathName = useSelector<ReducersList, string>(
     (state) => state.searchFilter.leaseTypePathName
   );
@@ -40,14 +44,21 @@ export const usePriceRange = (): ReturnUsePriceRange => {
   const queryMaxPrice = leaseTypeGlobal ? query.max_price : query.price_day_to;
   const paramMinPrice = leaseTypeGlobal ? 'min_price' : 'price_day_from';
   const paramMaxPrice = leaseTypeGlobal ? 'max_price' : 'price_day_to';
-
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
   const checkPrice = useMemo<string>(() => {
     if (price_day_from === MIN_PRICE && price_day_to === MAX_PRICE) {
       return '';
     } else if (price_day_to !== MIN_PRICE && price_day_from === MIN_PRICE) {
-      return `đ 0 - ${numeral(price_day_to).format('0,0')}`;
+      return `${t('shared:currency')} 0 - ${numeral(
+        lang && lang === 'vi' ? price_day_to : price_day_to / 23500
+      ).format('0,0')}`;
     } else if (price_day_from !== MIN_PRICE && price_day_to > price_day_from) {
-      return `đ ${numeral(price_day_from).format('0,0')} - ${numeral(price_day_to).format('0,0')}`;
+      return `${t('shared:currency')} ${numeral(
+        lang && lang === 'vi' ? price_day_from : price_day_from / 23500
+      ).format('0,0')} - ${numeral(
+        lang && lang === 'vi' ? price_day_to : price_day_to / 23500
+      ).format('0,0')}`;
     }
 
     return '';

@@ -21,5 +21,6 @@
     "others": "Others",
     "outdoors": "Outdoor",
     "success": "Successfully",
-    "lang": "en"
+    "priceRangeMin": "Min price",
+    "priceRangeMax": "Max price"
 }

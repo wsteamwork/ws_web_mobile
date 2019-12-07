@@ -17,6 +17,7 @@ import React, { ChangeEvent, Dispatch, FC, Fragment, SetStateAction, useContext,
 import { useTranslation } from 'react-i18next';
 import InputRange, { Range } from 'react-input-range';
 import { useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 interface IProps extends WithStyles<typeof styles> {
     setOpen: Dispatch<SetStateAction<boolean>>;
@@ -77,7 +78,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
     const { price_day_from, price_day_to } = state;
     const leaseTypePathName = useSelector<ReducersList, string>((state) => state.searchFilter.leaseTypePathName);
     const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
-
+    const cookies = new Cookies();
+    const lang = cookies.get('initLanguage');
     const paramMinPrice = leaseTypeGlobal ? 'min_price' : 'price_day_from';
     const paramMaxPrice = leaseTypeGlobal ? 'max_price' : 'price_day_to';
 
@@ -124,8 +126,11 @@ const ActionRangePrice: FC<IProps> = (props) => {
 
     const handleSubmit = () => {
         setOpen(false);
-        dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
-        updateRouter(leaseTypePathName, true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
+        dispatch({ type: 'setPrices', price_day_from: lang && lang === 'vi' ? price.min : price.min * 23500, price_day_to: lang && lang === 'vi' ? price.max : price.max * 23500 });
+        updateRouter(leaseTypePathName, true, paramMinPrice, (lang && lang === 'vi' ? price.min : price.min * 23500), paramMaxPrice, (lang && lang === 'vi' ? price.max : price.max * 23500), 'page', 1);
+
+        // dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
+        // updateRouter(leaseTypePathName, true, paramMinPrice, price.min, paramMaxPrice, price.max, 'page', 1);
     };
 
     // usePriceEffect(price, setPrice, state);
@@ -148,8 +153,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
                 <Grid container item lg={6} sm={6}>
                     <FormControl>
                         <InputLabel className={classes.labelLT} shrink htmlFor="min-price-filter">
-                            Tối thiểu
-            </InputLabel>
+                            {t('shared:priceRangeMin')}
+                        </InputLabel>
                         <InputBase
                             readOnly
                             id="min-price-filter"
@@ -162,8 +167,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
                             }}
                             startAdornment={
                                 <InputAdornment className={classes.labelLT} position="start">
-                                    đ
-                </InputAdornment>
+                                    {t('shared:currency')}
+                                </InputAdornment>
                             }
                         />
                     </FormControl>
@@ -171,8 +176,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
                 <Grid container item lg={6} sm={6}>
                     <FormControl>
                         <InputLabel className={classes.labelLT} shrink htmlFor="max-price-filter">
-                            Tối đa
-            </InputLabel>
+                            {t('shared:priceRangeMax')}
+                        </InputLabel>
                         <InputBase
                             readOnly
                             id="max-price-filter"
@@ -185,8 +190,8 @@ const ActionRangePrice: FC<IProps> = (props) => {
                             }}
                             startAdornment={
                                 <InputAdornment className={classes.labelLT} position="start">
-                                    đ
-                </InputAdornment>
+                                    {t('shared:currency')}
+                                </InputAdornment>
                             }
                         />
                     </FormControl>

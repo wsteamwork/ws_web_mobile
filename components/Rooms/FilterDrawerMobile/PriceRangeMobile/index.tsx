@@ -1,11 +1,12 @@
+import { IRoomFilterContext, MAX_PRICE, MIN_PRICE, RoomFilterContext, STEP_PRICE } from '@/store/Context/Room/RoomFilterContext';
+import { makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Fragment, useContext, useState, useEffect } from 'react';
-import { RoomFilterContext, IRoomFilterContext } from '@/store/Context/Room/RoomFilterContext';
-import _ from 'lodash';
-import { Theme, makeStyles, Typography } from '@material-ui/core';
-import InputRange, { Range } from 'react-input-range';
 import numeral from 'numeral';
-import { MIN_PRICE, MAX_PRICE, STEP_PRICE } from '@/store/Context/Room/RoomFilterContext';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import InputRange, { Range } from 'react-input-range';
+import Cookies from 'universal-cookie';
+
 interface IProps {
   classes?: any;
 }
@@ -29,6 +30,9 @@ const PriceRangeMobile: FC<IProps> = (props) => {
     min: price_day_from,
     max: price_day_to
   });
+  const { t } = useTranslation();
+  const cookies = new Cookies();
+  const lang = cookies.get('initLanguage');
   const setPriceEnhancement = (value: Range) => {
     if (value.min < MIN_PRICE) {
       value.min = MIN_PRICE;
@@ -43,21 +47,19 @@ const PriceRangeMobile: FC<IProps> = (props) => {
   }, [price]);
 
   const hanldeChange = () => {
-    dispatch({ type: 'setPrices', price_day_from: price.min, price_day_to: price.max });
+    dispatch({ type: 'setPrices', price_day_from: lang && lang === 'vi' ? price.min : price.min * 23500, price_day_to: lang && lang === 'vi' ? price.max : price.max * 23500 });
   };
   return (
     <Fragment>
-        <InputRange
-          allowSameValues={false}
-          minValue={MIN_PRICE}
-          maxValue={MAX_PRICE}
-          step={STEP_PRICE}
-          onChange={setPriceEnhancement}
-          value={price}
-        />
-      <Typography variant="subtitle2" className={classes.price}>{`đ ${numeral(price.min).format(
-        '0,0'
-      )} - đ ${numeral(price.max).format('0,0')}`}</Typography>
+      <InputRange
+        allowSameValues={false}
+        minValue={MIN_PRICE}
+        maxValue={MAX_PRICE}
+        step={STEP_PRICE}
+        onChange={setPriceEnhancement}
+        value={price}
+      />
+      <Typography variant='subtitle2'>{`${t('shared:currency')}${numeral(price.min).format('0,0')} - ${t('shared:currency')}${numeral(price.max).format('0,0')}`}</Typography>
     </Fragment>
   );
 };

@@ -21,5 +21,7 @@
     "others": "Tiện nghi khác",
     "outdoors": "Ngoài trời",
     "success": "Thành công!",
-    "lang": "vi"
+    "lang": "vi",
+    "priceRangeMin": "Giá tối thiểu",
+    "priceRangeMax": "Giá tối đa"
 }
