@@ -130,7 +130,7 @@ const LongtermRoom: NextPage = () => {
                 <Collapse in={viewDetail} >
                   <Grid container justify="center" style={{ zIndex: 1000000 }}>
                     <Grid item xs={12} sm={12} md={10}>
-                      <BoxLTRoomDetail room={ltroom} clickBook={handleView} />
+                      <BoxLTRoomDetail room={ltroom} onBook={handleOpenBookingDialog} />
                     </Grid>
 
                     <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">

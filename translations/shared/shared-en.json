@@ -22,5 +22,6 @@
     "outdoors": "Outdoor",
     "success": "Successfully",
     "priceRangeMin": "Min price",
-    "priceRangeMax": "Max price"
+    "priceRangeMax": "Max price",
+    "currency": "$"
 }

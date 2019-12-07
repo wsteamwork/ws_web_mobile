@@ -69,13 +69,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 interface IProps {
   room: LTRoomIndexRes,
-  clickBook?: () => void,
+  onBook?: () => any,
 }
 
 const BoxLTRoomDetail: FC<IProps> = (props) => {
   forceCheck();
   const classes = useStyles(props);
-  const { room, clickBook } = props;
+  const { room, onBook } = props;
   const { router } = useContext(GlobalContext);
   const isPreviewPage = router.pathname.includes('preview-long-term-room');
   const { t } = useTranslation();
@@ -172,7 +172,7 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
         timeout={transitionDuration}
         unmountOnExit
       >
-        <Fab variant="extended" className={classes.btnFabBook} onClick={clickBook} size='medium'>
+        <Fab variant="extended" className={classes.btnFabBook} onClick={onBook} size='medium'>
           {t('longtermroom:viewSchedule')}
           {/* <NavigationIcon className={classes.extendedIcon} /> */}
         </Fab>

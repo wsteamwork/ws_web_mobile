@@ -23,5 +23,6 @@
     "success": "Thành công!",
     "lang": "vi",
     "priceRangeMin": "Giá tối thiểu",
-    "priceRangeMax": "Giá tối đa"
+    "priceRangeMax": "Giá tối đa",
+    "currency": "đ"
 }
