@@ -25,5 +25,9 @@
     "totalArea": "Diện tích",
     "amenitiesLower": "tiện ích",
     "bathroomLower": "phòng tắm",
-    "bedroomLower": "phòng ngủ"
+    "bedroomLower": "phòng ngủ",
+    "stayForAtLeast1Month": "Chọn ở tối thiểu 1 tháng (30 ngày)",
+    "arrivalDateWithin2Months": "Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay",
+    "book": "Đặt phòng",
+    "days": "ngày"
 }

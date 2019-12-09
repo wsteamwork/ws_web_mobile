@@ -45,7 +45,7 @@ const RoomCardItem: FC<IProps> = (props) => {
             <Grid item xs={12} className="boxCard">
               <Grid className="cardWrapper">
                 <Grid container className="cardContainer">
-                  <Link href={`/long-term-room/${room.id}`} target="_blank" className="boxLink">
+                  <Link href={`/long-term-room/${room.id}`} className="boxLink">
                     <Grid container className="boxTitle">
                       <Grid item xs={12}>
                         <Typography variant="subtitle2" className="roomName">

@@ -6,9 +6,12 @@ import { getLTBookingData } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import NavTop from '@/components/NavTop';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 
 const LongTermBook: NextPage = (props) => {
+  const {router} = useContext(GlobalContext);
   //   const error = useSelector<ReducersList, boolean>((state) => state.book.error);
   // const LTBookingPriceCalculate = useSelector<ReducersList, LTBookingPriceCalculatorRes>(
   //   (state) => state.ltBooking.LTBookingPriceCalculate
@@ -19,6 +22,7 @@ const LongTermBook: NextPage = (props) => {
   //   }, [error]);
   return (
     <Fragment>
+      <NavTop showFavoriteAction={false} handleBackAction={()=>{router.back()}}/>
       <Grid className="book">
         <GridContainer xs={10} sm={9} className={'container'} spacing={0}>
           <Grid
