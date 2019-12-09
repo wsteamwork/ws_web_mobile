@@ -40,7 +40,7 @@ const CardItem: FunctionComponent<IProps> = (props) => {
   const { t } = useTranslation();
 
   return (
-    <Grid className="card-item">
+    <Grid className="card-item" onClick={onClickCard}>
       <Grid className="card-item__image-container">
         <img className="card-item__image" src={imgSrc} />
       </Grid>
@@ -62,7 +62,11 @@ const CardItem: FunctionComponent<IProps> = (props) => {
             'card-item__sub-title',
             bigTitle ? 'card-item__big-sub-title' : ''
           )}>
-          {subTitle ? (cookies.get('initLanguage') == 'en' ? cleanAccents(subTitle) : subTitle) : ''}
+          {subTitle
+            ? cookies.get('initLanguage') == 'en'
+              ? cleanAccents(subTitle)
+              : subTitle
+            : ''}
           {recommendedPrice}/{t('home:night')}
         </Grid>
       </Grid>

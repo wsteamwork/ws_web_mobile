@@ -69,12 +69,7 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     }
     const pushQuery: any = {
       name: cityId === undefined && districtId === undefined ? name : '',
-      // number_of_rooms: roomsCount,
-      // check_in: startDate,
-      // check_out: endDate,
-      // number_of_guests: guestsCount,
-      // rent_type: bookingType !== 0 ? bookingType : undefined,
-      // type_room: roomType !== 0 ? roomType : undefined,
+
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };

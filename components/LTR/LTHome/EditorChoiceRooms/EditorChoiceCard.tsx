@@ -84,7 +84,7 @@ const EditorChoiceCard: FC<IProps> = (props) => {
                           <Grid item xs={12} className="roomSubtitle">
                             {room.total_area && room.total_area > 0 ? (
                               <span>
-                                {room.total_area ? room.total_area : '?'} m<sup>2</sup>
+                                {room.total_area ? room.total_area : '69'} m<sup>2</sup>
                               </span>
                             ) : (
                               <span>

@@ -9,6 +9,7 @@ import TopDestination from '@/components/LTR/LTHome/TopDestinations';
 import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
+import GoodPrice from '@/components/LTR/LTHome/GoodPrice';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
@@ -28,21 +29,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const LTHome: NextPage = (props) => {
   const classes = useStyles(props);
-  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-  //   (state) => state.roomHomepage.roomsHot
-  // );
-  // const renderRoomsHot = (room) => (
-  //   <CardRoom2
-  //     city={room.city}
-  //     district={room.district}
-  //     // instantbook={room.instant_book}
-  //     roomID={room.id}
-  //     roomName={room.about_room.name}
-  //     roomType={room.accommodation_type_txt}
-  //     roomImage={room.avatar.images[0].name}
-  //     avg_rating={room.avg_rating}
-  //   />
-  // );
 
   return (
     <Fragment>
@@ -63,8 +49,7 @@ const LTHome: NextPage = (props) => {
               MozTransition: 'all 0.35s ease-in-out',
               OTransition: 'all 0.35s ease-in-out',
               transition: 'all 0.35s ease-in-out'
-            }}
-          >
+            }}>
             <Grid item xs={12} className={classes.boxWrapper}>
               <NavTopSearch />
             </Grid>
@@ -94,9 +79,11 @@ const LTHome: NextPage = (props) => {
         <Grid item xs={12}>
           <HighEndRooms />
         </Grid>
+        <Grid item xs={12}>
+          <GoodPrice />
+        </Grid>
         <BottomNav />
       </Grid>
-
     </Fragment>
   );
 };
