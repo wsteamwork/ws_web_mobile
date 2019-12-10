@@ -75,7 +75,7 @@ const LongtermRoom: NextPage = () => {
   }
 
   const handleBackButtonDetailPage = () => {
-    return viewDetail ? setViewDetail(!viewDetail) : router.push('/long-term-rooms');
+    return viewDetail ? setViewDetail(!viewDetail) : router.back();
   }
 
   return (
@@ -131,15 +131,6 @@ const LongtermRoom: NextPage = () => {
                   <Grid container justify="center" style={{ zIndex: 1000000 }}>
                     <Grid item xs={12} sm={12} md={10}>
                       <BoxLTRoomDetail room={ltroom} onBook={handleOpenBookingDialog} />
-                    </Grid>
-
-                    <Grid item sm={12} md={11} lg={4} xl={3} className="roomPage__boxBooking">
-                      <Grid container className="roomPage__boxBookingMoblie">
-                        <BoxBottomBooking
-                          priceBasic={ltroom.price_display}
-                          handleOpenBookingDialog={handleOpenBookingDialog}
-                        />
-                      </Grid>
                     </Grid>
                   </Grid>
                 </Collapse>

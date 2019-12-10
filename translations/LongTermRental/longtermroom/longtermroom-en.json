@@ -18,12 +18,16 @@
     "outdoors": "Outdoor",
     "allImages": "All Photos",
     "priceBasic": "Each month for 1-2 months term",
-    "priceBasicMobile": "/per month",
+    "priceBasicMobile": "/month",
     "notFoundData": "Not found data!",
     "depositFee": "Only furnitures guarantees deposit",
     "moreDetails": "More details",
     "totalArea": "Total area",
     "amenitiesLower": "amenities",
     "bathroomLower": "bathrooms",
-    "bedroomLower": "bedrooms"
+    "bedroomLower": "bedrooms",
+    "stayForAtLeast1Month": "Choose to stay for at least 1 month (30 days)",
+    "arrivalDateWithin2Months": "Choose your arrival date within 2 months from today",
+    "book": "Book",
+    "days": "days"
 }
