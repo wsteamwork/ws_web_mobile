@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { forceCheck } from 'react-lazyload';
 import { useSelector } from 'react-redux';
 import LTHome from './homepage/LTHome';
+import BottomNav from '@/components/Rooms/BottomNav';
 
 const Home: NextPage = () => {
   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
@@ -44,7 +45,7 @@ const Home: NextPage = () => {
 
       <Grid container justify="center" style={{ marginBottom: 100 }}>
         <Grid item xs={12} md={10}>
-          <LTHome />
+          <BottomNav/>
         </Grid>
       </Grid>
     </Fragment>
