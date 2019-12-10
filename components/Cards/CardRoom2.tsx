@@ -17,6 +17,7 @@ interface IProps {
   roomImage: string;
   roomType: string;
   avg_rating?: number;
+  priceDisplay?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -86,7 +87,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const CardRoom2: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { roomID, roomName, city, district, roomImage, roomType, avg_rating } = props;
+  const { roomID, roomName, city, district, roomImage, roomType, avg_rating, priceDisplay } = props;
   const { width } = useContext(GlobalContext);
   const { t } = useTranslation();
   const cookies = new Cookies();
@@ -132,15 +133,15 @@ const CardRoom2: FC<IProps> = (props) => {
                   <Grid className="priceContainer">
                     <Typography variant="subtitle1" className="priceText">
                       {width == 'xs' && cookies.get('initLanguage') == 'en' ? '$' : ''}
-                      123
+                      {priceDisplay}
                       {width == 'xs' && cookies.get('initLanguage') == 'vn' ? 'đ' : ''}
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>
                       {width == 'xs'
                         ? '/' + t('home:month')
                         : cookies.get('initLanguage') == 'en'
-                          ? 'usd/' + t('home:month')
-                          : 'đ/' + t('home:month')}
+                        ? 'usd/' + t('home:month')
+                        : 'đ/' + t('home:month')}
                     </Typography>
                   </Grid>
                 </Grid>

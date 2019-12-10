@@ -48,7 +48,11 @@
     "collectionRooms": {
         "collectionViews": "Ngắm nhìn cảnh đẹp",
         "seaView": "Bình minh trên biển",
-        "cityView": "Ngắm nhìn thành phố từ trên cao"
+        "cityView": "Ngắm nhìn thành phố từ trên cao",
+        "goodPrice": "Giá tốt",
+        "apartmentForRent": "Căn hộ cho thuê",
+        "studioForRent": "Studio cho thuê"
+
     },
     "editorChoice": "Lựa chọn hàng đầu",
     "hostAttraction": "Bạn có căn hộ rảnh rỗi? Bạn có phòng còn trống? Bạn muốn kiếm thêm thu nhập? Hay đơn giản hơn nữa, bạn muốn gặp gỡ và giao lưu với những người bạn tới từ khắp nơi trên thế giới. Hãy trở thành chủ nhà tại Westay ngay hôm nay để có cơ hội đạt được tất cả những điều đó!",

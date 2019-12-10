@@ -34,6 +34,7 @@ const GoodPrice: FC<IProps> = (props) => {
       city={room.city}
       district={room.district}
       // instantbook={room.instant_book}
+      priceDisplay={room.price_display}
       roomID={room.id}
       roomName={room.about_room.name}
       roomType={room.accommodation_type_txt}
@@ -45,7 +46,9 @@ const GoodPrice: FC<IProps> = (props) => {
     <Fragment>
       {/* <Grid container item xs={12} justify="center" className={classes.root}> */}
       <PropertyListHorizontalScroll
-        itemWidth={width == 'xs' ? '28%' : width == 'sm' ? '22%' : width == 'md' ? '16.67%' : '20%'}
+        itemWidth={width == 'xs' ? '90%' : width == 'sm' ? '80%' : width == 'md' ? '66.67%' : '66%'}
+        headTitle={t('home:collectionRooms:goodPrice')}
+        itemHeight={width == 'xs' ? 150 : width == 'sm' ? 220 : width == 'md' ? 220 : 200}
         gutter={6}
         listData={dataRooms}
         itemRender={renderRoomsHot}

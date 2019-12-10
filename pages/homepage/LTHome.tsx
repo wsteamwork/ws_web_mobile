@@ -10,6 +10,7 @@ import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
 import GoodPrice from '@/components/LTR/LTHome/GoodPrice';
+import ApartmentForRent from '@/components/LTR/LTHome/ApartmentForRent';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
@@ -17,6 +18,7 @@ import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import HeadRoom from 'react-headroom';
+import StudioForRent from '@/components/LTR/LTHome/StudioForRent';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
@@ -78,6 +80,13 @@ const LTHome: NextPage = (props) => {
         </Grid>
         <Grid item xs={12}>
           <HighEndRooms />
+        </Grid>
+
+        <Grid item xs={12}>
+          <ApartmentForRent />
+        </Grid>
+        <Grid item xs={12}>
+          <StudioForRent />
         </Grid>
         <Grid item xs={12}>
           <GoodPrice />

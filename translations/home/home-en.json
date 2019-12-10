@@ -19,10 +19,10 @@
     "profile": "Profile",
     "policyTerms": "Policy & Terms",
     "merchantChannel": "Become a host",
-    "contact" : "Contact",
-    "notification" : "Notification",
-    "supportHost" : "For host",
-    "currency" : "USD",
+    "contact": "Contact",
+    "notification": "Notification",
+    "supportHost": "For host",
+    "currency": "USD",
     "review": "Reviews",
     "searchComponent": {
         "enjoy": "Book and Enjoy",
@@ -33,14 +33,14 @@
         "room": "room(s)",
         "roomUpper": "Room(s)"
     },
-    "topDestinations" : "Top Destinations",
-    "becomeAHost" : "Become a host",
-    "topHomestay" : "Top Homestay",
-    "blogContainer":{
+    "topDestinations": "Top Destinations",
+    "becomeAHost": "Become a host",
+    "topHomestay": "Top Homestay",
+    "blogContainer": {
         "where": "Stunning Homestay",
-        "journey":"Journeys",
-        "whatPlay":"Activities",
-        "blog":"Blog",
+        "journey": "Journeys",
+        "whatPlay": "Activities",
+        "blog": "Blog",
         "titleJourney": "All about travel experiences",
         "titleWhere": "Discover beautiful places together",
         "titlePlay": "Find out about strange and interesting activities"
@@ -48,7 +48,10 @@
     "collectionRooms": {
         "collectionViews": "Collection views",
         "seaView": "Sea view",
-        "cityView": "City view"
+        "cityView": "City view",
+        "goodPrice": "Good Price",
+        "apartmentForRent": "Apartment For Rent",
+        "studioForRent": "Studio For Rent"
     },
     "editorChoice": "Editors choice",
     "hostAttraction": "You have free apartments? You have free rooms in your place? You want to earn more money? Or you just want to make friends with travelers from all around the world? Become a host at Westay, you will have the opportunity to make everything come true. Yes, it is possible!",
@@ -66,5 +69,4 @@
     "high_end": "High End",
     "business_trip": "Bussiness Trip",
     "show_all": "Show all"
-
 }
