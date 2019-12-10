@@ -8,7 +8,6 @@ import RoomTypeList from '@/components/LTR/LTHome/RoomTypeList';
 import TopDestination from '@/components/LTR/LTHome/TopDestinations';
 import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
-import BottomNav from '@/components/Rooms/BottomNav';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
@@ -16,6 +15,7 @@ import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import HeadRoom from 'react-headroom';
+import LazyLoad  from 'react-lazyload';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
@@ -77,24 +77,35 @@ const LTHome: NextPage = (props) => {
           <TopDestination />
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <FeatureRooms />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <WhyChoosingUs />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <EditorChoiceRooms />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <ForFamilyRooms />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <BusinessTripRooms />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
+          <LazyLoad>
           <HighEndRooms />
+          </LazyLoad>
         </Grid>
-        <BottomNav />
       </Grid>
 
     </Fragment>
