@@ -87,10 +87,10 @@ const BottomNav: FC<IProps> = (props) => {
           <LTHome/>
         </TabPanel>
         <TabPanel value={index} index={1} dir={theme.direction}>
-          <SettingInApp />
+          Item 2
         </TabPanel>
         <TabPanel value={index} index={2} dir={theme.direction}>
-          Item Three
+          <SettingInApp />
         </TabPanel>
       </SwipeableViews>
 
