@@ -108,22 +108,26 @@ const SettingInApp: FC<IProps> = (props) => {
       icon: '/static/icons/telephone.svg',
       action: ()=>{window.location.href="tel:0917041849"},
     },
-    {
-      name: t('home:logout'),
-      icon: '/static/icons/shut-down.svg',
-      action: ()=>{logoutTrigger()},
-    },
   ];
 
-  const imgAvatar = isLogin ? `${IMAGE_STORAGE_SM}${profile.avatar}` : '@/../../../static/images/room_demo.jpg';
+  const imgAvatar = isLogin ? `${IMAGE_STORAGE_SM}${profile.avatar}` : '@/../../../static/images/westay-avatar.jpg';
 
   return (
     <GridContainer xs = {10} sm = {9}>
       <Box my = {6}>
-        <Grid container alignItems = 'center'>
+        <Grid container alignItems = 'center' spacing={1}>
           <Grid item xs = {8}>
-            <Typography variant = 'h5' className = {classes.txtName}>{profile.name}</Typography>
-            <Typography variant = 'subtitle1'>View and edit profile</Typography>
+            {!isLogin ? (
+              <Fragment>
+                <Typography variant = 'h5' className = {classes.txtName}>{profile.name}</Typography>
+                <Typography variant = 'subtitle1'>{t('home:editProfile')}</Typography>
+              </Fragment>
+            ) : (
+              <Fragment>
+                <Typography variant = 'h5' className = {classes.txtName} onClick={()=>{alert('trang dang nhap')}}>{t('home:signUp/signIn')}</Typography>
+                <Typography variant = 'subtitle1'>{t('home:letSignUp')}</Typography>
+              </Fragment>
+            )}
           </Grid>
           <Grid item xs = {4} container justify = 'flex-end'>
             <Avatar alt = 'Profile' src = {imgAvatar} className = {classes.bigAvatar} />
@@ -171,6 +175,19 @@ const SettingInApp: FC<IProps> = (props) => {
               </Box>
             </Fragment>
           ))}
+
+          {isLogin ? (
+            <ListItem button onClick={()=>logoutTrigger()} disableGutters>
+              <ListItemText
+                primary = {t('home:logout')}
+              />
+              <ListItemSecondaryAction classes={{root: classes.iconAction}}>
+                <IconButton edge = 'end'>
+                  <img src = {'/static/icons/shut-down.svg'} width = {22} height = {22} />
+                </IconButton>
+              </ListItemSecondaryAction>
+            </ListItem>
+          ) : <Fragment/>}
         </List>
       </Box>
     </GridContainer>
