@@ -11,6 +11,9 @@ import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
 import Skeleton from '@material-ui/lab/Skeleton';
 import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
 import CardRoom2 from '@/components/Cards/CardRoom2';
+import ApartmentForRentCard from './ApartmentForRentCard';
+import { NumberRoomCity } from '@/types/Requests/Rooms/RoomResponses';
+
 interface IProps {
   classes?: any;
 }
@@ -18,12 +21,12 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     root: {
       marginBottom: 24,
-      marginTop: 18,
-      margin: '0 16px'
-    },
-    roomItem: {
-      padding: '6px !important'
+      marginTop: 18
+      // margin: '0 16px'
     }
+    // roomItem: {
+    //   padding: '6px !important'
+    // }
   })
 );
 
@@ -37,37 +40,42 @@ const ApartmentForRent: FC<IProps> = (props) => {
     getHomePageCollection('apartment_for_rent', 5).then((res) => setDataRooms(res));
   }, []);
 
+  const renderDestinations = (room: any) => <ApartmentForRentCard room={room} />;
+
   return (
     <Fragment>
       <Grid justify="center" className={classes.root}>
-        <Grid container>
-          <Grid className="head-title-container">
-            <Grid className="head-title">{t('home:collectionRooms:apartmentForRent')}</Grid>
-          </Grid>
-          {dataRooms.length ? (
-            <Fragment>
-              <Grid container spacing={2} className={classes.roomList}>
-                {dataRooms.map((room, index) => (
-                  <Grid item container xs={6} key={index} className={classes.roomItem}>
-                    <BussinessTripCard room={room} imgHeight={150} />
-                  </Grid>
-                ))}
-              </Grid>
-            </Fragment>
-          ) : (
-            <Grid container spacing={2} className={classes.roomList}>
-              {[1, 2, 3, 4].map((item, index) => (
-                <Grid item container xs={6} key={index} className={classes.roomItem}>
-                  <Skeleton variant="rect" width="100%" height={220} />
-                  <Skeleton variant="text" width="100%" height={10} />
-                  <Skeleton variant="text" width="80%" height={10} />
-                  <Skeleton variant="text" width="30%" height={10} />
-                </Grid>
+        <PropertyListHorizontalScroll
+          itemWidth={width == 'md' ? '66%' : width == 'sm' ? '80%' : '90%'}
+          gutter={6}
+          headTitle={t('home:collectionRooms:apartmentForRent')}
+          listData={dataRooms}
+          itemRender={renderDestinations}
+        />
+
+        {/* {dataRooms.length ? (
+          <Fragment>
+            <Grid>
+              {dataRooms.map((room, index) => (
+                <Grid key={index}></Grid>
               ))}
             </Grid>
-          )}
-        </Grid>
-        <ShowMoreHome top="0px" />
+          </Fragment>
+        ) : (
+          <Grid container spacing={2} className={classes.roomList}>
+            {[1, 2, 3, 4].map((item, index) => (
+              <Grid item container xs={6} key={index} className={classes.roomItem}>
+                <Skeleton variant="rect" width="100%" height={220} />
+                <Skeleton variant="text" width="100%" height={10} />
+                <Skeleton variant="text" width="80%" height={10} />
+                <Skeleton variant="text" width="30%" height={10} />
+                <Skeleton variant="rect" width={210} height={118} />
+              </Grid>
+            ))}
+          </Grid>
+        )} */}
+
+        {/* <ShowMoreHome top="0px" /> */}
       </Grid>
     </Fragment>
   );

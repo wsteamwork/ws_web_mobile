@@ -19,7 +19,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       marginBottom: 24,
       marginTop: 18,
-      margin: '0 16px'
+      margin: '0 18px'
     },
 
     roomItem: {
@@ -40,12 +40,11 @@ const StudioForRent: FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Grid container justify="center" className={classes.root}>
+      <Grid justify="center" className={classes.root}>
         <Grid container>
           <Grid className="head-title-container">
             <Grid className="head-title">{t('home:collectionRooms:studioForRent')}</Grid>
           </Grid>
-
           {dataRooms.length ? (
             <Fragment>
               <Grid container spacing={2} className={classes.roomList}>

@@ -32,7 +32,7 @@ const RoomTypeList: FC<IProps> = () => {
   useEffect(() => {
     getRoomType()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         return res.map((item, index) => ({
           ...item,
           img: `/static/images/property/${propertyImgs[index]}.jpg`

@@ -81,7 +81,6 @@ const LTHome: NextPage = (props) => {
         <Grid item xs={12}>
           <HighEndRooms />
         </Grid>
-
         <Grid item xs={12}>
           <ApartmentForRent />
         </Grid>
