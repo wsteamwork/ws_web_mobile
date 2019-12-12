@@ -1,16 +1,18 @@
+import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { Grid, Paper, Theme, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/styles';
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import LazyLoad from 'react-lazyload';
-import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
-import { cleanAccents, formatPrice } from '@/utils/mixins';
-import Cookies from 'universal-cookie';
 import ProgressiveImage from 'react-progressive-image';
+import Cookies from 'universal-cookie';
+
 interface IProps {
   classes?: any;
   room?: any;
+  imgHeight?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -19,13 +21,16 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
+    },
+    imgSize: {
+      height: (props) => (props.imgHeight ? props.imgHeight : 220)
     }
   })
 );
 
 const BusinessTripCard: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { room } = props;
+  const { room, imgHeight } = props;
   const { t } = useTranslation();
   const cookies = new Cookies();
   const imgRoomSM =
@@ -40,24 +45,20 @@ const BusinessTripCard: FC<IProps> = (props) => {
     <Grid container item xs={12} className={classes.boxWrapper}>
       <Grid item xs={12}>
         <Paper elevation={0} className="RoomCardBusinessTrip">
-          <Grid container className="__wrapper">
-            <Grid item xs={12} className="boxImg">
+          <Grid container className="RoomCardBusinessTrip__wrapper">
+            <Grid item xs={12} className="RoomCardBusinessTrip__boxImg">
               <ProgressiveImage src={imgRoomSM} placeholder={imgRoomXS}>
                 {(src, loading) => (
                   <img
                     style={{ opacity: loading ? 0.5 : 1 }}
                     src={src}
                     alt="Westay"
-                    className="imgSize"
+                    className={classNames('imgSize', classes.imgSize)}
                   />
                 )}
               </ProgressiveImage>
-              <Grid item xs={12} className="boxPrice">
-                {formatPrice(room.price_display)}&nbsp;
-                <span className="unitPrice">/{t('home:month')}</span>
-              </Grid>
             </Grid>
-            <Grid item xs={12} className="boxCard">
+            <Grid item xs={12} className="RoomCardBusinessTrip__boxCard">
               <Grid className="cardWrapper">
                 <Grid container className="cardContainer">
                   <Link href={`/long-term-room/${room.id}`} target="_blank" className="boxLink">
@@ -81,6 +82,10 @@ const BusinessTripCard: FC<IProps> = (props) => {
                         <Typography variant="subtitle2" className="roomName">
                           {room.about_room.name}
                         </Typography>
+                      </Grid>
+                      <Grid item xs={12} className="RoomCardBusinessTrip__boxPrice">
+                        {formatPrice(room.price_display)}&nbsp;
+                        <span className="unitPrice">/{t('home:month')}</span>
                       </Grid>
                       <Grid item xs={12} container className="marginRoomName">
                         <Grid item xs={12} className="roomType">

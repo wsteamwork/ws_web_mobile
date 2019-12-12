@@ -2,6 +2,7 @@ import { Grid, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import React, { ReactNode, useMemo } from 'react';
+import Swiper from 'react-id-swiper';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 interface Iprops<T> {
   classCustom?: any;
@@ -39,7 +40,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
   })
 );
 
-const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
+const SwiperList = <T extends any>(props: Iprops<T>) => {
   const classes = useStyles(props);
 
   const {
@@ -51,6 +52,33 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
     classCustom,
     isDependencies
   } = props;
+
+  const setting = {
+    slidesPerView: 1,
+    lazy: true,
+    spaceBetween: 30,
+    freeMode: true
+    // navigation: {
+    //   nextEl: '.swiper-button-next',
+    //   prevEl: '.swiper-button-prev'
+    // },
+    // renderPrevButton: () => <PrevArrow className="swiper-button-prev"></PrevArrow>,
+    // renderNextButton: () => <NextArrow className="swiper-button-next"></NextArrow>,
+    // breakpoints: {
+    //   1920: {},
+    //   1128: {
+    //     slidesPerView: 4
+    //   },
+    //   960: {
+    //     slidesPerView: 2.3,
+    //     freeMode: true
+    //   },
+    //   600: {
+    //     slidesPerView: 1.5
+    //   }
+    // }
+  };
+
   const renderList = useMemo(
     () =>
       listData.map((item, index) => (
@@ -64,17 +92,16 @@ const PropertyListHorizontalScroll = <T extends any>(props: Iprops<T>) => {
   );
 
   return (
-    <section className={classNames('property-list-horizontal-scroll-container', classes.spaceList)}>
+    <section className={classNames(classes.spaceList)}>
       {headTitle && (
         <Grid className="head-title-container">
-          <Grid className="head-title">{headTitle}</Grid>
+          <Typography className="head-title">{headTitle}</Typography>
         </Grid>
       )}
-      <Grid className={classNames('property-list-horizontal-scroll', classes.propertyList)}>
-        {renderList}
-      </Grid>
+      <Swiper {...setting}>{renderList}</Swiper>
+      {/* <Grid className={classNames(classes.propertyList)}>{renderList}</Grid> */}
     </section>
   );
 };
 
-export default PropertyListHorizontalScroll;
+export default SwiperList;

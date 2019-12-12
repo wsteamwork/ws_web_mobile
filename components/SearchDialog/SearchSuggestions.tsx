@@ -1,30 +1,16 @@
-import React, { FC, Fragment, useState, useEffect, Dispatch } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import {
-  InputAdornment,
-  InputBase,
-  Dialog,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
-  Typography,
-  Grid
-} from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
-import { TransitionProps } from '@material-ui/core/transitions';
-import SearchInput from '../LTR/ReusableComponents/SearchInput';
-import { getDataSearch } from '../Home/SearchAutoSuggestion';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { SearchSuggestData } from '@/types/Requests/Search/SearchResponse';
-import Router from 'next/router';
-import PlaceRoundedIcon from '@material-ui/icons/PlaceRounded';
+import { Grid } from '@material-ui/core';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import PlaceRoundedIcon from '@material-ui/icons/PlaceRounded';
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
+import Router from 'next/router';
+import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import { getDataSearch } from '../Home/SearchAutoSuggestion';
 interface Iprops {
   inputValue: string;
 }
@@ -69,12 +55,7 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     }
     const pushQuery: any = {
       name: cityId === undefined && districtId === undefined ? name : '',
-      // number_of_rooms: roomsCount,
-      // check_in: startDate,
-      // check_out: endDate,
-      // number_of_guests: guestsCount,
-      // rent_type: bookingType !== 0 ? bookingType : undefined,
-      // type_room: roomType !== 0 ? roomType : undefined,
+
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };

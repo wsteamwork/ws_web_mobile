@@ -111,27 +111,25 @@
   padding-left: 24px;
   padding-right: 24px;
   // margin-bottom: 36px;
+}
+.head-title-container {
+  margin-bottom: 16px;
+  -webkit-box-align: baseline;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  align-items: baseline;
+  display: inline-flex;
+  position: relative;
+}
 
-  .head-title-container {
-    margin-bottom: 16px;
-    -webkit-box-align: baseline;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    align-items: baseline;
-    display: inline-flex;
-    position: relative;
-    left: -6px;
-  }
-
-  .head-title {
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 26px;
-    letter-spacing: -0.6px;
-    color: inherit;
-    margin: 0px;
-    padding: 0px;
-  }
+.head-title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 26px;
+  letter-spacing: -0.6px;
+  color: inherit;
+  margin: 0px;
+  padding: 0px;
 }
 
 .property-list-horizontal-scroll {
@@ -156,7 +154,7 @@
     display: inline-block;
     white-space: normal;
     vertical-align: top;
-
+    position: relative;
     .propery-item-icon {
       display: flex;
       justify-content: center;

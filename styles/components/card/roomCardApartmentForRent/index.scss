@@ -1,0 +1,55 @@
+.ApartmentForRent {
+  position: relative;
+  height: 260px;
+  border-radius: 4px;
+  overflow: hidden;
+  &__boxImg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    &__img {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      object-fit: cover;
+      object-position: left center;
+    }
+  }
+
+  &__boxContent {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 0 1.4rem 1.45rem;
+    color: #fff;
+    &__wrapper {
+      position: relative;
+    }
+    &__title {
+      margin: 0px;
+      word-wrap: break-word;
+      font-size: 1.4rem;
+      font-weight: 700;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      line-height: 24px;
+      overflow: hidden;
+    }
+    &__detail {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__price {
+      font-weight: 600;
+    }
+    &__rating {
+      &__colorStar {
+        color: #fff !important;
+      }
+      // position: absolute;
+    }
+  }
+}

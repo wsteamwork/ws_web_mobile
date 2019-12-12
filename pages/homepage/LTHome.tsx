@@ -1,21 +1,24 @@
+import ApartmentForRent from '@/components/LTR/LTHome/ApartmentForRent';
 import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
 import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
 import FeatureRooms from '@/components/LTR/LTHome/FeatureRooms';
 import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
+import GoodPrice from '@/components/LTR/LTHome/GoodPrice';
 import HighEndRooms from '@/components/LTR/LTHome/HighEndRooms';
 import NavTopSearch from '@/components/LTR/LTHome/NavTopSearch';
 import RoomTypeList from '@/components/LTR/LTHome/RoomTypeList';
+import StudioForRent from '@/components/LTR/LTHome/StudioForRent';
 import TopDestination from '@/components/LTR/LTHome/TopDestinations';
 import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
+// import BottomNav from '@/components/Rooms/BottomNav';
 import { NextContextPage } from '@/store/Redux/Reducers';
-import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
 import HeadRoom from 'react-headroom';
-import LazyLoad  from 'react-lazyload';
+import LazyLoad from 'react-lazyload';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
@@ -28,21 +31,6 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const LTHome: NextPage = (props) => {
   const classes = useStyles(props);
-  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-  //   (state) => state.roomHomepage.roomsHot
-  // );
-  // const renderRoomsHot = (room) => (
-  //   <CardRoom2
-  //     city={room.city}
-  //     district={room.district}
-  //     // instantbook={room.instant_book}
-  //     roomID={room.id}
-  //     roomName={room.about_room.name}
-  //     roomType={room.accommodation_type_txt}
-  //     roomImage={room.avatar.images[0].name}
-  //     avg_rating={room.avg_rating}
-  //   />
-  // );
 
   return (
     <Fragment>
@@ -63,8 +51,7 @@ const LTHome: NextPage = (props) => {
               MozTransition: 'all 0.35s ease-in-out',
               OTransition: 'all 0.35s ease-in-out',
               transition: 'all 0.35s ease-in-out'
-            }}
-          >
+            }}>
             <Grid item xs={12} className={classes.boxWrapper}>
               <NavTopSearch />
             </Grid>
@@ -78,36 +65,45 @@ const LTHome: NextPage = (props) => {
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <FeatureRooms />
+            <FeatureRooms />
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <WhyChoosingUs />
+            <WhyChoosingUs />
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <EditorChoiceRooms />
+            <EditorChoiceRooms />
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <ForFamilyRooms />
+            <ForFamilyRooms />
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <BusinessTripRooms />
+            <BusinessTripRooms />
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
           <LazyLoad>
-          <HighEndRooms />
+            <HighEndRooms />
           </LazyLoad>
         </Grid>
+        <Grid item xs={12}>
+          <ApartmentForRent />
+        </Grid>
+        <Grid item xs={12}>
+          <StudioForRent />
+        </Grid>
+        <Grid item xs={12}>
+          <GoodPrice />
+        </Grid>
+        {/* <BottomNav /> */}
       </Grid>
-
     </Fragment>
   );
 };
@@ -115,9 +111,9 @@ const LTHome: NextPage = (props) => {
 LTHome.getInitialProps = async ({ store, req }: NextContextPage) => {
   const initLanguage = getCookieFromReq(req, 'initLanguage');
 
-  if (store.getState().roomHomepage.roomsHot.length === 0) {
-    const res = await getRoomsHomepage(store.dispatch, initLanguage);
-  }
+  // if (store.getState().roomHomepage.roomsHot.length === 0) {
+  //   const res = await getRoomsHomepage(store.dispatch, initLanguage);
+  // }
 
   return {};
 };
