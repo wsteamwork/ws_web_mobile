@@ -113,7 +113,7 @@ const PaymentType: FC<IProps> = (props) => {
               <Grid container>
                 <Grid item>
                   <FormControl component="fieldset">
-                    <Typography variant="body1">Chọn 1 trong 2 hình thức dưới đây</Typography>
+                    <Typography variant="body1">{t('longtermbooking:chooseMethod')}</Typography>
                     <RadioGroup name="paymentMethod" value={paymentMethod} onChange={handleChange}>
                       <FormControlLabel
                         value="payment1"
