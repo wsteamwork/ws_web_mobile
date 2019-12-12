@@ -1,7 +1,7 @@
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { getHomePageCollection } from '@/store/Hooks/CardRoomHooks';
 import { Theme } from '@fullcalendar/core';
-import { createStyles, Grid } from '@material-ui/core';
+import { createStyles, Grid, Typography } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import { makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
@@ -16,11 +16,35 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     root: {
       marginBottom: 24,
       marginTop: 18,
-      margin: '0 18px'
+      // margin: '0 18px'
+    },
+
+    roomList: {
+      paddingLeft: '1rem',
+      paddingRight: '0.5rem'
     },
 
     roomItem: {
-      padding: '6px !important'
+      padding: '4px !important'
+    },
+    headContainer: {
+      marginBottom: '1rem',
+      paddingLeft: '1rem',
+      WebkitBoxAlign: 'baseline',
+      WebkitBoxPack: 'justify',
+      justifyContent: 'space-between',
+      alignItems: 'baseline',
+      display: 'inline-flex',
+      position: 'relative',
+    },
+    headTitle: {
+      fontSize: '1.4rem',
+      fontWeight: 600,
+      lineHeight: '26px',
+      letterSpacing: '-0.6px',
+      color: 'inherit',
+      margin: '0px',
+      padding: '0px',
     }
   })
 );
@@ -39,12 +63,12 @@ const StudioForRent: FC<IProps> = (props) => {
     <Fragment>
       <Grid container justify="center" className={classes.root}>
         <Grid container>
-          <Grid className="head-title-container">
-            <Grid className="head-title">{t('home:collectionRooms:studioForRent')}</Grid>
+          <Grid className={classes.headContainer}>
+            <Typography className={classes.headTitle}>{t('home:collectionRooms:studioForRent')}</Typography>
           </Grid>
           {dataRooms.length ? (
             <Fragment>
-              <Grid container spacing={2} className={classes.roomList}>
+              <Grid container className={classes.roomList}>
                 {dataRooms.map((room, index) => (
                   <Grid item container xs={6} key={index} className={classes.roomItem}>
                     <BussinessTripCard room={room} imgHeight={150} />
@@ -53,7 +77,7 @@ const StudioForRent: FC<IProps> = (props) => {
               </Grid>
             </Fragment>
           ) : (
-              <Grid container spacing={2} className={classes.roomList}>
+              <Grid container className={classes.roomList}>
                 {[1, 2, 3, 4].map((item, index) => (
                   <Grid item container xs={6} key={index} className={classes.roomItem}>
                     <Skeleton variant="rect" width="100%" height={220} />

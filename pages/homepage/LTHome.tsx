@@ -1,7 +1,6 @@
 import ApartmentForRent from '@/components/LTR/LTHome/ApartmentForRent';
 import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
 import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
-import FeatureRooms from '@/components/LTR/LTHome/FeatureRooms';
 import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
 import GoodPrice from '@/components/LTR/LTHome/GoodPrice';
 import HighEndRooms from '@/components/LTR/LTHome/HighEndRooms';
@@ -9,7 +8,6 @@ import NavTopSearch from '@/components/LTR/LTHome/NavTopSearch';
 import RoomTypeList from '@/components/LTR/LTHome/RoomTypeList';
 import StudioForRent from '@/components/LTR/LTHome/StudioForRent';
 import TopDestination from '@/components/LTR/LTHome/TopDestinations';
-import WhyChoosingUs from '@/components/LTR/LTHome/WhyChoosingUs';
 import NextHead from '@/components/NextHead';
 // import BottomNav from '@/components/Rooms/BottomNav';
 import { NextContextPage } from '@/store/Redux/Reducers';
@@ -63,16 +61,16 @@ const LTHome: NextPage = (props) => {
         <Grid item xs={12}>
           <TopDestination />
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <LazyLoad>
             <FeatureRooms />
           </LazyLoad>
-        </Grid>
-        <Grid item xs={12}>
+        </Grid> */}
+        {/* <Grid item xs={12}>
           <LazyLoad>
             <WhyChoosingUs />
           </LazyLoad>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <LazyLoad>
             <EditorChoiceRooms />
@@ -94,13 +92,19 @@ const LTHome: NextPage = (props) => {
           </LazyLoad>
         </Grid>
         <Grid item xs={12}>
-          <ApartmentForRent />
+          <LazyLoad>
+            <ApartmentForRent />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
-          <StudioForRent />
+          <LazyLoad>
+            <StudioForRent />
+          </LazyLoad>
         </Grid>
         <Grid item xs={12}>
-          <GoodPrice />
+          <LazyLoad>
+            <GoodPrice />
+          </LazyLoad>
         </Grid>
         {/* <BottomNav /> */}
       </Grid>

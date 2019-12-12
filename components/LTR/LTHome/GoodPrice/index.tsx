@@ -1,11 +1,11 @@
 import CardRoom2 from '@/components/Cards/CardRoom2';
-import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
+import HorizontalScrollLayout from '@/pages/homepage/HorizontalScrollLayout';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { getHomePageCollection } from '@/store/Hooks/CardRoomHooks';
 import { Theme } from '@fullcalendar/core';
 import { createStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 interface IProps {
   classes?: any;
@@ -22,14 +22,18 @@ const GoodPrice: FC<IProps> = (props) => {
     getHomePageCollection('good_price', 4).then((res) => setDataRooms(res));
   }, []);
 
-  //   const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-  //     (state) => state.roomHomepage.roomsHot
-  //   );
+  const params = {
+    spaceBetween: 10,
+    scrollbar: {
+      el: '.swiper-scrollbar',
+      hide: false
+    }
+  }
+
   const renderRoomsHot = (room) => (
     <CardRoom2
       city={room.city}
       district={room.district}
-      // instantbook={room.instant_book}
       priceDisplay={room.price_display}
       roomID={room.id}
       roomName={room.about_room.name}
@@ -39,19 +43,15 @@ const GoodPrice: FC<IProps> = (props) => {
     />
   );
   return (
-    <Fragment>
-      {/* <Grid container item xs={12} justify="center" className={classes.root}> */}
-      <PropertyListHorizontalScroll
-        itemWidth={width == 'xs' ? '90%' : width == 'sm' ? '80%' : width == 'md' ? '66.67%' : '66%'}
-        headTitle={t('home:collectionRooms:goodPrice')}
-        itemHeight={width == 'xs' ? 150 : width == 'sm' ? 220 : width == 'md' ? 220 : 200}
-        gutter={6}
-        listData={dataRooms}
-        itemRender={renderRoomsHot}
-        sizeIcon={width == 'sm' ? 100 : 65}
-      />
-      {/* </Grid> */}
-    </Fragment>
+    <HorizontalScrollLayout
+      headTitle={t('home:goodPrice')}
+      listData={dataRooms}
+      swiperParams={params}
+      paddingLeft={4}
+      paddingRight={4}
+      itemRender={renderRoomsHot}
+    />
+
   );
 };
 
