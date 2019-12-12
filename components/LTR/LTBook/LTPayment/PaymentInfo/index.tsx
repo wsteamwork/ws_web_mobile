@@ -12,11 +12,12 @@ import React, { FC, Fragment, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import InfoHeader from './InfoHeader';
-
+import Cookies from 'universal-cookie';
 const PaymentInfo: FC = () => {
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const xsMode = width === 'xs';
+  const cookies = new Cookies();
   // const [infoStatus, setInfoStatus] = useState<boolean>(!xsMode);
   const LTDataInvoice = useSelector<ReducersList, PaymentBankListRes>(
     (state) => state.ltBooking.LTDataInvoice
@@ -73,9 +74,9 @@ const PaymentInfo: FC = () => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(
+                        justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(
                           LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
-                        )}đ`}</Grid>
+                        )}`}</Grid>
                     </Grid>
                     <Grid container item xs={12}>
                       <Grid item xs={6} className={'fontLow'}>
@@ -86,7 +87,7 @@ const PaymentInfo: FC = () => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(LTDataInvoice!.additional_fee)}đ`}</Grid>
+                        justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(LTDataInvoice!.additional_fee)}`}</Grid>
                     </Grid>
                     {LTDataInvoice!.coupon && (
                       <Grid container item xs={12}>
@@ -98,9 +99,9 @@ const PaymentInfo: FC = () => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(
+                          justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(
                             LTDataInvoice!.coupon_discount
-                          )}đ`}</Grid>
+                          )}`}</Grid>
                       </Grid>
                     )}
 
@@ -114,9 +115,9 @@ const PaymentInfo: FC = () => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(
+                          justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(
                             LTDataInvoice!.price_discount
-                          )}đ`}</Grid>
+                          )}`}</Grid>
                       </Grid>
                     )}
                   </Grid>
@@ -127,9 +128,9 @@ const PaymentInfo: FC = () => {
                         <Typography variant="h6">{t('payment:invoice:total')}</Typography>
                       </Grid>
                       <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                        <Typography variant="h6">{`${formatMoney(
+                        <Typography variant="h6">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(
                           LTDataInvoice!.contracts.data[0].next_payment_due.payment_amount
-                        )}đ`}</Typography>
+                        )}`}</Typography>
                       </Grid>
                     </Grid>
                   </Grid>

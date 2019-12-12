@@ -10,12 +10,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import numeral from 'numeral';
 import { useTranslation } from 'react-i18next';
-
+import Cookies from 'universal-cookie';
 const DirectPayment: FC = () => {
   const { t } = useTranslation();
   const dataInvoice = useSelector<ReducersList, PaymentBankListRes>(
     (state) => state.book.dataInvoice
   );
+  const cookies = new Cookies();
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.book.dataInvoice.room.data);
 
   const numberDay = useMemo<number>(() => {
@@ -225,7 +226,7 @@ const DirectPayment: FC = () => {
               <p>
                 Thanh toán mã booking{' '}
                 <span style={{ textTransform: 'uppercase' }}>#{dataInvoice.uuid}</span> số tiền:{' '}
-                {numeral(dataInvoice.total_fee).format('0,0')}đ
+                {cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{numeral(dataInvoice.total_fee).format('0,0')}
               </p>
             </Grid>
           </Grid>
@@ -246,7 +247,7 @@ const DirectPayment: FC = () => {
               </p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(dataInvoice.price_original).format('0,0')}đ</p>
+              <p>{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{numeral(dataInvoice.price_original).format('0,0')}</p>
             </Grid>
           </Grid>
           {/* <Grid container>
@@ -262,7 +263,7 @@ const DirectPayment: FC = () => {
               <p>{t('payment:directPayment:totalRevenue')}</p>
             </Grid>
             <Grid item xs={7} className="textRight">
-              <p>{numeral(dataInvoice.total_fee).format('0,0')}đ</p>
+              <p>{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{numeral(dataInvoice.total_fee).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>

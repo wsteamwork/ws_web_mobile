@@ -9,7 +9,7 @@ import moment from 'moment';
 import React, { FC, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import numeral from 'numeral'
+import numeral from 'numeral';
 const DirectPayment: FC = () => {
   const { t } = useTranslation();
   const LTDataInvoice = useSelector<ReducersList, PaymentBankListRes>(

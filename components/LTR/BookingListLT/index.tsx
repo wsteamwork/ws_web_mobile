@@ -2,7 +2,7 @@ import NotFoundGlobal from '@/components/Rooms/Lotte/NotFoundGlobal';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { updateObject } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, makeStyles, Theme, Grid } from '@material-ui/core';
 import Router from 'next/router';
 import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';

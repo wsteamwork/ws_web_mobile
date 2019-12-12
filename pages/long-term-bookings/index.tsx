@@ -5,28 +5,37 @@ import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Theme, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import NavTop from '@/components/NavTop';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import BookingTabs from '@/components/LTR/BookingTabs';
-
+import BottomNav from '@/components/Rooms/BottomNav';
+import { withCookies } from 'react-cookie';
+import Cookies from 'universal-cookie';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
-    },
+    }
   })
 );
 const LongtermBookings: NextPage = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { router } = useContext(GlobalContext);
+  const cookies = new Cookies();
+  const isLogin = !!cookies.get('_token');
   const backHomePage = () => {
     router.push('/');
   };
+  useEffect(() => {
+    if (!isLogin) {
+      router.push('/auth');
+    }
+  }, [isLogin])
   return (
     <Fragment>
       <NextHead
@@ -48,6 +57,9 @@ const LongtermBookings: NextPage = (props) => {
       <GridContainer xs={11} className={classes.boxWrapper}>
         <BookingTabs />
       </GridContainer>
+      <Grid item xs={12}>
+        <BottomNav inBookingLT={true}/>
+      </Grid>
     </Fragment>
   );
 };
@@ -57,5 +69,4 @@ LongtermBookings.getInitialProps = async ({ store, query, req }: NextContextPage
 
   return {};
 };
-
-export default LongtermBookings;
+export default withCookies(LongtermBookings);

@@ -27,9 +27,7 @@ import React, { FC, Fragment, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import {
-  LongTermBookingAction,
-} from '@/store/Redux/Reducers/Booking/long-term-booking';
+import { LongTermBookingAction } from '@/store/Redux/Reducers/Booking/long-term-booking';
 import { TransitionCustom } from '@/components/Book/BookingForm';
 import Cookies from 'universal-cookie';
 import PaymentType from './PaymentType';
@@ -364,6 +362,41 @@ const BookingCardLT: FC<IProps> = (props) => {
                       </Typography>
                     </Grid>
                   </Grid>
+                  {bookingType === CURRENT && booking.contracts.data[0].next_payment_due && (
+                    <Grid item xs={12} sm={12}>
+                      <Grid className={classes.content}>
+                        <Divider className={classes.marginLabel} />
+                        <Grid item xs={12} className={classes.wrapperPaymentXs}>
+                          <Grid item className={classes.infoContract}>
+                            <Typography variant="body1" className={classes.customerName}>
+                              {t('longtermbooking:paymentPeriod')}
+                            </Typography>
+                            <Typography variant="body1" className={classes.dayPayment}>
+                              {moment(nextPaymentDue.payment_due_date).format('DD/MM/YYYY')}
+                            </Typography>
+                          </Grid>
+                          <Grid item className={classes.infoContract} xs={4}>
+                            <Box>
+                              <Typography variant="body1" className={classes.boxPayment}>
+                                {cookies.get('initLanguage') == 'en' ? '$' : 'đ'}
+                                {numeral(nextPaymentDue.payment_amount).format('0,0')}
+                              </Typography>
+                              <Grid className={classes.boxPayment}>
+                                <Button
+                                  size="small"
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={openPaymentBooking}
+                                  className={classes.button}>
+                                  {t('longtermbooking:payment')}
+                                </Button>
+                              </Grid>
+                            </Box>
+                          </Grid>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  )}
                   <Grid item xs={12} sm={12}>
                     <Grid className={classes.content}>
                       <Divider className={classes.marginLabel} />
@@ -785,7 +818,7 @@ const BookingCardLT: FC<IProps> = (props) => {
                     <Grid className={classes.nameIcon} item xs={8} sm={9}>
                       <Grid>
                         <Typography variant="subtitle1" className={classes.priceDay}>
-                        {t('longtermbooking:contractStatus')}
+                          {t('longtermbooking:contractStatus')}
                         </Typography>
                         <Typography variant={'body1'} className={classes.customerName}>
                           {booking.contracts.data[0].status_txt}

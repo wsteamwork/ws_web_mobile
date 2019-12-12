@@ -20,11 +20,12 @@ import { ExpandMore } from '@material-ui/icons';
 import InfoHeader from './InfoHeader';
 import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 import { useTranslation } from 'react-i18next';
-
+import Cookies from 'universal-cookie';
 const PaymentInfo: FC = (props) => {
   const { t } = useTranslation();
   const { width } = useContext(GlobalContext);
   const xsMode = width === 'xs';
+  const cookies = new Cookies();
   const [infoStatus, setInfoStatus] = useState<boolean>(!xsMode);
   const room = useSelector<ReducersList, RoomIndexRes>((state) => state.book.dataInvoice.room.data);
   const lists = useSelector<ReducersList, PaymentBankListRes>((state) => state.book.dataInvoice);
@@ -78,7 +79,7 @@ const PaymentInfo: FC = (props) => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(lists!.price_original)}đ`}</Grid>
+                        justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(lists!.price_original)}`}</Grid>
                     </Grid>
                     <Grid container item xs={12}>
                       <Grid item xs={6} className={'fontLow'}>
@@ -89,7 +90,7 @@ const PaymentInfo: FC = (props) => {
                         item
                         xs={6}
                         className={'fontLow'}
-                        justify="flex-end">{`${formatMoney(lists!.additional_fee)}đ`}</Grid>
+                        justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(lists!.additional_fee)}`}</Grid>
                     </Grid>
                     {lists!.coupon && (
                       <Grid container item xs={12}>
@@ -101,7 +102,7 @@ const PaymentInfo: FC = (props) => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(lists!.coupon_discount)}đ`}</Grid>
+                          justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(lists!.coupon_discount)}`}</Grid>
                       </Grid>
                     )}
 
@@ -115,7 +116,7 @@ const PaymentInfo: FC = (props) => {
                           item
                           xs={6}
                           className={'fontLow'}
-                          justify="flex-end">{`${formatMoney(lists!.price_discount)}đ`}</Grid>
+                          justify="flex-end">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(lists!.price_discount)}`}</Grid>
                       </Grid>
                     )}
                   </Grid>
@@ -126,7 +127,7 @@ const PaymentInfo: FC = (props) => {
                         <Typography variant="h6">{t('payment:invoice:total')}</Typography>
                       </Grid>
                       <Grid container item xs={6} className={'fontLow'} justify="flex-end">
-                        <Typography variant="h6">{`${formatMoney(lists!.total_fee)}đ`}</Typography>
+                        <Typography variant="h6">{cookies.get('initLanguage') == 'en' ? '$' : 'đ'}{`${formatMoney(lists!.total_fee)}`}</Typography>
                       </Grid>
                     </Grid>
                   </Grid>
