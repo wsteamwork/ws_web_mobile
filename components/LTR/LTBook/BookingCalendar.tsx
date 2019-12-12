@@ -115,10 +115,10 @@ const BookingCalendar: FC<Iprops> = (props) => {
 
             <Typography variant="subtitle2">
               {focusedInput === 'endDate'
-                ? 'Chọn ở tối thiểu 1 tháng - 30 ngày'
+                ? t('longtermroom:stayForAtLeast1Month')
                 : focusedInput === 'startDate' && !!date.endDate
-                ? `${moment(moveout).diff(moment(movein), 'days')} ngày `
-                : 'Chọn ngày chuyển tới trong vòng 2 tháng kể từ ngày hôm nay'}
+                ? `${moment(moveout).diff(moment(movein), 'days')} ${t('longtermroom:days')} `
+                : t('longtermroom:arrivalDateWithin2Months')}
             </Typography>
           </Grid>
         </Grid>

@@ -38,6 +38,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     textCenter: {
       fontSize: '1rem',
       fontWeight: 'bold'
+    },
+    btnLike:{
+      backgroundColor:'#fff',
+      padding:8,
+      '&:hover':{
+        backgroundColor:'#fff',
+      }
     }
   })
 );
@@ -82,7 +89,7 @@ const NavTop: FC<IProps> = (props) => {
       </Grid>
       <Grid item xs={4} className={classes.boxRight}>
         {showFavoriteAction ? (
-          <IconButton onClick={handleFavoriteAction}>
+          <IconButton onClick={handleFavoriteAction} className={classes.btnLike}>
             <img src={'/static/images/Heart.svg'} width={24} height={24} />
           </IconButton>
         ) : (
@@ -107,7 +114,7 @@ const NavTop: FC<IProps> = (props) => {
     </Grid>
     </RoomFilterContext.Provider>
   ) : (
-    <Fragment></Fragment>
+    <Fragment/>
   );
 };
 NavTop.defaultProps = {

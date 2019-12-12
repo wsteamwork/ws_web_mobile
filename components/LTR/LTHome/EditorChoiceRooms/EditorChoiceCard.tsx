@@ -1,13 +1,12 @@
+import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
 import { Grid, Paper, Theme, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import LazyLoad from 'react-lazyload';
-import { IMAGE_STORAGE_SM, IMAGE_STORAGE_XS } from '@/utils/store/global';
-import { formatPrice, cleanAccents } from '@/utils/mixins';
-import Cookies from 'universal-cookie';
 import ProgressiveImage from 'react-progressive-image';
+import Cookies from 'universal-cookie';
 interface IProps {
   classes?: any;
   room: any;
@@ -84,13 +83,13 @@ const EditorChoiceCard: FC<IProps> = (props) => {
                           <Grid item xs={12} className="roomSubtitle">
                             {room.total_area && room.total_area > 0 ? (
                               <span>
-                                {room.total_area ? room.total_area : '?'} m<sup>2</sup>
+                                {room.total_area ? room.total_area : '69'} m<sup>2</sup>
                               </span>
                             ) : (
-                              <span>
-                                ? m<sup>2</sup>
-                              </span>
-                            )}
+                                <span>
+                                  ? m<sup>2</sup>
+                                </span>
+                              )}
                             <span className="dotAmenties">.</span>
                             <span>
                               {room.bathrooms.number_bathroom} {t('rooms:bathrooms')}
