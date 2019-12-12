@@ -31,7 +31,6 @@ import { Dispatch } from 'redux';
 import NavTop from '@/components/NavTop';
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import SearchRoom from '@/components/SearchRoom';
-import RoomCardItem from '@/components/RoomCardItem';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({

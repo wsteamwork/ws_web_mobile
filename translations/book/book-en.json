@@ -59,5 +59,6 @@
         "choosePayment": "Payment method",
         "transferMoney": "Transfer money via",
         "directTransfer": "Direct transfer"
-    }
+    },
+    "bookings": "My Trips"
 }

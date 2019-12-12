@@ -37,6 +37,8 @@ import shared_en from './shared/shared-en.json';
 import shared_vi from './shared/shared-vi.json';
 import user_en from './user/user-en.json';
 import user_vi from './user/user-vi.json';
+import longtermbooking_en from './LongTermRental/longtermbooking/longtermbooking-en.json';
+import longtermbooking_vi from './LongTermRental/longtermbooking/longtermbooking-vi.json';
 const cookies = new Cookies();
 
 const languageDetector = {
@@ -75,6 +77,7 @@ i18n
         roomlist: roomlist_en,
         basic: basic_en,
         longtermroom: longtermroom_en,
+        longtermbooking: longtermbooking_en,
         host: host_en,
         price: price_en
       },
@@ -95,6 +98,7 @@ i18n
         roomlist: roomlist_vi,
         basic: basic_vi,
         longtermroom: longtermroom_vi,
+        longtermbooking: longtermbooking_vi,
         host: host_vi,
         price: price_vi
       }
