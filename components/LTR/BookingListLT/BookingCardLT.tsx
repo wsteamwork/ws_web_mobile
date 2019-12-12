@@ -325,7 +325,7 @@ const BookingCardLT: FC<IProps> = (props) => {
                   <Grid item xs={9} sm={10}>
                     <Grid container>
                       <Grid item>
-                        <Grid item sm={6} xs={12} className={classes.infoRoomName}>
+                        <Grid item xs={12} className={classes.infoRoomName}>
                           <span className={classes.customerName}>
                             #{booking.uuid}
                             <Tooltip
@@ -342,19 +342,19 @@ const BookingCardLT: FC<IProps> = (props) => {
                         </Grid>
                       </Grid>
                     </Grid>
-                    <Grid item xs={12} lg={8} className={classes.infoContract}>
+                    <Grid item xs={12} className={classes.infoContract}>
                       <Typography variant="body1" className={classes.customerName}>
                         {t('longtermbooking:checkin')}:{' '}
                         {moment(booking.current_contract.move_in).format('DD/MM/YYYY')}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} lg={8} className={classes.infoContract}>
+                    <Grid item xs={12} className={classes.infoContract}>
                       <Typography variant="body1" className={classes.customerName}>
                         {t('longtermbooking:checkout')}:{' '}
                         {moment(booking.current_contract.move_out).format('DD/MM/YYYY')}
                       </Typography>
                     </Grid>
-                    <Grid item xs={12} lg={8} className={classes.infoContract}>
+                    <Grid item xs={12} className={classes.infoContract}>
                       <Typography variant="body1" className={classes.customerName}>
                         <a
                           href={`https://westay.vn/long-term-room/${booking.longTermRoom.data.id}`}
@@ -432,9 +432,9 @@ const BookingCardLT: FC<IProps> = (props) => {
             <Divider className={classes.marginLabel} />
             <Grid className={classes.price}>
               <Grid container spacing={1}>
-                <Grid item xs={12} sm={4} md lg xl={3}>
+                <Grid item xs={12} sm={4}>
                   <Grid container className={classes.wrapperContract}>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                    <Grid item xs={4} sm={3} className={classes.maxWidthIcon}>
                       <img
                         src={'/static/images/contract-list.svg'}
                         alt="Contract List"
@@ -530,16 +530,16 @@ const BookingCardLT: FC<IProps> = (props) => {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} sm={4} md lg xl={3}>
+                <Grid item xs={12} sm={4}>
                   <Grid container className={classes.wrapperContract}>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                    <Grid item xs={4} sm={3} className={classes.maxWidthIcon}>
                       <img
                         src={'/static/images/contract-current.svg'}
                         alt="Contract Current"
                         className={classes.imgDetail}
                       />
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                    <Grid className={classes.nameIcon} item xs={8} sm={9}>
                       <HtmlTooltip
                         placement="bottom-end"
                         title={`Click để xem chi tiết`}
@@ -666,16 +666,16 @@ const BookingCardLT: FC<IProps> = (props) => {
                   </Grid>
                 </Grid>
 
-                <Grid item xs={12} sm={4} md lg xl={3}>
+                <Grid item xs={12} sm={4}>
                   <Grid container className={classes.wrapperContract}>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                    <Grid item xs={4} sm={3} className={classes.maxWidthIcon}>
                       <img
                         src={'/static/images/debit-card.svg'}
                         alt="Debit Card"
                         className={classes.imgDetail}
                       />
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                    <Grid className={classes.nameIcon} item xs={8} sm={9}>
                       <Grid onClick={openTermPaymentContract}>
                         <Typography variant="subtitle1" className={classes.priceDay}>
                           {t('longtermbooking:paymentPeriod')}
@@ -756,9 +756,9 @@ const BookingCardLT: FC<IProps> = (props) => {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item xs={12} sm={4} md lg xl={3}>
+                <Grid item xs={12} sm={4}>
                   <Grid container className={classes.wrapperContract}>
-                    <Grid item xs={4} sm={3} md={12} lg={3} className={classes.maxWidthIcon}>
+                    <Grid item xs={4} sm={3} className={classes.maxWidthIcon}>
                       {booking.contracts.data[0].status === 1 && (
                         <img
                           src={'/static/images/new.svg'}
@@ -782,7 +782,7 @@ const BookingCardLT: FC<IProps> = (props) => {
                           />
                         )}
                     </Grid>
-                    <Grid className={classes.nameIcon} item xs={8} sm={9} lg={9} md={12}>
+                    <Grid className={classes.nameIcon} item xs={8} sm={9}>
                       <Grid>
                         <Typography variant="subtitle1" className={classes.priceDay}>
                         {t('longtermbooking:contractStatus')}
