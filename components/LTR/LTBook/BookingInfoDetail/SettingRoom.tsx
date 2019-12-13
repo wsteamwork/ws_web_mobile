@@ -32,7 +32,7 @@ const SettingRoom: FC = () => {
                 <Typography variant="caption" style={{ padding: '0px 10px' }}>
                   {`${t('book:bookingInfoDetail:noCancel1')} ${formatMoney(
                     dataCalculate.total_fee / 2
-                  )}đ ${t('book:bookingInfoDetail:noCancel2')} ${moment
+                  )}${t('shared:currency')} ${t('book:bookingInfoDetail:noCancel2')} ${moment
                     .unix(dataCalculate.checkin)
                     .subtract(room!.settings.days, 'day')
                     .locale('vi')
@@ -47,7 +47,7 @@ const SettingRoom: FC = () => {
                         <Typography variant="caption" style={{ padding: '0px 10px' }}>
                           {`${t('book:bookingInfoDetail:yesCancel1')} ${formatMoney(
                             dataCalculate.total_fee
-                          )}đ ${t('book:bookingInfoDetail:yesCancel2')}`}
+                          )}${t('shared:currency')} ${t('book:bookingInfoDetail:yesCancel2')}`}
                         </Typography>
                       )}
                   </Grid>
