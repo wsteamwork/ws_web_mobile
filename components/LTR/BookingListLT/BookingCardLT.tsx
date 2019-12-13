@@ -83,32 +83,24 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       borderRadius: '50%'
     },
     imgDefault: {
-      width: 64,
-      height: 64,
+      width: 30,
+      height: 30,
       margin: 'auto'
     },
     widthImg: {
       display: 'flex',
-      [theme.breakpoints.down('xs')]: {
-        marginBottom: 8,
-        maxHeight: 90
-      },
-      [theme.breakpoints.up('sm')]: {
-        maxHeight: 97
-      }
+      marginBottom: 8,
+      maxHeight: 30
+      
     },
     wrapperImage: {
       display: 'flex',
       alignItems: 'center',
-      [theme.breakpoints.down('sm')]: {
-        height: 97
-      },
-      [theme.breakpoints.down('xs')]: {
-        height: 90
-      },
+      height: 64,
+      width: 64,
       backgroundColor: '#3d5c5c',
       border: '1px solid #ffffff',
-      borderRadius: '10px'
+      borderRadius: '50%'
     },
     boxAction: {
       display: 'flex',
