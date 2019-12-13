@@ -1,9 +1,9 @@
 import FeatureRoomCard from '@/components/Cards/FeatureRoomCard';
-import PropertyListHorizontalScroll from '@/pages/homepage/PropertyListHorizontalScroll';
+import HorizontalScrollLayout from '@/pages/homepage/HorizontalScrollLayout';
 import { GlobalContext } from '@/store/Context/GlobalContext';
+import { getCollectionLongTerm } from '@/store/Context/LTR/HomepageCollectionContext';
 import { FC, useContext, useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
-import { getCollectionLongTerm } from '@/store/Context/LTR/HomepageCollectionContext';
 
 interface IProps { }
 
@@ -18,20 +18,17 @@ const FeatureRooms: FC<IProps> = () => {
         });
     }, []);
     const renderFeatureRooms = (room) => (
-        <div>
-            <FeatureRoomCard room={room} />
-        </div>
+        <FeatureRoomCard room={room} />
     );
     return (
-        <div>
-            <PropertyListHorizontalScroll
-                itemWidth={width == 'xs' ? '95%' : width == 'sm' ? '30%' : width == 'md' ? '38%' : width == 'lg' ? '33%' : '30%'}
-                headTitle={t('home:topDestinations')}
-                listData={roomFeature}
-                gutter={6}
-                itemRender={renderFeatureRooms}
-            />
-        </div>
+        <HorizontalScrollLayout
+            headTitle={t('home:topDestinations')}
+            listData={roomFeature}
+            slidePerView={2.1}
+            spaceBetween={10}
+            paddingLeft={18}
+            itemRender={renderFeatureRooms}
+        />
     )
 }
 

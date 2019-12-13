@@ -1,12 +1,11 @@
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import mainColor from '@/styles/constants/colors';
-import { Dialog, Grid, IconButton, makeStyles, Theme, Typography, Slide } from '@material-ui/core';
+import { Grid, IconButton, makeStyles, Theme, Typography } from '@material-ui/core';
 import createStyles from '@material-ui/core/styles/createStyles';
 import { Sort } from '@material-ui/icons';
-import React, { FC, useContext, useState, useMemo } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile/index';
-import { TransitionProps } from '@material-ui/core/transitions';
 interface IProps {
   classes?: any;
 }
