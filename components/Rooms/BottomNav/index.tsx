@@ -98,10 +98,12 @@ const BottomNav: FC<IProps> = (props) => {
     } else if (parseInt(newValue) == 2 && isLogin) {
       setIndex(parseInt(newValue));
       router.push('/profile/long-term-bookings');
-    } else if (parseInt(newValue) == 3 && isLogin) {
+    }
+    if (parseInt(newValue) == 3) {
       setIndex(parseInt(newValue));
       setOpenDrawer(true);
-    } else if (parseInt(newValue) == 0) {
+    }
+    if (parseInt(newValue) == 0) {
       setIndex(parseInt(newValue));
       router.push('/');
     }
