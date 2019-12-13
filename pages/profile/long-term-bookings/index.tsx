@@ -1,17 +1,17 @@
-import NextHead from '@/components/NextHead';
 import GridContainer from '@/components/Layout/Grid/Container';
+import BookingTabs from '@/components/LTR/BookingTabs';
+import NavTop from '@/components/NavTop';
+import NextHead from '@/components/NextHead';
+import BottomNav from '@/components/Rooms/BottomNav';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage } from '@/store/Redux/Reducers';
 import { getCookieFromReq } from '@/utils/mixins';
-import { createStyles, Theme, Grid } from '@material-ui/core';
+import { createStyles, Grid, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import NavTop from '@/components/NavTop';
-import { GlobalContext } from '@/store/Context/GlobalContext';
-import BookingTabs from '@/components/LTR/BookingTabs';
-import BottomNav from '@/components/Rooms/BottomNav';
 import { withCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({

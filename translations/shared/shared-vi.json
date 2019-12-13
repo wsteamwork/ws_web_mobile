@@ -24,5 +24,9 @@
     "lang": "vi",
     "priceRangeMin": "Giá tối thiểu",
     "priceRangeMax": "Giá tối đa",
-    "currency": "đ"
+    "currency": "đ",
+    "profile": "Cá nhân",
+    "setting": "Cài đặt",
+    "home": "Trang chủ",
+    "booking": "Đặt phòng"
 }

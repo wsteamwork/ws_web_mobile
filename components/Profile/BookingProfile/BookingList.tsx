@@ -252,7 +252,6 @@ const BookingList: FC<IBookingList> = (props) => {
       </GridContainer>
     );
   });
-
   return (
     <Grid className="bookingList">
       {bookings.length > 0 && (

@@ -1,4 +1,4 @@
-import ApartmentForRent from '@/components/LTR/LTHome/ApartmentForRent';
+// import ApartmentForRent from '@/components/LTR/LTHome/ApartmentForRent';
 import BusinessTripRooms from '@/components/LTR/LTHome/BusinessTripRooms';
 import EditorChoiceRooms from '@/components/LTR/LTHome/EditorChoiceRooms';
 import ForFamilyRooms from '@/components/LTR/LTHome/ForFamilyRooms';
@@ -45,6 +45,7 @@ const LTHome: NextPage = (props) => {
         <Grid item xs={12}>
           <HeadRoom
             style={{
+              zIndex: 2,
               WebkitTransition: 'all 0.35s ease-in-out',
               MozTransition: 'all 0.35s ease-in-out',
               OTransition: 'all 0.35s ease-in-out',
@@ -91,11 +92,11 @@ const LTHome: NextPage = (props) => {
             <HighEndRooms />
           </LazyLoad>
         </Grid>
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <LazyLoad>
             <ApartmentForRent />
           </LazyLoad>
-        </Grid>
+        </Grid> */}
         <Grid item xs={12}>
           <LazyLoad>
             <StudioForRent />

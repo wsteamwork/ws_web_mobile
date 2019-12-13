@@ -1,38 +1,33 @@
 import NextHead from '@/components/NextHead';
-import RoomCard from '@/components/RoomCard';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import BottomNav from '@/components/Rooms/BottomNav';
+import { NextContextPage } from '@/store/Redux/Reducers';
 import { getRoomsHomepage } from '@/store/Redux/Reducers/Home/roomHomepage';
-import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { getCookieFromReq } from '@/utils/mixins';
 import { Grid } from '@material-ui/core';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
-import { useTranslation } from 'react-i18next';
-import { forceCheck } from 'react-lazyload';
-import { useSelector } from 'react-redux';
 import LTHome from './homepage/LTHome';
-import BottomNav from '@/components/Rooms/BottomNav';
 
 const Home: NextPage = () => {
-  const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-    (state) => state.roomHomepage.roomsHot
-  );
-  const renderRoom = (room) => <RoomCard city={room.city.data.name}
-    district={room.district.data.name}
-    instantbook={room.instant_book}
-    roomID={room.id}
-    roomName={room.room_name}
-    roomNumber={room.number_room}
-    roomType={room.room_type_txt}
-    roomImage={room.avatar_image}
-    price_day={room.price_day}
-    price_hour={room.price_hour}
-    total_review={room.total_review}
-    avg_rating={room.avg_rating}
-    isHomepage={true} />;
-  const { t } = useTranslation();
-  // const { width } = useContext<IGlobalContext>(GlobalContext);
-  forceCheck();
+  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
+  //   (state) => state.roomHomepage.roomsHot
+  // );
+  // const renderRoom = (room) => <RoomCard city={room.city.data.name}
+  //   district={room.district.data.name}
+  //   instantbook={room.instant_book}
+  //   roomID={room.id}
+  //   roomName={room.room_name}
+  //   roomNumber={room.number_room}
+  //   roomType={room.room_type_txt}
+  //   roomImage={room.avatar_image}
+  //   price_day={room.price_day}
+  //   price_hour={room.price_hour}
+  //   total_review={room.total_review}
+  //   avg_rating={room.avg_rating}
+  //   isHomepage={true} />;
+  // const { t } = useTranslation();
+  // // const { width } = useContext<IGlobalContext>(GlobalContext);
+  // forceCheck();
   return (
     <Fragment>
       <NextHead
@@ -45,7 +40,8 @@ const Home: NextPage = () => {
 
       <Grid container justify="center" style={{ marginBottom: 100 }}>
         <Grid item xs={12} md={10}>
-          <BottomNav/>
+          <LTHome />
+          <BottomNav />
         </Grid>
       </Grid>
     </Fragment>

@@ -23,5 +23,9 @@
     "success": "Successfully",
     "priceRangeMin": "Min price",
     "priceRangeMax": "Max price",
-    "currency": "$"
+    "currency": "$",
+    "profile": "My account",
+    "setting": "Setting",
+    "home": "Home",
+    "booking": "My Booking"
 }

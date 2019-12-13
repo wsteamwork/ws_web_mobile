@@ -3,6 +3,7 @@ import FormSignin from '@/components/Auth/Signin/FormSignin';
 import FormSignup from '@/components/Auth/Signup/FormSignup';
 import GridContainer from '@/components/Layout/Grid/Container';
 import NextHead from '@/components/NextHead';
+import BottomNav from '@/components/Rooms/BottomNav';
 import NavHeader from '@/components/Toolbar/NavHeader';
 import { Button, Fade, Grid, makeStyles, Theme } from '@material-ui/core';
 import React, { FC, Fragment, useState } from 'react';
@@ -13,11 +14,12 @@ const useStyles = makeStyles((theme: Theme) => ({
   authContainer: {
     background: '#eaeaea',
     width: '100%',
-    height: '100vh'
+    height: '100vh',
+    marginBottom: '60px'
   },
   formAuthContainer: {
     [theme.breakpoints.down('sm')]: {
-      marginTop: '3vh',
+      // marginTop: '0vh',
     },
   }
 }));
@@ -47,13 +49,13 @@ const Auth: FC<IProps> = (props) => {
           <Grid item container justify="center" alignItems="center" xs={12} md={5} style={{ borderRadius: '8px 0 0 8px', backgroundImage: 'url(https://image.freepik.com/free-vector/bokeh-effect-gradient-background_23-2148364520.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
             <Grid container>
               <Grid item xs={4} md={12} style={{ justifyContent: 'flex-end', display: 'flex', alignItems: 'center' }}>
-                <Button fullWidth onClick={() => switchAuthComponent(0)} style={{ color: `${authComponent == 0 ? 'black' : 'white'}`, borderRadius: '0', height: 50, background: `${authComponent == 0 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Sign in</Button>
+                <Button fullWidth onClick={() => switchAuthComponent(0)} style={{ color: `${authComponent == 0 ? 'black' : 'white'}`, borderRadius: '0', height: 50,fontSize: '11px', background: `${authComponent == 0 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Sign in</Button>
               </Grid>
               <Grid item xs={4} md={12} style={{ justifyContent: 'flex-end', display: 'flex', alignItems: 'center' }}>
-                <Button fullWidth onClick={() => switchAuthComponent(1)} style={{ color: `${authComponent == 1 ? 'black' : 'white'}`, borderRadius: '0', height: 50, background: `${authComponent == 1 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Sign Up</Button>
+                <Button fullWidth onClick={() => switchAuthComponent(1)} style={{ color: `${authComponent == 1 ? 'black' : 'white'}`, borderRadius: '0', height: 50,fontSize: '11px', background: `${authComponent == 1 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Sign Up</Button>
               </Grid>
               <Grid item xs={4} md={12} style={{ justifyContent: 'flex-end', display: 'flex', alignItems: 'center' }}>
-                <Button fullWidth onClick={() => switchAuthComponent(2)} style={{ color: `${authComponent == 2 ? 'black' : 'white'}`, borderRadius: '0', height: 50, background: `${authComponent == 2 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Forget Password</Button>
+                <Button fullWidth onClick={() => switchAuthComponent(2)} style={{ color: `${authComponent == 2 ? 'black' : 'white'}`, borderRadius: '0', height: 50,fontSize: '11px', background: `${authComponent == 2 ? 'white' : 'transparent'}`, boxShadow: 'none' }} variant="contained">Forget Password</Button>
               </Grid>
             </Grid>
           </Grid>
@@ -74,8 +76,8 @@ const Auth: FC<IProps> = (props) => {
             </Fragment>
           </Fade>
         </Grid>
-
       </GridContainer>
+      <BottomNav />
     </Fragment>
   )
 }

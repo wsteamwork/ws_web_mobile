@@ -2,7 +2,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { updateRouter } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import Swiper from 'react-id-swiper';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
 import { useSelector } from 'react-redux';
@@ -30,7 +30,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const RoomTypeList: FC<IProps> = (props) => {
   const classes = useStyles(props)
   const { width } = useContext(GlobalContext);
-  const [roomTypesData, setRoomTypesData] = useState<any[]>([]);
   const propertyImgs = ['house', 'apartment', 'villa', 'room', 'hotels', 'studio'];
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
     (state) => state.searchFilter.leaseTypeGlobal
@@ -39,21 +38,6 @@ const RoomTypeList: FC<IProps> = (props) => {
   const redirectByProperty = (type: any) => {
     updateRouter(leaseTypeGlobal ? '/long-term-rooms' : '/rooms', true, 'accommodation_type', type);
   };
-
-  // useEffect(() => {
-  //   getRoomType()
-  //     .then((res) => {
-  //       return res.map((item, index) => ({
-  //         ...item,
-  //         img: `/static/images/property/${propertyImgs[index]}.jpg`
-  //       }));
-  //     })
-  //     .then((list) => setRoomTypesData(list));
-  // }, []);
-
-  // useEffect(() => {
-  //   console.log(roomTypesData)
-  // }, [roomTypesData])
   const arrayData = [
     { id: 1, value: "Full House", img: "/static/images/property/house.jpg" },
     { id: 2, value: "Apartment", img: "/static/images/property/apartment.jpg" },
@@ -72,20 +56,22 @@ const RoomTypeList: FC<IProps> = (props) => {
     }
   }
   return (
-    <Swiper {...params}>
-      {
-        arrayData.map((item, index) => (
-          <Grid key={index} onClick={() => redirectByProperty(item.id)}>
-            <Grid className={classes.propertyItemIcon}>
-              <img className={classes.itemIcon} style={{ width: 65, height: 65 }} src={item.img}></img>
+    <div style={{ paddingLeft: '18px' }}>
+      <Swiper {...params}>
+        {
+          arrayData.map((item, index) => (
+            <Grid key={index} onClick={() => redirectByProperty(item.id)}>
+              <Grid className={classes.propertyItemIcon}>
+                <img className={classes.itemIcon} style={{ width: 65, height: 65 }} src={item.img}></img>
+              </Grid>
+              <Typography style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: 4 }}>
+                {item.value}
+              </Typography>
             </Grid>
-            <Typography style={{ textAlign: 'center', fontSize: '0.8rem', marginTop: 4 }}>
-              {item.value}
-            </Typography>
-          </Grid>
-        ))
-      }
-    </Swiper>
+          ))
+        }
+      </Swiper>
+    </div>
 
   );
 };

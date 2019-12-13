@@ -180,7 +180,7 @@ body {
 html {
   
   @include xs {
-    font-size: 15px;
+    font-size: 16px;
   }
   @include sm {
     font-size: 16px;
@@ -207,3 +207,5 @@ a {
     text-decoration: none !important;
   }
 }
+
+input, select { font-size: 100%; }

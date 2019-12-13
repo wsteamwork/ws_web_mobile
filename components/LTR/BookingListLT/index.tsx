@@ -53,7 +53,7 @@ const BookingListLT: FC<IProps> = (props) => {
       page: current
     };
     Router.push({
-      pathname: '/long-term-bookings',
+      pathname: '/profile/long-term-bookings',
       query: updateObject<any>(Router.query, query)
     });
     scrollTop();

@@ -108,7 +108,7 @@ const FormSignup: FC = () => {
   }, []);
 
   return (
-    <Grid item xs={12} md={7} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
+    <Grid item xs={12} md={7} spacing={4} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
       <Formik
         enableReinitialize={false}
         validateOnChange={false}
@@ -130,7 +130,7 @@ const FormSignup: FC = () => {
                   <Typography variant="h6">{t('auth:registerInfo')}</Typography>
                 </Grid>
 
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={6} lg={6}>
                   <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
                     <TextField
                       variant="outlined"
@@ -146,7 +146,7 @@ const FormSignup: FC = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={12} lg={6}>
+                <Grid item xs={6} lg={6}>
                   <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
                     <TextField
                       variant="outlined"
