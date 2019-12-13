@@ -17,7 +17,10 @@ import { DEFAULT_DATE_FORMAT } from '@/utils/store/global';
 import { axios_merchant, axios } from '@/utils/axiosInstance';
 import { ScheduleRes } from '@/types/Requests/Calendar/CalendarRes';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import { getLongTermBookingList, LongTermBookingAction } from '@/store/Redux/Reducers/Booking/long-term-booking';
+import {
+  getLongTermBookingList,
+  LongTermBookingAction
+} from '@/store/Redux/Reducers/Booking/long-term-booking';
 import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 interface IProps {
   classes?: any;
@@ -48,6 +51,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     btnSubmit: {
       marginTop: 30
+    },
+    dialogContent: {
+      padding: 0
     }
   })
 );
@@ -122,11 +128,15 @@ const ReNewalBooking: FC<IProps> = (props) => {
               {t('longtermbooking:chooseNextCheckout')}
             </Typography>
           </DialogTitle>
-          <DialogContent>
+          <DialogContent
+            classes={{
+              // root: classes.dialogContent
+              root: "wrapper-calendar"
+            }}>
             <Grid className="booking-calendar">
               <Grid className="booking-calendar__box-main">
                 <Grid container className="box-main__wrapper">
-                  <Grid item xs={12} lg={7} xl={6} className="calendar-picker">
+                  <Grid item xs={11} className="calendar-picker">
                     <DateRangeMoveout
                       dataBlock={dataBlock}
                       booking={booking}

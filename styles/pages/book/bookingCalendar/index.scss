@@ -4,7 +4,27 @@
   margin-left: 8px !important;
   padding: 0 !important;
 }
-
+.wrapper-calendar {
+  padding-left: 70px !important;
+}
+//xs
+@media (min-width: 320px) and (max-width: 374px) {
+  .wrapper-calendar {
+    padding: 0 !important;
+  }
+}
+//xs
+@media (width: 375px) {
+  .wrapper-calendar {
+    padding: 8px 11px !important;
+  }
+}
+//xs
+@media (min-width: 376px) and (max-width: 420px) {
+  .wrapper-calendar {
+    padding: 8px 30px !important;
+  }
+}
 .booking-calendar {
   &__box-title {
     width: 100%;
