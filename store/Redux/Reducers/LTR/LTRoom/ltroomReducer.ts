@@ -67,7 +67,7 @@ export const getRoomAvailableDate = async (
       },
       headers: { 'Accept-Language': initLanguage }
     }
-  );
+    );
   return res.data.data;
 };
 //

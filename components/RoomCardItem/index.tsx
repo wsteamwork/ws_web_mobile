@@ -11,6 +11,16 @@ import FavoriteAnimation from '../Rooms/Lotte/FavoriteAnimation';
 interface IProps {
   classes?: any;
   room?: any;
+  roomImage?: string;
+  roomPrice?: string | number;
+  room_id?: number;
+  roomName?: string;
+  roomType?: string;
+  district?: string;
+  city?: string;
+  number_bedroom?: number;
+  number_bathroom?: number;
+  total_area?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -25,13 +35,20 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const RoomCardItem: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { room } = props;
+  const {
+    room,
+    roomImage,
+    roomPrice,
+    room_id,
+    roomName,
+    roomType,
+    district,
+    city,
+    number_bedroom,
+    number_bathroom,
+    total_area
+  } = props;
   const { t } = useTranslation();
-  const imgRoom =
-    room.avatar.images && room.avatar.images.length
-      ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
-      : './static/ms-icon-310x310.png';
-  const price = room.price_display ? formatPrice(room.price_display) : t('rooms:contactForPrice');
   return (
     <Grid container item xs={12} justify="center" className={classes.boxWrapper}>
       <Grid item xs={11}>
@@ -39,58 +56,61 @@ const RoomCardItem: FC<IProps> = (props) => {
           <Grid container className="__wrapper">
             <Grid item xs={12} className="boxImg">
               <LazyLoad>
-                <img src={imgRoom} className="imgSize" />
+                <img src={roomImage} className="imgSize" />
               </LazyLoad>
             </Grid>
             <Grid item xs={12} className="boxCard">
               <Grid className="cardWrapper">
                 <Grid container className="cardContainer">
-                  <Link href={`/long-term-room/${room.id}`} className="boxLink">
+                  <Link href={`/long-term-room/${room_id}`} target="_blank" className="boxLink">
                     <Grid container className="boxTitle">
                       <Grid item xs={12}>
                         <Typography variant="subtitle2" className="roomName">
-                          {room.about_room.name}
+                          {roomName}
                         </Typography>
                       </Grid>
                       <Grid item xs={10} md={9} container className="marginRoomName">
                         <Grid item xs={12} className="roomSubtitle">
-                          <span className="roomType">{room.accommodation_type_txt}</span>
+                          <span className="roomType">{roomType}</span>
                           <span className="dotAmenties">.</span>&nbsp;
-                          <span className="address">{room.district.data.name}, {room.city.data.name}</span>
+                          <span className="address">
+                            {district}, {city}
+                          </span>
                         </Grid>
                         <Grid item xs={12} className="collectionAmenities">
                           <span className="address">
-                            {room.bedrooms.number_bedroom} {t('rooms:rooms')}
+                            {number_bedroom} {t('rooms:rooms')}
                           </span>
                           &nbsp;
-                        <span className="dotAmenties">.</span>&nbsp;
-                        <span className="address">
-                            {room.bathrooms.number_bathroom} {t('rooms:bathrooms')}
+                          <span className="dotAmenties">.</span>&nbsp;
+                          <span className="address">
+                            {number_bathroom} {t('rooms:bathrooms')}
                           </span>
                           &nbsp;
-                        <span className="dotAmenties">.</span>&nbsp;
-                        <span className="address">
-                            {room.total_area && room.total_area > 0 ? (
+                          <span className="dotAmenties">.</span>&nbsp;
+                          <span className="address">
+                            {total_area && total_area > 0 ? (
                               <span>
-                                {room.total_area ? room.total_area : '?'} m<sup>2</sup>
+                                {total_area} m<sup>2</sup>
                               </span>
                             ) : (
-                                <span>? m<sup>2</sup></span>
-                              )}
+                              <span>
+                                ? m<sup>2</sup>
+                              </span>
+                            )}
                           </span>
                         </Grid>
                       </Grid>
                       <Grid item xs={2} md={3} className="boxPriceContainer">
                         <Grid className="boxPrice">
                           <Typography variant="subtitle1" className="priceBasic">
-                            {price}
+                            {roomPrice}
                           </Typography>
                           <Typography variant="subtitle2" className="priceUnit">
                             /{t('rooms:month')}
                           </Typography>
                         </Grid>
                       </Grid>
-
                     </Grid>
                   </Link>
                 </Grid>

@@ -19,15 +19,11 @@ import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import TooltipPayment from './TooltipPayment';
 
-type PaymentMethod = 'payment1' | 'payment2';
+export type PaymentMethod = 'payment1' | 'payment2';
 
 export const TransitionCustom = forwardRef<HTMLElement, SlideProps>((props, ref) => (
   <Slide direction="up" {...props} ref={ref} />
 ));
-
-// const CheckBoxCustom = forwardRef<HTMLElement, CheckboxProps>((props, ref) => (
-//   <Checkbox {...props} inputRef={ref} />
-// ));
 
 interface MyFormValues {
   firstName: string;

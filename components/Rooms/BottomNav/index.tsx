@@ -4,14 +4,15 @@ import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Slide, { SlideProps } from '@material-ui/core/Slide/Slide';
 import { Theme, useTheme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, forwardRef, Fragment, useState } from 'react';
+import React, { FC, forwardRef, Fragment, useState, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import MapMobile from '../MapMobile';
 import SwipeableViews from 'react-swipeable-views';
 import { Typography, Box } from '@material-ui/core';
 import LTHome from '@/pages/homepage/LTHome';
 import SettingInApp from '@/components/SettingInApp';
-
+import { Cookies, withCookies } from 'react-cookie';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     root: {
@@ -58,49 +59,60 @@ function TabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
+      {...other}>
       {value === index && <div>{children}</div>}
     </Typography>
   );
 }
 
-interface IProps { }
+interface IProps {
+  inBookingLT?: boolean;
+  cookies: Cookies;
+}
 const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
+  const { inBookingLT, cookies } = props;
   const [index, setIndex] = useState<number>(0);
+  const { router } = useContext(GlobalContext);
   const theme = useTheme();
-
+  const isLogin = !!cookies.get('_token');
   const handleChangeIndex = (index: number) => {
     setIndex(index);
+  };
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: string) => {
+    if (parseInt(newValue) == 1 && !isLogin) {
+      router.push('/auth');
+    } else if (parseInt(newValue) == 1 && isLogin) {
+      setIndex(parseInt(newValue));
+      router.push('/long-term-bookings');
+    } else {
+      setIndex(parseInt(newValue));
+    }
   };
 
   return (
     <Fragment>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={index}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabPanel value={index} index={0} dir={theme.direction}>
-          <LTHome/>
-        </TabPanel>
-        <TabPanel value={index} index={1} dir={theme.direction}>
-          Item 2
-        </TabPanel>
-        <TabPanel value={index} index={2} dir={theme.direction}>
-          <SettingInApp />
-        </TabPanel>
-      </SwipeableViews>
+      {!inBookingLT ? (
+        <SwipeableViews
+          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+          index={index}
+          onChangeIndex={handleChangeIndex}>
+          <TabPanel value={index} index={0} dir={theme.direction}>
+            <LTHome />
+          </TabPanel>
+          <TabPanel value={index} index={1} dir={theme.direction}>
+            Item 2
+          </TabPanel>
+          <TabPanel value={index} index={2} dir={theme.direction}>
+            <SettingInApp />
+          </TabPanel>
+        </SwipeableViews>
+      ) : (
+        ''
+      )}
 
-      <BottomNavigation
-        value={index}
-        onChange={(event, newValue) => {
-          setIndex(newValue);
-        }}
-        showLabels
-        className={classes.root}>
+      <BottomNavigation value={index} onChange={handleChange} showLabels className={classes.root}>
         <BottomNavigationAction
           classes={{
             selected: classes.colorSelected
@@ -108,7 +120,12 @@ const BottomNav: FC<IProps> = (props) => {
           className={classes.customColor}
           label={t('rooms:searchRooms:explore')}
           icon={
-            <img className={classes.marginBottom} width="16" height="16" src="/static/images/search.svg" />
+            <img
+              className={classes.marginBottom}
+              width="16"
+              height="16"
+              src="/static/images/search.svg"
+            />
           }
         />
         <BottomNavigationAction
@@ -122,7 +139,7 @@ const BottomNav: FC<IProps> = (props) => {
               className={classes.marginBottom}
               width="16"
               height="16"
-              src='/static/images/Heart.svg'
+              src="/static/images/Heart.svg"
             />
           }
         />
@@ -146,5 +163,4 @@ const BottomNav: FC<IProps> = (props) => {
     </Fragment>
   );
 };
-
-export default BottomNav;
+export default withCookies(BottomNav);

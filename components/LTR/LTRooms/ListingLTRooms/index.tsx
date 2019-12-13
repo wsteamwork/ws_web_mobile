@@ -12,6 +12,8 @@ import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
 import RoomCardItem from '@/components/RoomCardItem';
+import { IMAGE_STORAGE_SM } from '@/utils/store/global';
+import { formatPrice } from '@/utils/mixins';
 
 interface IProps {
   classes?: any;
@@ -51,6 +53,18 @@ const ListingLTRooms: FC<IProps> = (props) => {
     setIsEmpty(meta !== null && longtermRooms.length === 0 && !isLoading);
   }, [longtermRooms, isLoading]);
 
+  const imgRoom = (room) => {
+    let img =
+      room.avatar.images && room.avatar.images.length
+        ? `${IMAGE_STORAGE_SM + room.avatar.images[0].name}`
+        : './static/ms-icon-310x310.png';
+    return img;
+  };
+  const priceRoom = (room) => {
+    let price = room.price_display ? formatPrice(room.price_display) : t('rooms:contactForPrice');
+    return price;
+  };
+
   return (
     <Grid container item xs={12} justify="center">
       {longtermRooms.length && !isLoading ? (
@@ -59,7 +73,18 @@ const ListingLTRooms: FC<IProps> = (props) => {
             <LazyLoad>
               {longtermRooms.map((room, index) => (
                 <Grid item container xs={12} sm={6} key={index} className={classes.marginBottom}>
-                  <RoomCardItem room={room} />
+                  <RoomCardItem
+                    roomImage={imgRoom(room)}
+                    roomPrice={priceRoom(room)}
+                    room_id={room.id}
+                    roomName={room.about_room.name}
+                    roomType={room.accommodation_type_txt}
+                    district={room.district.data.name}
+                    city={room.city.data.name}
+                    number_bedroom={room.bedrooms.number_bedroom}
+                    number_bathroom={room.bathrooms.number_bathroom}
+                    total_area={room.total_area}
+                  />
                 </Grid>
               ))}
             </LazyLoad>
@@ -77,8 +102,8 @@ const ListingLTRooms: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-            <NotFound height={250} width={250} />
-          )}
+        <NotFound height={250} width={250} />
+      )}
     </Grid>
   );
 };

@@ -47,7 +47,7 @@ const BookingInfoDetail: FC = () => {
               </Grid>
               <Grid item xs={4}>
                 <Typography variant='subtitle2' align={'right'} gutterBottom className={'titleInfo'}>
-                  {t('book:bookingInfoDetail:guestNumber')}
+                  {t('book:bookingInfoDetail:guest')}
                 </Typography>
                 <Typography align={'right'} variant='subtitle1'>
                   {numberOfGuests} khách

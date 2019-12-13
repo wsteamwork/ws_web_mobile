@@ -75,6 +75,7 @@ export interface LTBookingIndexRes {
   guests: LTBookingGuests;
   type: any;
   source: string;
+  current_contract?: any;
   booking_purpose: string;
   status_reviews: number;
   bank_list: any;

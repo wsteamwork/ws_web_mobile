@@ -1,7 +1,10 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
 import { ReducersList } from '@/store/Redux/Reducers';
-import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import {
+  LTBookingAction,
+  LTBookingReducerState
+} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
@@ -49,8 +52,6 @@ const BookingCalendar: FC<Iprops> = (props) => {
     });
   }, [guest]);
 
-
-
   const handleOpenMobilePriceDetail = () => {
     setOpenMobilePriceDetail(true);
   };
@@ -86,41 +87,38 @@ const BookingCalendar: FC<Iprops> = (props) => {
     <Fragment>
       <Grid className="booking-calendar">
         <Grid className="booking-calendar__box-title">
-          {/* absolute */}
           <Grid className="box-title__wrapper">
-            <Grid container justify='space-between' alignItems='center'>
+            <Grid container justify="space-between" alignItems="center">
               <Grid item>
                 <Typography className="box-title__title">
-                {focusedInput === 'startDate' && !!date.endDate
-                  ? `${moment(movein).format('MMM Do')} - ${moment(moveout).format('MMM Do')}`
-                  : focusedInput === 'endDate'
-                  ? t('payment:directPayment:checkOut')
-                  : t('payment:directPayment:checkIn')}
+                  {focusedInput === 'startDate' && !!date.endDate
+                    ? `${moment(movein).format('MMM Do')} - ${moment(moveout).format('MMM Do')}`
+                    : focusedInput === 'endDate'
+                    ? 'Check Out'
+                    : 'Check In'}
                 </Typography>
               </Grid>
               <Grid item>
                 <IconButton onClick={onClearDates} className="button-clear-dates">
-                  <RefreshRounded/>
+                  <RefreshRounded />
                 </IconButton>
                 <IconButton
-          edge="start"
-          color="inherit"
-          onClick={handleCloseBookingDialog}
-          aria-label="close"
-          className="button-clear-dates"
-          >
-          <CloseIcon />
-        </IconButton>
+                  edge="start"
+                  color="inherit"
+                  onClick={handleCloseBookingDialog}
+                  aria-label="close"
+                  className="button-clear-dates">
+                  <CloseIcon />
+                </IconButton>
               </Grid>
             </Grid>
 
-            <Typography variant='subtitle2'>
+            <Typography variant="subtitle2">
               {focusedInput === 'endDate'
                 ? t('longtermroom:stayForAtLeast1Month')
                 : focusedInput === 'startDate' && !!date.endDate
                 ? `${moment(moveout).diff(moment(movein), 'days')} ${t('longtermroom:days')} `
-                : t('longtermroom:arrivalDateWithin2Months')
-              }
+                : t('longtermroom:arrivalDateWithin2Months')}
             </Typography>
           </Grid>
         </Grid>
@@ -137,97 +135,95 @@ const BookingCalendar: FC<Iprops> = (props) => {
             </Grid>
 
             <Grid item xs={12} lg={5} xl={6} className="box-price">
-              <QuantityButtons
-                number={guest}
-                setNumber={setGuest}
-                title={t('book:bookingInfoDetail:guestNumber')}/>
-                <Grid container spacing={2} className="mobile-box-price">
-                  <Grid item xs className="mobile-price-show">
-                    {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
-                      <Fragment>
-                        <Typography className="price" gutterBottom>
-                          {formatMoney(LTBookingPriceCalculate.price_with_fee)}&nbsp;{t('longtermroom:currency')}/
-                          {LTBookingPriceCalculate.range_stay}&nbsp;{t('longtermroom:days')}
-                        </Typography>
-                        <Typography color='primary' onClick={handleOpenMobilePriceDetail}>{t('longtermroom:moreDetails')}</Typography>
-                        <Dialog
-                          fullScreen
-                          open={openMobilePriceDetail}
-                          onClose={handleCloseMobilePriceDetail}
-                          TransitionComponent={TransitionCustom}
-                        >
-                          <Grid
-                            style={{
-                              zIndex: 102,
-                              position: 'absolute',
-                              top: 0,
-                              width: 100,
-                              padding: '0 20px'
-                            }}>
-                            <IconButton
-                              edge="start"
-                              color="inherit"
-                              onClick={handleCloseMobilePriceDetail}
-                              aria-label="close">
-                              <CloseIcon />
-                            </IconButton>
-                          </Grid>
-                          {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
-                            <Grid className="mobile-box-price-detail">
-                              <h3 className="price-title">{t('payment:directPayment:roomRateBook')}</h3>
-                              <Grid className="box-price-sub">
-                                <Grid className="price-subtitle">{t('book:bookingInfoDetail:priceOriginal')}</Grid>
-                                <Grid className="sub-price">
-                                  {`${formatMoney(LTBookingPriceCalculate.price_original)}`}{t('longtermroom:currency')}
-                                </Grid>
+              <QuantityButtons number={guest} setNumber={setGuest} title={'Khách'} />
+              <Grid container spacing={2} className="mobile-box-price">
+                <Grid item xs className="mobile-price-show">
+                  {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
+                    <Fragment>
+                      <Typography className="price" gutterBottom>
+                        {formatMoney(LTBookingPriceCalculate.price_with_fee)}đ/
+                        {LTBookingPriceCalculate.range_stay} ngày
+                      </Typography>
+                      <Typography color="primary" onClick={handleOpenMobilePriceDetail}>
+                        Xem chi tiết giá
+                      </Typography>
+                      <Dialog
+                        fullScreen
+                        open={openMobilePriceDetail}
+                        onClose={handleCloseMobilePriceDetail}
+                        TransitionComponent={TransitionCustom}>
+                        <Grid
+                          style={{
+                            zIndex: 102,
+                            position: 'absolute',
+                            top: 0,
+                            width: 100,
+                            padding: '0 20px'
+                          }}>
+                          <IconButton
+                            edge="start"
+                            color="inherit"
+                            onClick={handleCloseMobilePriceDetail}
+                            aria-label="close">
+                            <CloseIcon />
+                          </IconButton>
+                        </Grid>
+                        {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
+                          <Grid className="mobile-box-price-detail">
+                            <h3 className="price-title">Chi tiết giá</h3>
+                            <Grid className="box-price-sub">
+                              <Grid className="price-subtitle">Giá gốc</Grid>
+                              <Grid className="sub-price">
+                                {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
                               </Grid>
-                              <Grid className="box-price-sub">
-                                <Grid className="price-subtitle">{t('book:bookingInfoDetail:priceDeposit')}</Grid>
-                                <Grid className="sub-price">{`${formatMoney(
-                                  LTBookingPriceCalculate.deposit
-                                )}`}{t('longtermroom:currency')}
-                                </Grid>
-                              </Grid>
-
-                              <Divider style={{ margin: ' 16px 0 28px' }} />
-                              <Grid className="box-price-sub">
-                                <h3 className="price-title">{t('payment:invoice:total')}</h3>
-                                <Grid className="price-title">{`${formatMoney(
-                                  LTBookingPriceCalculate.price_with_fee
-                                )}`}{t('longtermroom:currency')}
-                                </Grid>
-                              </Grid>
-                              <Divider style={{ margin: ' 28px 0 16px' }} />
                             </Grid>
-                          ) : (
-                            ''
-                          )}
-                        </Dialog>
-                      </Fragment>
-                    ) : ltroom ? (
-                        <Fragment>
-                          <Typography className="price">
-                            {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
-                          </Typography>
-                          <Typography variant="body2" style={{fontSize: '0.75rem'}}>{ltroom.prices.prices[0].term}</Typography>
-                      </Fragment>
-                    ) : (
-                      ''
-                    )}
-                  </Grid>
-                  <Grid item xs={isLogin ? 4 : 5} sm={3}>
-                    <ButtonGlobal
-                      background="linear-gradient(to right, #667eea, #764ba2);"
-                      padding="0px"
-                      width="100%"
-                      onClick={handleSubmit}
-                      disabled={!disableBooking && isLogin}
-                      style={{color: '#fff'}}
-                      className="btBook">
-                      {isLogin ? t('longtermroom:book') : t('home:signIn')}
-                    </ButtonGlobal>
+                            <Grid className="box-price-sub">
+                              <Grid className="price-subtitle">Giá đặt cọc</Grid>
+                              <Grid className="sub-price">{`${formatMoney(
+                                LTBookingPriceCalculate.deposit
+                              )}đ`}</Grid>
+                            </Grid>
+
+                            <Divider style={{ margin: ' 16px 0 28px' }} />
+                            <Grid className="box-price-sub">
+                              <h3 className="price-title">Tổng cộng</h3>
+                              <Grid className="price-title">{`${formatMoney(
+                                LTBookingPriceCalculate.price_with_fee
+                              )}đ`}</Grid>
+                            </Grid>
+                            <Divider style={{ margin: ' 28px 0 16px' }} />
+                          </Grid>
+                        ) : (
+                          ''
+                        )}
+                      </Dialog>
+                    </Fragment>
+                  ) : ltroom ? (
+                    <Fragment>
+                      <Typography className="price">
+                        {formatMoney(ltroom.prices.prices[0].price)} {t('longtermroom:currency')}
+                      </Typography>
+                      <Typography variant="body2" style={{ fontSize: '0.75rem' }}>
+                        {ltroom.prices.prices[0].term}
+                      </Typography>
+                    </Fragment>
+                  ) : (
+                    ''
+                  )}
                 </Grid>
+                <Grid item xs={isLogin ? 4 : 5} sm={3}>
+                  <ButtonGlobal
+                    background="linear-gradient(to right, #667eea, #764ba2);"
+                    padding="0px"
+                    width="100%"
+                    onClick={handleSubmit}
+                    disabled={!disableBooking && isLogin}
+                    style={{ color: '#fff' }}
+                    className="btBook">
+                    {isLogin ? 'Đặt phòng' : 'Đăng nhập'}
+                  </ButtonGlobal>
                 </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>

@@ -59,5 +59,6 @@
         "choosePayment": "Phương thức thanh toán",
         "transferMoney": "Chuyển khoản qua",
         "directTransfer": "Chuyển khoản trực tiếp"
-    }
+    },
+    "bookings": "Chuyến đi"
 }
