@@ -13,6 +13,7 @@ interface IProps {
   classes?: any;
   room?: any;
   imgHeight?: number;
+  lineClamp?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -24,6 +25,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     imgSize: {
       height: (props) => (props.imgHeight ? props.imgHeight : 220)
+    },
+    roomName: {
+      WebkitLineClamp: (props) => (props.lineClamp ? props.lineClamp : 1)
     }
   })
 );
@@ -79,10 +83,25 @@ const BusinessTripCard: FC<IProps> = (props) => {
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>
-                        <Typography variant="subtitle2" className="roomName">
+                        <Typography
+                          variant="subtitle2"
+                          className={classNames('roomName', classes.roomName)}>
                           {room.about_room.name}
                         </Typography>
                       </Grid>
+
+                      <Grid item xs={12}>
+                        {room.total_area && room.total_area > 0 ? (
+                          <span>
+                            {room.total_area ? room.total_area : '69'} m<sup>2</sup>
+                          </span>
+                        ) : (
+                          <span>
+                            ? m<sup>2</sup>
+                          </span>
+                        )}
+                      </Grid>
+
                       <Grid item xs={12} className="RoomCardBusinessTrip__boxPrice">
                         {formatPrice(room.price_display)}&nbsp;
                         <span className="unitPrice">/{t('home:month')}</span>

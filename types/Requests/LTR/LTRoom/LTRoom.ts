@@ -57,6 +57,11 @@ export interface LTRoomIndexRes {
   merchant_status: number;
   total_comforts: number;
   comission: string | null;
+  apartment_building: string;
+  apartment_building_id: number;
+  room_same_apartment_building: number;
+  room_number: number | string;
+  floor: number | string;
   comforts: detailcomforts;
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
