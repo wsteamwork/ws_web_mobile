@@ -182,9 +182,9 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           not_included_services={checkPrice ? [] : room.not_included_services}
         />
       </div>
-      <div className={classes.paper}>
+      {/* <div className={classes.paper}> */}
         <BoxRoomSameBuilding />
-      </div>
+      {/* </div> */}
 
       <div className={classes.paperMap}>
         <LazyLoad offset={100}>
