@@ -13,25 +13,26 @@ import { useTranslation } from 'react-i18next';
 import LazyLoad, { forceCheck } from 'react-lazyload';
 import BoxInfoBasic from './BoxInfoBasic';
 import BoxRoomOfAccommodation from './BoxRoomOfAccommodation';
+import BoxRoomSameBuilding from './BoxRoomSameBuilding';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     paper: {
       padding: '32px 28px 0',
       [theme.breakpoints.up('sm')]: {
-        padding: '32px 38px 0',
+        padding: '32px 38px 0'
       }
     },
     paperCustomAccommodation: {
       padding: '24px 20px 0',
       [theme.breakpoints.up('sm')]: {
-        padding: '20px 20px 0',
+        padding: '20px 20px 0'
       }
     },
     paperFullRight: {
       padding: '32px 0 0 28px',
       [theme.breakpoints.up('sm')]: {
-        padding: '32px 0 0 38px',
+        padding: '32px 0 0 38px'
       }
     },
     paperMap: {
@@ -49,7 +50,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       margin: '24px 20px 0'
     },
     extendedIcon: {
-      marginRight: theme.spacing(1),
+      marginRight: theme.spacing(1)
     },
     btnFabBook: {
       position: 'fixed',
@@ -61,15 +62,15 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       textTransform: 'initial',
       [theme.breakpoints.up('sm')]: {
         bottom: theme.spacing(6),
-        right: theme.spacing(3),
+        right: theme.spacing(3)
       }
     }
   })
 );
 
 interface IProps {
-  room: LTRoomIndexRes,
-  onBook?: () => any,
+  room: LTRoomIndexRes;
+  onBook?: () => any;
 }
 
 const BoxLTRoomDetail: FC<IProps> = (props) => {
@@ -81,14 +82,36 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const theme = useTheme();
   const dataRoomOfAccommodation = {
-    bedrooms: { imageIcon: '/static/icons/bedroom.svg', title: t('longtermroom:bedrooms'), subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : '?'} ${t('longtermroom:bedroomLower')}` },
-    kitchens: { imageIcon: '/static/icons/fridge.svg', title: t('longtermroom:kitchens'), subtitle: `${room && room.comforts ? room.comforts.kitchens.length : '?'} ${t('longtermroom:amenities')}` },
-    bathrooms: { imageIcon: '/static/icons/bathroom.svg', title: t('longtermroom:bathrooms'), subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : '?'} ${t('longtermroom:bathroomLower')}` },
-    totalArea: { imageIcon: '/static/icons/area.svg', title: t('longtermroom:totalArea'), subtitle: `${room ? room.total_area : '?'}` },
+    bedrooms: {
+      imageIcon: '/static/icons/bedroom.svg',
+      title: t('longtermroom:bedrooms'),
+      subtitle: `${room && room.bedrooms ? room.bedrooms.number_bedroom : '?'} ${t(
+        'longtermroom:bedroomLower'
+      )}`
+    },
+    kitchens: {
+      imageIcon: '/static/icons/fridge.svg',
+      title: t('longtermroom:kitchens'),
+      subtitle: `${room && room.comforts ? room.comforts.kitchens.length : '?'} ${t(
+        'longtermroom:amenities'
+      )}`
+    },
+    bathrooms: {
+      imageIcon: '/static/icons/bathroom.svg',
+      title: t('longtermroom:bathrooms'),
+      subtitle: `${room && room.bathrooms ? room.bathrooms.number_bathroom : '?'} ${t(
+        'longtermroom:bathroomLower'
+      )}`
+    },
+    totalArea: {
+      imageIcon: '/static/icons/area.svg',
+      title: t('longtermroom:totalArea'),
+      subtitle: `${room ? room.total_area : '?'}`
+    }
   };
   const transitionDuration = {
     enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
+    exit: theme.transitions.duration.leavingScreen
   };
 
   const checkAboutRoom = isPreviewPage && !room.about_room;
@@ -97,8 +120,9 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
   return (
     <Fragment>
       <div className={classes.paper} style={{ marginTop: 30 }}>
-        <BoxInfoBasic textColor='#252529'
-          subTextColor='#8A8A8F'
+        <BoxInfoBasic
+          textColor="#252529"
+          subTextColor="#8A8A8F"
           name={checkAboutRoom ? t('room:updateRoomName') : room.about_room.name}
           district={room.district.data.name}
           city={room.city.data.name}
@@ -119,11 +143,11 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           isPreviewPage={isPreviewPage}
           description={checkAboutRoom ? t('room:notFoundContent') : room.about_room.description}
           space={checkAboutRoom ? t('room:notFoundContent') : room.about_room.space}
-          note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note} />
+          note={checkAboutRoom ? t('room:notFoundContent') : room.about_room.note}
+        />
       </div>
 
       <div className={classes.paperFullRight}>
-        {/* <LazyLoad> */}
         <BoxListImageRoom
           livingrooms={isPreviewPage && !room.livingrooms ? [] : room.livingrooms}
           outdoors={isPreviewPage && !room.outdoors ? [] : room.outdoors}
@@ -137,7 +161,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
       </div>
 
       <div className={classes.paper}>
-        {/* <LazyLoad> */}
         <BoxAmenities
           facilities={checkComfort ? undefined : room.comforts.facilities}
           bedrooms={checkComfort ? undefined : room.comforts.bedrooms}
@@ -149,7 +172,6 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           common={checkComfort ? undefined : room.comforts.common}
           kitchens={checkComfort ? undefined : room.comforts.kitchens}
         />
-        {/* </LazyLoad> */}
       </div>
       <div className={classes.paper}>
         {/* <LazyLoad offset={100}> */}
@@ -159,20 +181,24 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           included_services={checkPrice ? [] : room.included_services}
           not_included_services={checkPrice ? [] : room.not_included_services}
         />
-        {/* </LazyLoad> */}
       </div>
+      {/* <div className={classes.paper}> */}
+        <BoxRoomSameBuilding />
+      {/* </div> */}
+
       <div className={classes.paperMap}>
         <LazyLoad offset={100}>
-          <BoxMap city={room.city.data.name} district={room.district.data.name} latitude={room.latitude} longitude={room.longitude} />
+          <BoxMap
+            city={room.city.data.name}
+            district={room.district.data.name}
+            latitude={room.latitude}
+            longitude={room.longitude}
+          />
         </LazyLoad>
       </div>
 
-      <Zoom
-        in={true}
-        timeout={transitionDuration}
-        unmountOnExit
-      >
-        <Fab variant="extended" className={classes.btnFabBook} onClick={onBook} size='medium'>
+      <Zoom in={true} timeout={transitionDuration} unmountOnExit>
+        <Fab variant="extended" className={classes.btnFabBook} onClick={onBook} size="medium">
           {t('longtermroom:viewSchedule')}
           {/* <NavigationIcon className={classes.extendedIcon} /> */}
         </Fab>

@@ -13,17 +13,20 @@ export type LTRoomReducerState = {
   readonly room: LTRoomIndexRes | null;
   readonly error: boolean;
   readonly availableDates: LTRoomAvailableRes;
+  readonly roomSameBuilding: any[];
 };
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
   | { type: 'setErrorSSRLTRoompage'; payload: boolean }
-  | { type: 'setAvailableDates'; payload: LTRoomAvailableRes };
+  | { type: 'setAvailableDates'; payload: LTRoomAvailableRes }
+  | { type: 'setRoomSameBuilding'; payload: any[] };
 
 export const init: LTRoomReducerState = {
   room: null,
   error: false,
-  availableDates: null
+  availableDates: null,
+  roomSameBuilding: []
 };
 
 export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
@@ -37,6 +40,8 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
       return updateObject(state, { error: action.payload });
     case 'setAvailableDates':
       return updateObject(state, { availableDates: action.payload });
+    case 'setRoomSameBuilding':
+      return updateObject(state, { roomSameBuilding: action.payload });
     default:
       return state;
   }
@@ -44,7 +49,7 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
 
 export const getLTRoom = async (
   idRoom: any,
-  initLanguage: string =  'en'
+  initLanguage: string = 'en'
 ): Promise<LTRoomIndexRes> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
     `long-term-rooms/${idRoom}?include=city,district,merchant`,
@@ -56,7 +61,7 @@ export const getLTRoom = async (
 
 export const getRoomAvailableDate = async (
   idRoom: any,
-  initLanguage: string =  'en',
+  initLanguage: string = 'en',
   date_start: string = moment().format(DEFAULT_DATE_FORMAT)
 ): Promise<LTRoomAvailableRes> => {
   const res: AxiosRes<LTRoomAvailableRes> = await axios.get(
@@ -67,34 +72,22 @@ export const getRoomAvailableDate = async (
       },
       headers: { 'Accept-Language': initLanguage }
     }
-    );
+  );
   return res.data.data;
 };
-//
-// export const getPriceByDay = async (
-//   idRoom: any,
-//   date_start: string = moment().format(DEFAULT_DATE_FORMAT),
-//   date_end: string = moment()
-//     .add(6, 'month')
-//     .endOf('month')
-//     .format(DEFAULT_DATE_FORMAT),
-//   initLanguage: string =  'en'
-// ): Promise<PriceByDayRes[]> => {
-//   const query: BodyRequestPriceByDayRes = { date_start, date_end };
-//
-//   const res: AxiosRes<PriceByDayRes[]> = await axios.get(
-//     `rooms/calendar-props/${idRoom}?${qs.stringify(query)}`,
-//     { headers: { 'Accept-Language': initLanguage } }
-//   );
-//
-//   return res.data.data;
-// };
-//
+export const getRoomSameBuilding = async (
+  buildingId: any
+  // initLanguage: string = 'en'
+): Promise<any> => {
+  const res: AxiosRes<any> = await axios.get(`long-term-rooms?building_id=${buildingId}`);
+  return res.data;
+};
+
 export const getDataLTRoom = async (
   dispatch: Dispatch<ReducresActions>,
   query: ParsedUrlQuery,
   initLanguage: string = 'en'
-): Promise<Omit<LTRoomReducerState, 'error'>> => {
+): Promise<Omit<any, 'error'>> => {
   const { id } = query;
 
   try {
@@ -104,6 +97,9 @@ export const getDataLTRoom = async (
     ]);
 
     const [room, availableDates] = res;
+    // getRoomSameBuilding(room.apartment_building_id, initLanguage).then((res) =>
+    //   dispatch({ type: 'setLTRoom', payload: res.data })
+    // );
 
     dispatch({ type: 'setLTRoom', payload: room });
     dispatch({ type: 'setAvailableDates', payload: availableDates });

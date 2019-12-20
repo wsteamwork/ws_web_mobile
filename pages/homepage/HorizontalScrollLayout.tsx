@@ -1,10 +1,11 @@
 import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { Fragment, ReactNode, useMemo } from 'react';
-import Swiper from 'react-id-swiper';
+import Swiper, { ReactIdSwiperProps } from 'react-id-swiper';
 import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import { SwiperOptions } from 'swiper';
 
-interface Iprops<T> {
+interface Iprops<T> extends ReactIdSwiperProps {
   classCustom?: any;
   headTitle?: string;
   listData?: T[];
@@ -21,6 +22,12 @@ interface Iprops<T> {
   slidePerView?: number;
   spaceBetween?: number;
   swiperParams?: any;
+
+  //breakpoints props
+  styleSmUp?: SwiperOptions;
+  styleMdUp?: SwiperOptions;
+  styleLgUp?: SwiperOptions;
+  styleXlUp?: SwiperOptions;
 }
 
 const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
@@ -33,7 +40,7 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       justifyContent: 'space-between',
       alignItems: 'baseline',
       display: 'inline-flex',
-      position: 'relative',
+      position: 'relative'
     },
     titleText: {
       fontSize: '1.4rem',
@@ -42,11 +49,12 @@ const useStyles = makeStyles<Theme, Iprops<any>>((theme: Theme) =>
       letterSpacing: '-0.6px',
       color: 'inherit',
       margin: '0px',
-      padding: '0px',
+      padding: '0px'
     },
     propertyItemContainer: {
       height: (props) => props.itemHeight,
       width: (props) => props.itemWidth,
+      margin: (props) => props.margin,
       padding: (props) => props.paddingItem,
       paddingLeft: (props) => props.paddingLeft,
       paddingRight: (props) => props.paddingRight
@@ -76,21 +84,31 @@ const HorizontalScrollLayout = <T extends any>(props: Iprops<T>) => {
     spaceBetween,
     paddingLeft,
     paddingRight,
-    swiperParams
+    swiperParams,
+
+    //breakpoints props
+    styleSmUp,
+    styleMdUp,
+    styleLgUp,
+    styleXlUp
   } = props;
 
-
   const renderList = useMemo(
-    () =>
-      listData.map((item, index) => (
-        <Grid
-          key={index}
-        >
-          {itemRender(item, sizeIcon)}
-        </Grid>
-      )),
+    () => listData.map((item, index) => <Grid key={index}>{itemRender(item, sizeIcon)}</Grid>),
     [isDependencies == false ? null : itemRender]
   );
+  //600px    960px    1280px   1920px
+
+  const breakpoints = {
+    //xlUp
+    1920: styleXlUp,
+    //lgUp
+    1280: styleLgUp,
+    //mdUp
+    960: styleMdUp,
+    //smUp
+    600: styleSmUp
+  };
 
   return (
     <Fragment>
@@ -99,8 +117,8 @@ const HorizontalScrollLayout = <T extends any>(props: Iprops<T>) => {
           <Grid className={classes.titleText}>{headTitle}</Grid>
         </Grid>
       )}
-      <div style={{ paddingLeft: paddingLeft, paddingRight: paddingRight }}>
-        <Swiper {...swiperParams}>
+      <div className={classes.propertyItemContainer}>
+        <Swiper {...swiperParams} {...breakpoints}>
           {renderList}
         </Swiper>
       </div>
@@ -114,8 +132,8 @@ HorizontalScrollLayout.defaultProps = {
     freeMode: true,
     pagination: {
       el: '.swiper-pagination',
-      clickable: true,
+      clickable: true
     }
   }
-}
+};
 export default HorizontalScrollLayout;

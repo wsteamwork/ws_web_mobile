@@ -21,6 +21,7 @@ interface IProps {
   number_bedroom?: number;
   number_bathroom?: number;
   total_area?: number;
+  numberRoomSameBuilding?: number;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -46,7 +47,8 @@ const RoomCardItem: FC<IProps> = (props) => {
     city,
     number_bedroom,
     number_bathroom,
-    total_area
+    total_area,
+    numberRoomSameBuilding
   } = props;
   const { t } = useTranslation();
   return (
@@ -100,6 +102,13 @@ const RoomCardItem: FC<IProps> = (props) => {
                             )}
                           </span>
                         </Grid>
+                        {numberRoomSameBuilding ? (
+                          <Grid item xs={12}>
+                            {numberRoomSameBuilding}
+                          </Grid>
+                        ) : (
+                          ''
+                        )}
                       </Grid>
                       <Grid item xs={2} md={3} className="boxPriceContainer">
                         <Grid className="boxPrice">

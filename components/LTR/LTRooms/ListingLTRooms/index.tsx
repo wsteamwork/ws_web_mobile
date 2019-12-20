@@ -71,22 +71,26 @@ const ListingLTRooms: FC<IProps> = (props) => {
         <Fragment>
           <Grid container item xs={12}>
             <LazyLoad>
-              {longtermRooms.map((room, index) => (
-                <Grid item container xs={12} sm={6} key={index} className={classes.marginBottom}>
-                  <RoomCardItem
-                    roomImage={imgRoom(room)}
-                    roomPrice={priceRoom(room)}
-                    room_id={room.id}
-                    roomName={room.about_room.name}
-                    roomType={room.accommodation_type_txt}
-                    district={room.district.data.name}
-                    city={room.city.data.name}
-                    number_bedroom={room.bedrooms.number_bedroom}
-                    number_bathroom={room.bathrooms.number_bathroom}
-                    total_area={room.total_area}
-                  />
-                </Grid>
-              ))}
+              {longtermRooms.map((room, index) => {
+                console.log(room);
+                return (
+                  <Grid item container xs={12} sm={6} key={index} className={classes.marginBottom}>
+                    <RoomCardItem
+                      roomImage={imgRoom(room)}
+                      roomPrice={priceRoom(room)}
+                      room_id={room.id}
+                      roomName={room.about_room.name}
+                      roomType={room.accommodation_type_txt}
+                      district={room.district.data.name}
+                      city={room.city.data.name}
+                      number_bedroom={room.bedrooms.number_bedroom}
+                      number_bathroom={room.bathrooms.number_bathroom}
+                      total_area={room.total_area}
+                      numberRoomSameBuilding={room.room_same_apartment_building}
+                    />
+                  </Grid>
+                );
+              })}
             </LazyLoad>
           </Grid>
           <Pagination
