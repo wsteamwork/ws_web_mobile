@@ -115,6 +115,9 @@ const RoomCreateListing = () => {
         return 'Unknown step';
     }
   };
+  const handleApiDescription = () => {
+    handleDetailsListing(listing.room_id, current_step, data(current_step))
+  }
   return (
     <Fragment>
       <NextHead

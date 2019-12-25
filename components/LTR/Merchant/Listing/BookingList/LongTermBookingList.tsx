@@ -3,7 +3,6 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { updateObject } from '@/store/Context/utility';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { BookingListReducerAction, getBookingListLT } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
-import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import { NextPage } from 'next';
 import Router from 'next/router';
 import Pagination from 'rc-pagination';
@@ -17,19 +16,11 @@ import { ReactScrollLinkProps } from 'react-scroll/modules/components/Link';
 import { Dispatch } from 'redux';
 import BookingCardItem from './BookingCardItem';
 import FilterBookingList from './FilterBookingList';
-interface IProps {
-  classes?: any;
-}
-const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
-  createStyles({
-    title: {
-      margin: theme.spacing(3, 0)
-    }
-  })
-);
-const LongTermBookingList: NextPage = (props) => {
+
+const LongTermBookingList: NextPage = () => {
   const { t } = useTranslation();
-  const classes = useStyles(props);
+  //@ts-ignore
+  // const classes = useStyles(props);
   const { router } = useContext(GlobalContext);
   const bookinglist = useSelector<ReducersList, any>((state) => state.bookinglist.bookingList_LT);
   const {

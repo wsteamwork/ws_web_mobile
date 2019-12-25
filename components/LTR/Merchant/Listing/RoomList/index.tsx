@@ -27,23 +27,25 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     }
   })
 );
-const RoomListHost: NextPage = (props) => {
+
+export const scrollTop = () => {
+  let duration = 500 + window.scrollY * 0.1;
+  let effect: Partial<ReactScrollLinkProps> = {
+    smooth: 'easeInOutQuad',
+    isDynamic: true,
+    duration
+  };
+  scroll.scrollToTop(effect);
+};
+
+const RoomListHost: NextPage<IProps> = (props) => {
   const { t } = useTranslation();
   const { router } = useContext(GlobalContext);
+  //@ts-ignore
   const classes = useStyles(props);
   const roomlist = useSelector<ReducersList, any[]>((state) => state.roomlist.roomlist);
   const meta = useSelector<ReducersList, any>((state) => state.roomlist.meta);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
-  const scrollTop = () => {
-    let duration = 500 + window.scrollY * 0.1;
-    let effect: Partial<ReactScrollLinkProps> = {
-      smooth: 'easeInOutQuad',
-      isDynamic: true,
-      duration
-    };
-    scroll.scrollToTop(effect);
-  };
 
   const changePage = (current: number) => {
     setCurrentPage(current);
@@ -64,10 +66,6 @@ const RoomListHost: NextPage = (props) => {
       getRoomList(dispatch);
     }
   }, [roomlist]);
-  useEffect(() => {
-    getRoomList(dispatch);
-  }, [router.query]);
-
   useEffect(() => {
     getRoomList(dispatch);
   }, [router.query]);

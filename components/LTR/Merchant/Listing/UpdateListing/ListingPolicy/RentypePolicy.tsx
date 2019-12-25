@@ -38,7 +38,7 @@ const RentTypePolicy: FC<IProps> = (props) => {
   return (
     <Fragment>
       {listing ? (
-        <CardWrapperItem title="Chính sách đặt phòng" onClick={openUpdate}>
+        <CardWrapperItem title="Chính sách đặt phòng (Thuê ngắn hạn)" onClick={openUpdate}>
           <Typography variant="subtitle1" className={classes.name}>
             {listing.short_term_rent_type.rent_type_txt}
           </Typography>

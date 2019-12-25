@@ -28,14 +28,19 @@ const Location: FC<IProps> = (props) => {
   return (
     <Fragment>
       {listing ? (
-        <CardWrapperItem title="Vị trí" onClick={openUpdate}>
+        <CardWrapperItem
+          title={
+            listing.apartment_building_id ? 'Căn hộ tọa lạc trong tòa nhà tại vị trí' : 'Vị trí'
+          }
+          onClick={openUpdate}
+          showBtnUpdate={listing.apartment_building_id ? false : true}>
           <Typography variant="subtitle1" className={classes.name}>
             {listing.address}
           </Typography>
         </CardWrapperItem>
       ) : (
-          ''
-        )}
+        ''
+      )}
     </Fragment>
   );
 };

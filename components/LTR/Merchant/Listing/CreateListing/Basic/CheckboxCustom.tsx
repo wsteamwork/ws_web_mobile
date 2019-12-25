@@ -48,7 +48,7 @@ const CheckboxCustom: FC<IProps> = (props) => {
         <Grid className={classes.title}>{t('host:leaseType')}</Grid>
         <FormGroup row>
           <Grid container spacing={2}>
-            <Grid item xs={6} className={classes.checkboxItem}>
+            <Grid item xs={12} md={6} className={classes.checkboxItem}>
               <div className={classes.checkboxItemWrapper}>
                 <FormControlLabel
                   control={
@@ -67,7 +67,7 @@ const CheckboxCustom: FC<IProps> = (props) => {
                 <div style={{ marginTop: 10 }}>{t('host:shortTermRentType')}</div>
               </div>
             </Grid>
-            <Grid item xs={6} className={classes.checkboxItem}>
+            <Grid item xs={12} md={6} className={classes.checkboxItem}>
               <div className={classes.checkboxItemWrapper}>
                 <FormControlLabel
                   control={

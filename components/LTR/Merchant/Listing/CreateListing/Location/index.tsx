@@ -3,13 +3,12 @@ import CitiesList from '@/components/LTR/Merchant/Listing/CreateListing/Location
 import SelectCustom from '@/components/ReusableComponents/SelectCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { CreateListingActions, CreateListingState } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
-import { FormControl, OutlinedInput } from '@material-ui/core';
+import { Box, FormControl, OutlinedInput, Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import deepEqual from 'lodash.isequal';
 import React, { Dispatch, FC, Fragment, useEffect, useMemo, useState } from 'react';
-// import Geosuggest, { Suggest } from 'react-geosuggest';
 import { GoogleMap, Marker, withGoogleMap, WithGoogleMapProps } from 'react-google-maps';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
@@ -17,7 +16,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
 import SearchPlaceCustom from './SearchPlaceCustom';
 
-interface IProps { }
+interface IProps {
+}
 
 interface Coordinate {
   lat: number;
@@ -27,12 +27,10 @@ interface Coordinate {
 interface GoogleMapProps extends WithGoogleMapProps {
   defaultCenter: Coordinate | null;
   coordinate: Coordinate;
-  // onClickMap: (e: google.maps.MouseEvent | google.maps.IconMouseEvent) => void;
   handleDragEnd: (e: google.maps.MouseEvent) => void;
 }
 
 interface FormValues {
-  // address: string;
   city: string;
   building: string;
   district: string;
@@ -42,7 +40,6 @@ const useValidatation = () => {
   const { t } = useTranslation();
 
   const FormValidationSchema = Yup.object().shape({
-    // address: Yup.string().required(t('basic:addressRequired')),
     city: Yup.string().required(t('basic:cityRequired'))
   });
 
@@ -59,7 +56,7 @@ const Location: FC<IProps> = (props) => {
     disableSubmit,
     coordinate: coordinateState,
     district_id,
-    city_id
+    listing
   } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
   const [addressInput, setAddress] = useState<string>(address);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
@@ -141,144 +138,174 @@ const Location: FC<IProps> = (props) => {
     });
   };
   const initFormValue: FormValues = {
-    // address: address,
     city: '',
     building: building,
     district: ''
   };
 
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    return {};
+    return null;
   };
 
   return (
-    <div className="step1-tab3-location">
-      <Grid className="createListing-location">
-        <Grid className="createListing-heading-1">{t('host:address')}</Grid>
-        <Grid className="createListing-subTitle">
+    <div className='step1-tab3-location'>
+      <Grid className='createListing-location'>
+        <Grid className='createListing-heading-1'>{t('host:address')}</Grid>
+        <Grid className='createListing-subTitle'>
           {t('host:provideAddress')}
         </Grid>
       </Grid>
-      <Formik
-        enableReinitialize={true}
-        validateOnChange={true}
-        validationSchema={FormValidationSchema}
-        initialValues={initFormValue}
-        onSubmit={handleFormSubmit}
-        render={({
-          values,
-          handleSubmit,
-          touched,
-          errors,
-          initialValues,
-          isSubmitting,
-          handleChange,
-          handleBlur,
-          setFieldValue,
-          setFieldTouched
-        }: FormikProps<FormValues>) => {
-          const hasChanged = !deepEqual(values, initialValues);
-          const hasErrors = Object.keys(errors).length > 0;
-          setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
-          // console.log('value city', values.city)
-          return (
-            <form onSubmit={handleSubmit}>
-              <Grid container style={{ display: 'flex' }}>
-                <Grid item xs={10} md={7}>
-                  <Grid style={{ marginBottom: 32 }}>
-                    <h3
-                      style={{
-                        color: '#484848',
-                        paddingBottom: 8,
-                        fontSize: 16,
-                        fontWeight: 600,
-                        lineHeight: '1.375em'
-                      }}>
-                      {t('host:city')}
-                    </h3>
-                    <CitiesList
-                      onChange={setFieldValue}
-                      valueCity={values.city}
-                      onBlur={setFieldTouched}
-                      districtList={districtList}
-                      setDistrictList={setDistrictList}
-                      setDisabledDistrictField={setDisabledDistrictField}
-                      setDistrict={setDistrict}
-                    />
-                    {touched.city && <InputFeedback error={errors.city} />}
-                  </Grid>
-                </Grid>
-                <Grid className="box-district" item xs={10} md={5}>
-                  <SelectCustom
-                    onChange={(e) => {
-                      handleChange(e);
-                      callBackOnChange(e.target.value);
-                    }}
-                    name="district"
-                    value={values.district}
-                    options={districtList}
-                    title={t('host:district')}
-                    onBlurTouched={setFieldTouched}
-                    disabled={disabledDistrictField}
-                  />
-                </Grid>
-              </Grid>
-              {values.city ? (
-                <Grid container>
-                  <LazyLoad>
-                    <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                      <h3 style={{ color: '#484848' }}>{t('host:addressSpecific')}</h3>
-                      <div data-standalone-searchbox="">
-                        <SearchPlaceCustom
-                          setCoordinateMarker={setCoordinateMarker}
-                          setDefaultCenter={setDefaultCenter}
-                          setAddress={setAddress}
-                          addressInput={addressInput}
-                        />
-                      </div>
-                    </Grid>
-                    <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
-                      <h3 style={{ color: '#484848' }}>{t('host:building')}</h3>
-                      <FormControl fullWidth variant="outlined">
-                        <OutlinedInput
-                          placeholder={t('host:buildingPlaceholder')}
-                          id="component-outlined"
-                          value={values.building}
-                          onChange={(e) => {
-                            setFieldValue('building', e.target.value);
-                          }}
-                          onBlur={(e: any) => {
-                            handleBlur(e);
+      {listing && listing.apartment_building_id ? (
+        <Box>
+          <Typography variant='subtitle1' gutterBottom>
+            Địa chỉ của bạn sẽ được lấy theo địa chỉ của tòa nhà mà bạn đã chọn trước đó.
+          </Typography>
+          <Typography variant='subtitle2' gutterBottom>
+            {listing.apartment_building}, {listing.address}, {listing.district.data.name}, {listing.city.data.name}
+          </Typography>
 
-                          }}
-                          labelWidth={0}
-                        />
-                      </FormControl>
-                    </Grid>
-                  </LazyLoad>
-                </Grid>
-              ) : ''}
-            </form>
-          );
-        }}
-      />
-      {addressInput ? (
-        <Fragment>
-          <Grid className="createListing-heading-2">{t('host:mapAddressTitle')}</Grid>
-          <h3 className="createListing-subTitle">
-            {t('host:mapAddressSubTitle')}
-          </h3>
-          {defaultCenter && (
+          <Box mt={3}>
             <MapWithAMarker
               containerElement={<div style={{ height: `350px` }} />}
               mapElement={<div style={{ height: `100%` }} />}
-              defaultCenter={defaultCenter}
-              coordinate={coordinateMarker}
-              handleDragEnd={handleDragEnd}
+              defaultCenter={{
+                lat: parseFloat(listing.latitude),
+                lng: parseFloat(listing.longitude)
+              }}
+              coordinate={{
+                lat: parseFloat(listing.latitude),
+                lng: parseFloat(listing.longitude)
+              }}
+              handleDragEnd={() => null}
             />
-          )}
-        </Fragment>
-      ) : ''}
+          </Box>
+        </Box>
+      ) : (
+          <Fragment>
+            <Formik
+              enableReinitialize={true}
+              validateOnChange={true}
+              validationSchema={FormValidationSchema}
+              initialValues={initFormValue}
+              //@ts-ignore
+              onSubmit={handleFormSubmit}
+              render={({
+                values,
+                handleSubmit,
+                touched,
+                errors,
+                initialValues,
+                isSubmitting,
+                handleChange,
+                handleBlur,
+                setFieldValue,
+                setFieldTouched
+              }: FormikProps<FormValues>) => {
+                const hasChanged = !deepEqual(values, initialValues);
+                const hasErrors = Object.keys(errors).length > 0;
+                setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
+                // console.log('value city', values.city)
+                return (
+                  <form onSubmit={handleSubmit}>
+                    <Grid container style={{ display: 'flex' }}>
+                      <Grid item xs={10} md={7}>
+                        <Grid style={{ marginBottom: 32 }}>
+                          <h3
+                            style={{
+                              color: '#484848',
+                              paddingBottom: 8,
+                              fontSize: 16,
+                              fontWeight: 600,
+                              lineHeight: '1.375em'
+                            }}>
+                            {t('host:city')}
+                          </h3>
+                          <CitiesList
+                            onChange={setFieldValue}
+                            valueCity={values.city}
+                            onBlur={setFieldTouched}
+                            districtList={districtList}
+                            setDistrictList={setDistrictList}
+                            setDisabledDistrictField={setDisabledDistrictField}
+                            setDistrict={setDistrict}
+                          />
+                          {touched.city && <InputFeedback error={errors.city} />}
+                        </Grid>
+                      </Grid>
+                      <Grid className='box-district' item xs={10} md={5}>
+                        <SelectCustom
+                          onChange={(e) => {
+                            handleChange(e);
+                            callBackOnChange(e.target.value);
+                          }}
+                          name='district'
+                          value={values.district}
+                          options={districtList}
+                          title={t('host:district')}
+                          onBlurTouched={setFieldTouched}
+                          disabled={disabledDistrictField}
+                        />
+                      </Grid>
+                    </Grid>
+                    {values.city ? (
+                      <Grid container>
+                        <LazyLoad>
+                          <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+                            <h3 style={{ color: '#484848' }}>{t('host:addressSpecific')}</h3>
+                            <div data-standalone-searchbox=''>
+                              <SearchPlaceCustom
+                                setCoordinateMarker={setCoordinateMarker}
+                                setDefaultCenter={setDefaultCenter}
+                                setAddress={setAddress}
+                                addressInput={addressInput}
+                              />
+                            </div>
+                          </Grid>
+                          <Grid item xs={10} md={8} style={{ margin: '20px 0' }}>
+                            <h3 style={{ color: '#484848' }}>{t('host:building')}</h3>
+                            <FormControl fullWidth variant='outlined'>
+                              <OutlinedInput
+                                placeholder={t('host:buildingPlaceholder')}
+                                id='component-outlined'
+                                value={values.building}
+                                onChange={(e) => {
+                                  setFieldValue('building', e.target.value);
+                                }}
+                                onBlur={(e: any) => {
+                                  handleBlur(e);
+
+                                }}
+                                labelWidth={0}
+                              />
+                            </FormControl>
+                          </Grid>
+                        </LazyLoad>
+                      </Grid>
+                    ) : ''}
+                  </form>
+                );
+              }}
+            />
+            {addressInput ? (
+              <Fragment>
+                <Grid className='createListing-heading-2'>{t('host:mapAddressTitle')}</Grid>
+                <h3 className='createListing-subTitle'>
+                  {t('host:mapAddressSubTitle')}
+                </h3>
+                {defaultCenter && (
+                  <MapWithAMarker
+                    containerElement={<div style={{ height: `350px` }} />}
+                    mapElement={<div style={{ height: `100%` }} />}
+                    defaultCenter={defaultCenter}
+                    coordinate={coordinateMarker}
+                    handleDragEnd={handleDragEnd}
+                  />
+                )}
+              </Fragment>
+            ) : ''}
+          </Fragment>
+        )
+      }
     </div>
   );
 };

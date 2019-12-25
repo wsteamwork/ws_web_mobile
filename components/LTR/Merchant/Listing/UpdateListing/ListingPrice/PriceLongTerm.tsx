@@ -43,7 +43,7 @@ const PriceLongTerm: FC<IProps> = (props) => {
               <Grid item xs={12} className={classes.margin}>
                 <Typography variant="subtitle2" className={classes.name}>
                   Giá cơ bản: {numeral(listing.prices.prices.term_1_month).format('0,0')} vnđ/ tháng
-              </Typography>
+                </Typography>
               </Grid>
               <Grid container className={classes.margin}>
                 <Grid item xs={12} sm={6} className={classes.marginXs}>

@@ -182,11 +182,6 @@ const Room: FC<IProps> = (props) => {
       .test('checkNotChoose', 'Please select an option', (value) => value != 0)
   });
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
-    // const data: any = {
-    //   lease_type: values.lease_type,
-    //   accommodation_type: values.accommodation_type,
-    //   stay_with_host: values.stay_with_host
-    // };
   };
 
   return (

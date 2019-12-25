@@ -6,9 +6,9 @@ import _ from 'lodash';
 import { ParsedUrlQuery } from 'querystring';
 import { Dispatch, Reducer } from 'redux';
 import Cookies from 'universal-cookie';
-import { getLTRoom } from '../../LTRoom/ltroomReducer';
+import { getLTRoomOfMerchant } from '../../LTRoom/ltroomReducer';
 
-interface Coordinate {
+export interface Coordinate {
   lat: number;
   lng: number;
 }
@@ -264,10 +264,13 @@ export const getDataLTCreateListingID = async (
 ): Promise<any> => {
   const { id } = query;
   try {
-    const res = await getLTRoom(id, initLanguage);
+    const res = await getLTRoomOfMerchant(id, initLanguage);
     // console.log(res);
     dispatch({ type: 'SET_LISTING', payload: res });
-    dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: res.accommodation_type });
+    dispatch({
+      type: 'SET_ACCOMMODATION_TYPE',
+      payload: res.apartment_building_id ? 2 : res.accommodation_type
+    });
     dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });
     dispatch({ type: 'SET_STAY_WITH_HOST', payload: res.stay_with_host });
     dispatch({ type: 'SET_GUEST_RECOMMENDATION', payload: res.guests.recommendation });

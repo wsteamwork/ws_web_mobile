@@ -1,4 +1,3 @@
-import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { axios } from '@/utils/axiosInstance';
 import { cleanAccents } from '@/utils/mixins';
 import { MenuItem, OutlinedInput, Paper } from '@material-ui/core';
@@ -10,8 +9,8 @@ import deburr from 'lodash/deburr';
 import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { useDispatch } from 'react-redux';
+import { CreateApartmentActions } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateApartment';
 interface Iprops {
-  //   classes?: any;
   setDistrictList: Dispatch<SetStateAction<any[]>>;
   setDisabledDistrictField: Dispatch<SetStateAction<boolean>>;
   valueCity: string;
@@ -19,6 +18,7 @@ interface Iprops {
   onBlur: any;
   onChange: any;
   setDistrict: any;
+  cityID?: number;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -51,20 +51,23 @@ const useStyles = makeStyles((theme) => ({
 
 const CitiesList: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
-  //   const { classes } = props;
   const {
+    cityID,
     setDistrictList,
     setDisabledDistrictField,
     valueCity,
     onChange,
     onBlur,
     setDistrict,
-    districtList
+    districtList,
   } = props;
-  const dispatch = useDispatch<Dispatch<CreateListingActions>>();
+  const dispatch = useDispatch<Dispatch<CreateApartmentActions>>();
   const [stateSuggestions, setStateSuggestions] = useState<any[]>([]);
   const [suggestionsList, setSuggestionsList] = useState<any[]>([]);
-  const [city_id, setCityId] = useState<number>(null);
+  const [city_id, setCityId] = useState<number>(0);
+  useEffect(() => {
+    setCityId(cityID)
+  }, [cityID]);
 
   const getCities = async () => {
     try {
@@ -92,7 +95,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
         );
       })
       .then(() => {
-        if (districtList) {
+        if (districtList && districtList.length) {
           setDistrict(districtList[0].id);
           dispatch({
             type: 'SET_DISTRICT_ID',
@@ -116,6 +119,13 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
     });
   }, []);
 
+  useEffect(() => {
+    dispatch({
+      type: 'SET_CITY',
+      payload: valueCity
+    });
+  }, [valueCity]);
+
   function renderInputComponent(inputProps) {
     const { classes, inputRef = () => { }, ref, ...other } = inputProps;
 
@@ -127,6 +137,9 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
             ref(node);
             inputRef(node);
           },
+          classes: {
+            input: classes.input
+          }
         }}
         {...other}
         labelWidth={0}

@@ -1,5 +1,6 @@
 { 
     "titleName": "Room List", 
+    "titleNameBuilding": "Building List",
     "contentNotFound": "The current room list is not displayed, please wait a moment", 
     "tooltipUpdateRoom": "Edit",
     "tooltipUpdateRoomLongTerm": "Long Term Room Edit",
@@ -21,6 +22,16 @@
     "policy": "Cancellation policy",
     "leaseTypeLongTerm": "Long-term",
     "leaseTypeShortTerm": "Homestay",
-    "duplicateListing": "Duplicate listing"
-
+    "duplicateListing": "Duplicate listing",
+    "buildingTitle": "Building",
+    "addedToBuildingSucsses": "You have successfully added a room to the building!",
+    "addedToBuildingError": "Opps, something's wrong!",
+    "buildingInfo": "Building information",
+    "idRoom": "Room ID",
+    "whichFloor": "Which floor?",
+    "deselectBuilding": "Deselect current building",
+    "atLeastOneRequired": "Please select an option",
+    "chooseABuilding": "Choose a building",
+    "yourBuilding": "Your building",
+    "roomCodeInBuilding": "Room code in the building?"
 }

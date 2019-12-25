@@ -6,10 +6,11 @@ import Layout from '@/components/LTR/Merchant/Listing/Layout';
 import NextHead from '@/components/NextHead';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
-import { CreateListingActions, getDataLTCreateListingID, handleUpdateStep1 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
+import { CreateListingActions, CreateListingState, getDataLTCreateListingID, handleUpdateStep1 } from '@/store/Redux/Reducers/LTR/CreateListing/Basic/CreateListing';
 import { getCookieFromReq } from '@/utils/mixins';
-import React, { Dispatch, Fragment, useContext, useState } from 'react';
+import React, { Fragment, useContext, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dispatch } from 'redux';
 
 const RoomCreateListingID = () => {
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
@@ -18,10 +19,12 @@ const RoomCreateListingID = () => {
   const disableSubmit = useSelector<ReducersList, boolean>(
     (state) => state.createListing.disableSubmit
   );
-
+  const { listing } = useSelector<ReducersList, CreateListingState>((state) => state.createListing);
   const getSteps = () => {
     return ['Thông tin cơ bản', 'Phòng ngủ', 'Phòng tắm', 'Địa chỉ'];
   };
+
+  const isExist = listing.apartment_building_id;
 
   const data = {
     lease_type: useSelector<ReducersList, number>((state) => state.createListing.leaseType),
@@ -40,15 +43,15 @@ const RoomCreateListingID = () => {
     number_bathroom: useSelector<ReducersList, number>(
       (state) => state.createListing.bathroomNumber
     ),
-    address: useSelector<ReducersList, string>((state) => state.createListing.address),
-    building: useSelector<ReducersList, string>((state) => state.createListing.building),
-    coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate),
     bedRooms: useSelector<ReducersList, any>((state) => state.createListing.bedRooms),
-    city_id: useSelector<ReducersList, any>((state) => state.createListing.city_id),
-    district_id: useSelector<ReducersList, any>((state) => state.createListing.district_id)
+    address: isExist ? listing.address : useSelector<ReducersList, string>((state) => state.createListing.address),
+    building: isExist ? listing.apartment_building : useSelector<ReducersList, string>((state) => state.createListing.building),
+    coordinate: isExist ? { lat: listing.latitude, lng: listing.longitude } : useSelector<ReducersList, any>((state) => state.createListing.coordinate),
+    city_id: isExist ? listing.city_id : useSelector<ReducersList, any>((state) => state.createListing.city_id),
+    district_id: isExist ? listing.district_id : useSelector<ReducersList, any>((state) => state.createListing.district_id)
   };
 
-  const uid = router.query.uid;
+  const uid = router.query.id;
   const getStepContent = (step) => {
     switch (step) {
       case 0:
@@ -63,6 +66,7 @@ const RoomCreateListingID = () => {
         return 'Unknown step';
     }
   };
+
   return (
     <Fragment>
       <NextHead
@@ -71,12 +75,12 @@ const RoomCreateListingID = () => {
         title="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         url="/host/create-listing"
-        ogImage="/static/images/Bg_home.4023648f.jpg"></NextHead>
+        ogImage="/static/images/Bg_home.4023648f.jpg" />
       <Layout
         title="Bước 1: Thông tin cơ bản"
         getSteps={getSteps}
         getStepContent={getStepContent}
-        nextLink={`/host/create-listing/${idListing}/proccess`}
+        nextLink={`/host/create-listing/${idListing}/detail`}
         handleAPI={() => handleUpdateStep1(data, dispatch, uid)}
         submitEachStep={true}
         disableSubmit={disableSubmit}

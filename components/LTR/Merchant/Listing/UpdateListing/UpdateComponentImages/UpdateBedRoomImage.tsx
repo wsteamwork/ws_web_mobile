@@ -118,7 +118,7 @@ const UpdateBedRoomImage: FC<IProps> = (props) => {
           <Fragment>
             <Grid container justify="center" alignContent="center">
               {_.times(number_bedroom, (i) =>
-                bedrooms[`bedroom_${i + 1}`] && bedrooms[`bedroom_${i + 1}`].images.length ? (
+                bedrooms[`bedroom_${i + 1}`] ? (
                   <Grid item key={i} xs={12}>
                     <Dialog
                       open={openDialog === i + 1}

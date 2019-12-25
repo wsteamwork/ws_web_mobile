@@ -1,21 +1,22 @@
-import { Radio, Theme, Typography, Grid } from '@material-ui/core';
+import { Grid, Radio, Theme } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, ReactNode } from 'react';
 import classNames from 'classnames';
+import React, { FC, ReactNode } from 'react';
 interface IProps {
   classes?: any,
   label: string,
   descr?: ReactNode,
   value: string,
   className?: string;
+  noneBorder?: boolean
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
     checkboxItemWrapper: {
       padding: '5px 15px 10px',
-      border: '1px solid lightgray',
+      border: (props) => props.noneBorder ? 'none' : '1px solid lightgray',
       borderRadius: 4,
       minHeight: 120,
     },

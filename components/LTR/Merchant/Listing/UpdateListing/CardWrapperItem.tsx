@@ -1,6 +1,5 @@
 import { Button, createStyles, Divider, Grid, makeStyles, Theme, Typography, Snackbar } from '@material-ui/core';
 import React, { FC, Fragment } from 'react';
-import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 
 interface IProps {
   classes?: any;

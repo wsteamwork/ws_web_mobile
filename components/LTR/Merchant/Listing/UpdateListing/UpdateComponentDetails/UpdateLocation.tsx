@@ -124,14 +124,6 @@ const UpdateLocation: FC<IProps> = (props) => {
     });
   }, [addressInput]);
 
-  // useEffect(() => {
-  //   if (!address.length) {
-  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: true });
-  //   } else {
-  //     dispatch({ type: 'SET_DISABLE_SUBMIT', payload: false });
-  //   }
-  // }, [address]);
-
   const onClickMap = (e: google.maps.MouseEvent) => {
     let lat = e.latLng.lat();
     let lng = e.latLng.lng();
@@ -142,7 +134,6 @@ const UpdateLocation: FC<IProps> = (props) => {
   };
   const MapWithAMarker = withGoogleMap<GoogleMapProps>((props) => (
     <GoogleMap defaultZoom={14} defaultCenter={props.defaultCenter}>
-      {/* cordi */}
       <Marker position={props.coordinate} />
     </GoogleMap>
   ));
@@ -150,21 +141,6 @@ const UpdateLocation: FC<IProps> = (props) => {
   const handleChange = (event) => {
     setBuilding(event.target.value);
   };
-
-  // const onSuggestSelect = (place: Suggest) => {
-  //   if (place) {
-  //     let { lat, lng } = place.location;
-  //     setCoordinate({
-  //       lat,
-  //       lng
-  //     });
-  //     setDefaultCenter({
-  //       lat,
-  //       lng
-  //     });
-  //     setAddress(place.label);
-  //   }
-  // };
 
   const callBackOnChange = (value) => {
     setDistrict(value);
@@ -247,6 +223,7 @@ const UpdateLocation: FC<IProps> = (props) => {
             validateOnChange={true}
             validationSchema={FormValidationSchema}
             initialValues={initFormValue}
+            //@ts-ignore
             onSubmit={handleFormSubmit}
             render={({
               values,

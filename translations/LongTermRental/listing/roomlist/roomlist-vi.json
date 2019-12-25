@@ -1,5 +1,6 @@
 {
     "titleName": "Danh sách phòng",
+        "titleNameBuilding": "Danh sách tòa nhà",
     "contentNotFound": "Danh sách phòng hiện tại chưa hiển thị, vui lòng đợi trong giây lát",
     "tooltipUpdateRoom": "Cập nhật phòng",
     "tooltipUpdateRoomLongTerm": "Bổ sung thông tin dài hạn",
@@ -21,5 +22,16 @@
     "policy": "Chính sách hủy",
     "leaseTypeLongTerm": "Thuê dài hạn",
     "leaseTypeShortTerm": "Homestay",
-    "duplicateListing": "Nhân đôi phòng"
+    "duplicateListing": "Nhân đôi phòng",
+    "buildingTitle": "Tòa nhà",
+    "addedToBuildingSucsses": "Bạn đã thêm phòng vào tòa nhà thành công!",
+    "addedToBuildingError": "Opps, có gì đó sai rồi!",
+    "buildingInfo": "Thông tin tòa nhà",
+    "idRoom": "Mã phòng",
+    "whichFloor": "Tầng mấy?",
+    "deselectBuilding": "Bỏ chọn tòa nhà hiện tại",
+    "atLeastOneRequired": "Bạn cần lựa chọn một giá trị",
+    "chooseABuilding": "Lựa chọn tòa nhà",
+    "yourBuilding": "Tòa nhà của bạn",
+    "roomCodeInBuilding": "Mã phòng trong tòa nhà?"
 }

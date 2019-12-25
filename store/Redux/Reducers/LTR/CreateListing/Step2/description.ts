@@ -2,6 +2,7 @@ import { updateObject } from '@/store/Context/utility';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 import { axios_merchant } from '@/utils/axiosInstance';
 import { Dispatch, Reducer } from 'redux';
+import axios from 'axios';
 
 export type DescriptionReducerState = {
   room_id: number;
@@ -15,7 +16,6 @@ export type DescriptionReducerState = {
   space_en: string;
   rules_en: string;
   lang_en: string;
-  // detail_en: any;
   error: boolean;
 };
 
@@ -31,7 +31,6 @@ export const init: DescriptionReducerState = {
   space_en: '',
   rules_en: '',
   lang_en: 'en',
-  // detail_en: null,
   error: false
 };
 
@@ -47,7 +46,6 @@ export type DescriptionReducerAction =
   | { type: 'setSpaceEN'; payload: string }
   | { type: 'setRulesEN'; payload: string }
   | { type: 'setLangEN'; payload: string }
-  // | { type: 'setDetailEn'; payload: any }
   | { type: 'setError'; payload: boolean };
 
 export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionReducerAction> = (
@@ -77,8 +75,6 @@ export const descriptionReducer: Reducer<DescriptionReducerState, DescriptionRed
       return updateObject(state, { rules_en: action.payload });
     case 'setLangEN':
       return updateObject(state, { lang_en: action.payload });
-    // case 'setDetailEn':
-    //   return updateObject(state, { detail_en: action.payload });
     case 'setError':
       return updateObject(state, { error: action.payload });
     default:
@@ -94,7 +90,6 @@ export const getDataDescription = async (
     const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}`);
     const room_id = res.data.data.room_id;
     const about_room_vi = res.data.data.about_room.vi;
-    // const about_room_en = res.data.data.about_room.en;
 
     dispatch({ type: 'setRoomId', payload: room_id });
     dispatch({
@@ -113,23 +108,6 @@ export const getDataDescription = async (
       type: 'setRules',
       payload: about_room_vi && about_room_vi.note ? about_room_vi.note : ''
     });
-    //EN
-    // dispatch({
-    //   type: 'setNameEN',
-    //   payload: about_room_en && about_room_en.name ? about_room_en.name : ''
-    // });
-    // dispatch({
-    //   type: 'setDescriptionEN',
-    //   payload: about_room_en && about_room_en.description ? about_room_en.description : ''
-    // });
-    // dispatch({
-    //   type: 'setSpaceEN',
-    //   payload: about_room_en && about_room_en.space ? about_room_en.space : ''
-    // });
-    // dispatch({
-    //   type: 'setRulesEN',
-    //   payload: about_room_en && about_room_en.note ? about_room_en.note : ''
-    // });
     return about_room_vi;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
@@ -177,10 +155,6 @@ export const getDetailDescription = async (
     const room_id = res.data.data.room_id;
     const detail_room_vi = res.data.data.detail_room.vi;
     dispatch({ type: 'setRoomId', payload: room_id });
-    // dispatch({
-    //   type: 'setDetailEn',
-    //   payload: res.data.data.detail_room.en ? res.data.data.detail_room.en : ''
-    // });
     dispatch({
       type: 'setName',
       payload: detail_room_vi && detail_room_vi.name ? detail_room_vi.name : ''
@@ -240,5 +214,26 @@ export const getDetailDescriptionEN = async (
     return detail_room_en;
   } catch (error) {
     dispatch({ type: 'setError', payload: true });
+  }
+};
+
+export const handleTranslateToEnglish = async (text: string) => {
+  let fromLang = 'vi';
+  let toLang = 'en';
+  let API_KEY = process.env.GOOGLE_TRANSLATE_API_KEY;
+  let url = 'https://translation.googleapis.com/language/translate/v2';
+  try {
+    const res = await axios
+      .get(url, {
+        params: {
+          key: API_KEY,
+          q: text,
+          source: fromLang,
+          target: toLang,
+        }
+      })
+    return res.data.data.translations[0].translatedText;
+  } catch (error) {
+    console.log('There was an error with the translation request: ', error);
   }
 };

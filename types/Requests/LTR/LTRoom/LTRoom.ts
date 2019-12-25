@@ -60,8 +60,8 @@ export interface LTRoomIndexRes {
   apartment_building: string;
   apartment_building_id: number;
   room_same_apartment_building: number;
-  room_number: number | string;
-  floor: number | string;
+  room_number: string;
+  floor: string;
   comforts: detailcomforts;
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;

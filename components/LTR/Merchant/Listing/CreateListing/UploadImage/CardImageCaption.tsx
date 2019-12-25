@@ -136,11 +136,6 @@ const CardImageCaption: FC<IProps> = (props) => {
                   ''
                 )}
               <Card>
-                {/* <CardMedia
-                  className={classes.media}
-                  image={onUpdateImage ? (imageExists(IMAGE_STORAGE_LG + img.name) ? IMAGE_STORAGE_LG + img.name : '') : IMAGE_STORAGE_LG + img.name}
-                  title="Image"
-                /> */}
                 <CardMedia
                   className={classes.media}
                   image={IMAGE_STORAGE_LG + img.name}
