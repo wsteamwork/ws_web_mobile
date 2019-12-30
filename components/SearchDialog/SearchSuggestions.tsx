@@ -9,10 +9,12 @@ import parse from 'autosuggest-highlight/parse';
 import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getDataSearch } from '../Home/SearchAutoSuggestion';
+import { ReducersList } from '@/store/Redux/Reducers';
 interface Iprops {
   inputValue: string;
+  handleClose?: any;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -29,8 +31,11 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
   const { t } = useTranslation();
-  const { inputValue } = props;
+  const { inputValue, handleClose } = props;
   const classes = useStyles(props);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
   const [dataSuggestions, setDataSuggestions] = useState<SearchSuggestData[]>([]);
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   useEffect(() => {
@@ -59,10 +64,11 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };
-    Router.push({
+    leaseTypeGlobal && Router.push({
       pathname: '/long-term-rooms',
       query: pushQuery
     });
+    handleClose();
   };
 
   return (
@@ -83,8 +89,6 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
                   </span>
                 ))}
               </Grid>
-
-              {/* {suggestion.name} */}
             </Grid>
           );
         })}

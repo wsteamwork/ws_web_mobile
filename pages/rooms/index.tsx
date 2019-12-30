@@ -31,13 +31,15 @@ import { Dispatch } from 'redux';
 import NavTop from '@/components/NavTop';
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import SearchRoom from '@/components/SearchRoom';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      margin: '0 auto'
     },
     boxSearch: {
       backgroundColor: '#ffffff',
@@ -47,7 +49,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%'
     },
     boxRoomListing: {
-      marginTop: 218,
+      marginTop: 370,
       marginBottom: 50
     }
   })
@@ -55,10 +57,14 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Rooms: NextPage = (props) => {
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const [hideNavTop, setHideNavTop] = useState<boolean>(false);
-  
+  const { router } = useContext(GlobalContext);
+  const backHomePage = () => {
+    router.push('/');
+  };
   return (
     <Fragment>
       <NextHead
@@ -83,11 +89,18 @@ const Rooms: NextPage = (props) => {
               onPin={() => setHideNavTop(false)}
               onUnpin={() => setHideNavTop(true)}>
               <Grid item xs={12} className={classes.boxWrapper}>
-                <NavTop isHidden={hideNavTop} />
+                <NavTop
+                  isHidden={hideNavTop}
+                  handleBackAction={backHomePage}
+                  textCenter={t('rooms:searchRooms:explore')}
+                />
               </Grid>
             </HeadRoom>
             <Grid item xs={12}>
               <SearchRoom />
+            </Grid>
+            <Grid item xs={11} className={classes.boxWrapper}>
+              <SearchComponent className="searchHome__content" showGuestRoom={true} />
             </Grid>
             <Grid item xs={12} className={classes.boxWrapper}>
               <ButtonFilterRoom />

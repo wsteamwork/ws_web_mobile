@@ -71,7 +71,7 @@ const SearchDialog: FC<Iprops> = (props: Iprops) => {
           </Grid>
         </Grid>
         <Grid item xs className={classes.suggestions}>
-          <SearchSuggestions inputValue={inputValue} />
+          <SearchSuggestions inputValue={inputValue} handleClose={handleClose} />
         </Grid>
       </Grid>
     </Dialog>

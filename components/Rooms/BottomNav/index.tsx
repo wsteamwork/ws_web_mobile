@@ -82,10 +82,9 @@ interface IProps {
 const BottomNav: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
-  const { inBookingLT, cookies } = props;
+  const { cookies } = props;
   const [index, setIndex] = useState<number>(0);
   const { router } = useContext(GlobalContext);
-  // const theme = useTheme();
   const isLogin = !!cookies.get('_token');
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
 

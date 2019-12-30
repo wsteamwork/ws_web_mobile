@@ -6,6 +6,8 @@ import { Sort } from '@material-ui/icons';
 import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import FilterDrawerMobile from '../Rooms/FilterDrawerMobile/index';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 interface IProps {
   classes?: any;
 }
@@ -33,8 +35,11 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     textRight: {
       fontSize: 15
     },
-    btnRight: {
+    btnRightLT: {
       color: mainColor.primaryLT
+    },
+    btnRightST: {
+      color: mainColor.primary
     }
   })
 );
@@ -43,6 +48,9 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const { t } = useTranslation();
   const { state } = useContext(RoomIndexContext);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
   const { meta } = state;
   const [openDialog, setOpenDialog] = useState<boolean>(false);
   const handleOpenDialog = () => {
@@ -63,7 +71,7 @@ const ButtonFilterRoom: FC<IProps> = (props) => {
       <Grid item xs={6} className={classes.boxRight}>
         <Typography className={classes.textRight}>{t('rooms:searchRooms:filterRooms')}</Typography>
         <IconButton onClick={handleOpenDialog}>
-          <Sort className={classes.btnRight} />
+          <Sort className={leaseTypeGlobal ? classes.btnRightLT : classes.btnRightST} />
         </IconButton>
       </Grid>
       <FilterDrawerMobile handleClose={handleCloseDialog} open={openDialog} />

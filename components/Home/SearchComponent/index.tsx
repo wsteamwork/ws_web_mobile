@@ -62,9 +62,9 @@ const SearchComponent: FC<IProps> = (props) => {
     <Grid container spacing={1} className={className}>
       {showGuestRoom ? (
         <Fragment>
-          <Grid item xs={12} md={4}>
+          {/* <Grid item xs={12} md={4}>
             <SearchAutoSuggestion />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} md={4}>
             <DateRangeSearch />
           </Grid>
