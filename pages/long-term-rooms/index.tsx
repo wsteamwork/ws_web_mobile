@@ -1,15 +1,22 @@
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
 import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
-import GridContainer from '@/components/Layout/Grid/Container'
+import GridContainer from '@/components/Layout/Grid/Container';
 import BottomNav from '@/components/Rooms/BottomNav';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchRoom from '@/components/SearchRoom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
-import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
-import { NextContextPage } from '@/store/Redux/Reducers';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
+import {
+  RoomFilterContext,
+  RoomFilterReducer,
+  RoomFilterStateInit
+} from '@/store/Context/Room/RoomFilterContext';
+import {
+  RoomIndexContext,
+  RoomIndexReducer,
+  RoomIndexStateInit
+} from '@/store/Context/Room/RoomListContext';
+import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -17,8 +24,8 @@ import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
-import { Dispatch } from 'redux';
+import {  useSelector } from 'react-redux';
+import ButtonChangeLeaseType from '@/components/ButtonChangeLeaseType';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
@@ -65,19 +72,8 @@ const LongtermRooms: NextPage = (props) => {
     dispatch({ type: 'setMapOpen', isMapOpen: false });
   };
   const backHomePage = () => {
-    router.push('/')
+    router.push('/');
   };
-  const dispatchLeaseType = useDispatch<Dispatch<SearchFilterAction>>();
-
-  if (router.pathname.includes('/long-term-rooms')) {
-    dispatchLeaseType({
-      type: 'setLeaseTypeGlobal',
-      leaseTypeGlobal: 1,
-      leaseTypePathName: router.pathname.includes('/long-term-rooms')
-        ? '/long-term-rooms'
-        : '/rooms'
-    });
-  }
   return (
     <Fragment>
       <NextHead
@@ -93,7 +89,11 @@ const LongtermRooms: NextPage = (props) => {
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
           <GridContainer xs={12} md={10}>
-            <Grid item xs={12} md={isMapOpen ? 12 : 10} className={isMapOpen ? classes.boxSearchMap : classes.boxSearch}>
+            <Grid
+              item
+              xs={12}
+              md={isMapOpen ? 12 : 10}
+              className={isMapOpen ? classes.boxSearchMap : classes.boxSearch}>
               {!isMapOpen ? (
                 <HeadRoom
                   style={{
@@ -115,16 +115,16 @@ const LongtermRooms: NextPage = (props) => {
                   </Grid>
                 </HeadRoom>
               ) : (
-                  <Grid item xs={12} className={classes.boxWrapper}>
-                    <NavTop
-                      isHidden={false}
-                      handleBackAction={backRoomList}
-                      textCenter={t('rooms:map')}
-                      showLocationAction={false}
-                      showFilterAction={true}
-                    />
-                  </Grid>
-                )}
+                <Grid item xs={12} className={classes.boxWrapper}>
+                  <NavTop
+                    isHidden={false}
+                    handleBackAction={backRoomList}
+                    textCenter={t('rooms:map')}
+                    showLocationAction={false}
+                    showFilterAction={true}
+                  />
+                </Grid>
+              )}
               <Grid item xs={12}>
                 <SearchRoom />
               </Grid>
@@ -133,10 +133,13 @@ const LongtermRooms: NextPage = (props) => {
                   <ButtonFilterRoom />
                 </Grid>
               ) : (
-                  ''
-                )}
+                ''
+              )}
             </Grid>
-            <Grid item xs={12} className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
+            <Grid
+              item
+              xs={12}
+              className={isMapOpen ? classes.boxMapListing : classes.boxRoomListing}>
               <Grid item xs={12}>
                 <MapAndListing />
               </Grid>
@@ -145,6 +148,7 @@ const LongtermRooms: NextPage = (props) => {
           <Grid item xs={12}>
             <BottomNav />
           </Grid>
+          <ButtonChangeLeaseType isHomePage={false}/>
         </RoomFilterContext.Provider>
       </RoomIndexContext.Provider>
     </Fragment>

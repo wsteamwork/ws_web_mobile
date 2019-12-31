@@ -1,11 +1,8 @@
-import GridContainer from '@/components/Layout/Grid/Container';
-import ListRoom from '@/components/ListRoom';
 import LoadingSkeleton from '@/components/Loading/LoadingSkeleton';
-import LTRoomCardListing from '@/components/LTR/LTRooms/LTRoomCardListing';
 import NotFound from '@/components/Rooms/Lotte/NotFound';
 import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
 import { updateRouter } from '@/store/Context/utility';
-import { Grid, Theme, Typography } from '@material-ui/core';
+import { Grid, Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import Pagination from 'rc-pagination';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
@@ -72,7 +69,6 @@ const ListingLTRooms: FC<IProps> = (props) => {
           <Grid container item xs={12}>
             <LazyLoad>
               {longtermRooms.map((room, index) => {
-                console.log(room);
                 return (
                   <Grid item container xs={12} sm={6} key={index} className={classes.marginBottom}>
                     <RoomCardItem

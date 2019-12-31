@@ -53,9 +53,17 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     switch (option.type) {
       case 1:
         cityId = option.id;
+        dispatch({
+          type: 'SET_SEARCH_CITY',
+          city_id: option.id
+        });
         break;
       case 2:
         districtId = option.id;
+        dispatch({
+          type: 'SET_SEARCH_DISTRICT',
+          district_id: option.id
+        });
         break;
     }
     const pushQuery: any = {
@@ -64,10 +72,11 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };
-    leaseTypeGlobal && Router.push({
-      pathname: '/long-term-rooms',
-      query: pushQuery
-    });
+    leaseTypeGlobal &&
+      Router.push({
+        pathname: '/long-term-rooms',
+        query: pushQuery
+      });
     handleClose();
   };
 

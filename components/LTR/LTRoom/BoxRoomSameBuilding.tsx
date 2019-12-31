@@ -63,7 +63,6 @@ const BoxRoomSameBuilding: FC<IProps> = (props) => {
       });
   }, [ltroom.apartment_building_id]);
   const renderRoomSameBuilding = (room) => {
-    console.log(room);
     return (
       <BusinessTripCard
         room={room}

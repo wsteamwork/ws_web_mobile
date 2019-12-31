@@ -51,7 +51,6 @@ const ChooseGuestRoom: FC = () => {
         <Paper elevation={0} className="chooseGuestRoom">
           <Grid container className="root" onClick={() => setOpen(true)}>
             <span className="flex_columCenter">
-              {/* <FontAwesomeIcon icon={faDoorClosed} size="1x"></FontAwesomeIcon> */}
               <InputBase
                 readOnly
                 value={valueInput}

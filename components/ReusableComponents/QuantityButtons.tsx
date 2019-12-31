@@ -42,10 +42,10 @@ const QuantityButtons: FC<Iprops> = (props) => {
   return (
     <Grid container className={`quantityButtons ${!icon ? 'titleNoIcon' : ''}`}>
       <Grid item xs={8} className="flex_columCenter">
-        <p style={{ display: 'flex' }}>
+        <p style={{ display: 'flex', alignItems: 'center' }}>
           {icon ? (
             <Fragment>
-              <FontAwesomeIcon icon={icon} size="lg"></FontAwesomeIcon>&nbsp;&nbsp;
+              <FontAwesomeIcon icon={icon} size="sm"></FontAwesomeIcon>&nbsp;&nbsp;
             </Fragment>
           ) : (
               ''

@@ -49,8 +49,9 @@ const styles: any = (theme: Theme) =>
   createStyles({
     container: {
       margin: '0 auto',
-      height: '100%',
-      borderRadius: 32,
+      borderRadius: 5,
+      height: '50px',
+      paddingLeft: '10px',
       background: '#f5f5f5',
       position: 'relative',
       alignItems: 'center',
@@ -72,9 +73,6 @@ const styles: any = (theme: Theme) =>
       color: '#fff',
       height: '45px',
       justifyContent: 'center'
-      // [theme.breakpoints.down!('sm')]: {
-      //   padding: '8px 0'
-      // }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -298,7 +296,6 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   return (
     <Autosuggest
       {...autosuggestProps}
-      // alwaysRenderSuggestions={true}
       inputProps={{
         id: 'search-autosuggest-simple',
         value: searchText,
