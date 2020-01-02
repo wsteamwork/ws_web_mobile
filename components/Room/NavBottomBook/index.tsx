@@ -49,14 +49,14 @@ const NavBottomBook: FC = (props) => {
                   <Grid item xs={12} sm={4}>
                     <div>
                       <span className={'price'}>
-                        {numeral(room.price_day).format('0,0')} {t('shared:dayPrice')}
+                        {t('room:currency')}{numeral(room.price_day).format('0,0')}{t('shared:dayPrice')}
                       </span>
                     </div>
                   </Grid>
                   {room!.rent_type != 2 && (
                     <Grid item xs={12} sm={4}>
                       <span className={'price'}>
-                        {numeral(room.price_hour).format('0,0')} {t('shared:hourPrice')}
+                        {t('room:currency')}{numeral(room.price_hour).format('0,0')}{t('shared:hourPrice')}
                       </span>
                     </Grid>
                   )}

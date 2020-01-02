@@ -1,7 +1,7 @@
 import { RoomDetailsContext } from '@/store/Context/Room/RoomDetailContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import numeral from 'numeral';
 import React, { FC, memo, useContext, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -20,30 +20,36 @@ const PriceDetail: FC = () => {
           {!!dataCalculate && dataCalculate.days >= 5 ? (
             <Grid className="priceDetail__avg">
               <p>
-                {t('room:boxBooking:average')} {numeral(dataCalculate.avg_price).format('0,0')} VND/{' '}
-                {t('room:boxBooking:day')}
+                {t('room:boxBooking:average')} {t('room:currency')}{numeral(dataCalculate.avg_price).format('0,0')}/{t('room:boxBooking:day')}
               </p>
             </Grid>
           ) : (
               <Grid container>
-                <Grid item xs={6} className="priceDetail__priceDay flex_center">
+                <Grid item xs={room.price_hour !== 0 && room.rent_type !== 2 ? 4 : 6} className="priceDetail__priceDay flex_center">
                   <p>
-                    {numeral(
+                    {t('room:currency')}{numeral(
                       room.is_discount === 1 ? room.price_day_discount : room.price_day
                     ).format('0,0')}{' '}
-                    VND/ {t('room:boxBooking:day')}
+                    /{t('room:boxBooking:day')}
                   </p>
                 </Grid>
+
                 {room.price_hour !== 0 && room.rent_type !== 2 && (
-                  <Grid item xs={6} className="priceDetail__priceHour flex_center">
+                  <Grid item xs={4} className="priceDetail__priceHour flex_center">
                     <p>
-                      {numeral(
+                      {t('room:currency')}{numeral(
                         room.is_discount === 1 ? room.price_hour_discount : room.price_hour
-                      ).format('0,0')}{' '}
-                      VND/ 4 {t('room:boxBooking:hours')}
+                      ).format('0,0')}{' '}/4{t('room:boxBooking:hours')}
                     </p>
                   </Grid>
                 )}
+                <Grid item xs={room.price_hour !== 0 && room.rent_type !== 2 ? 4 : 6} className="priceDetail__priceDay flex_center">
+                  <Typography variant="subtitle2">
+                    <a target="_blank" href={`/long-term-room/${room.id}`}>
+                      {t('shared:viewMonthlyPrice')}
+                    </a>
+                  </Typography>
+                </Grid>
               </Grid>
             )}
         </Grid>

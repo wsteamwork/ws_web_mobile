@@ -46,7 +46,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     wrapper: {
       letterSpacing: 0.5,
-      // color: '#323232',
       fontWeight: 700,
       fontSize: 18,
       [theme.breakpoints.only('xs')]: {

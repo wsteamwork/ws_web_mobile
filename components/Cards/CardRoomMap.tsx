@@ -155,8 +155,8 @@ const CardRoomMap: FC<IProps> = (props) => {
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>
                       {cookies.get('initLanguage') == 'en'
-                        ? 'usd/' + t('home:month')
-                        : 'vnd/' + t('home:month')}
+                        ? '$/' + t('home:month')
+                        : 'đ/' + t('home:month')}
                     </Typography>
                   </Grid>
                 </Grid>

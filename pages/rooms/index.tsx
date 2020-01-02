@@ -1,12 +1,7 @@
-import SearchComponent from '@/components/Home/SearchComponent';
-import GridContainer from '@/components/Layout/Grid/Container';
-import SelectLeaseTypeGlobal from '@/components/LTR/ReusableComponents/SelectLeaseTypeGlobal';
 import NextHead from '@/components/NextHead';
 import BottomNav from '@/components/Rooms/BottomNav';
-import FilterActions from '@/components/Rooms/FilterActions';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchMobile from '@/components/Rooms/SearchMobile';
-import NavHeader from '@/components/Toolbar/NavHeader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import {
   RoomFilterContext,
@@ -18,26 +13,24 @@ import {
   RoomIndexReducer,
   RoomIndexStateInit
 } from '@/store/Context/Room/RoomListContext';
-import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { Grid, Hidden } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { Theme } from '@material-ui/core/styles';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
-import React, { Fragment, useContext, useReducer, useState, useEffect } from 'react';
-import HeadRoom from 'react-headroom';
-import { useDispatch } from 'react-redux';
-import { Sticky, StickyContainer } from 'react-sticky';
-import { Dispatch } from 'redux';
-import NavTop from '@/components/NavTop';
+import React, { Fragment, useContext, useReducer, useState } from 'react';
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
-import SearchRoom from '@/components/SearchRoom';
+import { useTranslation } from 'react-i18next';
+import NavTop from '@/components/NavTop';
+import HeadRoom from 'react-headroom';
+import ButtonChangeLeaseType from '@/components/ButtonChangeLeaseType';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     boxWrapper: {
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      margin: '0 auto'
     },
     boxSearch: {
       backgroundColor: '#ffffff',
@@ -47,7 +40,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
       width: '100%'
     },
     boxRoomListing: {
-      marginTop: 218,
+      marginTop: 152,
       marginBottom: 50
     }
   })
@@ -55,10 +48,14 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const Rooms: NextPage = (props) => {
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const [state, dispatch] = useReducer(RoomIndexReducer, RoomIndexStateInit);
   const [stateRoomFilter, dispatchRoomFilter] = useReducer(RoomFilterReducer, RoomFilterStateInit);
   const [hideNavTop, setHideNavTop] = useState<boolean>(false);
-  
+  const { router } = useContext(GlobalContext);
+  const backHomePage = () => {
+    router.push('/');
+  };
   return (
     <Fragment>
       <NextHead
@@ -72,7 +69,7 @@ const Rooms: NextPage = (props) => {
       <RoomIndexContext.Provider value={{ state, dispatch }}>
         <RoomFilterContext.Provider
           value={{ state: stateRoomFilter, dispatch: dispatchRoomFilter }}>
-          <Grid item xs={12} className={classes.boxSearch}>
+          <Grid item xs={12} md={10} className={classes.boxSearch}>
             <HeadRoom
               style={{
                 WebkitTransition: 'all 0.3s ease-in-out',
@@ -83,14 +80,20 @@ const Rooms: NextPage = (props) => {
               onPin={() => setHideNavTop(false)}
               onUnpin={() => setHideNavTop(true)}>
               <Grid item xs={12} className={classes.boxWrapper}>
-                <NavTop isHidden={hideNavTop} />
+                <NavTop
+                  isHidden={hideNavTop}
+                  textCenter={t('rooms:searchRooms:explore')}
+                  handleBackAction={backHomePage}
+                />
               </Grid>
             </HeadRoom>
             <Grid item xs={12}>
-              <SearchRoom />
-            </Grid>
-            <Grid item xs={12} className={classes.boxWrapper}>
-              <ButtonFilterRoom />
+              <Grid item xs={11} className={classes.boxWrapper}>
+                <SearchMobile />
+              </Grid>
+              <Grid item xs={12} className={classes.boxWrapper}>
+                <ButtonFilterRoom />
+              </Grid>
             </Grid>
           </Grid>
           <Grid item xs={12} className={classes.boxRoomListing}>
@@ -99,6 +102,7 @@ const Rooms: NextPage = (props) => {
           <Grid item xs={12}>
             <BottomNav />
           </Grid>
+          <ButtonChangeLeaseType isHomePage={false}/>
         </RoomFilterContext.Provider>
       </RoomIndexContext.Provider>
     </Fragment>

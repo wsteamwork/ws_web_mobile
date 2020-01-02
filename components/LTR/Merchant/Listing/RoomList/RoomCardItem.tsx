@@ -79,9 +79,6 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     wrapperImage: {
       display: 'flex',
       alignItems: 'center',
-      [theme.breakpoints.up('md')]: {
-        maxWidth: 140
-      },
       [theme.breakpoints.down('sm')]: {
         height: 117
       },
@@ -132,13 +129,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     vertifiredMdDown: {
       display: 'flex',
-      alignItems: 'center',
-      [theme.breakpoints.down('md')]: {
-        alignItems: 'flex-start'
-      }
+      alignItems: 'flex-start'
     },
     iconVerified: {
-      width: '23px',
+      width: '18px',
       float: 'inherit',
       position: 'relative',
       top: 5,
@@ -186,10 +180,8 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       maxWidth: 60
     },
     sizeButton: {
-      [theme.breakpoints.down('md')]: {
-        width: '0.9rem',
-        height: '0.9rem'
-      }
+      width: '0.9rem',
+      height: '0.9rem'
     },
     process: {
       display: 'flex',
@@ -335,7 +327,7 @@ const RoomCardItem: FC<IProps> = (props) => {
               <Grid item xs={12}>
                 <Grid container>
                   {room.avatar && room.avatar.images.length ? (
-                    <Grid item xs={7} sm={3} md={3} lg={2} className={classes.widthImg}>
+                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                       <img
                         className={classes.img}
                         src={IMAGE_STORAGE_LG + room.avatar.images[0].name}

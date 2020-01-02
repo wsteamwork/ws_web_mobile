@@ -2,6 +2,8 @@ import { InputAdornment, InputBase } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import React, { FC, Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 interface Iprops {
   onClick?: () => void;
   displayOnlyForModal?: boolean;
@@ -30,7 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const SearchInput: FC<Iprops> = (props: Iprops) => {
   const { t } = useTranslation();
-
+  const searchText = useSelector<ReducersList, string>(
+    (state) => state.searchFilter.searchText
+  );
   const classes = useStyles(props);
   const { onClick, displayOnlyForModal, value, handleChange } = props;
 
@@ -38,6 +42,7 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
     <Fragment>
       {displayOnlyForModal ? (
         <InputBase
+          value={searchText}
           placeholder={t('home:SearchAutocomplete:toGo')}
           id="input-with-icon-textfield"
           classes={{ root: classes.InputBaseRoot }}
@@ -62,7 +67,6 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
               </InputAdornment>
             }
             fullWidth
-          // onClick={onClick}
           />
         )}
     </Fragment>

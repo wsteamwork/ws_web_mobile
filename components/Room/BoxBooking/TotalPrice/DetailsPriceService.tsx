@@ -31,7 +31,7 @@ const DetailsPriceService: FC<IProps> = (props) => {
               <p>{t('room:boxBooking:serviceFee')} </p>
             </Grid>
             <Grid item xs={4} className="detailsFeeService__textRight">
-              <p>{numeral(dataCalculate.service_fee).format('0,0')}đ</p>
+              <p>{t('room:currency')}{numeral(dataCalculate.service_fee).format('0,0')}</p>
             </Grid>
           </Grid>
 
@@ -40,7 +40,7 @@ const DetailsPriceService: FC<IProps> = (props) => {
               <p>{t('room:boxBooking:chargeAddGuest')} </p>
             </Grid>
             <Grid item xs={4} className="detailsFeeService__textRight">
-              <p>{numeral(dataCalculate.charge_additional_guest).format('0,0')}đ</p>
+              <p>{t('room:currency')}{numeral(dataCalculate.charge_additional_guest).format('0,0')}</p>
             </Grid>
           </Grid>
 
@@ -49,7 +49,7 @@ const DetailsPriceService: FC<IProps> = (props) => {
               <p>{t('room:boxBooking:chargeAddHour')} </p>
             </Grid>
             <Grid item xs={4} className="detailsFeeService__textRight">
-              <p>{numeral(dataCalculate.charge_additional_hour).format('0,0')}đ</p>
+              <p>{t('room:currency')}{numeral(dataCalculate.charge_additional_hour).format('0,0')}</p>
             </Grid>
           </Grid>
         </Grid>

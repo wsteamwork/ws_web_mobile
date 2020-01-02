@@ -2,7 +2,7 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
-import { Grid } from '@material-ui/core';
+import { Grid, createStyles, makeStyles } from '@material-ui/core';
 import Router from 'next/router';
 import { ParsedUrlQueryInput } from 'querystring';
 import React, { FC, Fragment, memo, useContext } from 'react';
@@ -12,7 +12,15 @@ import { compose } from 'recompose';
 import ChooseGuestRoom from '../ChooseGuestRoom';
 import DateRangeSearch from '../DateRangeSearch';
 import SearchAutoSuggestion from '../SearchAutoSuggestion';
+import { Theme } from '@fullcalendar/core';
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    customBtn: {
+      borderRadius: 5,
+    }
+  })
+);
 interface IProps {
   className?: string;
   filter: SearchFilterState;
@@ -22,6 +30,7 @@ interface IProps {
 
 const SearchComponent: FC<IProps> = (props) => {
   const { className, filter, showGuestRoom, closeModal } = props;
+  const classes = useStyles(props);
   const { dispatch: dispatchGlobal } = useContext(GlobalContext);
   const {
     searchText,
@@ -84,7 +93,7 @@ const SearchComponent: FC<IProps> = (props) => {
         )}
 
       <Grid item xs={12} md={2}>
-        <ButtonGlobal padding="0px" width="100%" height={50} onClick={applySearch}>
+        <ButtonGlobal padding="0px" width="100%" height={50} onClick={applySearch} className={classes.customBtn}>
           {t('home:searchComponent:search')}
         </ButtonGlobal>
       </Grid>

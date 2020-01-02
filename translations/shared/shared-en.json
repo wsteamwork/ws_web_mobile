@@ -9,8 +9,8 @@
         "conf": "Confirm cancellation",
         "success": "Cancel the room successfully!"
     },
-    "dayPrice": "VND/night",
-    "hourPrice": "VND/4 hours",
+    "dayPrice": "/night",
+    "hourPrice": "/4hrs",
     "facilities": "Facilities",
     "bedrooms": "Bedroom",
     "kitchens": "Kitchen",
@@ -27,5 +27,8 @@
     "profile": "My account",
     "setting": "Setting",
     "home": "Home",
-    "booking": "My Booking"
+    "booking": "My Booking",
+    "viewMonthlyPrice":"Check monthly price",
+    "viewDailyPrice":"Check daily price",
+    "viewDetails": "View details"
 }

@@ -3,9 +3,9 @@ export const IS_SEARCH_DISTRICT = 2;
 export const IS_SEARCH_ROOM = 3;
 
 export interface SearchSuggestRes {
-  city?: (SearchSuggestData)[];
-  district?: (SearchSuggestData)[];
-  room?: (SearchSuggestData)[];
+  city?: SearchSuggestData[];
+  district?: SearchSuggestData[];
+  room?: SearchSuggestData[];
 }
 export interface SearchSuggestData {
   id: number;
@@ -15,6 +15,7 @@ export interface SearchSuggestData {
   type: number;
   description: string;
   city: string;
+  district: string | '';
   number_room: number;
   country: string;
 }

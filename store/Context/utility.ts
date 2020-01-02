@@ -30,8 +30,6 @@ export const updateRouter = (
 ) => {
   const obj = {};
   if (notArray) {
-    // console.log('param', param);
-    // console.log('value', value);
     if (param2) obj[param2] = value2;
     if (param3) obj[param3] = value3;
     obj[param] = value;

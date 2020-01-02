@@ -1,23 +1,10 @@
-import { ReducersType } from '@/store/Redux/Reducers';
+import { GlobalContext } from '@/store/Context/GlobalContext';
+import { ReducersList, ReducersType } from '@/store/Redux/Reducers';
 import { SearchFilterAction, SearchFilterState } from '@/store/Redux/Reducers/Search/searchFilter';
 import { AxiosRes } from '@/types/Requests/ResponseTemplate';
-import {
-  IS_SEARCH_CITY,
-  IS_SEARCH_DISTRICT,
-  SearchSuggestData,
-  SearchSuggestRes
-} from '@/types/Requests/Search/SearchResponse';
+import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, IS_SEARCH_ROOM, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { axios } from '@/utils/axiosInstance';
-import {
-  Fade,
-  Grid,
-  IconButton,
-  InputAdornment,
-  MenuItem,
-  Paper,
-  TextField,
-  InputBase
-} from '@material-ui/core';
+import { Fade, Grid, IconButton, InputAdornment, MenuItem, Paper, TextField } from '@material-ui/core';
 import { createStyles, Theme } from '@material-ui/core/styles';
 import { Close, SearchRounded } from '@material-ui/icons';
 import HomeIcon from '@material-ui/icons/HomeRounded';
@@ -26,14 +13,14 @@ import { withStyles } from '@material-ui/styles';
 // @ts-ignore
 import match from 'autosuggest-highlight/match';
 import parse from 'autosuggest-highlight/parse';
-import React, { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import Autosuggest from 'react-autosuggest';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'recompose';
 import { Dispatch } from 'redux';
 
-interface Iprops {
+interface IProps {
   classes?: any;
   filter: SearchFilterState;
   updateSearchText: (searchText: string) => void;
@@ -45,17 +32,20 @@ interface Iprops {
 // - Make component customizable
 // - Refactor refactor
 
-const styles: any = (theme: Theme) =>
+const styles: any = (theme: Theme, props: IProps) =>
   createStyles({
     container: {
+      border: '1px solid #afafaf !important',
+      background: '#fff !important',
       margin: '0 auto',
       height: '100%',
-      borderRadius: 32,
-      background: '#f5f5f5',
+      borderRadius: 4,
+      // background: '#f5f5f5',
       position: 'relative',
       alignItems: 'center',
       justifyContent: 'center',
       display: 'flex'
+
     },
     suggestionsContainerOpen: {
       position: 'absolute',
@@ -70,11 +60,9 @@ const styles: any = (theme: Theme) =>
     },
     textFieldRoot: {
       color: '#fff',
-      height: '45px',
+      height: '43px',
+      // height: '45px',
       justifyContent: 'center'
-      // [theme.breakpoints.down!('sm')]: {
-      //   padding: '8px 0'
-      // }
     },
     suggestionsContainerOpenNavSearch: {
       position: 'absolute',
@@ -133,25 +121,27 @@ const styles: any = (theme: Theme) =>
     }
   });
 
-export const getDataSearch = async (value: string): Promise<any> => {
-  const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
-  //Change response to one-array-data
-  //if (Array.isArray(res.data.data[0]))
-  let dataChange: SearchSuggestData[] = [];
-  Object.keys(res.data.data[0]).map((key) => {
-    res.data.data[0][key].map((item) => {
-      dataChange.push(item);
-    });
-  });
-  return dataChange;
-};
-
-const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
+const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
   const { classes, updateSearchText, updateSearchDistrict, updateSearchCity, filter } = props;
   const [searchText, setSearchText] = useState<string>(filter.searchText);
   const [data, setData] = useState<SearchSuggestData[]>([]);
   const { t } = useTranslation();
   // const { dispatch: dispatchGlobal } = useContext(GlobalContext);
+  const { router } = useContext(GlobalContext);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
+  const getDataSearch = async (value: string): Promise<any> => {
+    const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
+    //Change response to one-array-data
+    //if (Array.isArray(res.data.data[0]))
+    let dataChange: SearchSuggestData[] = [];
+    Object.keys(res.data.data[0]).map((key) => {
+      res.data.data[0][key].map((item) => {
+        dataChange.push(item);
+      });
+    });
+    setData(dataChange);
+  };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>, { newValue }: { newValue: any }) => {
     setSearchText(newValue);
@@ -161,7 +151,7 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
   };
 
   const onSuggestionsFetchRequested = ({ value }: { value: any }) => {
-    getDataSearch(value).then((data) => setData(data));
+    getDataSearch(value);
   };
 
   const onSuggestionsClearRequested = () => {
@@ -175,6 +165,9 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
 
   const handleEmptyText = () => {
     setSearchText('');
+    updateSearchText('');
+    updateSearchCity(undefined);
+    updateSearchDistrict(undefined);
   };
 
   const handleSuggestionSelected = (
@@ -200,57 +193,42 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
         updateSearchText(suggestion.name);
         updateSearchCity(undefined);
         updateSearchDistrict(undefined);
+        router.push(`${leaseTypeGlobal == 1 ? `/long-term-room/${suggestion.id}` : `room/${suggestion.id}`}`)
         break;
     }
   };
 
   const renderInputComponent = (inputProps: any) => {
-    const { inputRef = () => {}, ref, ...other } = inputProps;
+    const { inputRef = () => { }, ref, ...other } = inputProps;
     return (
-      <InputBase
-          placeholder={t('home:SearchAutocomplete:toGo')}
-          id="input-with-icon-textfield"
-          classes={{ root: classes.InputBaseRoot }}
-          startAdornment={
-            <InputAdornment position="start" className={classes.startAdornmentt}>
-              <img src="/static/icons/search.svg" alt="search icon" />
+      <TextField
+        fullWidth
+        classes={{ root: classes.textFieldRoot }}
+        placeholder={t('home:SearchAutocomplete:toGo')}
+        InputProps={{
+          classes: { input: classes.inputCustom },
+          startAdornment: (
+            <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
+              <SearchRounded />
             </InputAdornment>
-          }
-          fullWidth
-          inputRef= {(node) => {
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <Fade in={!!searchText}>
+                <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
+                  <Close fontSize="small" />
+                </IconButton>
+              </Fade>
+            </InputAdornment>
+          ),
+          inputRef: (node) => {
             ref(node);
             inputRef(node);
-          }}
-          {...other}
-        />
-      // <TextField
-      //   fullWidth
-      //   classes={{ root: classes.textFieldRoot }}
-      //   placeholder={t('home:SearchAutocomplete:toGo')}
-      //   InputProps={{
-      //     classes: { input: classes.inputCustom },
-      //     startAdornment: (
-      //       <InputAdornment classes={{ positionStart: classes.startAdornment }} position="start">
-      //         <SearchRounded />
-      //       </InputAdornment>
-      //     ),
-      //     endAdornment: (
-      //       <InputAdornment position="end">
-      //         <Fade in={!!searchText}>
-      //           <IconButton onClick={handleEmptyText} className="iconButton" aria-label="Search">
-      //             <Close fontSize="small" />
-      //           </IconButton>
-      //         </Fade>
-      //       </InputAdornment>
-      //     ),
-      //     inputRef: (node) => {
-      //       ref(node);
-      //       inputRef(node);
-      //     },
-      //     disableUnderline: true
-      //   }}
-      //   {...other}
-      // />
+          },
+          disableUnderline: true
+        }}
+        {...other}
+      />
     );
   };
 
@@ -259,30 +237,41 @@ const SearchAutoSuggestion: FC<Iprops> = (props: Iprops) => {
     const parts = parse(suggestion.name, matches);
     return (
       <MenuItem selected={isHighlighted} component="div" classes={{ gutters: classes.gutters }}>
-        <Grid container>
+        <Grid container style={{ minHeight: 35 }} justify="flex-start" alignItems="center">
           <Grid item xs={7} md={7} className={classes.left}>
             <div>
               {suggestion.type === IS_SEARCH_CITY || suggestion.type === IS_SEARCH_DISTRICT ? (
                 <LocationIcon className={classes.searchIcon} />
               ) : (
-                <HomeIcon className={classes.searchIcon} />
-              )}
+                  <HomeIcon className={classes.searchIcon} />
+                )}
             </div>
             <div className={classes.suggestionText}>
               {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (
                 <span key={index}>{part.text}</span>
               ))}
+              {
+                suggestion.type == IS_SEARCH_CITY ?
+                  (<span>, {suggestion.country}</span>) : <span></span>
+              }
+              {
+                suggestion.type == IS_SEARCH_DISTRICT ?
+                  (<span>, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+              }
+              {
+                suggestion.type == IS_SEARCH_ROOM ? (<span>{suggestion.district ? `, ${suggestion.district}` : ''}, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+              }
             </div>
           </Grid>
-          <Grid item xs={5} md={5} className={classes.right}>
+          {/* <Grid item xs={5} md={5} className={classes.right}>
             {suggestion.number_room !== 0 && suggestion.number_room! && (
               <p>
                 {suggestion.number_room} {t('home:SearchAutocomplete:accommodation')}
               </p>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
-      </MenuItem>
+      </MenuItem >
     );
   };
 

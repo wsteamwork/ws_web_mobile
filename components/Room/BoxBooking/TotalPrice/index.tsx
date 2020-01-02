@@ -46,7 +46,7 @@ const TotalPrice: FC = () => {
               </Grid>
               <Grid item xs={6}>
                 <p className="totalPrice__right">
-                  {numeral(dataCalculate.price_original).format('0,0')} VND
+                  {t('room:currency')}{numeral(dataCalculate.price_original).format('0,0')}
                 </p>
               </Grid>
             </Grid>
@@ -59,12 +59,11 @@ const TotalPrice: FC = () => {
               </Grid>
               <Grid item xs={6}>
                 <p className="totalPrice__right">
-                  {numeral(
+                  {t('room:currency')}{numeral(
                     dataCalculate.service_fee +
                     dataCalculate.charge_additional_guest +
                     dataCalculate.charge_additional_hour
                   ).format('0,0')}{' '}
-                  VND
                 </p>
               </Grid>
             </Grid>
@@ -74,7 +73,7 @@ const TotalPrice: FC = () => {
               </Grid>
               <Grid item xs={7}>
                 <p className="totalPrice__right">
-                  {numeral(dataCalculate.total_fee).format('0,0')} VND
+                  {t('room:currency')}{numeral(dataCalculate.total_fee).format('0,0')}
                 </p>
               </Grid>
             </Grid>

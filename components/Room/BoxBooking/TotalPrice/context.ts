@@ -10,6 +10,7 @@ import { DEFAULT_DATE_TIME_FORMAT } from '@/utils/store/global';
 import moment from 'moment';
 import { Dispatch, useContext, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Cookies from 'universal-cookie';
 
 type ReturnCalculate = {
   numberDay: number;
@@ -56,7 +57,8 @@ export const useCalculatePrice = (): ReturnCalculate => {
 
   const getcalculatePrice = async () => {
     setLoading(true);
-
+    const cookies = new Cookies();
+    const lang = cookies.get('initLanguage') || 'en';
     const body: BookingPriceCalculatorReq = {
       room_id: parseInt(router.query.id as string, 10),
       checkin:
@@ -79,7 +81,8 @@ export const useCalculatePrice = (): ReturnCalculate => {
     try {
       const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
         'bookings/calculate-price-with-specific-day-price',
-        body
+        body,
+        { headers: { 'Accept-Language': lang } }
       );
 
       setLoading(false);

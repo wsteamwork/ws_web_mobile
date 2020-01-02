@@ -21,7 +21,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       height: 80,
       backgroundColor: '#F6F6F6'
     },
-    customTextField: {
+    customTextFieldLT: {
       '& .MuiOutlinedInput-root': {
         '& fieldset': {
           borderColor: '#ffffff',
@@ -32,6 +32,20 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
         '&.Mui-focused fieldset': {
           border: '1px solid',
           borderColor: mainColor.primaryLT
+        }
+      }
+    },
+    customTextFieldST: {
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#ffffff',
+          borderRadius: 25,
+          backgroundColor: '#ffffff',
+          boxShadow: '0px 9px 20px rgba(0, 0, 0, 0.06)'
+        },
+        '&.Mui-focused fieldset': {
+          border: '1px solid',
+          borderColor: mainColor.primary
         }
       }
     },
@@ -49,6 +63,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 
 const SearchRoom: FC<IProps> = (props) => {
   const classes = useStyles(props);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
   const [openSearchDialog, setOpenSearchDialog] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
   const searchText = useSelector<ReducersList, string>((state) => state.searchFilter.searchText);
@@ -70,7 +87,7 @@ const SearchRoom: FC<IProps> = (props) => {
       <Grid item xs={11}>
         <TextField
           value={searchText}
-          className={classes.customTextField}
+          className={leaseTypeGlobal ? classes.customTextFieldLT : classes.customTextFieldST}
           fullWidth={true}
           onClick={handleOpenSearchDialog}
           variant="outlined"

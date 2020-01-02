@@ -2,14 +2,22 @@ import ButtonGlobal from '@/components/ButtonGlobal';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { faDoorClosed, faUserFriends } from '@fortawesome/free-solid-svg-icons';
-import { Grid } from '@material-ui/core';
+import { Grid, createStyles, makeStyles } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import React, { Dispatch, FC, memo, SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { Theme } from '@fullcalendar/core';
 
 const QuantityButtons = dynamic(() => import('@/components/ReusableComponents/QuantityButtons'));
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    customBtn: {
+      borderRadius: 5,
+    }
+  })
+);
 interface IProps {
   setOpen: Dispatch<SetStateAction<boolean>>;
   open: boolean;
@@ -18,13 +26,13 @@ interface IProps {
 
 const ActionChoose: FC<IProps> = (props) => {
   const { t } = useTranslation();
+  const classes = useStyles(props);
   const { setOpen, open, checkRemove } = props;
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
   const numberGuest = useSelector<ReducersList, number>((state) => state.searchFilter.guestsCount);
   const numberRoom = useSelector<ReducersList, number>((state) => state.searchFilter.roomsCount);
   const [guest, setGuest] = useState(numberGuest);
   const [room, setRoom] = useState(numberRoom);
-  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   useEffect(() => {
     !open && handleClose();
@@ -67,13 +75,9 @@ const ActionChoose: FC<IProps> = (props) => {
           </ButtonGlobal>
         </Grid>
         <Grid item xs={6}>
-          {leaseTypeGlobal ?
-            <ButtonGlobal background="linear-gradient(to right, #667eea, #764ba2);" height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
-              {t('home:chooseGuestRoom:apply')}
-            </ButtonGlobal> :
-            <ButtonGlobal height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
-              {t('home:chooseGuestRoom:apply')}
-            </ButtonGlobal>}
+          <ButtonGlobal className={classes.customBtn} height="35px" fontSize="14px" color="primary" onClick={handleSubmit}>
+            {t('home:chooseGuestRoom:apply')}
+          </ButtonGlobal>
         </Grid>
       </Grid>
     </Grid>

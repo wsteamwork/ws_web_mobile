@@ -9,25 +9,6 @@ import React, { Fragment } from 'react';
 import LTHome from './homepage/LTHome';
 
 const Home: NextPage = () => {
-  // const roomsHot = useSelector<ReducersList, RoomIndexRes[]>(
-  //   (state) => state.roomHomepage.roomsHot
-  // );
-  // const renderRoom = (room) => <RoomCard city={room.city.data.name}
-  //   district={room.district.data.name}
-  //   instantbook={room.instant_book}
-  //   roomID={room.id}
-  //   roomName={room.room_name}
-  //   roomNumber={room.number_room}
-  //   roomType={room.room_type_txt}
-  //   roomImage={room.avatar_image}
-  //   price_day={room.price_day}
-  //   price_hour={room.price_hour}
-  //   total_review={room.total_review}
-  //   avg_rating={room.avg_rating}
-  //   isHomepage={true} />;
-  // const { t } = useTranslation();
-  // // const { width } = useContext<IGlobalContext>(GlobalContext);
-  // forceCheck();
   return (
     <Fragment>
       <NextHead
@@ -36,14 +17,14 @@ const Home: NextPage = () => {
         title="Westay - Đặt phòng Homestay nhanh chóng, trải nghiệm hạng sang tại Westay"
         description="Đặt phòng homestay nhanh chóng, trải nghiệm hạng sang tại Westay cùng với nhiều ưu đãi hấp dẫn"
         url="https://westay.vn"
-        ogImage="/static/images/Bg_home.4023648f.jpg" />
-
-      <Grid container justify="center" style={{ marginBottom: 100 }}>
-        <Grid item xs={12} md={10}>
-          <LTHome />
-          <BottomNav />
+        ogImage="/static/images/Bg_home.4023648f.jpg"
+      />
+        <Grid container justify="center">
+          <Grid item xs={12} md={10}>
+            <LTHome />
+            <BottomNav />
+          </Grid>
         </Grid>
-      </Grid>
     </Fragment>
   );
 };
