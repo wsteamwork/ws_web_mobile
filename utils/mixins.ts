@@ -71,7 +71,7 @@ export const selfMemo = <T = any>(value: T): T => {
 
 export const formatPrice = (price: number): string | number => {
   const cookies = new Cookies();
-  const lang = cookies.get('initLanguage') || 'en';
+  const lang = cookies.get('initLanguage');
   try {
     let format = '';
     if (price >= 1000000) {

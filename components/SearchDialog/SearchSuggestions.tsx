@@ -1,5 +1,5 @@
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { SearchSuggestData } from '@/types/Requests/Search/SearchResponse';
+import { SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
 import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
@@ -10,8 +10,10 @@ import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDataSearch } from '../Home/SearchAutoSuggestion';
+// import { getDataSearch } from '../Home/SearchAutoSuggestion';
 import { ReducersList } from '@/store/Redux/Reducers';
+import { axios } from '@/utils/axiosInstance';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 interface Iprops {
   inputValue: string;
   handleClose?: any;
@@ -38,6 +40,19 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
   );
   const [dataSuggestions, setDataSuggestions] = useState<SearchSuggestData[]>([]);
   const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
+  const getDataSearch = async (value: string): Promise<any> => {
+    const res: AxiosRes<SearchSuggestRes> = await axios.get(`search-suggestions?key=${value}`);
+    //Change response to one-array-data
+    //if (Array.isArray(res.data.data[0]))
+    let dataChange: SearchSuggestData[] = [];
+    Object.keys(res.data.data[0]).map((key) => {
+      res.data.data[0][key].map((item) => {
+        dataChange.push(item);
+      });
+    });
+    return dataChange;
+  };
+
   useEffect(() => {
     getDataSearch(inputValue).then((data) => setDataSuggestions(data));
   }, [inputValue]);

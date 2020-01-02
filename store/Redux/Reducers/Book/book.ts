@@ -67,7 +67,7 @@ export const getRoomDetails = async (
 
 export const getDataCalculate = async (
   query: BookingPriceCalculatorReq,
-  initLanguage: string =  'en'
+  initLanguage: string = 'en'
 ): Promise<BookingPriceCalculatorRes> => {
   const res: AxiosRes<BookingPriceCalculatorRes> = await axios.post(
     'bookings/calculate-price-with-specific-day-price',

@@ -28,5 +28,8 @@
     "profile": "Cá nhân",
     "setting": "Cài đặt",
     "home": "Trang chủ",
-    "booking": "Đặt phòng"
+    "booking": "Đặt phòng",
+    "viewMonthlyPrice":"Check monthly price",
+    "viewDailyPrice":"Check daily price",
+    "viewDetails": "View details"
 }
