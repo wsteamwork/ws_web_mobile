@@ -1,5 +1,9 @@
+// import { getDataSearch } from '../Home/SearchAutoSuggestion';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { AxiosRes } from '@/types/Requests/ResponseTemplate';
+import { IS_SEARCH_CITY, IS_SEARCH_DISTRICT, IS_SEARCH_ROOM, SearchSuggestData, SearchSuggestRes } from '@/types/Requests/Search/SearchResponse';
+import { axios } from '@/utils/axiosInstance';
 import { Grid } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
@@ -10,10 +14,6 @@ import Router from 'next/router';
 import React, { Dispatch, FC, Fragment, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-// import { getDataSearch } from '../Home/SearchAutoSuggestion';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { axios } from '@/utils/axiosInstance';
-import { AxiosRes } from '@/types/Requests/ResponseTemplate';
 interface Iprops {
   inputValue: string;
   handleClose?: any;
@@ -80,6 +80,17 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
           district_id: option.id
         });
         break;
+      case 3:
+        // Router.push({ pathname: `/long-term-room/${option.id}` })
+        // Router.push({ pathname: `/long-term-room/${option.id}`});
+        window.open(`/long-term-room/${option.id}`, '_blank');
+        // districtId = option.id;
+        // dispatch({
+        //   type: 'SET_SEARCH_DISTRICT',
+        //   district_id: option.id
+        // });
+        break;
+
     }
     const pushQuery: any = {
       name: cityId === undefined && districtId === undefined ? name : '',
@@ -107,11 +118,20 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
                 {suggestion.type == 3 ? <HomeRoundedIcon /> : <PlaceRoundedIcon />}
               </Grid>
               <Grid>
-                {parts.map((part, index) => (
-                  <span key={index} style={{ fontWeight: part.highlight && 700 }}>
-                    {part.text}
-                  </span>
+                {parts.map((part: { text: React.ReactNode; highlight: any }, index) => (
+                  <span key={index}>{part.text}</span>
                 ))}
+                {
+                  suggestion.type == IS_SEARCH_CITY ?
+                    (<span>, {suggestion.country}</span>) : <span></span>
+                }
+                {
+                  suggestion.type == IS_SEARCH_DISTRICT ?
+                    (<span>, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+                }
+                {
+                  suggestion.type == IS_SEARCH_ROOM ? (<span>{suggestion.district ? `, ${suggestion.district}` : ''}, {suggestion.city}, {suggestion.country}</span>) : <span></span>
+                }
               </Grid>
             </Grid>
           );
