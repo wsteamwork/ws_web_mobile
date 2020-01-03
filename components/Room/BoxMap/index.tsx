@@ -31,7 +31,6 @@ const BoxMap: FC<IProps> = (props) => {
   const { t } = useTranslation();
   const classes = useStyles(props);
   const { district, city, latitude, longitude } = props;
-  // const room = useSelector<ReducersList, RoomIndexRes>((state) => state.roomPage.room);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   return (
@@ -41,7 +40,7 @@ const BoxMap: FC<IProps> = (props) => {
           bootstrapURLKeys={{
             key: process.env.REACT_APP_GOOGLE_MAP_KEY || 'AIzaSyA2ePi78OKNDZPNg-twQ74XwX_oczRQUoM'
           }}
-          defaultZoom={15}
+          defaultZoom={14}
           defaultCenter={{
             lat: latitude ? parseFloat(latitude) : 0,
             lng: longitude ? parseFloat(longitude) : 0
@@ -60,7 +59,7 @@ const BoxMap: FC<IProps> = (props) => {
                   lat: parseFloat(latitude),
                   lng: parseFloat(longitude)
                 },
-                radius: 400
+                radius: 300
               }) : null
           }}
         />

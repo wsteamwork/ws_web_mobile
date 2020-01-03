@@ -1,3 +1,4 @@
+import { PlaceIndexResponse } from './../../Places/PlaceIndexResponse';
 import { CityRes } from '@/types/Requests/Cities/CityResponse';
 import { DistrictRes } from '@/types/Requests/Districts/DistrictResponse';
 import { AmenitiesIndexRes } from '@/types/Requests/LTR/Amenities/AmenitiesResponses';
@@ -66,6 +67,7 @@ export interface LTRoomIndexRes {
   city: TransformerInclude<CityRes>;
   district: TransformerInclude<DistrictRes>;
   merchant: TransformerInclude<Merchant>;
+  places: TransformerInclude<PlaceIndexResponse[]>;
 }
 
 export type LTRoomScheduleRes = {

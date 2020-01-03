@@ -14,18 +14,21 @@ export type LTRoomReducerState = {
   readonly error: boolean;
   readonly availableDates: LTRoomAvailableRes;
   readonly roomSameBuilding: any[];
+  readonly placesList: any;
 };
 
 export type LTRoomReducerAction =
   | { type: 'setLTRoom'; payload: LTRoomIndexRes }
   | { type: 'setErrorSSRLTRoompage'; payload: boolean }
   | { type: 'setAvailableDates'; payload: LTRoomAvailableRes }
+  | { type: 'setPlaces'; payload: any }
   | { type: 'setRoomSameBuilding'; payload: any[] };
 
 export const init: LTRoomReducerState = {
   room: null,
   error: false,
   availableDates: null,
+  placesList: null,
   roomSameBuilding: []
 };
 
@@ -42,6 +45,8 @@ export const ltroomReducer: Reducer<LTRoomReducerState, LTRoomReducerAction> = (
       return updateObject(state, { availableDates: action.payload });
     case 'setRoomSameBuilding':
       return updateObject(state, { roomSameBuilding: action.payload });
+    case 'setPlaces':
+      return updateObject(state, { placesList: action.payload });
     default:
       return state;
   }
@@ -52,7 +57,7 @@ export const getLTRoom = async (
   initLanguage: string = 'en'
 ): Promise<LTRoomIndexRes> => {
   const res: AxiosRes<LTRoomIndexRes> = await axios.get(
-    `long-term-rooms/${idRoom}?include=city,district,merchant`,
+    `long-term-rooms/${idRoom}?include=city,district,merchant,places`,
     { headers: { 'Accept-Language': initLanguage } }
   );
 
@@ -77,7 +82,6 @@ export const getRoomAvailableDate = async (
 };
 export const getRoomSameBuilding = async (
   buildingId: any
-  // initLanguage: string = 'en'
 ): Promise<any> => {
   const res: AxiosRes<any> = await axios.get(`long-term-rooms?building_id=${buildingId}`);
   return res.data;
@@ -97,14 +101,13 @@ export const getDataLTRoom = async (
     ]);
 
     const [room, availableDates] = res;
-    // getRoomSameBuilding(room.apartment_building_id, initLanguage).then((res) =>
-    //   dispatch({ type: 'setLTRoom', payload: res.data })
-    // );
+    const placesList = room.places.data;
 
     dispatch({ type: 'setLTRoom', payload: room });
     dispatch({ type: 'setAvailableDates', payload: availableDates });
+    dispatch({ type: 'setPlaces', payload: room.places.data });
     dispatch({ type: 'setErrorSSRLTRoompage', payload: false });
-    return { room, availableDates };
+    return { room, availableDates, placesList };
   } catch (error) {
     dispatch({ type: 'setErrorSSRLTRoompage', payload: true });
   }

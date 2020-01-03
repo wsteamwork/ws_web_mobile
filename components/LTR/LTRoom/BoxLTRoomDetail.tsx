@@ -14,6 +14,7 @@ import LazyLoad, { forceCheck } from 'react-lazyload';
 import BoxInfoBasic from './BoxInfoBasic';
 import BoxRoomOfAccommodation from './BoxRoomOfAccommodation';
 import BoxRoomSameBuilding from './BoxRoomSameBuilding';
+import PlacesAroundList from '@/components/Room/BoxRoomDetail/PlacesAround/PlacesAroundList';
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   createStyles({
@@ -181,6 +182,11 @@ const BoxLTRoomDetail: FC<IProps> = (props) => {
           included_services={checkPrice ? [] : room.included_services}
           not_included_services={checkPrice ? [] : room.not_included_services}
         />
+      </div>
+      
+      <div className={classes.paper}>
+        {/* <LazyLoad offset={100}> */}
+        <PlacesAroundList />
       </div>
       {/* <div className={classes.paper}> */}
         <BoxRoomSameBuilding />
