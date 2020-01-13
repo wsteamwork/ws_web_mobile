@@ -29,7 +29,15 @@
     "setting": "Cài đặt",
     "home": "Trang chủ",
     "booking": "Đặt phòng",
-    "viewMonthlyPrice":"Check monthly price",
-    "viewDailyPrice":"Check daily price",
-    "viewDetails": "View details"
+    "viewMonthlyPrice":"Giá theo tháng",
+    "viewDailyPrice":"Giá theo ngày",
+    "viewDetails": "Chi tiết",
+    "days": "ngày",
+    "guest": "Khách",
+    "priceDetail": "Giá chi tiết",
+    "originalPrice": "Giá đặt phòng" ,
+    "deposit": "Đặt cọc",
+    "totalPrice": "Tổng cộng"
+
+
 }

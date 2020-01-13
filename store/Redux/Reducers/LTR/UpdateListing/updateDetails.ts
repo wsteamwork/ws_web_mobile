@@ -4,6 +4,7 @@ import { AxiosRes } from './../../../../../types/Requests/ResponseTemplate';
 import { updateObject } from '@/store/Context/utility';
 import { Dispatch, Reducer } from 'redux';
 import { axios_merchant } from '@/utils/axiosInstance';
+import { guidebookRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 
 interface Coordinate {
   lat: number;
@@ -26,6 +27,8 @@ export type UpdateDetailsState = {
   readonly building: string;
   readonly city_id: number;
   readonly district_id: number;
+  readonly city_name: string;
+  readonly district_name: string;
   readonly instant_book: number;
   readonly no_booking_cancel: number;
   readonly coordinate: Coordinate;
@@ -33,6 +36,8 @@ export type UpdateDetailsState = {
   readonly rent_type: number;
   readonly checkin: string;
   readonly checkout: string;
+  readonly placesList: any;
+  readonly guidebooks: guidebookRes[];
   readonly error: boolean;
 };
 
@@ -52,6 +57,8 @@ export type UpdateDetailsActions =
   | { type: 'SET_BUILDING'; payload: string }
   | { type: 'SET_CITY_ID'; payload: number }
   | { type: 'SET_DISTRICT_ID'; payload: number }
+  | { type: 'SET_CITY_NAME'; payload: string }
+  | { type: 'SET_DISTRICT_NAME'; payload: string }
   | { type: 'SET_COORDINATE'; payload: Coordinate }
   | { type: 'SET_DISABLE_SUBMIT'; payload: boolean }
   | { type: 'SET_INSTANT_BOOK'; payload: number }
@@ -59,6 +66,8 @@ export type UpdateDetailsActions =
   | { type: 'SET_RENT_TYPE'; payload: number }
   | { type: 'SET_CHECKIN'; payload: string }
   | { type: 'SET_CHECKOUT'; payload: string }
+  | { type: 'SET_PLACES'; payload: any }
+  | { type: 'SET_GUIDEBOOKS'; payload: guidebookRes[] }
   | { type: 'SET_ERROR'; payload: boolean };
 
 const init: UpdateDetailsState = {
@@ -77,6 +86,8 @@ const init: UpdateDetailsState = {
   building: '',
   city_id: null,
   district_id: null,
+  city_name: '',
+  district_name: '',
   coordinate: null,
   disableSubmit: false,
   instant_book: 0,
@@ -84,6 +95,8 @@ const init: UpdateDetailsState = {
   rent_type: 1,
   checkin: '14:00:00',
   checkout: '12:00:00',
+  placesList: null,
+  guidebooks: [],
   error: false
 };
 
@@ -122,6 +135,10 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { city_id: action.payload });
     case 'SET_DISTRICT_ID':
       return updateObject<UpdateDetailsState>(state, { district_id: action.payload });
+    case 'SET_CITY_NAME':
+      return updateObject<UpdateDetailsState>(state, { city_name: action.payload });
+    case 'SET_DISTRICT_NAME':
+      return updateObject<UpdateDetailsState>(state, { district_name: action.payload });
     case 'SET_COORDINATE':
       return updateObject<UpdateDetailsState>(state, { coordinate: action.payload });
     case 'SET_DISABLE_SUBMIT':
@@ -136,6 +153,10 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { checkin: action.payload });
     case 'SET_CHECKOUT':
       return updateObject<UpdateDetailsState>(state, { checkout: action.payload });
+    case 'SET_PLACES':
+      return updateObject<UpdateDetailsState>(state, { placesList: action.payload });
+    case 'SET_GUIDEBOOKS':
+      return updateObject<UpdateDetailsState>(state, { guidebooks: action.payload });
     case 'SET_ERROR':
       return updateObject(state, { error: action.payload });
     default:
@@ -167,6 +188,8 @@ export const getDataUpdateListing = async (
     dispatch({ type: 'SET_BUILDING', payload: listing.building });
     dispatch({ type: 'SET_CITY_ID', payload: listing.city_id });
     dispatch({ type: 'SET_DISTRICT_ID', payload: listing.district_id });
+    dispatch({ type: 'SET_CITY_NAME', payload: listing.city_name });
+    dispatch({ type: 'SET_DISTRICT_NAME', payload: listing.district_name });
     dispatch({ type: 'SET_INSTANT_BOOK', payload: listing.short_term_room.instant_book });
     dispatch({
       type: 'SET_BOOKING_CANCEL',
@@ -189,6 +212,42 @@ export const getDataUpdateListing = async (
       }
     });
     return listing;
+  } catch (error) {
+    dispatch({ type: 'SET_ERROR', payload: true });
+  }
+};
+
+export const getDataPlacesListing = async (
+  id: any,
+  dispatch: Dispatch<UpdateDetailsActions>
+): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`long-term-rooms/${id}?include=places`);
+    const listing = res.data.data;
+    const room_id = listing.room_id;
+
+    dispatch({ type: 'SET_ROOM_ID', payload: room_id });
+    dispatch({ type: 'SET_PLACES', payload: listing.places.data });
+    dispatch({
+      type: 'SET_COORDINATE',
+      payload: {
+        lat: Number(listing.latitude),
+        lng: Number(listing.longitude)
+      }
+    });
+    return listing;
+  } catch (error) {
+    dispatch({ type: 'SET_ERROR', payload: true });
+  }
+};
+
+export const getGuideBookList = async (dispatch: Dispatch<UpdateDetailsActions>): Promise<any> => {
+  try {
+    const res: AxiosRes<any> = await axios_merchant.get(`guidebookcategories`);
+    const guidebooks = res.data.data;
+
+    dispatch({ type: 'SET_GUIDEBOOKS', payload: guidebooks });
+    return guidebooks;
   } catch (error) {
     dispatch({ type: 'SET_ERROR', payload: true });
   }
