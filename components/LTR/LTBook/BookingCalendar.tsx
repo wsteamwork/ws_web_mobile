@@ -1,10 +1,8 @@
 import ButtonGlobal from '@/components/ButtonGlobal';
 import QuantityButtons from '@/components/ReusableComponents/QuantityButtons';
+import { TransitionCustom } from '@/components/Rooms/BottomNav';
 import { ReducersList } from '@/store/Redux/Reducers';
-import {
-  LTBookingAction,
-  LTBookingReducerState
-} from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
+import { LTBookingAction, LTBookingReducerState } from '@/store/Redux/Reducers/LTR/LTBooking/ltbooking';
 import { DateRange } from '@/store/Redux/Reducers/Search/searchFilter';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { formatMoney } from '@/utils/mixins';
@@ -20,7 +18,6 @@ import 'react-dates/initialize';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import DateRangeVerticalLT from './DateRangeVerticalLT';
-import { TransitionCustom } from '@/components/Rooms/BottomNav';
 
 interface Iprops {
   handleCloseBookingDialog: () => void;
@@ -94,8 +91,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                   {focusedInput === 'startDate' && !!date.endDate
                     ? `${moment(movein).format('MMM Do')} - ${moment(moveout).format('MMM Do')}`
                     : focusedInput === 'endDate'
-                    ? 'Check Out'
-                    : 'Check In'}
+                      ? 'Check Out'
+                      : 'Check In'}
                 </Typography>
               </Grid>
               <Grid item>
@@ -117,8 +114,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
               {focusedInput === 'endDate'
                 ? t('longtermroom:stayForAtLeast1Month')
                 : focusedInput === 'startDate' && !!date.endDate
-                ? `${moment(moveout).diff(moment(movein), 'days')} ${t('longtermroom:days')} `
-                : t('longtermroom:arrivalDateWithin2Months')}
+                  ? `${moment(moveout).diff(moment(movein), 'days')} ${t('longtermroom:days')} `
+                  : t('longtermroom:arrivalDateWithin2Months')}
             </Typography>
           </Grid>
         </Grid>
@@ -135,17 +132,17 @@ const BookingCalendar: FC<Iprops> = (props) => {
             </Grid>
 
             <Grid item xs={12} lg={5} xl={6} className="box-price">
-              <QuantityButtons number={guest} setNumber={setGuest} title={'Khách'} />
+              <QuantityButtons number={guest} setNumber={setGuest} title={t('shared:guest')} />
               <Grid container spacing={2} className="mobile-box-price">
                 <Grid item xs className="mobile-price-show">
                   {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                     <Fragment>
                       <Typography className="price" gutterBottom>
-                        {formatMoney(LTBookingPriceCalculate.price_with_fee)}đ/
-                        {LTBookingPriceCalculate.range_stay} ngày
+                        {formatMoney(LTBookingPriceCalculate.price_with_fee)}{t('shared:currency')}/
+                        {LTBookingPriceCalculate.range_stay} {t('shared:days')}
                       </Typography>
                       <Typography color="primary" onClick={handleOpenMobilePriceDetail}>
-                        Xem chi tiết giá
+                        {t('shared:viewDetails')}
                       </Typography>
                       <Dialog
                         fullScreen
@@ -170,15 +167,15 @@ const BookingCalendar: FC<Iprops> = (props) => {
                         </Grid>
                         {!!date.startDate && !!date.endDate && LTBookingPriceCalculate ? (
                           <Grid className="mobile-box-price-detail">
-                            <h3 className="price-title">Chi tiết giá</h3>
+                            <h3 className="price-title">{t('shared:priceDetail')}</h3>
                             <Grid className="box-price-sub">
-                              <Grid className="price-subtitle">Giá gốc</Grid>
+                              <Grid className="price-subtitle">{t('shared:originalPrice')}</Grid>
                               <Grid className="sub-price">
-                                {`${formatMoney(LTBookingPriceCalculate.price_original)}đ`}
+                                {`${formatMoney(LTBookingPriceCalculate.price_original)}${t('shared:currency')}`}
                               </Grid>
                             </Grid>
                             <Grid className="box-price-sub">
-                              <Grid className="price-subtitle">Giá đặt cọc</Grid>
+                              <Grid className="price-subtitle">{t('shared:deposit')}</Grid>
                               <Grid className="sub-price">{`${formatMoney(
                                 LTBookingPriceCalculate.deposit
                               )}đ`}</Grid>
@@ -186,7 +183,7 @@ const BookingCalendar: FC<Iprops> = (props) => {
 
                             <Divider style={{ margin: ' 16px 0 28px' }} />
                             <Grid className="box-price-sub">
-                              <h3 className="price-title">Tổng cộng</h3>
+                              <h3 className="price-title">{t('shared:totalPrice')}</h3>
                               <Grid className="price-title">{`${formatMoney(
                                 LTBookingPriceCalculate.price_with_fee
                               )}đ`}</Grid>
@@ -194,8 +191,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                             <Divider style={{ margin: ' 28px 0 16px' }} />
                           </Grid>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                       </Dialog>
                     </Fragment>
                   ) : ltroom ? (
@@ -208,8 +205,8 @@ const BookingCalendar: FC<Iprops> = (props) => {
                       </Typography>
                     </Fragment>
                   ) : (
-                    ''
-                  )}
+                        ''
+                      )}
                 </Grid>
                 <Grid item xs={isLogin ? 4 : 5} sm={3}>
                   <ButtonGlobal

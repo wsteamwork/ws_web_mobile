@@ -30,5 +30,11 @@
     "booking": "My Booking",
     "viewMonthlyPrice":"Check monthly price",
     "viewDailyPrice":"Check daily price",
-    "viewDetails": "View details"
+    "viewDetails": "View details",
+    "days": "days",
+    "guest": "Guests",
+    "priceDetail": "Price detail",
+    "originalPrice": "Booking price" ,
+    "deposit": "Deposit",
+    "totalPrice": "Total"
 }
