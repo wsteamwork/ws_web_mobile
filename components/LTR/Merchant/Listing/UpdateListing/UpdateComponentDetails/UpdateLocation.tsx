@@ -5,6 +5,7 @@ import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { handleUpdateListing } from '@/store/Redux/Reducers/LTR/UpdateListing/listingdetails';
 import { getDataUpdateListing, UpdateDetailsActions, UpdateDetailsState } from '@/store/Redux/Reducers/LTR/UpdateListing/updateDetails';
+import { axios } from '@/utils/axiosInstance';
 import { FormControl, OutlinedInput } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import classNames from 'classnames';
@@ -58,6 +59,8 @@ const UpdateLocation: FC<IProps> = (props) => {
     building,
     city_id,
     district_id,
+    city_name,
+    district_name,
     coordinate,
     disableSubmit
   } = useSelector<ReducersList, UpdateDetailsState>((state) => state.updateDetails);
@@ -65,14 +68,14 @@ const UpdateLocation: FC<IProps> = (props) => {
   const [addressInput, setAddress] = useState<string>(address);
   const [buildingInput, setBuilding] = useState<string>(building);
   const [coordi, setCoordinate] = useState<Coordinate>(coordinate);
-  // console.log(coordi);
   const [defaultCenter, setDefaultCenter] = useState<Coordinate>({
     lat: 21.027895,
     lng: 105.833896
   });
   const [district, setDistrict] = useState<number>(district_id);
+  // const [city, setCity] = useState<number>(city_id);
   const [districtList, setDistrictList] = useState<any[]>(null);
-  const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(true);
+  const [disabledDistrictField, setDisabledDistrictField] = useState<boolean>(false);
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>('Cập nhật thành công');
@@ -98,19 +101,51 @@ const UpdateLocation: FC<IProps> = (props) => {
       lng: location.lng()
     });
   };
-
+  // console.log(district_id, city_id);
   useEffect(() => {
     getDataUpdateListing(id, dispatch);
   }, [room_id]);
+
+  const getDistricts = async () => {
+    try {
+      const res = await axios.get(`/districts?city_id=${city_id}`);
+      return res;
+    } catch (error) { }
+  };
+
+  useEffect(() => {
+    getDistricts()
+      .then((res) => {
+        return setDistrictList(
+          res.data.data.map((district) => {
+            let obj = {};
+            obj['value'] = district.name;
+            obj['id'] = district.id;
+            return obj;
+          })
+        );
+      })
+      .then(() => {
+        if (districtList) {
+          setDistrict(districtList[0].id);
+          dispatch({
+            type: 'SET_DISTRICT_ID',
+            payload: parseInt(districtList[0].id)
+          });
+        }
+      });
+    if (city_id > 0) setDisabledDistrictField(false);
+  }, [city_id]);
 
   useMemo(() => {
     setAddress(address);
     setBuilding(building);
     setCoordinate(coordinate);
     setDistrict(district_id);
+    // setCity(city_id);
     setDisableSubmit(disableSubmit);
   }, [address, building, coordinate, district_id, disableSubmit]);
-
+  // console.log(district);
   useEffect(() => {
     dispatch({
       type: 'SET_COORDINATE',
@@ -144,37 +179,39 @@ const UpdateLocation: FC<IProps> = (props) => {
 
   const callBackOnChange = (value) => {
     setDistrict(value);
+    // console.log(value);
     dispatch({
       type: 'SET_DISTRICT_ID',
       payload: parseInt(value)
     });
   };
-
+  // console.log(city_name, district_name)
   const initFormValue: any = useMemo(() => {
     return {
       address: address,
-      city: '',
+      city: city_name,
       building: building,
-      district: ''
+      district: district
     };
-  }, [address, city_id, building, district]);
+  }, [address, city_name, building, district]);
 
   const handleFormSubmit = (values: FormValues, actions: FormikHelpers<FormValues>) => {
     return {};
   };
 
-  const handleChangeAddress = (setFieldValue: any) => (value: any) => {
-    dispatch({
-      type: 'SET_ADDRESS',
-      payload: value
-    });
-    setFieldValue('address', value);
-  };
+  // const handleChangeAddress = (setFieldValue: any) => (value: any) => {
+  //   dispatch({
+  //     type: 'SET_ADDRESS',
+  //     payload: value
+  //   });
+  //   setFieldValue('address', value);
+  // };
 
   const InputFeedback = ({ error }) =>
     error ? <div className={classNames('input-feedback')}>{error}</div> : null;
 
   const updateLocation: any = () => {
+    // console.log(city_id, district_id);
     const res = handleUpdateListing(room_id, {
       address: {
         address: addressInput,
@@ -204,6 +241,8 @@ const UpdateLocation: FC<IProps> = (props) => {
   return (
     <Fragment>
       <CardWrapperUpdate
+        widthLg={11}
+        widthMd={11}
         disabledSave={disableSubmit}
         handleSave={updateLocation}
         openSnack={openSnack}
@@ -241,6 +280,50 @@ const UpdateLocation: FC<IProps> = (props) => {
               setDisableSubmit(!hasChanged || hasErrors || isSubmitting);
               return (
                 <form onSubmit={handleSubmit}>
+
+
+                  <Grid container style={{ display: 'flex' }}>
+                    <Grid item xs={7} style={{ paddingRight: 20 }}>
+                      <Grid style={{ margin: '32px 0' }}>
+                        <h3
+                          style={{
+                            color: '#484848',
+                            paddingBottom: 8,
+                            fontSize: 16,
+                            fontWeight: 600,
+                            lineHeight: '1.375em'
+                          }}>
+                          Thành phố
+                        </h3>
+                        <CitiesList
+                          onChange={setFieldValue}
+                          valueCity={values.city}
+                          onBlur={setFieldTouched}
+                          districtList={districtList}
+                          setDistrictList={setDistrictList}
+                          setDisabledDistrictField={setDisabledDistrictField}
+                          setDistrict={setDistrict}
+                        />
+                        {touched.city && <InputFeedback error={errors.city} />}
+                      </Grid>
+                    </Grid>
+                    <Grid item xs={5}>
+                      <Grid style={{ margin: '32px 0' }}>
+                        <SelectCustom
+                          onChange={(e) => {
+                            handleChange(e);
+                            callBackOnChange(e.target.value);
+                          }}
+                          name="district"
+                          value={values.district}
+                          options={districtList}
+                          title="Quận huyện"
+                          onBlurTouched={setFieldTouched}
+                          disabled={disabledDistrictField}
+                        />
+                      </Grid>
+                    </Grid>
+                  </Grid>
                   <h3 style={{ color: '#484848' }}>Địa chỉ</h3>
                   <div data-standalone-searchbox="">
                     <StandaloneSearchBox ref={onSearchBoxMounted} onPlacesChanged={onPlacesChanged}>
@@ -277,46 +360,6 @@ const UpdateLocation: FC<IProps> = (props) => {
                         labelWidth={0}
                       />
                     </FormControl>
-                  </Grid>
-                  <Grid container style={{ display: 'flex' }}>
-                    <Grid item xs={7} style={{ paddingRight: 20 }}>
-                      <Grid style={{ margin: '32px 0' }}>
-                        <h3
-                          style={{
-                            color: '#484848',
-                            paddingBottom: 8,
-                            fontSize: 16,
-                            fontWeight: 600,
-                            lineHeight: '1.375em'
-                          }}>
-                          Thành phố
-                        </h3>
-                        <CitiesList
-                          onChange={setFieldValue}
-                          valueCity={values.city}
-                          onBlur={setFieldTouched}
-                          districtList={districtList}
-                          setDistrictList={setDistrictList}
-                          setDisabledDistrictField={setDisabledDistrictField}
-                          setDistrict={setDistrict}
-                        />
-                        {touched.city && <InputFeedback error={errors.city} />}
-                      </Grid>
-                    </Grid>
-                    <Grid item xs={5}>
-                      <SelectCustom
-                        onChange={(e) => {
-                          handleChange(e);
-                          callBackOnChange(e.target.value);
-                        }}
-                        name="district"
-                        value={values.district}
-                        options={districtList}
-                        title="Quận huyện"
-                        onBlurTouched={setFieldTouched}
-                        disabled={disabledDistrictField}
-                      />
-                    </Grid>
                   </Grid>
                 </form>
               );

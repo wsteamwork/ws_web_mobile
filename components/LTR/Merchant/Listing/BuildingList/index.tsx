@@ -7,7 +7,7 @@ import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, createStyle
 import CreateIcon from '@material-ui/icons/CreateRounded';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import 'react-id-swiper/lib/styles/scss/swiper.scss';
+import 'swiper/swiper.scss';
 
 interface IProps {
 }

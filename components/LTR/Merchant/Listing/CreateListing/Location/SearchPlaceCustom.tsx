@@ -8,14 +8,16 @@ interface IProps {
   setDefaultCenter: any;
   setAddress: any;
   addressInput: string;
+  startAdornment?: React.ReactNode;
 }
 
 let autocomplete = null;
 
 const SearchPlaceCustom: FC<IProps> = (props) => {
-  const { setCoordinateMarker, setDefaultCenter, setAddress, addressInput } = props;
+  const { setCoordinateMarker, setDefaultCenter, setAddress, addressInput, startAdornment } = props;
   const loaded = useRef(false);
   const [openSnack, setOpenSnack] = useState<boolean>(false);
+  const [addresStemp, setAddressTemp] = useState<string>(addressInput);
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
@@ -29,11 +31,18 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
         inputEl as HTMLInputElement
       );
       autocomplete.setComponentRestrictions({ country: 'vn' });
-      autocomplete.setFields(['address_components', 'geometry', 'icon', 'name']);
+      autocomplete.setFields([
+        'formatted_address',
+        'address_components',
+        'geometry',
+        'icon',
+        'name'
+      ]);
       autocomplete.addListener('place_changed', () => {
         const placeInfo = autocomplete.getPlace();
         const location = placeInfo.geometry.location;
-        setAddress(placeInfo.name);
+        setAddressTemp(placeInfo.formatted_address)
+        setAddress(placeInfo.formatted_address);
         setCoordinateMarker({
           lat: location.lat(),
           lng: location.lng()
@@ -74,16 +83,17 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
       <OutlinedInput
         onPaste={(e) => {
           setOpenSnack(true);
-          e.preventDefault()
+          e.preventDefault();
         }}
         type="text"
         placeholder="Nhập địa chỉ"
-        // id="standalone-search-box"
+        startAdornment={startAdornment}
         inputProps={{ id: 'standalone-search-box' }}
-        value={addressInput}
+        value={addresStemp}
         onChange={(e) => {
-          setAddress(e.target.value);
+          setAddressTemp(e.target.value);
         }}
+        // onBlur={() => setAddress(addresStemp)}
         labelWidth={0}
         fullWidth
       />
@@ -96,8 +106,7 @@ const SearchPlaceCustom: FC<IProps> = (props) => {
           horizontal: 'right'
         }}
         open={openSnack}
-        autoHideDuration={3000}
-      >
+        autoHideDuration={3000}>
         <MySnackbarContentWrapper
           variant={'warning'}
           message={'Copy/Paste không có hiệu lực cho mục này'}

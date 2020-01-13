@@ -111,7 +111,7 @@ const UpdateDescription: FC<IProps> = (props) => {
         }
       }
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật mô tả căn hộ thành công !")
     }
@@ -193,8 +193,8 @@ const UpdateDescription: FC<IProps> = (props) => {
                       autoFocus={true}
                       inputProps={{ maxLength: 100 }}
                       handleChange={(e) => {
-                          handleChange(e)
-                          dispatchDescription({ type: 'setNameEN' }, e.currentTarget.value);
+                        handleChange(e)
+                        dispatchDescription({ type: 'setNameEN' }, e.currentTarget.value);
                       }}
                       handleBlur={(e) => {
                         handleBlur(e);
@@ -265,7 +265,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                       }}
                       inputProps={{ maxLength: 5000 }}
                       placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
-                      handleChange={handleChange}
+                      handleChange={(e) => {
+                        handleChange(e)
+                        dispatchDescription({ type: 'setDescriptionEN' }, e.currentTarget.value);
+                      }}
                       handleBlur={(e) => {
                         handleBlur(e);
                         // if (e.currentTarget.value.length > 49) {
@@ -323,7 +326,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                             ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
                             : ''
                         }
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e)
+                          dispatchDescription({ type: 'setSpaceEN' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchDescription({ type: 'setSpaceEN' }, e.currentTarget.value);
@@ -371,7 +377,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                             ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`
                             : ''
                         }
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e)
+                          dispatchDescription({ type: 'setRulesEN' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchDescription({ type: 'setRulesEN' }, e.currentTarget.value);

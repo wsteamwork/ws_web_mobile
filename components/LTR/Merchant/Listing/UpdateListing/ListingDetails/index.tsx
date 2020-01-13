@@ -9,6 +9,7 @@ import NameAndDescription from './NameAndDescription';
 import NameAndDescriptionEN from './NameAndDescriptionEN';
 import RentAndRoomType from './RentAndRoomType';
 import StatusRoom from './StatusRoom';
+import GuideBook from './GuideBook';
 
 interface IProps {
   classes?: any;
@@ -25,6 +26,7 @@ const ListingDetails: FC<IProps> = (props) => {
         <BedRooms />
         <BathRooms />
         <Location />
+        <GuideBook />
         <StatusRoom />
       </Grid>
     </Grid>

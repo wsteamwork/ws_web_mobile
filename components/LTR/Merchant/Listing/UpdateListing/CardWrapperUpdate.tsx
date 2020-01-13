@@ -1,12 +1,12 @@
+import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, createStyles, Theme, Snackbar } from '@material-ui/core';
+import { Button, createStyles, Snackbar, Theme } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid/Grid';
 import { makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
-import React, { FC, useContext, useEffect, useState, Fragment } from 'react';
-import MySnackbarContentWrapper from '@/components/Profile/EditProfile/MySnackbarContentWrapper';
+import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 
 interface IProps {
   handleSave?: any;
@@ -69,7 +69,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 
 const CardWrapperUpdate: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { handleSave, disabledSave, children, openSnack, handleCloseSnack, messageSnack, statusSnack , widthMd, widthLg } = props;
+  const { handleSave, disabledSave, children, openSnack, handleCloseSnack, messageSnack, statusSnack, widthMd, widthLg } = props;
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
   const [isBottom, setIsBottom] = useState<boolean>(true);

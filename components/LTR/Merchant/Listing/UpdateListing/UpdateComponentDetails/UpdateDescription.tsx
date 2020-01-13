@@ -265,7 +265,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                       }}
                       inputProps={{ maxLength: 5000 }}
                       placeholder={width !== 'xl' && width !== 'lg' ? t('details:desExample1') : ''}
-                      handleChange={handleChange}
+                      handleChange={(e) => {
+                        handleChange(e)
+                        dispatchDescription({ type: 'setDescription' }, e.currentTarget.value);
+                      }}
                       handleBlur={(e) => {
                         handleBlur(e);
                         // if (e.currentTarget.value.length > 49) {
@@ -323,7 +326,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                             ? `${t('details:spaceExample1')} \n${t('details:spaceExample2')}`
                             : ''
                         }
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e)
+                          dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchDescription({ type: 'setSpace' }, e.currentTarget.value);
@@ -371,7 +377,10 @@ const UpdateDescription: FC<IProps> = (props) => {
                             ? `${t('details:rulesExample1')} \n${t('details:rulesExample2')}`
                             : ''
                         }
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e)
+                          dispatchDescription({ type: 'setRules' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchDescription({ type: 'setRules' }, e.currentTarget.value);

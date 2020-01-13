@@ -41,7 +41,7 @@ const CheckboxCustom: FC<IProps> = (props) => {
   const { name, values, onChange, handleBlur, handleChange } = props;
   const classes = useStyles(props);
   const { t } = useTranslation();
-
+  // console.log(values.lease_type)
   return (
     <Grid className={classes.container}>
       <FormControl component="fieldset" fullWidth>

@@ -256,7 +256,10 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                         }}
                         autoFocus={true}
                         inputProps={{ maxLength: 100 }}
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e)
+                          dispatchName({ type: 'SET_NAME' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchName({ type: 'SET_NAME' }, e.currentTarget.value);
@@ -299,7 +302,10 @@ const CreateApartmentForListing: FC<IProps> = (props) => {
                         }}
                         autoFocus={true}
                         inputProps={{ maxLength: 100 }}
-                        handleChange={handleChange}
+                        handleChange={(e) => {
+                          handleChange(e);
+                          dispatchName({ type: 'SET_NAME_EN' }, e.currentTarget.value);
+                        }}
                         handleBlur={(e) => {
                           handleBlur(e);
                           dispatchName({ type: 'SET_NAME_EN' }, e.currentTarget.value);

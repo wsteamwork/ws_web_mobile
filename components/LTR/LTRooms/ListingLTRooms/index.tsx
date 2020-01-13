@@ -102,8 +102,8 @@ const ListingLTRooms: FC<IProps> = (props) => {
           <LoadingSkeleton type={'rooms'} duplicate={5} />
         </Grid>
       ) : (
-        <NotFound height={250} width={250} />
-      )}
+            <NotFound height={250} width={250} />
+          )}
     </Grid>
   );
 };

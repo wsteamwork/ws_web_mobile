@@ -1,13 +1,13 @@
-import mainColor from '@/styles/constants/colors';
-import { makeStyles, Theme, ButtonGroup, Button, Grid } from '@material-ui/core';
-import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, Dispatch, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector, useDispatch } from 'react-redux';
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
-import { GlobalContext } from '@/store/Context/GlobalContext';
+import mainColor from '@/styles/constants/colors';
+import { Button, ButtonGroup, Grid, makeStyles, Theme } from '@material-ui/core';
+import createStyles from '@material-ui/core/styles/createStyles';
 import { ParsedUrlQueryInput } from 'querystring';
+import React, { Dispatch, FC, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 interface IProps {
   classes?: any;
   isHomePage?: boolean;
@@ -24,7 +24,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     btnGroup: {
       position: 'fixed',
-      bottom: '11%',
+      bottom: '9%',
       backgroundColor: '#ffffff',
       color: 'white',
       borderRadius: 25,

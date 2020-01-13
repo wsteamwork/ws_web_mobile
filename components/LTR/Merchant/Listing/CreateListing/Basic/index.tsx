@@ -44,6 +44,7 @@ const Basic: FC<IProps> = (props) => {
   const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const dispatch = useDispatch<Dispatch<CreateListingActions>>();
   const [disableSubmitForm, setDisableSubmit] = useState<boolean>(disableSubmit);
+  const [arrayLeaseType, setArrayLeaseType] = useState<Array<string>>(['shortterm', 'longterm']);
 
   useEffect(() => {
     dispatch({
@@ -53,13 +54,16 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType().then((res) => setRoomTypesData(res));
+    getRoomType(setRoomTypesData);
   }, []);
 
   const checkLeaseType = (listing: any) => {
-    let arrayLeaseType = [];
-    if (listing.long_term_rent_type.rent_type == 1) arrayLeaseType.push('longterm');
-    if (listing.short_term_rent_type.rent_type) arrayLeaseType.push('shortterm');
+    // let arrayLeaseType = [];
+    if (listing.long_term_rent_type.rent_type == 1) { setArrayLeaseType(['shortterm', 'longterm']) }
+    else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
+      setArrayLeaseType([])
+    }
+    console.log(arrayLeaseType);
     return arrayLeaseType;
   };
 
@@ -75,7 +79,7 @@ const Basic: FC<IProps> = (props) => {
   }, [isStayWithHost]);
 
   const initFormValue: FormValues = {
-    lease_type: !!id ? checkLeaseType(listing) : ['shortterm'],
+    lease_type: !!id ? checkLeaseType(listing) : arrayLeaseType,
     accommodation_type: accommodationType,
     stay_with_host: !!id ? listing.stay_with_host : null,
     total_area: !!id ? listing.total_area : totalArea

@@ -180,7 +180,7 @@ const CitiesList: FC<Iprops> = (props: Iprops) => {
   };
 
   const handleChange = (name) => (event, { newValue }) => {
-    setDisabledDistrictField(true);
+    // setDisabledDistrictField(true);
     onChange(name, newValue);
   };
   function getSuggestionValue(suggestion) {

@@ -96,6 +96,7 @@ const DialogAddRoomToBuilding: FC<IProps> = (props) => {
 
   useEffect(() => {
     getBuildings().then((res) => {
+      // console.log(res);
       let itemCancel = {
         id: 0,
         name: t('roomlist:deselectBuilding'),
