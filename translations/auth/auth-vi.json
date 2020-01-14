@@ -5,7 +5,7 @@
     "loginInfo": "Thông tin đăng nhập",
     "password": "Mật khẩu",
     "singin": "Đăng nhập",
-    "noAccount": "Bạn chưa có tài khoản Westay?",
+    "noAccount": "Bạn chưa có tài khoản WeStay?",
     "signup": "Đăng ký",
     "now": "ngay",
     "withFacebook": "Login with Facebook",
@@ -21,5 +21,10 @@
     "privatePoli": "Chính sách quyền riêng tư",
     "ofWstay": "của Westay.",
     "and": "và",
-    "birthday": "Ngày sinh"
+    "birthday": "Ngày sinh",
+    "forgetPassword": "Quên mật khẩu?",
+    "sendForgetPassword": "Xác nhận",
+    "forgetPasswordInfo": "Nhập Email bạn đã đăng ký với WeStay",
+    "statementConfirm": "Việc đăng ký tài khoản đồng nghĩa với việc bạn đồng ý với ",
+    "statementConfirmTail": " của WeStay"
 }

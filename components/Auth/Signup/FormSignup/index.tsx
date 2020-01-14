@@ -3,7 +3,7 @@ import SimpleLoader from '@/components/Loading/SimpleLoader';
 import { GlobalContext } from '@/store/Context/GlobalContext';
 import { RegisterReq } from '@/types/Requests/Account/AccountRequests';
 import { AxiosErrorCustom } from '@/types/Requests/ResponseTemplate';
-import { FormControl, FormHelperText, Grid, TextField, Typography } from '@material-ui/core';
+import { FormControl, FormHelperText, Grid, TextField, Typography, Link } from '@material-ui/core';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
 import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
 import { useCookies } from 'react-cookie';
@@ -108,7 +108,7 @@ const FormSignup: FC = () => {
   }, []);
 
   return (
-    <Grid item xs={12} md={7} spacing={4} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
+    <Grid item xs={12} md={7} className="formSignin" style={{ background: 'white', padding: 16, borderRadius: '0 8px 8px 0' }}>
       <Formik
         enableReinitialize={false}
         validateOnChange={false}
@@ -130,7 +130,7 @@ const FormSignup: FC = () => {
                   <Typography variant="h6">{t('auth:registerInfo')}</Typography>
                 </Grid>
 
-                <Grid item xs={6} lg={6}>
+                <Grid item xs={12} lg={6}>
                   <FormControl error={!!touched.firstName && !!errors.firstName} fullWidth>
                     <TextField
                       variant="outlined"
@@ -146,7 +146,7 @@ const FormSignup: FC = () => {
                   </FormControl>
                 </Grid>
 
-                <Grid item xs={6} lg={6}>
+                <Grid item xs={12} lg={6}>
                   <FormControl error={!!(touched!.lastName && errors.lastName)} fullWidth>
                     <TextField
                       variant="outlined"
@@ -252,6 +252,14 @@ const FormSignup: FC = () => {
                       {touched.password_confirmation ? errors.password_confirmation : ''}
                     </FormHelperText>
                   </FormControl>
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography variant='body2'>
+                    {t('auth:statementConfirm')}
+                    <Link color={'primary'} href="/terms-and-conditions" className={'textTerms'}>
+                      {t('layout:footer:termsOfUse')}
+                    </Link> {t('auth:statementConfirmTail')}
+                  </Typography>
                 </Grid>
 
                 <Grid item xs={12}>
