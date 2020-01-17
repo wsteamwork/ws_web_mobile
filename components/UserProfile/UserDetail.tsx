@@ -1,4 +1,5 @@
 import { ReducersList } from '@/store/Redux/Reducers';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { RoomReviewIndexResponse } from '@/types/Requests/Rooms/RoomReviewIndexResponse';
@@ -18,6 +19,10 @@ const UserDetail: FC = (props) => {
   );
   const userRooms = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.userProfile.userRooms
+  );
+
+  const userLTRooms = useSelector<ReducersList, LTRoomIndexRes[]>(
+    (state) => state.userProfile.userLTRooms
   );
 
   const totalReview = useMemo<number>(() => {
@@ -41,19 +46,33 @@ const UserDetail: FC = (props) => {
     return array;
   }, [userRooms]);
 
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
+
   const renderRoom = (room) => <RoomCard city={room.city.data.name}
-                                         district={room.district.data.name}
-                                         instantbook={room.instant_book}
-                                         roomID={room.id}
-                                         roomName={room.details.data[0].name}
-                                         roomNumber={room.number_room}
-                                         roomType={room.room_type_txt}
-                                         roomImage={room.media.data[0].image}
-                                         price_day={room.price_day}
-                                         price_hour={room.price_hour}
-                                         total_review={room.total_review}
-                                         avg_rating={room.avg_rating}
-                                         isHomepage={true} />;
+    district={room.district.data.name}
+    instantbook={room.instant_book}
+    roomID={room.id}
+    roomName={room.details.data[0].name}
+    roomNumber={room.number_room}
+    roomType={room.room_type_txt}
+    roomImage={room.media.data[0].image}
+    price_day={room.price_day}
+    price_hour={room.price_hour}
+    total_review={room.total_review}
+    avg_rating={room.avg_rating}
+    isHomepage={true} />;
+
+  const renderLTRoom = (ltRoom) => <RoomCard city={ltRoom.city}
+    district={ltRoom.district}
+    instantbook={ltRoom.instant_book}
+    roomID={ltRoom.id}
+    roomName={ltRoom.about_room.name}
+    roomNumber={ltRoom.bedrooms.number_bedroom}
+    roomType={ltRoom.accommodation_type_txt}
+    roomImage={ltRoom.avatar.images[0].name}
+    price_day={ltRoom.price_display}
+    isHomepage={true}
+  />;
 
   return (
     <Grid container className={'userDetail'}>
@@ -82,13 +101,23 @@ const UserDetail: FC = (props) => {
           </div>
         </div>
       </Grid>
-
-      <ListRoom
-        roomData={userRooms}
-        slidesPerView={userRooms.length < 2 ? 1 : 2}
-        usingSlider={true}
-        title={t('user:accommodationUpper')}
-        render={renderRoom}/>
+      {
+        leaseTypeGlobal ? (
+          <ListRoom
+            roomData={userLTRooms}
+            slidesPerView={userLTRooms.length < 2 ? 1 : 2}
+            usingSlider={true}
+            title={t('user:accommodationUpper')}
+            render={renderLTRoom} />
+        ) : (
+            <ListRoom
+              roomData={userRooms}
+              slidesPerView={userRooms.length < 2 ? 1 : 2}
+              usingSlider={true}
+              title={t('user:accommodationUpper')}
+              render={renderRoom} />
+          )
+      }
 
       {totalReview !== 0 && (
         <Fragment>

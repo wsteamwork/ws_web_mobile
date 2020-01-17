@@ -1,5 +1,6 @@
 import { ReducersList } from '@/store/Redux/Reducers';
 import mainColor from '@/styles/constants/colors';
+import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
 import { ProfileViewInfoRes } from '@/types/Requests/Profile/ProfileResponse';
 import { RoomIndexRes } from '@/types/Requests/Rooms/RoomResponses';
 import { faDoorClosed } from '@fortawesome/free-solid-svg-icons';
@@ -11,11 +12,17 @@ import { useSelector } from 'react-redux';
 
 const UserBox: FC = (props) => {
   const { t } = useTranslation();
+
   const profile = useSelector<ReducersList, ProfileViewInfoRes>(
     (state) => state.userProfile.profile
   );
+
   const userRooms = useSelector<ReducersList, RoomIndexRes[]>(
     (state) => state.userProfile.userRooms
+  );
+
+  const userLTRooms = useSelector<ReducersList, LTRoomIndexRes[]>(
+    (state) => state.userProfile.userLTRooms
   );
 
   const totalReview = useMemo<number>(() => {
@@ -27,6 +34,7 @@ const UserBox: FC = (props) => {
     }
     return total;
   }, [userRooms]);
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>((state) => state.searchFilter.leaseTypeGlobal);
 
   return (
     <Grid container className={'userBox'}>
@@ -60,7 +68,7 @@ const UserBox: FC = (props) => {
               className='imageFA'
               color={mainColor.primary}></FontAwesomeIcon>
             <Typography className={'text'}>
-              {userRooms.length} {t('user:accommodation')}
+              {leaseTypeGlobal ? userLTRooms.length : userRooms.length} {t('user:accommodation')}
             </Typography>
           </div>
         </Grid>

@@ -85,5 +85,6 @@
     "bedroomsImgSubtitle": "Phòng ngủ, điều hoà, đèn đọc sách,..",
     "bathroomsImgSubtitle": "",
     "livingroomsImgSubtitle": "Tivi, bộ xofa, điều hoà...",
-    "room_number": "Phòng số "
+    "room_number": "Phòng số ",
+    "pernight": "/đêm"
 }
