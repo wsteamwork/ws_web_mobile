@@ -96,19 +96,19 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 {total_area} m<sup>2</sup>
                               </span>
                             ) : (
-                              <span>
-                                ? m<sup>2</sup>
-                              </span>
-                            )}
+                                <span>
+                                  ? m<sup>2</sup>
+                                </span>
+                              )}
                           </span>
                         </Grid>
                         {numberRoomSameBuilding ? (
                           <Grid item xs={12}>
-                            {numberRoomSameBuilding}
+                            {numberRoomSameBuilding} {t('longtermroom:room_same_building')}
                           </Grid>
                         ) : (
-                          ''
-                        )}
+                            ''
+                          )}
                       </Grid>
                       <Grid item xs={2} md={3} className="boxPriceContainer">
                         <Grid className="boxPrice">

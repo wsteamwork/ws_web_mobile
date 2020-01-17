@@ -1,22 +1,15 @@
+import ButtonChangeLeaseType from '@/components/ButtonChangeLeaseType';
 import ButtonFilterRoom from '@/components/ButtonFilterRoom';
+import GridContainer from '@/components/Layout/Grid/Container';
 import NavTop from '@/components/NavTop';
 import NextHead from '@/components/NextHead';
-import GridContainer from '@/components/Layout/Grid/Container';
 import BottomNav from '@/components/Rooms/BottomNav';
 import MapAndListing from '@/components/Rooms/MapAndListing';
 import SearchRoom from '@/components/SearchRoom';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import {
-  RoomFilterContext,
-  RoomFilterReducer,
-  RoomFilterStateInit
-} from '@/store/Context/Room/RoomFilterContext';
-import {
-  RoomIndexContext,
-  RoomIndexReducer,
-  RoomIndexStateInit
-} from '@/store/Context/Room/RoomListContext';
-import { NextContextPage, ReducersList } from '@/store/Redux/Reducers';
+import { RoomFilterContext, RoomFilterReducer, RoomFilterStateInit } from '@/store/Context/Room/RoomFilterContext';
+import { RoomIndexContext, RoomIndexReducer, RoomIndexStateInit } from '@/store/Context/Room/RoomListContext';
+import { NextContextPage } from '@/store/Redux/Reducers';
 import { getCookieFromReq } from '@/utils/mixins';
 import { createStyles, Grid, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
@@ -24,8 +17,6 @@ import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect, useReducer, useState } from 'react';
 import HeadRoom from 'react-headroom';
 import { useTranslation } from 'react-i18next';
-import {  useSelector } from 'react-redux';
-import ButtonChangeLeaseType from '@/components/ButtonChangeLeaseType';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({

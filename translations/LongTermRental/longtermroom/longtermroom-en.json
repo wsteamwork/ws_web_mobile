@@ -29,5 +29,6 @@
     "stayForAtLeast1Month": "Choose to stay for at least 1 month (30 days)",
     "arrivalDateWithin2Months": "Choose your arrival date within 2 months from today",
     "book": "Book",
-    "days": "days"
+    "days": "days",
+    "room_same_building": " other property in this building"
 }

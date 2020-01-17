@@ -90,7 +90,7 @@ const BusinessTripCard: FC<IProps> = (props) => {
                         <Typography
                           variant="subtitle2"
                           className={classNames('roomName', classes.roomName)}>
-                          {isRoomSameBulding && room.room_number != null
+                          {t('room:room_number')} {isRoomSameBulding && room.room_number != null
                             ? room.room_number
                             : room.about_room.name}
                         </Typography>
@@ -102,10 +102,10 @@ const BusinessTripCard: FC<IProps> = (props) => {
                             {room.total_area ? room.total_area : '69'} m<sup>2</sup>
                           </span>
                         ) : (
-                          <span>
-                            ? m<sup>2</sup>
-                          </span>
-                        )}
+                            <span>
+                              ? m<sup>2</sup>
+                            </span>
+                          )}
                       </Grid>
                       {!isRoomSameBulding && (
                         <Fragment>

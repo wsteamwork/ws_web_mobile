@@ -1,17 +1,17 @@
-import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
-import { Grid, Hidden, Theme } from '@material-ui/core';
-import React, { FC, useContext, useState, useEffect, useMemo } from 'react';
-import MapCanvas from './MapCanvas';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 import CardRoomMap from '@/components/Cards/CardRoomMap';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import { Coords } from 'google-map-react';
+import { RoomIndexContext } from '@/store/Context/Room/RoomListContext';
+import { ReducersList } from '@/store/Redux/Reducers';
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import Slider, { Settings } from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { Grid, Theme } from '@material-ui/core';
+import { createStyles, makeStyles } from '@material-ui/styles';
+import { Coords } from 'google-map-react';
 import _ from 'lodash';
+import React, { FC, useContext, useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Slider, { Settings } from 'react-slick';
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
+import MapCanvas from './MapCanvas';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     listRoom: {
@@ -134,8 +134,8 @@ const MapRoomListing: FC = (props) => {
                 ))}
               </Slider>
             ) : (
-              ''
-            )}
+                ''
+              )}
           </Grid>
         ),
         [longtermRooms, hoverId]
