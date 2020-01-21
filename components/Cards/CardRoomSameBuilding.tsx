@@ -7,6 +7,10 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
+import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
+import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
+import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
+
 interface IProps {
   classes?: any;
   city: string;
@@ -16,10 +20,8 @@ interface IProps {
   roomImage: string;
   roomType: string;
   numberBedroom: number;
-  avg_rating?: number;
-  isHover?: boolean;
+  //   avg_rating?: number;
   room: LTRoomIndexRes;
-  focus?(room: LTRoomIndexRes): void;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -83,28 +85,14 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
   })
 );
 
-const CardRoomMap: FC<IProps> = (props) => {
+const CardRoomSameBuilding: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const {
-    roomID,
-    roomName,
-    city,
-    district,
-    roomImage,
-    roomType,
-    numberBedroom,
-    avg_rating,
-    room,
-    isHover,
-    focus
-  } = props;
+  const { roomID, roomName, city, district, roomImage, roomType, numberBedroom, room } = props;
   const { t } = useTranslation();
   const cookies = new Cookies();
   return (
-    <Grid
-      className={classNames('roomCardMap', classes.roomInMap, isHover ? classes.border : '')}
-      onMouseOver={() => focus(room)}>
-      <Grid container className="roomCardMap__wrapper" spacing={0}>
+    <Grid className={classNames('roomCardSameBuilding', classes.roomInMap)}>
+      <Grid container className="roomCardSameBuilding__wrapper" spacing={0}>
         <Grid item xs={4} className="boxImg">
           <img
             src={!!roomImage ? IMAGE_STORAGE_SM + roomImage : './static/images/westay-avatar.jpg'}
@@ -120,33 +108,39 @@ const CardRoomMap: FC<IProps> = (props) => {
                 <Grid className="boxTitle">
                   <Grid>
                     <Typography variant="subtitle2" className="roomName">
-                      {roomName.length > 34 ? roomName.substr(0, 35) : roomName}
-                      <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
+                      P{room.room_number ? room.room_number : roomName}
+                      {/* {roomName.length > 34 ? roomName.substr(0, 35) : roomName} */}
+                      {/* <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
                         <span>{t('rooms:exploreDetailsRoom')}</span>
-                      </Link>
+                      </Link> */}
                     </Typography>
+                    <Grid className="roomSubtitle">
+                      <MeetingRoomRoundedIcon className="subtitleIcon" />
+                      {room.bedrooms.number_bedroom} {t('rooms:rooms')} •{' '}
+                      {room.bathrooms.number_bathroom} {t('rooms:bathrooms')}
+                    </Grid>
+                    <Grid className="roomSubtitle">
+                      <LayersRoundedIcon className="subtitleIcon" />
+                      {room.total_area} m2 - {t('rooms:floor')} {room.floor}
+                    </Grid>
+                    <Grid className="roomSubtitle">
+                      <ApartmentRoundedIcon className="subtitleIcon" />{' '}
+                      {room.room_same_apartment_building} {t('rooms:roomCardSameBuilding')}
+                    </Grid>
                   </Grid>
-                  <Grid className="roomSubtitle">
+                  {/* <Grid className="roomSubtitle">
                     <span className="address">
                       {cookies.get('initLanguage') == 'en' ? cleanAccents(district) : district},{' '}
                       {cookies.get('initLanguage') == 'en' ? cleanAccents(city) : city}
                     </span>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
-                <Grid className="boxRating">
+                {/* <Grid className="boxRating">
                   <Typography variant="subtitle2" className="roomName">
                     {roomType}
                   </Typography>
-                  {/* <Rating
-                    name="customized-empty"
-                    readOnly
-                    size="small"
-                    value={avg_rating}
-                    precision={0.5}
-                    classes={{ root: classes.colorStar }}
-                    emptyIcon={<StarBorderIcon fontSize="inherit" className={classes.iconEmpty} />}
-                  /> */}
-                </Grid>
+
+                </Grid> */}
 
                 <Grid className="boxPrice">
                   <Grid className="priceContainer">
@@ -155,7 +149,7 @@ const CardRoomMap: FC<IProps> = (props) => {
                     </Typography>
                     <Typography variant="subtitle2" className={classes.txtPer}>
                       {cookies.get('initLanguage') == 'en'
-                        ? '$/' + t('home:month')
+                        ? '/' + t('home:month')
                         : 'đ/' + t('home:month')}
                     </Typography>
                   </Grid>
@@ -168,4 +162,4 @@ const CardRoomMap: FC<IProps> = (props) => {
     </Grid>
   );
 };
-export default CardRoomMap;
+export default CardRoomSameBuilding;
