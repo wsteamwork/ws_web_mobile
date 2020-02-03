@@ -71,6 +71,7 @@
     "floor": "tầng",
     "roomSameBuilding": "phòng cùng toà nhà",
     "placeholderSearch": "Bạn muốn đi đâu ?",
-    "exploreDetailsRoom": "...Xem chi tiết"
+    "exploreDetailsRoom": "...Xem chi tiết",
+    "roomCardSameBuilding": "phòng tương tự còn trống"
 
 }

@@ -23,6 +23,7 @@ interface FormValues {
   accommodation_type: number;
   stay_with_host: number;
   total_area: number;
+  number_of_listing: number;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Basic: FC<IProps> = (props) => {
   const classes = useStyles(props);
-  const { accommodationType, stayWithHost, disableSubmit, totalArea, listing } = useSelector<
+  const { accommodationType, stayWithHost, disableSubmit, totalArea, listing, number_of_listing } = useSelector<
     ReducersList,
     CreateListingState
   >((state) => state.createListing);
@@ -54,16 +55,19 @@ const Basic: FC<IProps> = (props) => {
   }, [disableSubmitForm]);
 
   useEffect(() => {
-    getRoomType().then(res => setRoomTypesData(res));
+    getRoomType().then(res => { setRoomTypesData(res) })
+    // getRoomType(setRoomTypesData);
   }, []);
 
   const checkLeaseType = (listing: any) => {
-    // let arrayLeaseType = [];
-    if (listing.long_term_rent_type.rent_type == 1) { setArrayLeaseType(['shortterm', 'longterm']) }
-    else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
-      setArrayLeaseType([])
-    }
-    console.log(arrayLeaseType);
+    let arrayLeaseType = [];
+    if (listing.long_term_rent_type.rent_type == 1) arrayLeaseType.push('longterm')
+    if (listing.long_term_rent_type.rent_type) arrayLeaseType.push('shortterm')
+    // if (listing.long_term_rent_type.rent_type == 1) { setArrayLeaseType(['shortterm', 'longterm']) }
+    // else if (listing.short_term_rent_type.rent_type) { setArrayLeaseType(['shortterm']) } else {
+    //   setArrayLeaseType([])
+    // }
+    // console.log(arrayLeaseType);
     return arrayLeaseType;
   };
 
@@ -82,7 +86,8 @@ const Basic: FC<IProps> = (props) => {
     lease_type: !!id ? checkLeaseType(listing) : arrayLeaseType,
     accommodation_type: accommodationType,
     stay_with_host: !!id ? listing.stay_with_host : null,
-    total_area: !!id ? listing.total_area : totalArea
+    total_area: !!id ? listing.total_area : totalArea,
+    number_of_listing: !!id ? listing.number_of_listing : number_of_listing
   };
 
   const validationForm = Yup.object().shape({
@@ -97,7 +102,8 @@ const Basic: FC<IProps> = (props) => {
       lease_type: values.lease_type,
       accommodation_type: values.accommodation_type,
       stay_with_host: values.stay_with_host,
-      total_area: values.total_area
+      total_area: values.total_area,
+      number_of_listing: values.number_of_listing
     };
   };
 
@@ -191,6 +197,46 @@ const Basic: FC<IProps> = (props) => {
                     labelWidth={0}
                   />
                   {touched.total_area && <InputFeedback error={errors.total_area} />}
+                </FormControl>
+              </Grid>
+
+              <Grid className="create-listing-title">{t('host:number_of_listing')}</Grid>
+              <Grid item xs={10} md={8}>
+                <FormControl
+                  style={{ marginBottom: 32 }}
+                  // className={classes.formControl}
+                  aria-describedby="price_day_helper"
+                  required
+                  fullWidth>
+                  <OutlinedInput
+                    name="number_of_listing"
+                    placeholder={t('host:number_of_listing')}
+                    type="number"
+                    value={values.number_of_listing}
+                    onChange={(e) => {
+                      handleChange(e);
+                      dispatch({
+                        type: 'SET_NUMBER_OF_LISTING',
+                        payload: parseInt(e.target.value)
+                      });
+                      setFieldValue('number_of_listing', parseInt(e.target.value));
+                    }}
+                    onBlur={(e: any) => {
+                      handleBlur(e);
+                      dispatch({
+                        type: 'SET_NUMBER_OF_LISTING',
+                        payload: parseInt(e.target.value)
+                      });
+                    }}
+                    // inputComponent={NumberFormatCustom as any}
+                    // endAdornment={
+                    //   <InputAdornment position="start">
+                    //     m<sup>2</sup>
+                    //   </InputAdornment>
+                    // }
+                    labelWidth={0}
+                  />
+                  {touched.number_of_listing && <InputFeedback error={errors.number_of_listing} />}
                 </FormControl>
               </Grid>
 

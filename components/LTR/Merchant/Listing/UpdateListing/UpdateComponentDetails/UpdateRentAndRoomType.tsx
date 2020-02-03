@@ -91,11 +91,13 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
     status_short_term,
     status_long_term,
     total_area,
+    number_of_listing,
     room_id
   } = useSelector<ReducersList, UpdateDetailsState>((state) => state.updateDetails);
   const [roomType, setRoomType] = useState<number>(accommodationType);
   const [isStayWithHost, setStayWithHost] = useState<boolean>(!!stayWithHost);
   const [totalArea, setTotalArea] = useState<number>(total_area);
+  const [numberOfListing, setNumberOfListing] = useState<number>(number_of_listing);
   const [roomTypesData, setRoomTypesData] = useState<RoomTypeData[]>([]);
   const [statusShortTerm, setStatusShortTerm] = useState<boolean>(!!status_short_term);
   const [statusLongTerm, setStatusLongTerm] = useState<boolean>(!!status_long_term);
@@ -106,7 +108,8 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const dispatch_detail = useDispatch<Dispatch<UpdateDetailsActions>>();
 
   useEffect(() => {
-    getRoomType().then((res) => setRoomTypesData(res));
+    getRoomType().then(res => setRoomTypesData(res));
+    // getRoomType(setRoomTypesData);
   }, []);
 
   useEffect(() => {
@@ -116,10 +119,11 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   useMemo(() => {
     setRoomType(accommodationType);
     setTotalArea(total_area);
+    setNumberOfListing(number_of_listing);
     setStatusShortTerm(!!status_short_term);
     setStatusLongTerm(!!status_long_term);
     setStayWithHost(!!stayWithHost);
-  }, [accommodationType, status_short_term, status_long_term, stayWithHost, total_area]);
+  }, [accommodationType, status_short_term, status_long_term, stayWithHost, total_area, number_of_listing]);
 
   useEffect(() => {
     dispatch({
@@ -155,6 +159,7 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
   const updateRoomType: any = () => {
     const res = handleUpdateListing(room_id, {
       total_area: totalArea,
+      number_of_listing: numberOfListing,
       accommodation_type: roomType
     });
     if (res) {
@@ -168,6 +173,9 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
 
   const changeTotalArea = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTotalArea(parseInt(event.target.value));
+  };
+  const changeNumberOfListing = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNumberOfListing(parseInt(event.target.value));
   };
 
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
@@ -255,6 +263,37 @@ const UpdateRentAndRoomType: FC<IProps> = (props) => {
                             m<sup>2</sup>
                           </InputAdornment>
                         )
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container item xs={12} sm={8} md={8} lg={7} className={classes.area}>
+                <Grid item xs={12} className={classes.rentType}>
+                  <Typography variant="h1" gutterBottom className={'label main_label'}>
+                    Tổng số listing còn trống hiện tại
+                  </Typography>
+                </Grid>
+                <Grid container item xs={12}>
+                  <FormControl
+                    className={classes.formControl}
+                    aria-describedby="price_day_helper"
+                    required>
+                    <TextValidator
+                      fullWidth
+                      validators={['required', 'isNumber']}
+                      // errorMessages={['Số listing phải', 'Diện tích là bắt buộc']}
+                      name="number_of_listing"
+                      variant="outlined"
+                      value={numberOfListing}
+                      onChange={changeNumberOfListing}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        // endAdornment: (
+                        //   <InputAdornment position="start">
+                        //     m<sup>2</sup>
+                        //   </InputAdornment>
+                        // )
                       }}
                     />
                   </FormControl>

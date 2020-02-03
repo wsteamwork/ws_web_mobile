@@ -15,6 +15,7 @@ export type UpdateDetailsState = {
   readonly room_id: number;
   readonly accommodationType: number;
   readonly total_area: number;
+  readonly number_of_listing: number;
   readonly stayWithHost: number;
   readonly status_short_term: number;
   readonly status_long_term: number;
@@ -45,6 +46,7 @@ export type UpdateDetailsActions =
   | { type: 'SET_ROOM_ID'; payload: number }
   | { type: 'SET_ACCOMMODATION_TYPE'; payload: number }
   | { type: 'SET_TOTAL_AREA'; payload: number }
+  | { type: 'SET_NUMBER_OF_LISTING'; payload: number }
   | { type: 'SET_STAY_WITH_HOST'; payload: number }
   | { type: 'SET_STATUS_SHORT_TERM'; payload: number }
   | { type: 'SET_STATUS_LONG_TERM'; payload: number }
@@ -74,6 +76,7 @@ const init: UpdateDetailsState = {
   room_id: null,
   accommodationType: 2,
   total_area: 0,
+  number_of_listing: 0,
   stayWithHost: 0,
   status_short_term: 0,
   status_long_term: 0,
@@ -111,6 +114,8 @@ export const updateDetailsReducer: Reducer<UpdateDetailsState, UpdateDetailsActi
       return updateObject<UpdateDetailsState>(state, { accommodationType: action.payload });
     case 'SET_TOTAL_AREA':
       return updateObject<UpdateDetailsState>(state, { total_area: action.payload });
+    case 'SET_NUMBER_OF_LISTING':
+      return updateObject<UpdateDetailsState>(state, { number_of_listing: action.payload });
     case 'SET_STAY_WITH_HOST':
       return updateObject<UpdateDetailsState>(state, { stayWithHost: action.payload });
     case 'SET_STATUS_SHORT_TERM':
@@ -176,6 +181,7 @@ export const getDataUpdateListing = async (
     dispatch({ type: 'SET_ROOM_ID', payload: room_id });
     dispatch({ type: 'SET_ACCOMMODATION_TYPE', payload: listing.accommodation_type });
     dispatch({ type: 'SET_TOTAL_AREA', payload: listing.total_area });
+    dispatch({ type: 'SET_NUMBER_OF_LISTING', payload: listing.number_of_listing });
     dispatch({ type: 'SET_STAY_WITH_HOST', payload: listing.stay_with_host });
     dispatch({ type: 'SET_STATUS_SHORT_TERM', payload: listing.short_term_room.merchant_status });
     dispatch({ type: 'SET_STATUS_LONG_TERM', payload: listing.merchant_status });

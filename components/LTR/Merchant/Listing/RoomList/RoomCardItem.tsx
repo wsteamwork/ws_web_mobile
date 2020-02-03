@@ -79,6 +79,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     wrapperImage: {
       display: 'flex',
       alignItems: 'center',
+      [theme.breakpoints.up('md')]: {
+        maxWidth: 140
+      },
       [theme.breakpoints.down('sm')]: {
         height: 117
       },
@@ -129,10 +132,13 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     vertifiredMdDown: {
       display: 'flex',
-      alignItems: 'flex-start'
+      alignItems: 'center',
+      [theme.breakpoints.down('md')]: {
+        alignItems: 'flex-start'
+      }
     },
     iconVerified: {
-      width: '18px',
+      width: '23px',
       float: 'inherit',
       position: 'relative',
       top: 5,
@@ -180,8 +186,10 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       maxWidth: 60
     },
     sizeButton: {
-      width: '0.9rem',
-      height: '0.9rem'
+      [theme.breakpoints.down('md')]: {
+        width: '0.9rem',
+        height: '0.9rem'
+      }
     },
     process: {
       display: 'flex',
@@ -588,7 +596,35 @@ const RoomCardItem: FC<IProps> = (props) => {
                           </Grid>
                         </Grid>
                       </Grid>
-
+                      <Grid className={classes.price}>
+                        <Grid container item xs={12} sm={12} lg={10} spacing={1}>
+                          <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}>
+                            <Grid container>
+                              <Grid item xs={8} className={classes.spanIcon}>
+                                Total Listing:
+                              </Grid>
+                              <Grid className={classes.nameIcon} item xs={4}>
+                                <Typography variant="subtitle1" className={classes.priceDay}>
+                                  {room.number_of_listing}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid>
+                          {/* <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}>
+                            <Grid container>
+                              <Grid item xs={8} className={classes.spanIcon}>
+                                Available Listing:
+                              </Grid>
+                              <Grid className={classes.nameIcon} item xs={4}>
+                                <Typography variant="subtitle1" className={classes.priceDay}>
+                                  {room.number_of_listing}
+                                </Typography>
+                              </Grid>
+                            </Grid>
+                          </Grid> */}
+                          <Grid item xs={6} sm={3} xl={4} className={classes.wrapperIcon}></Grid>
+                        </Grid>
+                      </Grid>
                       <Grid container>
                         <Grid item xs={12} lg={8} className={classes.infoRoomName}>
                           {room.short_term_room.rent_type === 3 ? (
@@ -604,17 +640,17 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ{' '}
                                   {t('roomlist:onePerDay')}
                                   &nbsp;&#8226;
                                 </span>
                               ) : (
                                   ''
                                 )}
-                              {room.short_term_room.rent_type !== 2 ? (
+                              {(room.short_term_room.rent_type !== 2 && room.short_term_room.price_hour !== 0) ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
                                   {t('roomlist:onePerHour')}
                                 </span>
                               ) : (

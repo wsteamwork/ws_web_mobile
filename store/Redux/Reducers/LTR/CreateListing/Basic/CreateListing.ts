@@ -17,6 +17,7 @@ export type CreateListingState = {
   readonly leaseType: number;
   readonly accommodationType: number;
   readonly totalArea: number;
+  readonly number_of_listing: number;
   readonly stayWithHost: number;
   readonly guestRecommendation: number;
   readonly maxGuest: number;
@@ -39,6 +40,7 @@ export type CreateListingActions =
   | { type: 'SET_LEASE_TYPE'; payload: number }
   | { type: 'SET_ACCOMMODATION_TYPE'; payload: number }
   | { type: 'SET_TOTAL_AREA'; payload: number }
+  | { type: 'SET_NUMBER_OF_LISTING'; payload: number }
   | { type: 'SET_STAY_WITH_HOST'; payload: number }
   | { type: 'SET_GUEST_RECOMMENDATION'; payload: number }
   | { type: 'SET_MAX_GUEST'; payload: number }
@@ -60,6 +62,7 @@ const init: CreateListingState = {
   leaseType: 3,
   accommodationType: 2,
   totalArea: 0,
+  number_of_listing: 1,
   stayWithHost: 0,
   bedRooms: null,
   bedsNumber: 1,
@@ -89,6 +92,8 @@ export const createListingReducer: Reducer<CreateListingState, CreateListingActi
       return updateObject<CreateListingState>(state, { accommodationType: action.payload });
     case 'SET_TOTAL_AREA':
       return updateObject<CreateListingState>(state, { totalArea: action.payload });
+    case 'SET_NUMBER_OF_LISTING':
+      return updateObject<CreateListingState>(state, { number_of_listing: action.payload });
     case 'SET_STAY_WITH_HOST':
       return updateObject<CreateListingState>(state, { stayWithHost: action.payload });
     case 'SET_GUEST_RECOMMENDATION':
@@ -272,6 +277,7 @@ export const getDataLTCreateListingID = async (
       payload: res.apartment_building_id ? 2 : res.accommodation_type
     });
     dispatch({ type: 'SET_TOTAL_AREA', payload: res.total_area });
+    dispatch({ type: 'SET_NUMBER_OF_LISTING', payload: res.number_of_listing });
     dispatch({ type: 'SET_STAY_WITH_HOST', payload: res.stay_with_host });
     dispatch({ type: 'SET_GUEST_RECOMMENDATION', payload: res.guests.recommendation });
     dispatch({ type: 'SET_MAX_GUEST', payload: res.guests.max_additional_guest });

@@ -1,15 +1,15 @@
 import { LTRoomIndexRes } from '@/types/Requests/LTR/LTRoom/LTRoom';
-import { cleanAccents, formatPrice } from '@/utils/mixins';
+import { formatPrice } from '@/utils/mixins';
 import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Link, Theme, Typography } from '@material-ui/core';
+import { Grid, Theme, Typography } from '@material-ui/core';
+import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
+import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
+import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import Cookies from 'universal-cookie';
-import LayersRoundedIcon from '@material-ui/icons/LayersRounded';
-import MeetingRoomRoundedIcon from '@material-ui/icons/MeetingRoomRounded';
-import ApartmentRoundedIcon from '@material-ui/icons/ApartmentRounded';
 
 interface IProps {
   classes?: any;
@@ -108,7 +108,7 @@ const CardRoomSameBuilding: FC<IProps> = (props) => {
                 <Grid className="boxTitle">
                   <Grid>
                     <Typography variant="subtitle2" className="roomName">
-                      P{room.room_number ? room.room_number : roomName}
+                      {roomName}
                       {/* {roomName.length > 34 ? roomName.substr(0, 35) : roomName} */}
                       {/* <Link href={`/long-term-room/${roomID}`} target="_blank" className="linkRoom">
                         <span>{t('rooms:exploreDetailsRoom')}</span>
@@ -121,11 +121,11 @@ const CardRoomSameBuilding: FC<IProps> = (props) => {
                     </Grid>
                     <Grid className="roomSubtitle">
                       <LayersRoundedIcon className="subtitleIcon" />
-                      {room.total_area} m2 - {t('rooms:floor')} {room.floor}
+                      {room.total_area} m2
                     </Grid>
                     <Grid className="roomSubtitle">
                       <ApartmentRoundedIcon className="subtitleIcon" />{' '}
-                      {room.room_same_apartment_building} {t('rooms:roomCardSameBuilding')}
+                      {room.number_of_listing} {t('rooms:roomCardSameBuilding')}
                     </Grid>
                   </Grid>
                   {/* <Grid className="roomSubtitle">
