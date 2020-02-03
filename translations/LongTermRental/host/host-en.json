@@ -4,6 +4,7 @@
     "longTerm": "Long-term",
     "longTermRentType": "For rent at least 30 days",
     "shortTerm": "Short Term",
+    "number_of_listing": "Number of similar listing *",
     "shortTermRentType": "Include nightly & 4 hours rent",
     "basicInformation": "Basic information",
     "propertyType": "Property type *",

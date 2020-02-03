@@ -82,7 +82,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
                       number_bedroom={room.bedrooms.number_bedroom}
                       number_bathroom={room.bathrooms.number_bathroom}
                       total_area={room.total_area}
-                      numberRoomSameBuilding={room.room_same_apartment_building}
+                      numberRoomSameBuilding={room.number_of_listing}
                     />
                   </Grid>
                 );
