@@ -66,6 +66,8 @@
     "contactForPrice": "Contact for price",
     "currency": "VND",
     "month": "month",
+    "foor": "floor",
+    "roomSameBuilding": "rooms same building",
     "placeholderSearch": "Where are you going ?",
     "exploreDetailsRoom": "...Explore details"
 }
