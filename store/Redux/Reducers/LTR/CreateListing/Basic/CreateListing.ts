@@ -159,7 +159,8 @@ export const handleCreateRoom = async (
         lease_type: data.lease_type,
         accommodation_type: data.accommodation_type,
         stay_with_host: data.stay_with_host,
-        total_area: data.total_area
+        total_area: data.total_area,
+        number_of_listing: data.number_of_listing
       },
       tab2: {
         guest: {
@@ -218,7 +219,8 @@ export const handleUpdateStep1 = async (
         lease_type: data.lease_type,
         accommodation_type: data.accommodation_type,
         stay_with_host: data.stay_with_host,
-        total_area: data.total_area
+        total_area: data.total_area,
+        number_of_listing: data.number_of_listing
       },
       tab2: {
         guest: {
