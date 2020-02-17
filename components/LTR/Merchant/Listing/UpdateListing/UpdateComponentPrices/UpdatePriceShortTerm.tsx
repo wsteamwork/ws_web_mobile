@@ -35,10 +35,13 @@ const UpdatePriceShortTerm: FC<IProps> = (props) => {
         price_hour: priceShort.price_hour,
         price_charge_guest: priceShort.price_charge_guest,
         price_after_hour: priceShort.price_after_hour,
-        cleaning_fee: priceShort.cleaning_fee
+        cleaning_fee: priceShort.cleaning_fee,
+        price_day_discount: priceShort.price_day_discount,
+        price_hour_discount: priceShort.price_day_discount,
+        is_discount: priceShort.is_discount
       }
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật giá ngắn hạn thành công !")
     }
