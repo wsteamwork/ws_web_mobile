@@ -15,6 +15,7 @@ export type SearchFilterState = {
   readonly guestsCount: number | undefined;
   readonly searchText: string;
   readonly roomsCount: number | undefined;
+  readonly onlyApartmentBuilding: number | undefined;
   readonly bookingType: number;
   readonly roomType: number;
   readonly startDate: string | null;
@@ -30,6 +31,7 @@ export type SearchFilterAction =
   | { type: 'SET_NAV_BOOKING_TYPE'; bookingType: number }
   | { type: 'SET_NAV_GUESTS'; guestsCount: number | undefined }
   | { type: 'SET_NUMBER_ROOM'; roomsCount: number | undefined }
+  | { type: 'SET_ONLY_APARTMENT_BUILDING'; onlyApartmentBuilding: number | undefined }
   | { type: 'SET_ROOM_RECENTLY'; roomRecently: number[] }
   | { type: 'SET_SEARCH_TEXT'; searchText: string }
   | { type: 'SET_SEARCH_CITY'; city_id: number | undefined }
@@ -43,6 +45,7 @@ const init: SearchFilterState = {
   district_id: null,
   searchText: '',
   guestsCount: 1,
+  onlyApartmentBuilding: 0,
   roomsCount: 1,
   bookingType: 2,
   roomType: 0,
@@ -76,6 +79,8 @@ const reducerSearch: Reducer<SearchFilterState, SearchFilterAction> = (
       return updateObject(state, { district_id: action.district_id });
     case 'SET_NUMBER_ROOM':
       return updateObject(state, { roomsCount: action.roomsCount });
+    case 'SET_ONLY_APARTMENT_BUILDING':
+      return updateObject(state, { onlyApartmentBuilding: action.onlyApartmentBuilding });
     case 'SET_START_DATE':
       return updateObject(state, { startDate: action.payload });
     case 'SET_END_DATE':

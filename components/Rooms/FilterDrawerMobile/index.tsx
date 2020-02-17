@@ -26,6 +26,7 @@ import PriceRangeMobile from './PriceRangeMobile/index';
 import RoomTypeMobile from './RoomTypeMobile';
 import { TransitionProps } from '@material-ui/core/transitions';
 import { TransitionCustom } from '@/components/Book/BookingForm';
+import SwitchToServiceApartment from '../FilterActions/SwitchToServiceApartment';
 const useStyles = makeStyles<Theme>((theme: Theme) =>
   createStyles({
     center: {
@@ -103,7 +104,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const { handleClose, open } = props;
   const { state, dispatch } = useContext(RoomFilterContext);
   const { router } = useContext(GlobalContext);
-  const { price_day_from, price_day_to, instant_book } = state;
+  const { price_day_from, price_day_to, instant_book, only_apartment_building } = state;
   const booking_type = useSelector<ReducersList, number>((state) => state.searchFilter.bookingType);
   const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
     (state) => state.searchFilter.leaseTypeGlobal
@@ -128,7 +129,7 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
   const [dataRoomType, setDataRoomType] = useState<number[]>(roomTypeInit);
   const [dataAmentites, setDataAmentites] = useState<number[]>(amenitiesInit);
   const [dataDistricts, setDataDistricts] = useState<number[]>(districtInit);
-  
+
   const filterRoomType = () => {
     dispatch({ type: 'setRoomTypes', roomTypes: dataRoomType });
   };
@@ -144,18 +145,20 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     amenities: dataAmentites.join(','),
     districts: dataDistricts.join(','),
     rent_type: booking_type,
-    instant_book: instant_book,
+    // instant_book: instant_book,
     price_day_from: price_day_from,
-    price_day_to: price_day_to
+    price_day_to: price_day_to,
+    only_apartment_building: only_apartment_building
   };
 
   const queryLT = {
     accommodation_type: dataRoomType.join(','),
     comfort_lists: dataAmentites.join(','),
     district_id: dataDistricts.join(','),
-    instant_book: instant_book,
+    // instant_book: instant_book,
     min_price: price_day_from,
-    max_price: price_day_to
+    max_price: price_day_to,
+    only_apartment_building: only_apartment_building
   };
 
   const applyFilter = () => {
@@ -163,7 +166,6 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
     filterRoomType();
     filterAmentites();
     filterDistricts();
-
     router.push({
       pathname: leaseTypePathName,
       query: updateObject<any>(router.query, leaseTypeGlobal ? queryLT : query)
@@ -201,28 +203,36 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
                   {leaseTypeGlobal ? (
                     ''
                   ) : (
-                    <Grid container item xs={12}>
-                      <Grid item xs={6} className={classes.inline}>
-                        <Typography variant="subtitle2" className={classes.title}>
-                          {t('rooms:filterRooms:bookByHour')}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={6} className={classes.itemRight}>
-                        <BookingTypeMobile />
-                      </Grid>
                       <Grid container item xs={12}>
-                        <Divider className={classes.divider} />
+                        <Grid item xs={6} className={classes.inline}>
+                          <Typography variant="subtitle2" className={classes.title}>
+                            {t('rooms:filterRooms:bookByHour')}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={6} className={classes.itemRight}>
+                          <BookingTypeMobile />
+                        </Grid>
+                        <Grid container item xs={12}>
+                          <Divider className={classes.divider} />
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  )}
+                    )}
                   <Grid container item xs={12}>
-                    <Grid item xs={6} className={classes.inline}>
+                    {/* <Grid item xs={6} className={classes.inline}>
                       <Typography variant="subtitle2" className={classes.title}>
                         {t('rooms:filterRooms:instantBook')}
                       </Typography>
                     </Grid>
                     <Grid item xs={6} className={classes.itemRight}>
                       <InstantBookMobile />
+                    </Grid> */}
+                    <Grid item xs={6} className={classes.inline}>
+                      <Typography variant="subtitle2" className={classes.title}>
+                        {t('rooms:filterRooms:switchServiceApartment')}
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.itemRight}>
+                      <SwitchToServiceApartment />
                     </Grid>
                     <Grid container item xs={12}>
                       <Divider className={classes.divider} />
@@ -263,16 +273,16 @@ const FilterDrawerMobile: FC<IProps> = (props) => {
                     {t('rooms:filterRooms:apply')}
                   </Button>
                 ) : (
-                  <Button
-                    color="primary"
-                    variant="contained"
-                    onClick={applyFilter}
-                    classes={{
-                      root: classes.apply
-                    }}>
-                    {t('rooms:filterRooms:apply')}
-                  </Button>
-                )}
+                    <Button
+                      color="primary"
+                      variant="contained"
+                      onClick={applyFilter}
+                      classes={{
+                        root: classes.apply
+                      }}>
+                      {t('rooms:filterRooms:apply')}
+                    </Button>
+                  )}
               </DialogActions>
             </Dialog>
           </div>

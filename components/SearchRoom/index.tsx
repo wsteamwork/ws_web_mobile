@@ -1,12 +1,12 @@
-import { makeStyles, Theme, Grid, TextField } from '@material-ui/core';
-import createStyles from '@material-ui/core/styles/createStyles';
-import React, { FC, useState, useContext, useEffect } from 'react';
-import mainColor from '@/styles/constants/colors';
-import { useTranslation } from 'react-i18next';
-import SearchDialog from '../SearchDialog';
 import { GlobalContext } from '@/store/Context/GlobalContext';
-import { useSelector } from 'react-redux';
 import { ReducersList } from '@/store/Redux/Reducers';
+import mainColor from '@/styles/constants/colors';
+import { Grid, makeStyles, TextField, Theme } from '@material-ui/core';
+import createStyles from '@material-ui/core/styles/createStyles';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import SearchDialog from '../SearchDialog';
 
 interface IProps {
   classes?: any;

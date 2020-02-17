@@ -106,16 +106,16 @@ const LongtermRooms: NextPage = (props) => {
                   </Grid>
                 </HeadRoom>
               ) : (
-                <Grid item xs={12} className={classes.boxWrapper}>
-                  <NavTop
-                    isHidden={false}
-                    handleBackAction={backRoomList}
-                    textCenter={t('rooms:map')}
-                    showLocationAction={false}
-                    showFilterAction={true}
-                  />
-                </Grid>
-              )}
+                  <Grid item xs={12} className={classes.boxWrapper}>
+                    <NavTop
+                      isHidden={false}
+                      handleBackAction={backRoomList}
+                      textCenter={t('rooms:map')}
+                      showLocationAction={false}
+                      showFilterAction={true}
+                    />
+                  </Grid>
+                )}
               <Grid item xs={12}>
                 <SearchRoom />
               </Grid>
@@ -124,8 +124,8 @@ const LongtermRooms: NextPage = (props) => {
                   <ButtonFilterRoom />
                 </Grid>
               ) : (
-                ''
-              )}
+                  ''
+                )}
             </Grid>
             <Grid
               item
@@ -139,7 +139,9 @@ const LongtermRooms: NextPage = (props) => {
           <Grid item xs={12}>
             <BottomNav />
           </Grid>
-          <ButtonChangeLeaseType isHomePage={false}/>
+          <Grid item xs={12}>
+            <ButtonChangeLeaseType isHomePage={false} />
+          </Grid>
         </RoomFilterContext.Provider>
       </RoomIndexContext.Provider>
     </Fragment>

@@ -43,11 +43,22 @@ const PriceRangeMobile: FC<IProps> = (props) => {
   };
 
   useEffect(() => {
-    hanldeChange();
+    // console.log(price.max);
+    if (lang && lang === 'en') {
+      if (price.max >= 5000) {
+        hanldeChange(5000)
+      }
+    } else {
+      hanldeChange();
+    }
   }, [price]);
 
-  const hanldeChange = () => {
-    dispatch({ type: 'setPrices', price_day_from: lang && lang === 'vi' ? price.min : price.min * 23500, price_day_to: lang && lang === 'vi' ? price.max : price.max * 23500 });
+  const hanldeChange = (defaultMaxPrice?: number) => {
+    if (defaultMaxPrice) {
+      dispatch({ type: 'setPrices', price_day_from: lang && lang === 'vi' ? price.min : price.min * 23500, price_day_to: lang && lang === 'vi' ? defaultMaxPrice : defaultMaxPrice * 23500 });
+    } else {
+      dispatch({ type: 'setPrices', price_day_from: lang && lang === 'vi' ? price.min : price.min * 23500, price_day_to: lang && lang === 'vi' ? price.max : price.max * 23500 });
+    }
   };
   return (
     <Fragment>

@@ -9,6 +9,7 @@ interface Iprops {
   displayOnlyForModal?: boolean;
   value?: string;
   handleChange?: (e) => void;
+  handleEnterKeyDown?: (e) => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -36,7 +37,7 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
     (state) => state.searchFilter.searchText
   );
   const classes = useStyles(props);
-  const { onClick, displayOnlyForModal, value, handleChange } = props;
+  const { onClick, displayOnlyForModal, value, handleChange, handleEnterKeyDown } = props;
 
   return (
     <Fragment>
@@ -58,6 +59,8 @@ const SearchInput: FC<Iprops> = (props: Iprops) => {
           <InputBase
             value={value}
             onChange={handleChange}
+            onKeyPress={handleEnterKeyDown}
+            // onSubmit={handleEnterKeyDown}
             placeholder={t('home:SearchAutocomplete:toGo')}
             id="input-with-icon-textfield"
             classes={{ root: classes.InputBaseRoot }}

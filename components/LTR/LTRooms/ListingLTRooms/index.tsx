@@ -11,6 +11,8 @@ import Pagination from 'rc-pagination';
 import React, { FC, Fragment, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LazyLoad from 'react-lazyload';
+import { useSelector } from 'react-redux';
+import { ReducersList } from '@/store/Redux/Reducers';
 
 interface IProps {
   classes?: any;
@@ -36,6 +38,7 @@ const ListingLTRooms: FC<IProps> = (props) => {
   const [isEmpty, setIsEmpty] = useState<boolean>(false);
   const { t } = useTranslation();
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const filterOnlyApartment = useSelector<ReducersList, number>((state) => state.searchFilter.onlyApartmentBuilding);
 
   const changePage = (current: number) => {
     setCurrentPage(current);
@@ -82,6 +85,8 @@ const ListingLTRooms: FC<IProps> = (props) => {
                       number_bedroom={room.bedrooms.number_bedroom}
                       number_bathroom={room.bathrooms.number_bathroom}
                       total_area={room.total_area}
+                      isBuilding={filterOnlyApartment == 1}
+                      apartment={room.apartment_building}
                       numberRoomSameBuilding={room.number_of_listing}
                     />
                   </Grid>

@@ -27,6 +27,7 @@ export type RoomFilterAction =
   | { type: 'setMeta'; meta: Pagination }
   | { type: 'setLoadMore'; isLoadMore: boolean }
   | { type: 'setMapOpen'; isMapOpen: boolean }
+  | { type: 'setOnlyApartmentBuilding'; payload: 0 | 1 }
   | { type: 'setRating'; ratingLists: number[] }
   | { type: 'setComforts'; comforts: ComfortIndexRes[] }
   | { type: 'setRoomTypes'; roomTypes: number[] }
@@ -44,6 +45,7 @@ export type RoomFilterState = {
   readonly districts: number[];
   readonly roomTypesFilter: number[];
   readonly instant_book: number;
+  readonly only_apartment_building: 0 | 1;
 };
 
 export const RoomFilterStateInit: RoomFilterState = {
@@ -55,7 +57,8 @@ export const RoomFilterStateInit: RoomFilterState = {
   districts: [],
   ratingLists: [],
   roomTypesFilter: [],
-  instant_book: 0
+  instant_book: 0,
+  only_apartment_building: 0
 };
 
 export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
@@ -80,6 +83,8 @@ export const RoomFilterReducer: Reducer<RoomFilterState, RoomFilterAction> = (
       return updateObject<RoomFilterState>(state, { roomTypes: action.roomTypes });
     case 'setInstantBook':
       return updateObject(state, { instant_book: action.payload });
+    case 'setOnlyApartmentBuilding':
+      return updateObject(state, { only_apartment_building: action.payload });
     default:
       return state;
   }

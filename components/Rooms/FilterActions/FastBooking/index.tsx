@@ -29,8 +29,8 @@ const FastBooking: FC = () => {
       dispatch({ type: 'setInstantBook', payload: 1 });
       updateRouter(leaseTypePathName, true, 'instant_book', 1, 'page', 1);
     } else {
-      dispatch({ type: 'setInstantBook', payload: 0 });
-      updateRouter(leaseTypePathName, true, 'instant_book', 0, 'page', 1);
+      dispatch({ type: 'setInstantBook', payload: undefined });
+      updateRouter(leaseTypePathName, true, 'instant_book', undefined, 'page', 1);
     }
   };
   return useMemo(

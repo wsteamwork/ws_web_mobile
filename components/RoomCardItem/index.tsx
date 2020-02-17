@@ -1,6 +1,4 @@
-import { formatPrice } from '@/utils/mixins';
-import { IMAGE_STORAGE_SM } from '@/utils/store/global';
-import { Grid, Paper, Theme, Typography } from '@material-ui/core';
+import { Divider, Grid, Paper, Theme, Typography } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC } from 'react';
@@ -22,6 +20,8 @@ interface IProps {
   number_bathroom?: number;
   total_area?: number;
   numberRoomSameBuilding?: number;
+  isBuilding?: boolean;
+  apartment?: string;
 }
 
 const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
@@ -30,6 +30,27 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center'
+    },
+    apartmentContainer: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: '0.3rem',
+      paddingBottom: '0.3rem'
+    },
+    apartmentName: {
+      overflow: 'hidden',
+      overflowWrap: 'break-word',
+      WebkitLineClamp: 1,
+      textOverflow: 'ellipsis',
+      WebkitBoxOrient: 'vertical',
+      fontWeight: 500,
+      color: 'tomato',
+      fontSize: '1rem',
+      justifyContent: 'center',
+      alignItems: 'center',
+      right: 0,
+      display: 'flex',
     }
   })
 );
@@ -48,7 +69,9 @@ const RoomCardItem: FC<IProps> = (props) => {
     number_bedroom,
     number_bathroom,
     total_area,
-    numberRoomSameBuilding
+    numberRoomSameBuilding,
+    isBuilding,
+    apartment
   } = props;
   const { t } = useTranslation();
   return (
@@ -122,6 +145,12 @@ const RoomCardItem: FC<IProps> = (props) => {
                       </Grid>
                     </Grid>
                   </Link>
+                  <Divider style={{ marginTop: '0.6rem', height: 1 }} />
+                  <Grid item xs={12} className={classes.apartmentContainer}>
+                    {apartment && <Grid item xs={12} className={classes.apartmentName}>
+                      {apartment}
+                    </Grid>}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
