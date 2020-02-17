@@ -59,7 +59,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
   const filter = useSelector<ReducersList, SearchFilterState>(
     (state) => state.searchFilter
   );
-  const { searchText, city_id, district_id, guestsCount, roomsCount } = filter;
+  const { searchText, city_id, district_id, guestsCount, roomsCount, onlyApartmentBuilding } = filter;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setLeaseType(parseInt(event.target.value));
@@ -78,6 +78,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
         district_id: district_id ? district_id : '',
         bedrooms: roomsCount,
         number_guest: guestsCount,
+        only_apartment_building: onlyApartmentBuilding
         // discount:''
       };
       Router.push({
@@ -87,6 +88,7 @@ const SelectLeaseTypeGlobal: FC<IProps> = (props) => {
     } else {
       const pushQueryST: ParsedUrlQueryInput = {
         name: city_id === undefined && district_id === undefined ? searchText : '',
+        only_apartment_building: onlyApartmentBuilding,
         number_of_rooms: roomsCount,
         number_of_guests: guestsCount,
         city_id: city_id ? city_id : '',

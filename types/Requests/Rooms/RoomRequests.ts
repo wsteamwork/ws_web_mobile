@@ -71,7 +71,6 @@ export interface RoomUrlParams {
   discount?: string;
 }
 
-
 // LONG TERM
 export interface LTRoomIndexGetParams extends BaseGetRequestParams, Partial<MapCoords> {
   name?: string;
@@ -79,6 +78,7 @@ export interface LTRoomIndexGetParams extends BaseGetRequestParams, Partial<MapC
   district_id?: number;
   bedrooms?: number;
   number_guest?: number;
+  only_apartment_building?: number;
   accommodation_type?: number;
   comfort_lists?: string;
   min_price?: number;
@@ -95,6 +95,7 @@ export interface LTRoomUrlParams {
   bedrooms?: number;
   number_guest?: number;
   accommodation_type?: number;
+  only_apartment_building?: number;
   comfort_lists?: string;
   min_price?: number;
   max_price?: number;

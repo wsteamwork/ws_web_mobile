@@ -94,7 +94,6 @@ const SearchSuggestions: FC<Iprops> = (props: Iprops) => {
     }
     const pushQuery: any = {
       name: cityId === undefined && districtId === undefined ? name : '',
-
       city_id: cityId ? cityId : '',
       district_id: districtId ? districtId : ''
     };

@@ -1,13 +1,15 @@
+import { ReducersList } from '@/store/Redux/Reducers';
+import { SearchFilterAction } from '@/store/Redux/Reducers/Search/searchFilter';
 import { Dialog, Grid, IconButton, Slide, Toolbar, Typography } from '@material-ui/core';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { TransitionProps } from '@material-ui/core/transitions';
 import CloseIcon from '@material-ui/icons/Close';
-import React, { FC, useState } from 'react';
+import Router from 'next/router';
+import React, { Dispatch, FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import SearchInput from '../LTR/ReusableComponents/SearchInput';
 import SearchSuggestions from './SearchSuggestions';
-import { useSelector } from 'react-redux';
-import { ReducersList } from '@/store/Redux/Reducers';
 
 interface Iprops {
   handleClose: () => void;
@@ -52,8 +54,33 @@ const SearchDialog: FC<Iprops> = (props: Iprops) => {
   const classes = useStyles(props);
   const searchText = useSelector<ReducersList, string>((state) => state.searchFilter.searchText);
   const [inputValue, setInputValue] = useState<string>(searchText);
+  const dispatch = useDispatch<Dispatch<SearchFilterAction>>();
+  const leaseTypeGlobal = useSelector<ReducersList, 0 | 1>(
+    (state) => state.searchFilter.leaseTypeGlobal
+  );
   const handleChange = (e) => {
     setInputValue(e.target.value);
+  };
+  const _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      applySearch(e.target.value);
+    }
+  }
+
+  const applySearch = (value: string) => {
+    dispatch({
+      type: 'SET_SEARCH_TEXT',
+      searchText: value
+    });
+    const pushQuery: any = {
+      name: value
+    };
+    leaseTypeGlobal &&
+      Router.push({
+        pathname: '/long-term-rooms',
+        query: pushQuery
+      });
+    handleClose();
   };
 
   return (
@@ -67,7 +94,7 @@ const SearchDialog: FC<Iprops> = (props: Iprops) => {
           </Toolbar>
           <Typography className={classes.title}>Search</Typography>
           <Grid className={classes.searchInputWrapper}>
-            <SearchInput value={inputValue} handleChange={handleChange} />
+            <SearchInput value={inputValue} handleChange={handleChange} handleEnterKeyDown={_handleKeyDown} />
           </Grid>
         </Grid>
         <Grid item xs className={classes.suggestions}>

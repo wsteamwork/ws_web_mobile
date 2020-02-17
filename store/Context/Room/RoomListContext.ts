@@ -166,6 +166,7 @@ export const getLTRooms = async (
     number_guest: params.number_guest,
     min_price: params.min_price,
     max_price: params.max_price,
+    only_apartment_building: params.only_apartment_building,
     accommodation_type: params.accommodation_type,
     comfort_lists: !!params.comfort_lists ? params.comfort_lists : undefined,
     discount: params.discount === null ? 1 : undefined, // 0,1

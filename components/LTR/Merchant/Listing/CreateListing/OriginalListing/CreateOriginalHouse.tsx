@@ -61,10 +61,10 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
     apartment_building_id: Yup.string()
       .required('At least one checkbox is required')
       .test('checkNotChoose', 'Please select an option', (value) => value != 0),
-    room_number: Yup.string()
-      .required('Required'),
-    floor: Yup.string()
-      .required('Required')
+    // room_number: Yup.string()
+    //   .required('Required'),
+    // floor: Yup.string()
+    //   .required('Required')
   });
 
   const onSubmit = async (
@@ -201,7 +201,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                             <InputFeedback error={errors.apartment_building_id} />
                           )}
                         </FormControl>
-                        <Box my={4}>
+                        {/* <Box my={4}>
                           <Typography variant='subtitle1' className={classes.title}>
                             Mã phòng trong tòa nhà?
                           </Typography>
@@ -225,9 +225,9 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                               touched.room_number && <FormHelperText>{errors.room_number}</FormHelperText>
                             ) : ""}
                           </FormControl>
-                        </Box>
+                        </Box> */}
 
-                        <Box my={4}>
+                        {/* <Box my={4}>
                           <Typography variant='subtitle1' className={classes.title}>
                             Căn hộ trên tầng mấy?
                           </Typography>
@@ -251,7 +251,7 @@ const CreateOriginalHouse: FC<IProps> = (props) => {
                               touched.floor && <FormHelperText>{errors.floor}</FormHelperText>
                             ) : ""}
                           </FormControl>
-                        </Box>
+                        </Box> */}
                         <Box my={1} textAlign='center'>
                           <ButtonGlobal
                             variant='contained'
