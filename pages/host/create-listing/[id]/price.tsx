@@ -11,9 +11,9 @@ import { getListingPrices, handlePricesListing, StepPricesActions } from '@/stor
 import { IPriceLongTerm, IPriceLT, IPriceShortTerm, IPriceST } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
 import { IServicesFee } from '@/types/Requests/LTR/CreateListing/Step3/ServicesFee';
 import React, { Fragment, useContext, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
-import { useTranslation } from 'react-i18next';
 
 const RoomCreateListing = () => {
   const { router } = useContext(GlobalContext);
@@ -25,6 +25,8 @@ const RoomCreateListing = () => {
   const dispatch_process = useDispatch<Dispatch<ProcessReducerAction>>();
   const data_ShortTerm = useSelector<ReducersList, IPriceShortTerm>((state => state.priceTerm.priceST));
   const data_LongTerm = useSelector<ReducersList, IPriceLongTerm>((state => state.priceTerm.priceLT));
+  const data_LongTerm_usd = useSelector<ReducersList, IPriceLongTerm>((state => state.priceTerm.priceLTUSD));
+  const verified_prices = useSelector<ReducersList, 0 | 1>((state => state.priceTerm.verified_prices));
   const data_serviceFee = useSelector<ReducersList, IServicesFee>((state => state.priceTerm.serviceFee));
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
   const dispatchPriceTerm = useDispatch<Dispatch<PriceTermActions>>();
@@ -44,7 +46,9 @@ const RoomCreateListing = () => {
   };
 
   const dataLT: IPriceLT = {
-    prices: data_LongTerm
+    prices: { prices: data_LongTerm },
+    prices_usd: { prices: data_LongTerm_usd },
+    verified_prices: verified_prices
   };
 
   const data = (step) => {

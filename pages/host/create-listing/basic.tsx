@@ -54,6 +54,9 @@ const RoomCreateListing: FC<IProps> = (props) => {
     number_bathroom: useSelector<ReducersList, number>(
       (state) => state.createListing.bathroomNumber
     ),
+    number_of_listing: useSelector<ReducersList, number>(
+      (state) => state.createListing.number_of_listing
+    ),
     address: useSelector<ReducersList, string>((state) => state.createListing.address),
     building: useSelector<ReducersList, string>((state) => state.createListing.building),
     coordinate: useSelector<ReducersList, any>((state) => state.createListing.coordinate),

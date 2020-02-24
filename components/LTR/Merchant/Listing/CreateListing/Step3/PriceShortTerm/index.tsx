@@ -45,6 +45,9 @@ const PriceShortTerm: FC<IProps> = (props) => {
     rent_type: 1,
     price_day: 0,
     price_hour: 0,
+    price_day_discount: 0,
+    price_hour_discount: 0,
+    is_discount: 0,
     price_charge_guest: 0,
     price_after_hour: 0,
     cleaning_fee: 0
@@ -56,6 +59,9 @@ const PriceShortTerm: FC<IProps> = (props) => {
       rent_type: listing ? listing.short_term_rent_type.rent_type : 1,
       price_day: priceShort ? priceShort.price_day : 0,
       price_hour: priceShort ? priceShort.price_hour : 0,
+      price_day_discount: priceShort ? priceShort.price_day_discount : 0,
+      price_hour_discount: priceShort ? priceShort.price_hour_discount : 0,
+      is_discount: priceShort ? priceShort.is_discount : 0,
       price_charge_guest: priceShort ? priceShort.price_charge_guest : 0,
       price_after_hour: priceShort ? priceShort.price_after_hour : 0,
       cleaning_fee: priceShort ? priceShort.cleaning_fee : 0
@@ -130,6 +136,35 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 </FormControl>
               </Grid>
 
+              <Grid item xs={12} style={{ marginTop: 12 }}>
+                <Typography className={classes.title} variant="h6" gutterBottom>
+                  {t('price:priceByDayDiscount')}
+                </Typography>
+
+                <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
+                  {t('price:priceByDayDiscountSubtitle')}
+                </Typography>
+
+                <FormControl className={'formControl'} aria-describedby="price_day_helper" required>
+                  <TextValidator
+                    validators={['isNumber', 'minNumber:100000']}
+                    errorMessages={[
+                      t('price:requirePrice'),
+                      t('price:minPriceDay')
+                    ]}
+                    name="price_day"
+                    variant="outlined"
+                    value={price.price_day_discount}
+                    onChange={changePrice('price_day_discount')}
+                    onBlur={blurPrice}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom as any,
+                      endAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+
               {listing.short_term_rent_type.rent_type === 3 ? (
                 <Grid item xs={12}>
                   <Divider className={classes.divider} />
@@ -153,6 +188,37 @@ const PriceShortTerm: FC<IProps> = (props) => {
                     variant="outlined"
                     value={price.price_hour}
                     onChange={changePrice('price_hour')}
+                    onBlur={blurPrice}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom as any,
+                      endAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                    }}
+                  />
+                </Grid>
+              ) : (
+                  ''
+                )}
+
+              {listing.short_term_rent_type.rent_type === 3 ? (
+                <Grid item xs={12} style={{ marginTop: 12 }}>
+                  <Typography className={classes.title} variant="h6" gutterBottom>
+                    {t('price:priceByHoursDiscount')}
+                  </Typography>
+
+                  <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
+                    {t('price:priceByHoursDiscountSubtitle')}
+                  </Typography>
+
+                  <TextValidator
+                    validators={['isNumber', 'minNumber:50000']}
+                    errorMessages={[
+                      t('price:requirePrice'),
+                      t('price:minPriceHours')
+                    ]}
+                    id="outlined-adornment-amount"
+                    variant="outlined"
+                    value={price.price_hour_discount}
+                    onChange={changePrice('price_hour_discount')}
                     onBlur={blurPrice}
                     InputProps={{
                       inputComponent: NumberFormatCustom as any,

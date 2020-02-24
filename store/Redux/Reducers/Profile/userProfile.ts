@@ -70,7 +70,7 @@ export const getLTRoomMerchantById = async (
   initLanguage: string = 'en'
 ): Promise<LTRoomIndexRes[]> => {
   const res: AxiosRes<LTRoomIndexRes[]> = await axios.get(
-    `long-term-rooms?merchant=${idUser}&limit=100`,
+    `long-term-rooms?merchant_id=${idUser}&limit=100`,
     {
       headers: { 'Accept-Language': initLanguage }
     }
