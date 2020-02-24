@@ -1,11 +1,12 @@
 import NumberFormatCustom from '@/components/LTR/ReusableComponents/NumberFormatCustom';
+import RadioCustom from '@/components/LTR/ReusableComponents/RadioCustom';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/priceTerm';
 import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { IPriceShortTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
-import { Divider, FormControl, Grid, InputAdornment, Theme, Typography } from '@material-ui/core';
+import { Divider, FormControl, Grid, InputAdornment, RadioGroup, Theme, Typography } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,6 +32,9 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
     },
     divider: {
       margin: '16px 0'
+    },
+    radioCustom: {
+      height: '100%'
     }
   })
 );
@@ -41,6 +45,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
   const priceShort = useSelector<ReducersList, IPriceShortTerm>((state) => state.priceTerm.priceST);
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
+  const [isDiscount, setIsDiscount] = useState<number>(0);
   const [price, setPrice] = useState<IPriceShortTerm>({
     rent_type: 1,
     price_day: 0,
@@ -61,7 +66,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
       price_hour: priceShort ? priceShort.price_hour : 0,
       price_day_discount: priceShort ? priceShort.price_day_discount : 0,
       price_hour_discount: priceShort ? priceShort.price_hour_discount : 0,
-      is_discount: priceShort ? priceShort.is_discount : 0,
+      is_discount: priceShort ? priceShort.is_discount : isDiscount,
       price_charge_guest: priceShort ? priceShort.price_charge_guest : 0,
       price_after_hour: priceShort ? priceShort.price_after_hour : 0,
       cleaning_fee: priceShort ? priceShort.cleaning_fee : 0
@@ -69,15 +74,19 @@ const PriceShortTerm: FC<IProps> = (props) => {
   }, [listing, priceShort]);
 
   useEffect(() => {
+    setIsDiscount(priceShort ? priceShort.is_discount : 0)
+  }, []);
+
+  useEffect(() => {
     dispatchStep({ type: 'setStep', payload: 'tab1' });
   }, []);
 
-  const changePrice = (name: keyof IPriceShortTerm) => (
+  const changePrice = (name: keyof IPriceShortTerm, value?: number) => (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setPrice({
       ...price,
-      [name]: parseInt(event.target.value)
+      [name]: parseInt(event.target.value) || value
     });
   };
 
@@ -93,6 +102,19 @@ const PriceShortTerm: FC<IProps> = (props) => {
     }
   }, [price, priceShort]);
 
+  useMemo(() => {
+    setIsDiscount(isDiscount);
+  }, [isDiscount]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setIsDiscount(parseInt((event.target as HTMLInputElement).value));
+  };
+
+  useEffect(() => {
+    changePrice('is_discount', isDiscount)
+    blurPrice();
+  }, [isDiscount])
+
   return (
     listing && (
       <Grid container>
@@ -105,6 +127,32 @@ const PriceShortTerm: FC<IProps> = (props) => {
             <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
               {t('price:shortTermPriceSubtitle')}
             </Typography>
+            <Grid container className={classes.container} justify="center">
+              <Grid item xs={12}>
+                <FormControl component="fieldset" fullWidth>
+                  <RadioGroup value={String(isDiscount)} onChange={handleChange} row>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={6}>
+                        <RadioCustom
+                          label={'Đang giảm giá'}
+                          className={classes.radioCustom}
+                          value={String(1)}
+                          descr={'Chọn mục này để tạo giảm giá'}
+                        />
+                      </Grid>
+                      <Grid item xs={12} sm={6}>
+                        <RadioCustom
+                          label={'Không giảm giá'}
+                          className={classes.radioCustom}
+                          value={String(0)}
+                          descr={'Nếu bạn muốn kết thúc giảm giá phòng vui lòng chọn mục này'}
+                        />
+                      </Grid>
+                    </Grid>
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+            </Grid>
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
@@ -135,36 +183,36 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   />
                 </FormControl>
               </Grid>
+              {isDiscount ? (
+                <Grid item xs={12} style={{ marginTop: 12 }}>
+                  <Typography className={classes.title} variant="h6" gutterBottom>
+                    {t('price:priceByDayDiscount')}
+                  </Typography>
 
-              <Grid item xs={12} style={{ marginTop: 12 }}>
-                <Typography className={classes.title} variant="h6" gutterBottom>
-                  {t('price:priceByDayDiscount')}
-                </Typography>
+                  <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
+                    {t('price:priceByDayDiscountSubtitle')}
+                  </Typography>
 
-                <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  {t('price:priceByDayDiscountSubtitle')}
-                </Typography>
-
-                <FormControl className={'formControl'} aria-describedby="price_day_helper" required>
-                  <TextValidator
-                    validators={['isNumber', 'minNumber:100000']}
-                    errorMessages={[
-                      t('price:requirePrice'),
-                      t('price:minPriceDay')
-                    ]}
-                    name="price_day"
-                    variant="outlined"
-                    value={price.price_day_discount}
-                    onChange={changePrice('price_day_discount')}
-                    onBlur={blurPrice}
-                    InputProps={{
-                      inputComponent: NumberFormatCustom as any,
-                      endAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                    }}
-                  />
-                </FormControl>
-              </Grid>
-
+                  <FormControl className={'formControl'} aria-describedby="price_day_helper" required>
+                    <TextValidator
+                      validators={['isNumber', 'minNumber:100000']}
+                      errorMessages={[
+                        t('price:requirePrice'),
+                        t('price:minPriceDay')
+                      ]}
+                      name="price_day"
+                      variant="outlined"
+                      value={price.price_day_discount}
+                      onChange={changePrice('price_day_discount')}
+                      onBlur={blurPrice}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        endAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                      }}
+                    />
+                  </FormControl>
+                </Grid>
+              ) : (null)}
               {listing.short_term_rent_type.rent_type === 3 ? (
                 <Grid item xs={12}>
                   <Divider className={classes.divider} />
@@ -199,7 +247,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   ''
                 )}
 
-              {listing.short_term_rent_type.rent_type === 3 ? (
+              {listing.short_term_rent_type.rent_type === 3 && isDiscount ? (
                 <Grid item xs={12} style={{ marginTop: 12 }}>
                   <Typography className={classes.title} variant="h6" gutterBottom>
                     {t('price:priceByHoursDiscount')}
