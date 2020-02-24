@@ -23,6 +23,7 @@ const UpdatePriceLongTerm: FC<IProps> = (props) => {
   const [messageSnack, setMessageSnack] = useState<string>('Cập nhật thành công');
   const [statusSnack, setStatusSnack] = useState<string>("success");
   const priceLong = useSelector<ReducersList, IPriceLongTerm>((state) => state.priceTerm.priceLT);
+  const priceLongUSD = useSelector<ReducersList, IPriceLongTerm>((state) => state.priceTerm.priceLTUSD);
   useEffect(() => {
     getListingPrices(id, dispatchStep);
     getPrice(id, dispatchPriceTerm);
@@ -31,10 +32,15 @@ const UpdatePriceLongTerm: FC<IProps> = (props) => {
   const UpdateLongTerm: any = () => {
     const res = handleUpdateListing(listing.room_id, {
       prices_long_term: {
-        prices: priceLong
-      } 
+        prices: {
+          prices: priceLong
+        },
+        prices_usd: {
+          prices: priceLongUSD
+        }
+      }
     });
-    if(res) {
+    if (res) {
       setOpenSnack(true);
       setMessageSnack("Cập nhật giá dài hạn thành công !")
     }

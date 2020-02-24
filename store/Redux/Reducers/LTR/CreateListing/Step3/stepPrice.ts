@@ -92,6 +92,7 @@ export const handlePricesListing = async (room_id: number, tab: string, data: an
       Authorization: `Bearer ${token}`
     }
   };
+  // console.log(data);
   const response = await axios_merchant.post(
     `long-term/room/step3/${tab}/${room_id}`,
     {

@@ -13,6 +13,7 @@ export interface LTRoomIndexRes {
   id: number;
   room_id: number;
   prices: pricesLT;
+  verified_prices: 0 | 1;
   discount_prices: number | null;
   is_discount: number;
   is_discount_txt: string;

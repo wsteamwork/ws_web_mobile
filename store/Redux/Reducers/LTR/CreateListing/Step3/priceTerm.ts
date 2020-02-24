@@ -12,6 +12,8 @@ import { Reducer } from 'redux';
 export type PriceTermState = {
   readonly priceST: IPriceShortTerm;
   readonly priceLT: IPriceLongTerm;
+  readonly priceLTUSD: IPriceLongTerm;
+  readonly verified_prices: 0 | 1;
   readonly serviceFee: IServicesFee;
   readonly all_fee_included_in_prices;
   error: boolean;
@@ -20,6 +22,8 @@ export type PriceTermState = {
 export type PriceTermActions =
   | { type: 'setPriceST'; payload: IPriceShortTerm }
   | { type: 'setPriceLT'; payload: IPriceLongTerm }
+  | { type: 'setPriceLTUSD'; payload: IPriceLongTerm }
+  | { type: 'setVerifiedPrice'; payload: 0 | 1 }
   | { type: 'setServiceFee'; payload: IServicesFee }
   | { type: 'setAllFeeIncluded'; payload: number }
   | { type: 'setError'; payload: boolean };
@@ -27,6 +31,8 @@ export type PriceTermActions =
 export const init: PriceTermState = {
   priceST: null,
   priceLT: null,
+  priceLTUSD: null,
+  verified_prices: 0,
   serviceFee: { included_fee: [] },
   all_fee_included_in_prices: 1,
   error: false
@@ -41,6 +47,10 @@ export const PriceTermReducer: Reducer<PriceTermState, PriceTermActions> = (
       return updateObject(state, { priceST: action.payload });
     case 'setPriceLT':
       return updateObject(state, { priceLT: action.payload });
+    case 'setPriceLTUSD':
+      return updateObject(state, { priceLTUSD: action.payload });
+    case 'setVerifiedPrice':
+      return updateObject(state, { verified_prices: action.payload });
     case 'setServiceFee':
       return updateObject(state, { serviceFee: action.payload });
     case 'setAllFeeIncluded':
@@ -61,6 +71,14 @@ export const getPrice = async (id: any, dispatch: Dispatch<PriceTermActions>): P
       payload: res.data.data.prices.prices ? res.data.data.prices.prices : null
     });
     dispatch({
+      type: 'setPriceLTUSD',
+      payload: res.data.data.prices_usd.prices ? res.data.data.prices_usd.prices : null
+    });
+    dispatch({
+      type: 'setVerifiedPrice',
+      payload: res.data.data.verified_prices ? res.data.data.verified_prices : null
+    });
+    dispatch({
       type: 'setServiceFee',
       payload: {
         [`included_fee`]: res.data.data.prices.included_fee ? res.data.data.prices.included_fee : []
@@ -78,4 +96,3 @@ export const getPrice = async (id: any, dispatch: Dispatch<PriceTermActions>): P
     dispatch({ type: 'setError', payload: true });
   }
 };
-
