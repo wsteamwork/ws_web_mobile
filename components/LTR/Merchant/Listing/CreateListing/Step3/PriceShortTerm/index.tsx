@@ -45,14 +45,14 @@ const PriceShortTerm: FC<IProps> = (props) => {
   const priceShort = useSelector<ReducersList, IPriceShortTerm>((state) => state.priceTerm.priceST);
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
-  const [isDiscount, setIsDiscount] = useState<number>(0);
+  // const [isDiscount, setIsDiscount] = useState<number>(0);
   const [price, setPrice] = useState<IPriceShortTerm>({
     rent_type: 1,
     price_day: 0,
     price_hour: 0,
-    price_day_discount: 0,
-    price_hour_discount: 0,
-    is_discount: 0,
+    // price_day_discount: 0,
+    // price_hour_discount: 0,
+    // is_discount: 0,
     price_charge_guest: 0,
     price_after_hour: 0,
     cleaning_fee: 0
@@ -64,18 +64,18 @@ const PriceShortTerm: FC<IProps> = (props) => {
       rent_type: listing ? listing.short_term_rent_type.rent_type : 1,
       price_day: priceShort ? priceShort.price_day : 0,
       price_hour: priceShort ? priceShort.price_hour : 0,
-      price_day_discount: priceShort ? priceShort.price_day_discount : 0,
-      price_hour_discount: priceShort ? priceShort.price_hour_discount : 0,
-      is_discount: priceShort ? priceShort.is_discount : isDiscount,
+      // price_day_discount: priceShort ? priceShort.price_day_discount : 0,
+      // price_hour_discount: priceShort ? priceShort.price_hour_discount : 0,
+      // is_discount: priceShort ? priceShort.is_discount : isDiscount,
       price_charge_guest: priceShort ? priceShort.price_charge_guest : 0,
       price_after_hour: priceShort ? priceShort.price_after_hour : 0,
       cleaning_fee: priceShort ? priceShort.cleaning_fee : 0
     });
   }, [listing, priceShort]);
 
-  useEffect(() => {
-    setIsDiscount(priceShort ? priceShort.is_discount : 0)
-  }, []);
+  // useEffect(() => {
+  //   setIsDiscount(priceShort ? priceShort.is_discount : 0)
+  // }, []);
 
   useEffect(() => {
     dispatchStep({ type: 'setStep', payload: 'tab1' });
@@ -102,18 +102,18 @@ const PriceShortTerm: FC<IProps> = (props) => {
     }
   }, [price, priceShort]);
 
-  useMemo(() => {
-    setIsDiscount(isDiscount);
-  }, [isDiscount]);
+  // useMemo(() => {
+  //   setIsDiscount(isDiscount);
+  // }, [isDiscount]);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setIsDiscount(parseInt((event.target as HTMLInputElement).value));
-  };
+  // const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setIsDiscount(parseInt((event.target as HTMLInputElement).value));
+  // };
 
-  useEffect(() => {
-    changePrice('is_discount', isDiscount)
-    blurPrice();
-  }, [isDiscount])
+  // useEffect(() => {
+  //   changePrice('is_discount', isDiscount)
+  //   blurPrice();
+  // }, [isDiscount])
 
   return (
     listing && (
@@ -127,7 +127,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
             <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
               {t('price:shortTermPriceSubtitle')}
             </Typography>
-            <Grid container className={classes.container} justify="center">
+            {/* <Grid container className={classes.container} justify="center">
               <Grid item xs={12}>
                 <FormControl component="fieldset" fullWidth>
                   <RadioGroup value={String(isDiscount)} onChange={handleChange} row>
@@ -152,7 +152,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   </RadioGroup>
                 </FormControl>
               </Grid>
-            </Grid>
+            </Grid> */}
             <Grid container justify="center">
               <Grid item xs={12}>
                 <Typography className={classes.title} variant="h6" gutterBottom>
@@ -183,7 +183,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   />
                 </FormControl>
               </Grid>
-              {isDiscount ? (
+              {/* {isDiscount ? (
                 <Grid item xs={12} style={{ marginTop: 12 }}>
                   <Typography className={classes.title} variant="h6" gutterBottom>
                     {t('price:priceByDayDiscount')}
@@ -212,7 +212,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                     />
                   </FormControl>
                 </Grid>
-              ) : (null)}
+              ) : (null)} */}
               {listing.short_term_rent_type.rent_type === 3 ? (
                 <Grid item xs={12}>
                   <Divider className={classes.divider} />
@@ -247,7 +247,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                   ''
                 )}
 
-              {listing.short_term_rent_type.rent_type === 3 && isDiscount ? (
+              {/* {listing.short_term_rent_type.rent_type === 3 && isDiscount ? (
                 <Grid item xs={12} style={{ marginTop: 12 }}>
                   <Typography className={classes.title} variant="h6" gutterBottom>
                     {t('price:priceByHoursDiscount')}
@@ -276,7 +276,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 </Grid>
               ) : (
                   ''
-                )}
+                )} */}
             </Grid>
           </div>
           <Divider className={classes.divider} />
