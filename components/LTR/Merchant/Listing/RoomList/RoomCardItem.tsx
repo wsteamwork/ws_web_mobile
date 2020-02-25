@@ -342,6 +342,14 @@ const RoomCardItem: FC<IProps> = (props) => {
                         alt="Westay - Homestay cho người việt"
                       />
                     </Grid>
+                  ) : (room.short_term_room.avatar ? (
+                    <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
+                      <img
+                        className={classes.img}
+                        src={IMAGE_STORAGE_LG + room.short_term_room.avatar}
+                        alt="Westay - Homestay cho người việt"
+                      />
+                    </Grid>
                   ) : (
                       <Grid item xs={6} sm={3} md={3} lg={2} className={classes.widthImg}>
                         <Grid className={classes.wrapperImage}>
@@ -352,7 +360,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                           />
                         </Grid>
                       </Grid>
-                    )}
+                    ))}
                   <Hidden smUp>
                     <Grid item xs={6} className={classes.btnShowSmUp}>
                       <Grid item>
@@ -631,7 +639,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
-                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} {t('shared:currency')}/
                                   {t('roomlist:onePerMonth')} &#8226;
                                 </span>
                               ) : (
@@ -640,7 +648,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {room.short_term_room.rent_type !== 1 ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_day).format('0,0')} vnđ{' '}
+                                  {numeral(room.short_term_room.price_day).format('0,0')} {t('shared:currency')}{' '}
                                   {t('roomlist:onePerDay')}
                                   &nbsp;&#8226;
                                 </span>
@@ -650,7 +658,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                               {(room.short_term_room.rent_type !== 2 && room.short_term_room.price_hour !== 0) ? (
                                 <span>
                                   &nbsp;
-                                  {numeral(room.short_term_room.price_hour).format('0,0')} vnđ{' '}
+                                  {numeral(room.short_term_room.price_hour).format('0,0')} {t('shared:currency')}{' '}
                                   {t('roomlist:onePerHour')}
                                 </span>
                               ) : (
@@ -664,7 +672,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
-                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} {t('shared:currency')}/
                                   {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
@@ -672,7 +680,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_day).format('0,0')} vnđ/{' '}
+                                {numeral(room.short_term_room.price_day).format('0,0')} {t('shared:currency')}/{' '}
                                 {t('roomlist:onePerDay')}
                               </span>
                             </Typography>
@@ -683,7 +691,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                             <Typography variant="body1" className={classes.priceAll}>
                               {room.status === 1 ? (
                                 <span>
-                                  {numeral(room.prices.prices.term_1_month).format('0,0')} vnđ/
+                                  {numeral(room.prices.prices.term_1_month).format('0,0')} {t('shared:currency')}/
                                   {t('roomlist:onePerMonth')} &nbsp;&#8226;
                                 </span>
                               ) : (
@@ -691,7 +699,7 @@ const RoomCardItem: FC<IProps> = (props) => {
                                 )}
                               <span>
                                 &nbsp;
-                                {numeral(room.short_term_room.price_hour).format('0,0')} vnđ/{' '}
+                                {numeral(room.short_term_room.price_hour).format('0,0')} {t('shared:currency')}/{' '}
                                 {t('roomlist:onePerHour')}
                               </span>
                             </Typography>

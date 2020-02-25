@@ -42,5 +42,11 @@
     "building": "Building",
     "buildingPlaceholder": "More information about the building, room number...",
     "mapAddressTitle": "Is this your property location?",
-    "mapAddressSubTitle": "If the map not show or your property location not correct, please contact us."
+    "mapAddressSubTitle": "If the map not show or your property location not correct, please contact us.",
+    
+    "bookingList": "Booking Management",
+    "roomList": "Room Management",
+    "createListing": "Create listing",
+    "buildingList": "Building Management",
+    "homepage": "Home"
 }

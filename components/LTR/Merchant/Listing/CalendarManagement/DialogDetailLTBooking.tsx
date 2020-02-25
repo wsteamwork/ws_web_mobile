@@ -10,6 +10,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Gri
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
@@ -73,6 +74,7 @@ const DialogDetailLTBooking: FC<IProps> = (props) => {
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<any>(null);
   const [statusSnack, setStatusSnack] = useState<any>('success');
+  const { t } = useTranslation();
 
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
@@ -190,7 +192,7 @@ const DialogDetailLTBooking: FC<IProps> = (props) => {
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Tiền đã cọc</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.deposit)} vnđ
+                  {formatMoney(bookingDetail.deposit)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Grid item xs={12} className={classes.wrapperPaymentXs}>

@@ -8,7 +8,7 @@ import { CreateListingActions } from '@/store/Redux/Reducers/LTR/CreateListing/B
 import { ApartmentBuildingsRes } from '@/types/Requests/LTR/CreateListing/ApartmentBuildings/ApartmentBuildingsRes';
 import { RoomWithinBuildingReq } from '@/types/Requests/LTR/CreateListing/StoreRoomWithinBuilding/RoomWithinBuilding';
 import { axios_merchant } from '@/utils/axiosInstance';
-import { Box, Collapse, FormHelperText, Grid, RadioGroup, TextField, Theme, Typography } from '@material-ui/core';
+import { Box, Collapse, Grid, RadioGroup, Theme, Typography } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import { Formik, FormikHelpers, FormikProps } from 'formik';

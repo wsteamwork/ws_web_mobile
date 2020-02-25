@@ -204,7 +204,7 @@ const BookingList: FC<IBookingList> = (props) => {
                 <Typography variant="h6" align="right" className={'typoTotalFee'}>
                   <span>Total: </span>
                   <span> {formatMoney(i.total_fee)} </span>
-                  <span> VND</span>
+                  <span> {t('shared:currency')} </span>
                 </Typography>
               </Grid>
             </Grid>
@@ -252,6 +252,7 @@ const BookingList: FC<IBookingList> = (props) => {
       </GridContainer>
     );
   });
+
   return (
     <Grid className="bookingList">
       {bookings.length > 0 && (

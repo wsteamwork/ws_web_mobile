@@ -1,26 +1,15 @@
+import LongTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/LongTermBookingList';
+import ShortTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList';
 import NavHeader_Merchant from '@/components/LTR/ReusableComponents/NavHeader_Merchant';
+import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
+import { AppBar, Box, Breadcrumbs, Grid, Link, Tab, Tabs, Theme, Typography, withStyles } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
 import React, { Fragment } from 'react';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import {
-  Grid,
-  Breadcrumbs,
-  Link,
-  Typography,
-  Theme,
-  AppBar,
-  Box,
-  withStyles,
-  Tabs,
-  Tab
-} from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/styles';
-import ShortTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/ShortTermBookingList';
-import LongTermBookingList from '@/components/LTR/Merchant/Listing/BookingList/LongTermBookingList';
-import { ReducersList } from '@/store/Redux/Reducers';
-import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { Dispatch } from 'redux';
-import { BookingListReducerAction } from '@/store/Redux/Reducers/LTR/BookingList/bookinglist';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -115,6 +104,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const BookingList: NextPage = (props) => {
   const classes = useStyles(props);
+  const { t } = useTranslation();
   const dispatch = useDispatch<Dispatch<BookingListReducerAction>>();
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -130,9 +120,9 @@ const BookingList: NextPage = (props) => {
             separator={<NavigateNextIcon fontSize="small" className={classes.custom_link_bread} />}
             aria-label="breadcrumb">
             <Link href="/" className={classes.custom_link_bread}>
-              Trang chủ
+              {t('host:homepage')}
             </Link>
-            <Typography color="textPrimary">Danh sách đặt phòng</Typography>
+            <Typography color="textPrimary">{t('host:bookingList')}</Typography>
           </Breadcrumbs>
           <Grid className={classes.root}>
             <AppBar position="static" color="inherit" className={classes.wrapperTab}>

@@ -395,10 +395,10 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                                 {booking.phone}
                               </Typography>
                             ) : (
-                              <Typography variant="subtitle2" className={classes.notPayment}>
-                                Thông tin sẽ được cung cấp sau khi khách hàng thanh toán
+                                <Typography variant="subtitle2" className={classes.notPayment}>
+                                  Thông tin sẽ được cung cấp sau khi khách hàng thanh toán
                               </Typography>
-                            )}
+                              )}
                             <Hidden xsDown>
                               {booking.payment_status == 3 && (
                                 <Typography variant="subtitle2" className={classes.valueNormal}>
@@ -442,7 +442,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                                   </span>
                                 )}
                                 <span> - </span>
-                                {numeral(booking.total_fee).format('0,0')} vnđ
+                                {numeral(booking.total_fee).format('0,0')} {t('shared:currency')}
                               </Typography>
                             </Hidden>
                             {booking.status === 1 && (
@@ -474,10 +474,10 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                                   {booking.checkout.substring(11, 16)}
                                 </Typography>
                               ) : (
-                                <Typography variant="subtitle2">
-                                  {moment(booking.checkin).format('DD/MM/YYYY')}
-                                </Typography>
-                              )}
+                                  <Typography variant="subtitle2">
+                                    {moment(booking.checkin).format('DD/MM/YYYY')}
+                                  </Typography>
+                                )}
                               <Typography variant="subtitle2" className={classes.valueNormal}>
                                 {booking.booking_type === 1 ? '' : <span>&#8594;</span>}
                               </Typography>
@@ -495,7 +495,7 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                             <TableCell className={classes.tableValue}>
                               <Grid item xs={12} className={classes.wrapperPayment}>
                                 <Typography variant="subtitle2" className={classes.customerName}>
-                                  {numeral(booking.total_fee).format('0,0')} vnđ
+                                  {numeral(booking.total_fee).format('0,0')} {t('shared:currency')}
                                 </Typography>
                                 <Grid>
                                   <IconButton
@@ -601,35 +601,35 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                                 <Typography variant="subtitle2">Tiền phòng</Typography>
                                 <Typography variant="subtitle2">
-                                  {numeral(booking.price_original).format('0,0')} vnđ
+                                  {numeral(booking.price_original).format('0,0')} {t('shared:currency')}
                                 </Typography>
                               </Grid>
                               <Divider className={classes.divider} />
                               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                                 <Typography variant="subtitle2">Phụ thu khách</Typography>
                                 <Typography variant="subtitle2">
-                                  {numeral(booking.additional_fee).format('0,0')} vnđ
+                                  {numeral(booking.additional_fee).format('0,0')} {t('shared:currency')}
                                 </Typography>
                               </Grid>
                               <Divider className={classes.divider} />
                               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                                 <Typography variant="subtitle2">Giảm giá</Typography>
                                 <Typography variant="subtitle2">
-                                  {numeral(booking.price_discount).format('0,0')} vnđ
+                                  {numeral(booking.price_discount).format('0,0')} {t('shared:currency')}
                                 </Typography>
                               </Grid>
                               <Divider className={classes.divider} />
                               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                                 <Typography variant="subtitle2">Dọn dẹp</Typography>
                                 <Typography variant="subtitle2">
-                                  {numeral(booking.service_fee).format('0,0')} vnđ
+                                  {numeral(booking.service_fee).format('0,0')} {t('shared:currency')}
                                 </Typography>
                               </Grid>
                               <Divider className={classes.divider} />
                               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                                 <Typography variant="subtitle2">Tổng cộng</Typography>
                                 <Typography variant="subtitle2">
-                                  {numeral(booking.total_fee).format('0,0')} vnđ
+                                  {numeral(booking.total_fee).format('0,0')} {t('shared:currency')}
                                 </Typography>
                               </Grid>
                             </DialogContent>
@@ -725,8 +725,8 @@ const ShortTermBookingList: FC<IProps> = (props) => {
                       ))}
                     </TableBody>
                   ) : (
-                    ''
-                  )}
+                      ''
+                    )}
                 </Table>
                 <Snackbar
                   anchorOrigin={{
@@ -754,12 +754,12 @@ const ShortTermBookingList: FC<IProps> = (props) => {
               )}
             </Fragment>
           ) : (
-            <NotFoundGlobal
-              height={300}
-              width={250}
-              content="Danh sách booking hiện tại chưa hiển thị, vui lòng đợi trong giây lát"
-            />
-          ),
+              <NotFoundGlobal
+                height={300}
+                width={250}
+                content="Danh sách booking hiện tại chưa hiển thị, vui lòng đợi trong giây lát"
+              />
+            ),
         [open, openCancel, bookinglist, openSnack, reason, reasonDescription]
       )}
     </Fragment>

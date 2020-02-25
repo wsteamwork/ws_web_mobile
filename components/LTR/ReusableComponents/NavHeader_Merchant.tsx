@@ -10,6 +10,7 @@ import IconMenu from '@material-ui/icons/MenuRounded';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, MouseEvent, useContext, useState } from 'react';
 import { withCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
 import { compose } from "recompose";
 import Cookies from 'universal-cookie';
 interface IProps {
@@ -77,6 +78,7 @@ const useStyles = makeStyles<Theme, IProps>((theme: Theme) =>
 const NavHeader_Merchant: FC<IProps> = (props) => {
   const classes = useStyles(props);
   const cookies = new Cookies();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
   const { router } = useContext(GlobalContext);
@@ -117,12 +119,12 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                   <Grid container spacing={2} alignItems='center' justify='space-around'>
                     <Grid item>
                       <Button onClick={() => openLink('/host/booking-list')} className={classes.btnPolicy}>
-                        Danh sách booking
+                        {t('host:bookingList')}
                       </Button>
                     </Grid>
                     <Grid item>
                       <Button className={classes.btnPolicy} onClick={handleSwitch}>
-                        Quản lý phòng
+                        {t('host:roomList')}
                         <ArrowDown />
                       </Button>
 
@@ -133,21 +135,26 @@ const NavHeader_Merchant: FC<IProps> = (props) => {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}>
                         <StyledMenuItem onClick={() => openLink('/host/room-list')}>
-                          <ListItemText primary='Danh sách phòng' />
+                          <ListItemText primary={`${t('host:roomList')}`} />
                         </StyledMenuItem>
                         <StyledMenuItem onClick={() => openLink('/host/building-list')}>
-                          <ListItemText primary='Danh sách tòa nhà' />
+                          <ListItemText primary={`${t('host:buildingList')}`} />
                         </StyledMenuItem>
                         <StyledMenuItem onClick={() => openLink('/host/create-listing/type-accommodation')}>
-                          <ListItemText primary='Đăng phòng' />
+                          <ListItemText primary={`${t('host:createListing')}`} />
                         </StyledMenuItem>
                       </StyledMenu>
                     </Grid>
-                    {/* <Grid item>
-                      <Button href={'#'} className={classes.btnPolicy}>
-                        Khuyến mãi
+                    <Grid item>
+                      <Button onClick={() => openLink('/host/building-list')} className={classes.btnPolicy}>
+                        {t('host:buildingList')}
                       </Button>
-                    </Grid> */}
+                    </Grid>
+                    <Grid item>
+                      <Button onClick={() => openLink('/host/create-listing/type-accommodation')} className={classes.btnPolicy}>
+                        {t('host:createListing')}
+                      </Button>
+                    </Grid>
                     {/* <Grid item>
                       <Button href={'#'} className={classes.btnPolicy}>
                         Tin nhắn

@@ -10,6 +10,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, Gri
 import CloseIcon from '@material-ui/icons/Close';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, SyntheticEvent, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IProps {
   classes?: any,
@@ -73,6 +74,7 @@ const DialogDetailBooking: FC<IProps> = (props) => {
   const [openSnack, setOpenSnack] = useState<boolean>(false);
   const [messageSnack, setMessageSnack] = useState<string>('');
   const [statusSnack, setStatusSnack] = useState<any>('success');
+  const { t } = useTranslation();
 
   const handleCloseSnack = (event?: SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
@@ -185,35 +187,35 @@ const DialogDetailBooking: FC<IProps> = (props) => {
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Giá phòng</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.price_original)} vnđ
+                  {formatMoney(bookingDetail.price_original)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Divider className={classes.divider} />
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Phụ thu khách</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.additional_fee)} vnđ
+                  {formatMoney(bookingDetail.additional_fee)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Divider className={classes.divider} />
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Giảm giá</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.price_discount)} vnđ
+                  {formatMoney(bookingDetail.price_discount)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Divider className={classes.divider} />
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Dọn dẹp</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.service_fee)} vnđ
+                  {formatMoney(bookingDetail.service_fee)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Divider className={classes.divider} />
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
                 <Typography variant="subtitle2">Tổng cộng</Typography>
                 <Typography variant="subtitle2">
-                  {formatMoney(bookingDetail.total_fee)} vnđ
+                  {formatMoney(bookingDetail.total_fee)} {t('shared:currency')}
                 </Typography>
               </Grid>
               <Grid item xs={12} className={classes.wrapperPaymentXs}>
