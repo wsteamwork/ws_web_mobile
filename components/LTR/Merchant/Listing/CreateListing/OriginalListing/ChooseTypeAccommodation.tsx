@@ -73,10 +73,10 @@ const ChooseTypeAccommodation: FC<IProps> = (props) => {
               <Grid item xl={8} lg={9} xs={12}>
                 <RadioCustom
                   noneBorder
-                  label='Tạo mới toà căn hộ / toà nhà'
+                  label='Tạo mới toà nhà / Khách sạn căn hộ / Toà nhà dịch vụ'
                   descr={
                     <div>
-                      <Typography variant='subtitle1' gutterBottom>Nếu bạn ở hữu một toà căn hộ dịch vụ hay có nhiều căn hộ khác nhau trong cùng một toà nhà/ nhà, sẽ tốt nhất nếu bạn tạo mới một toà nhà sau đó thêm từng phòng/căn hộ vào toà nhà đó</Typography>
+                      <Typography variant='subtitle1' gutterBottom>Nếu bạn ở hữu một toà nhà dịch vụ hoặc toà khách sạn căn hộ hoặc có nhiều căn hộ khác nhau trong cùng một toà nhà, sẽ tốt nhất nếu bạn tạo mới một toà nhà sau đó thêm từng phòng/căn hộ vào toà nhà đó</Typography>
                       <img src='../../../static/images/apartment.jpg' alt='westay.vn'
                         onClick={() => imageChange(0)}
                         className={classNames(classes.imgType, typeAccommodation
@@ -91,10 +91,10 @@ const ChooseTypeAccommodation: FC<IProps> = (props) => {
               <Grid item xl={8} lg={9} xs={12}>
                 <RadioCustom
                   noneBorder
-                  label='Tạo mới phòng / căn hộ'
+                  label='Tạo mới phòng / Căn hộ Studio / Căn hộ chung cư riêng lẻ'
                   descr={
                     <div>
-                      <Typography variant='subtitle1' gutterBottom>Bạn đã tạo toà nhà và muốn thêm từng căn hộ/phòng vào đó hoặc bạn muốn tạo những căn hộ riêng rẽ không thuộc một toà nhà/ toà căn hộ dịch vụ nào</Typography>
+                      <Typography variant='subtitle1' gutterBottom>Bạn đã tạo toà nhà và muốn thêm phòng vào toà nàh đó hoặc bạn muốn tạo những căn chung cư riêng lẻ không thuộc một toà nhà nào mà bạn sở hữu/quản lý</Typography>
                       <img src='../../../static/images/studio.jpg' alt='westay.vn'
                         onClick={() => imageChange(1)}
                         className={classNames(classes.imgType, typeAccommodation ? classes.chooseType : '')} />

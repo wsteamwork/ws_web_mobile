@@ -1,5 +1,5 @@
 { 
-    "titleName": "Room List", 
+    "titleName": "Listing Management", 
     "titleNameBuilding": "Building List",
     "contentNotFound": "The current room list is not displayed, please wait a moment", 
     "tooltipUpdateRoom": "Edit",

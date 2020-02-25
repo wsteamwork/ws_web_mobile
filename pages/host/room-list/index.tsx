@@ -8,6 +8,7 @@ import { createStyles, makeStyles } from '@material-ui/styles';
 import { NextPage } from 'next';
 import React, { Fragment, useContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles<Theme>((theme: Theme) =>
@@ -22,7 +23,7 @@ const useStyles = makeStyles<Theme>((theme: Theme) =>
 );
 const RoomList: NextPage = (props) => {
   const classes = useStyles(props);
-
+  const { t } = useTranslation();
   const [cookies] = useCookies(['_token']);
 
   const error = useSelector<ReducersList, boolean>((state) => state.iProfile.error);
@@ -41,9 +42,9 @@ const RoomList: NextPage = (props) => {
             separator={<NavigateNextIcon fontSize="small" className={classes.custom_link_bread} />}
             aria-label="breadcrumb">
             <Link href="/" className={classes.custom_link_bread}>
-              Trang chủ
+              {t('host:homePage')}
             </Link>
-            <Typography color="textPrimary">Danh sách phòng</Typography>
+            <Typography color="textPrimary">{t('host:roomList')}</Typography>
           </Breadcrumbs>
         </Grid>
       </Grid>

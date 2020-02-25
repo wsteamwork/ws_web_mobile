@@ -360,7 +360,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                         {numeral(nextPaymentDue.payment_amount).format(
                           '0,0'
                         )}{' '}
-                        vnđ
+                        {t('shared:currency')}
                       </Typography>
                       {booking.contracts.data[0].status === 1 && (
                         <Grid>
@@ -517,7 +517,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                             {numeral(
                               nextPaymentDue.payment_amount
                             ).format('0,0')}{' '}
-                            vnđ
+                            {t('shared:currency')}
                           </Typography>
                           {booking.contracts.data[0].status === 1 && (
                             <Grid>
@@ -562,7 +562,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                                 {numeral(
                                   nextPaymentDue.payment_amount
                                 ).format('0,0')}{' '}
-                                vnđ
+                                {t('shared:currency')}
                               </Typography>
                               {booking.contracts.data[0].status === 1 && (
                                 <Grid>
@@ -748,7 +748,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                           <Grid item xs={12} className={classes.wrapperPaymentXs}>
                             <Typography variant="subtitle2">Giá trị</Typography>
                             <Typography variant="subtitle2">
-                              {numeral(currentContract.price_original).format('0,0')} vnđ
+                              {numeral(currentContract.price_original).format('0,0')} {t('shared:currency')}
                             </Typography>
                           </Grid>
                           <Divider className={classes.divider} />
@@ -758,14 +758,14 @@ const BookingCardItem: FC<IProps> = (props) => {
                               {numeral(
                                 currentContract.price_with_fee - currentContract.price_original
                               ).format('0,0')}{' '}
-                              vnđ
+                              {t('shared:currency')}
                             </Typography>
                           </Grid>
                           <Divider className={classes.divider} />
                           <Grid item xs={12} className={classes.wrapperPaymentXs}>
                             <Typography variant="subtitle2">Tổng</Typography>
                             <Typography variant="subtitle2">
-                              {numeral(currentContract.price_with_fee).format('0,0')} vnđ
+                              {numeral(currentContract.price_with_fee).format('0,0')} {t('shared:currency')}
                             </Typography>
                           </Grid>
                           <Divider className={classes.divider} />
@@ -905,7 +905,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                               </TableRow>
                             </TableHead>
                             <TableBody>
-                              {currentContract.payment.payment_period.map((row, i) => (
+                              {currentContract && currentContract.payment && currentContract.payment.payment_period.map((row, i) => (
                                 <TableRow key={row.id}>
                                   <TableCell
                                     className={classes.TableValue}
@@ -917,7 +917,7 @@ const BookingCardItem: FC<IProps> = (props) => {
                                     {moment(row.payment_due_date).format('DD/MM/YYYY')}
                                   </TableCell>
                                   <TableCell className={classes.TableValue} align="left">
-                                    {numeral(row.payment_amount).format('0,0')} vnđ
+                                    {numeral(row.payment_amount).format('0,0')} {t('shared:currency')}
                                   </TableCell>
                                   <TableCell className={classes.TableValue} align="left">
                                     {row.payment_status_txt}

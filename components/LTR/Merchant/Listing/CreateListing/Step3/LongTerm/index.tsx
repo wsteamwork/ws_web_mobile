@@ -204,48 +204,51 @@ const LongTerm: FC<IProps> = (props) => {
             <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
               {t('price:longTermPriceSubtitle')}
             </Typography>
-            <Grid container justify="center">
-              <Grid item xs={12}>
-                <Typography className={classes.title} variant="h6" gutterBottom>
-                  {t('price:longTerm1MonthPrices')}
-                </Typography>
+            <Grid container>
+              <Typography className={classes.title} variant="h6" gutterBottom>
+                {t('price:longTerm1MonthPrices')}
+              </Typography>
 
-                <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
-                  {t('price:longTerm1MonthPricesSubtitle')}
-                </Typography>
-
-                <TextValidator
-                  validators={['required', 'isNumber', 'minNumber:5000000']}
-                  errorMessages={[
-                    t('price:requirePrice'),
-                    t('price:requirePrice'),
-                    t('price:minLongTermPrice')
-                  ]}
-                  variant="outlined"
-                  value={price.term_1_month}
-                  onChange={handleChange('term_1_month')}
-                  onBlur={handleBlur}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom as any,
-                    startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                  }}
-                />
-                <TextValidator
-                  validators={['required', 'isNumber', 'minNumber:250']}
-                  errorMessages={[
-                    t('price:requirePrice'),
-                    t('price:requirePrice'),
-                    t('price:minLongTermPrice')
-                  ]}
-                  variant="outlined"
-                  value={priceUSD.term_1_month}
-                  onChange={handleChangeUSD('term_1_month')}
-                  onBlur={handleBlurUSD}
-                  InputProps={{
-                    inputComponent: NumberFormatCustom as any,
-                    startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                  }}
-                />
+              <Typography className={classes.subTitle} variant="subtitle2" gutterBottom>
+                {t('price:longTerm1MonthPricesSubtitle')}
+              </Typography>
+              <Grid container spacing={4} alignItems="center">
+                <Grid item>
+                  <TextValidator
+                    validators={['required', 'isNumber', 'minNumber:5000000']}
+                    errorMessages={[
+                      t('price:requirePrice'),
+                      t('price:requirePrice'),
+                      t('price:minLongTermPrice')
+                    ]}
+                    variant="outlined"
+                    value={price.term_1_month}
+                    onChange={handleChange('term_1_month')}
+                    onBlur={handleBlur}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom as any,
+                      startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                    }}
+                  />
+                </Grid>
+                <Grid item>
+                  <TextValidator
+                    validators={['required', 'isNumber', 'minNumber:250']}
+                    errorMessages={[
+                      t('price:requirePrice'),
+                      t('price:requirePrice'),
+                      t('price:minLongTermPrice')
+                    ]}
+                    variant="outlined"
+                    value={priceUSD.term_1_month}
+                    onChange={handleChangeUSD('term_1_month')}
+                    onBlur={handleBlurUSD}
+                    InputProps={{
+                      inputComponent: NumberFormatCustom as any,
+                      startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                    }}
+                  />
+                </Grid>
               </Grid>
             </Grid>
           </div>
@@ -278,6 +281,8 @@ const LongTerm: FC<IProps> = (props) => {
                         startAdornment: <InputAdornment position="start"> đ </InputAdornment>
                       }}
                     />
+                  </Grid>
+                  <Grid item>
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
@@ -345,6 +350,8 @@ const LongTerm: FC<IProps> = (props) => {
                         startAdornment: <InputAdornment position="start"> đ </InputAdornment>
                       }}
                     />
+                  </Grid>
+                  <Grid item>
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
@@ -413,6 +420,8 @@ const LongTerm: FC<IProps> = (props) => {
                         startAdornment: <InputAdornment position="start"> đ </InputAdornment>
                       }}
                     />
+                  </Grid>
+                  <Grid item>
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[
@@ -480,6 +489,8 @@ const LongTerm: FC<IProps> = (props) => {
                         startAdornment: <InputAdornment position="start"> đ </InputAdornment>
                       }}
                     />
+                  </Grid>
+                  <Grid item>
                     <TextValidator
                       validators={['required', 'isNumber']}
                       errorMessages={[

@@ -1,10 +1,11 @@
+import { GlobalContext } from '@/store/Context/GlobalContext';
 import { ReducersList } from '@/store/Redux/Reducers';
 import { createStyles, Grid, makeStyles, Theme } from '@material-ui/core';
 import numeral from 'numeral';
 import React, { FC, Fragment, useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import CardWrapperItem from '../CardWrapperItem';
-import { GlobalContext } from '@/store/Context/GlobalContext';
 interface IProps {
   classes?: any;
 }
@@ -30,6 +31,8 @@ const PriceShortTerm: FC<IProps> = (props) => {
   const listing = useSelector<ReducersList, any>((state) => state.listingdetails.listing);
   const { router } = useContext(GlobalContext);
   const id = router.query.id;
+  const { t } = useTranslation();
+
   const openUpdate = () => {
     router.push(`/host/update-listing/${id}/price-short-term`);
   };
@@ -43,7 +46,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 <Grid item xs={12} sm={6} className={classes.marginXs}>
                   Giá theo ngày:{' '}
                   <span className={classes.name}>
-                    {numeral(listing.short_term_room.price_day).format('0,0')} vnđ
+                    {numeral(listing.short_term_room.price_day).format('0,0')} {t('shared:currency')}
                   </span>
                 </Grid>
               ) : (
@@ -53,7 +56,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
                 <Grid item xs={12} sm={6}>
                   Giá theo giờ:{' '}
                   <span className={classes.name}>
-                    {numeral(listing.short_term_room.price_hour).format('0,0')} vnđ
+                    {numeral(listing.short_term_room.price_hour).format('0,0')} {t('shared:currency')}
                   </span>
                 </Grid>
               ) : (
@@ -64,13 +67,13 @@ const PriceShortTerm: FC<IProps> = (props) => {
               <Grid item xs={12} sm={6} className={classes.margin}>
                 Phụ thu thêm người:{' '}
                 <span className={classes.name}>
-                  {numeral(listing.short_term_room.price_charge_guest).format('0,0')} vnđ
+                  {numeral(listing.short_term_room.price_charge_guest).format('0,0')} {t('shared:currency')}
                 </span>
               </Grid>
               <Grid item xs={12} sm={6} className={classes.marginXs}>
                 Phụ thu thêm giờ:{' '}
                 <span className={classes.name}>
-                  {numeral(listing.short_term_room.price_after_hour).format('0,0')} vnđ
+                  {numeral(listing.short_term_room.price_after_hour).format('0,0')} {t('shared:currency')}
                 </span>
               </Grid>
             </Grid>
@@ -78,7 +81,7 @@ const PriceShortTerm: FC<IProps> = (props) => {
               <Grid item xs={12} sm={6} className={classes.margin}>
                 Phí dọn dẹp:{' '}
                 <span className={classes.name}>
-                  {numeral(listing.short_term_room.cleaning_fee).format('0,0')} vnđ
+                  {numeral(listing.short_term_room.cleaning_fee).format('0,0')} {t('shared:currency')}
                 </span>
               </Grid>
             </Grid>

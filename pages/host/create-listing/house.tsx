@@ -7,11 +7,11 @@ interface IProps {
 }
 
 const house: FC<IProps> = (props) => {
-  const {}      = props;
+  const { } = props;
 
   return (
     <CreateOriginalListing>
-      <CreateOriginalHouse/>
+      <CreateOriginalHouse />
     </CreateOriginalListing>
   );
 };

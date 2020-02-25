@@ -42,5 +42,11 @@
     "building": "Toà nhà",
     "buildingPlaceholder": "Thông tin về số căn hộ, toà nhà",
     "mapAddressTitle": "Đây đã phải là địa chỉ đúng chưa?",
-    "mapAddressSubTitle": "Nếu căn hộ của bạn không thể định vị trên bản đồ, vui lòng liên hệ với chúng tôi để nhận được trợ giúp"
+    "mapAddressSubTitle": "Nếu căn hộ của bạn không thể định vị trên bản đồ, vui lòng liên hệ với chúng tôi để nhận được trợ giúp",
+
+    "bookingList": "Quản lý đặt phòng",
+    "roomList": "Quản lý phòng",
+    "createListing": "Đăng phòng",
+    "buildingList": "Quản lý toà nhà",
+    "homepage": "Trang chủ"
 }
