@@ -36,5 +36,6 @@
     "priceDetail": "Price detail",
     "originalPrice": "Booking price" ,
     "deposit": "Deposit",
-    "totalPrice": "Total"
+    "totalPrice": "Total",
+    "useCurrencyUSD": "Use USD as currency"
 }

@@ -3,8 +3,8 @@ export interface IPriceST {
 }
 
 export interface IPriceLT {
-  prices: { prices: IPriceLongTerm };
-  prices_usd: { prices: IPriceLongTerm };
+  prices?: { prices: IPriceLongTerm };
+  prices_usd?: { prices: IPriceLongTerm };
   verified_prices: 0 | 1;
 }
 

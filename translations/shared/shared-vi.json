@@ -37,7 +37,6 @@
     "priceDetail": "Giá chi tiết",
     "originalPrice": "Giá đặt phòng" ,
     "deposit": "Đặt cọc",
-    "totalPrice": "Tổng cộng"
-
-
+    "totalPrice": "Tổng cộng",
+    "useCurrencyUSD": "Đăng giá phòng theo USD"
 }

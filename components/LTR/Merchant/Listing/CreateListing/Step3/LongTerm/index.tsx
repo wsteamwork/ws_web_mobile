@@ -4,13 +4,14 @@ import { PriceTermActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3
 import { StepPricesActions } from '@/store/Redux/Reducers/LTR/CreateListing/Step3/stepPrice';
 import { IPriceLongTerm } from '@/types/Requests/LTR/CreateListing/Step3/PriceTerm';
 import { calcPercentage } from '@/utils/mixins';
-import { Button, Divider, Grid, InputAdornment, Theme, Typography } from '@material-ui/core';
+import { Button, Checkbox, Divider, Grid, InputAdornment, Theme, Typography, FormControlLabel } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { FC, Fragment, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch } from 'redux';
+
 
 interface IProps {
   classes?: any;
@@ -65,7 +66,7 @@ const LongTerm: FC<IProps> = (props) => {
   const dispatch = useDispatch<Dispatch<PriceTermActions>>();
   const dispatchStep = useDispatch<Dispatch<StepPricesActions>>();
   const { t } = useTranslation();
-
+  const [useUSD, setUseUSD] = useState<boolean>(false);
   const [price, setPrice] = useState<IPriceLongTerm>({
     term_1_month: 0,
     term_2_month: 0,
@@ -90,14 +91,6 @@ const LongTerm: FC<IProps> = (props) => {
       term_6_month: priceLong ? priceLong.term_6_month : 0,
       term_12_month: priceLong ? priceLong.term_12_month : 0
     });
-
-    // setPriceUSD({
-    //   term_1_month: priceLong ? Math.ceil(priceLong.term_1_month / 22500) : 0,
-    //   term_2_month: priceLong ? Math.ceil(priceLong.term_2_month / 22500) : 0,
-    //   term_3_month: priceLong ? Math.ceil(priceLong.term_3_month / 22500) : 0,
-    //   term_6_month: priceLong ? Math.ceil(priceLong.term_6_month / 22500) : 0,
-    //   term_12_month: priceLong ? Math.ceil(priceLong.term_12_month / 22500) : 0
-    // });
   }, [priceLong]);
 
   useEffect(() => {
@@ -135,6 +128,7 @@ const LongTerm: FC<IProps> = (props) => {
       [name]: calcPercentage(parseInt(event.target.value), price.term_1_month)
     });
   };
+
   const handleChangeUSD = (name: keyof IPriceLongTerm) => (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -171,20 +165,21 @@ const LongTerm: FC<IProps> = (props) => {
 
   useMemo(() => {
     if (
-      !priceLong ||
-      !(
-        price.term_1_month &&
-        price.term_2_month &&
-        price.term_3_month &&
-        price.term_6_month &&
-        price.term_12_month
-      ) || !priceLongUSD || !(
-        priceUSD.term_1_month &&
-        priceUSD.term_2_month &&
-        priceUSD.term_3_month &&
-        priceUSD.term_6_month &&
-        priceUSD.term_12_month
-      )
+      (!useUSD && (
+        !priceLong ||
+        !(
+          price.term_1_month &&
+          price.term_2_month &&
+          price.term_3_month &&
+          price.term_6_month &&
+          price.term_12_month
+        ))) || (useUSD && !priceLongUSD || !(
+          priceUSD.term_1_month &&
+          priceUSD.term_2_month &&
+          priceUSD.term_3_month &&
+          priceUSD.term_6_month &&
+          priceUSD.term_12_month
+        ))
     ) {
       dispatchStep({ type: 'setDisableNext', payload: true });
     } else {
@@ -204,6 +199,18 @@ const LongTerm: FC<IProps> = (props) => {
             <Typography className={classes.bigTitleSubTitle} variant="subtitle2" gutterBottom>
               {t('price:longTermPriceSubtitle')}
             </Typography>
+            <Grid item>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    onChange={() => setUseUSD(!useUSD)}
+                  />
+                }
+                label={t('shared:useCurrencyUSD')}
+              />
+
+            </Grid>
             <Grid container>
               <Typography className={classes.title} variant="h6" gutterBottom>
                 {t('price:longTerm1MonthPrices')}
@@ -213,42 +220,45 @@ const LongTerm: FC<IProps> = (props) => {
                 {t('price:longTerm1MonthPricesSubtitle')}
               </Typography>
               <Grid container spacing={4} alignItems="center">
-                <Grid item>
-                  <TextValidator
-                    validators={['required', 'isNumber', 'minNumber:5000000']}
-                    errorMessages={[
-                      t('price:requirePrice'),
-                      t('price:requirePrice'),
-                      t('price:minLongTermPrice')
-                    ]}
-                    variant="outlined"
-                    value={price.term_1_month}
-                    onChange={handleChange('term_1_month')}
-                    onBlur={handleBlur}
-                    InputProps={{
-                      inputComponent: NumberFormatCustom as any,
-                      startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                    }}
-                  />
-                </Grid>
-                <Grid item>
-                  <TextValidator
-                    validators={['required', 'isNumber', 'minNumber:250']}
-                    errorMessages={[
-                      t('price:requirePrice'),
-                      t('price:requirePrice'),
-                      t('price:minLongTermPrice')
-                    ]}
-                    variant="outlined"
-                    value={priceUSD.term_1_month}
-                    onChange={handleChangeUSD('term_1_month')}
-                    onBlur={handleBlurUSD}
-                    InputProps={{
-                      inputComponent: NumberFormatCustom as any,
-                      startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                    }}
-                  />
-                </Grid>
+                {!useUSD ? (
+                  <Grid item>
+                    <TextValidator
+                      validators={['required', 'isNumber', 'minNumber:5000000']}
+                      errorMessages={[
+                        t('price:requirePrice'),
+                        t('price:requirePrice'),
+                        t('price:minLongTermPrice')
+                      ]}
+                      variant="outlined"
+                      value={price.term_1_month}
+                      onChange={handleChange('term_1_month')}
+                      onBlur={handleBlur}
+                      InputProps={{
+                        inputComponent: NumberFormatCustom as any,
+                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                      }}
+                    />
+                  </Grid>
+                ) : (
+                    <Grid item>
+                      <TextValidator
+                        validators={['required', 'isNumber', 'minNumber:250']}
+                        errorMessages={[
+                          t('price:requirePrice'),
+                          t('price:requirePrice'),
+                          t('price:minLongTermPrice')
+                        ]}
+                        variant="outlined"
+                        value={priceUSD.term_1_month}
+                        onChange={handleChangeUSD('term_1_month')}
+                        onBlur={handleBlurUSD}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom as any,
+                          startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                        }}
+                      />
+                    </Grid>
+                  )}
               </Grid>
             </Grid>
           </div>
@@ -264,42 +274,45 @@ const LongTerm: FC<IProps> = (props) => {
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!price.term_1_month}
-                      variant="outlined"
-                      value={price.term_2_month}
-                      onChange={handleChange('term_2_month')}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                      }}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!priceUSD.term_1_month}
-                      variant="outlined"
-                      value={priceUSD.term_2_month}
-                      onChange={handleChangeUSD('term_2_month')}
-                      onBlur={handleBlurUSD}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                      }}
-                    />
-                  </Grid>
+                  {!useUSD ? (
+                    <Grid item>
+                      <TextValidator
+                        validators={['required', 'isNumber']}
+                        errorMessages={[
+                          t('price:requirePrice'),
+                          t('price:requirePrice')
+                        ]}
+                        disabled={!price.term_1_month}
+                        variant="outlined"
+                        value={price.term_2_month}
+                        onChange={handleChange('term_2_month')}
+                        onBlur={handleBlur}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom as any,
+                          startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                        }}
+                      />
+                    </Grid>
+                  ) : (
+                      <Grid item>
+                        <TextValidator
+                          validators={['required', 'isNumber']}
+                          errorMessages={[
+                            t('price:requirePrice'),
+                            t('price:requirePrice')
+                          ]}
+                          disabled={!priceUSD.term_1_month}
+                          variant="outlined"
+                          value={priceUSD.term_2_month}
+                          onChange={handleChangeUSD('term_2_month')}
+                          onBlur={handleBlurUSD}
+                          InputProps={{
+                            inputComponent: NumberFormatCustom as any,
+                            startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                          }}
+                        />
+                      </Grid>
+                    )}
                   {price.term_2_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
@@ -333,42 +346,44 @@ const LongTerm: FC<IProps> = (props) => {
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!price.term_1_month}
-                      variant="outlined"
-                      value={price.term_3_month}
-                      onChange={handleChange('term_3_month')}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                      }}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!priceUSD.term_1_month}
-                      variant="outlined"
-                      value={priceUSD.term_3_month}
-                      onChange={handleChangeUSD('term_3_month')}
-                      onBlur={handleBlurUSD}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                      }}
-                    />
-                  </Grid>
+                  {!useUSD ? (
+                    <Grid item>
+                      <TextValidator
+                        validators={['required', 'isNumber']}
+                        errorMessages={[
+                          t('price:requirePrice'),
+                          t('price:requirePrice')
+                        ]}
+                        disabled={!price.term_1_month}
+                        variant="outlined"
+                        value={price.term_3_month}
+                        onChange={handleChange('term_3_month')}
+                        onBlur={handleBlur}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom as any,
+                          startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                        }}
+                      />
+                    </Grid>) : (
+                      <Grid item>
+                        <TextValidator
+                          validators={['required', 'isNumber']}
+                          errorMessages={[
+                            t('price:requirePrice'),
+                            t('price:requirePrice')
+                          ]}
+                          disabled={!priceUSD.term_1_month}
+                          variant="outlined"
+                          value={priceUSD.term_3_month}
+                          onChange={handleChangeUSD('term_3_month')}
+                          onBlur={handleBlurUSD}
+                          InputProps={{
+                            inputComponent: NumberFormatCustom as any,
+                            startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                          }}
+                        />
+                      </Grid>
+                    )}
                   {price.term_3_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
@@ -403,42 +418,45 @@ const LongTerm: FC<IProps> = (props) => {
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!price.term_1_month}
-                      variant="outlined"
-                      value={price.term_6_month}
-                      onChange={handleChange('term_6_month')}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                      }}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!priceUSD.term_1_month}
-                      variant="outlined"
-                      value={priceUSD.term_6_month}
-                      onChange={handleChangeUSD('term_6_month')}
-                      onBlur={handleBlurUSD}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                      }}
-                    />
-                  </Grid>
+                  {!useUSD ? (
+                    <Grid item>
+                      <TextValidator
+                        validators={['required', 'isNumber']}
+                        errorMessages={[
+                          t('price:requirePrice'),
+                          t('price:requirePrice')
+                        ]}
+                        disabled={!price.term_1_month}
+                        variant="outlined"
+                        value={price.term_6_month}
+                        onChange={handleChange('term_6_month')}
+                        onBlur={handleBlur}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom as any,
+                          startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                        }}
+                      />
+                    </Grid>
+                  ) : (
+                      <Grid item>
+                        <TextValidator
+                          validators={['required', 'isNumber']}
+                          errorMessages={[
+                            t('price:requirePrice'),
+                            t('price:requirePrice')
+                          ]}
+                          disabled={!priceUSD.term_1_month}
+                          variant="outlined"
+                          value={priceUSD.term_6_month}
+                          onChange={handleChangeUSD('term_6_month')}
+                          onBlur={handleBlurUSD}
+                          InputProps={{
+                            inputComponent: NumberFormatCustom as any,
+                            startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                          }}
+                        />
+                      </Grid>
+                    )}
                   {price.term_6_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
@@ -472,42 +490,45 @@ const LongTerm: FC<IProps> = (props) => {
                 </Typography>
 
                 <Grid container spacing={4} alignItems="center">
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!price.term_1_month}
-                      variant="outlined"
-                      value={price.term_12_month}
-                      onChange={handleChange('term_12_month')}
-                      onBlur={handleBlur}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> đ </InputAdornment>
-                      }}
-                    />
-                  </Grid>
-                  <Grid item>
-                    <TextValidator
-                      validators={['required', 'isNumber']}
-                      errorMessages={[
-                        t('price:requirePrice'),
-                        t('price:requirePrice')
-                      ]}
-                      disabled={!priceUSD.term_1_month}
-                      variant="outlined"
-                      value={priceUSD.term_12_month}
-                      onChange={handleChangeUSD('term_12_month')}
-                      onBlur={handleBlurUSD}
-                      InputProps={{
-                        inputComponent: NumberFormatCustom as any,
-                        startAdornment: <InputAdornment position="start"> USD </InputAdornment>
-                      }}
-                    />
-                  </Grid>
+                  {!useUSD ? (
+                    <Grid item>
+                      <TextValidator
+                        validators={['required', 'isNumber']}
+                        errorMessages={[
+                          t('price:requirePrice'),
+                          t('price:requirePrice')
+                        ]}
+                        disabled={!price.term_1_month}
+                        variant="outlined"
+                        value={price.term_12_month}
+                        onChange={handleChange('term_12_month')}
+                        onBlur={handleBlur}
+                        InputProps={{
+                          inputComponent: NumberFormatCustom as any,
+                          startAdornment: <InputAdornment position="start"> đ </InputAdornment>
+                        }}
+                      />
+                    </Grid>
+                  ) : (
+                      <Grid item>
+                        <TextValidator
+                          validators={['required', 'isNumber']}
+                          errorMessages={[
+                            t('price:requirePrice'),
+                            t('price:requirePrice')
+                          ]}
+                          disabled={!priceUSD.term_1_month}
+                          variant="outlined"
+                          value={priceUSD.term_12_month}
+                          onChange={handleChangeUSD('term_12_month')}
+                          onBlur={handleBlurUSD}
+                          InputProps={{
+                            inputComponent: NumberFormatCustom as any,
+                            startAdornment: <InputAdornment position="start"> USD </InputAdornment>
+                          }}
+                        />
+                      </Grid>
+                    )}
                   {price.term_12_month ? (
                     <Grid item xs>
                       <Typography className={classes.txtPercent}>
