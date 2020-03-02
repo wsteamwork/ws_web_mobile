@@ -271,7 +271,7 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
             )}
           </Grid> */}
         </Grid>
-      </MenuItem >
+      </MenuItem>
     );
   };
 
@@ -287,7 +287,7 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
   return (
     <Autosuggest
       {...autosuggestProps}
-      // alwaysRenderSuggestions={true}
+      alwaysRenderSuggestions={true}
       inputProps={{
         id: 'search-autosuggest-simple',
         value: searchText,

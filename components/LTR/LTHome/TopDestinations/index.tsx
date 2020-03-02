@@ -22,7 +22,7 @@ const TopDestination: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const locationRoom = (city: any) => {
-    updateRouter(`${leaseTypeGlobal} ? '/long-term-rooms' : '/rooms'`, true, 'city_id', city.city_id);
+    updateRouter(`${leaseTypeGlobal ? '/long-term-rooms' : '/rooms'}`, true, 'city_id', city.city_id);
     dispatch({
       type: 'SET_SEARCH_TEXT',
       searchText: city.name_city
