@@ -22,11 +22,12 @@ const TopDestination: FC<IProps> = (props) => {
   const { t } = useTranslation();
 
   const locationRoom = (city: any) => {
-    updateRouter(`${leaseTypeGlobal ? '/long-term-rooms' : '/rooms'}`, true, 'city_id', city.city_id);
+    // console.log(city);
     dispatch({
       type: 'SET_SEARCH_TEXT',
       searchText: city.name_city
     });
+    updateRouter(`${leaseTypeGlobal ? '/long-term-rooms' : '/rooms'}`, true, 'city_id', city.city_id);
   };
 
   const renderDestinations = (city: NumberRoomCity) => (
@@ -35,7 +36,7 @@ const TopDestination: FC<IProps> = (props) => {
         title={city.name_city}
         imgSrc={city.image}
         recommendedPrice={formatPrice(parseInt(city.average_price))}
-        onClickCard={() => locationRoom(city.city_id)}
+        onClickCard={() => locationRoom(city)}
       />
     </div>
   );

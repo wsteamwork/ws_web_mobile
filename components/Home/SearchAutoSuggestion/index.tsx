@@ -140,7 +140,11 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
         dataChange.push(item);
       });
     });
+    // if (dataChange) {
     setData(dataChange);
+    // } else {
+    // setData([])
+    // }
   };
 
   const onChangeInput = (e: ChangeEvent<HTMLInputElement>, { newValue }: { newValue: any }) => {
@@ -263,13 +267,6 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
               }
             </div>
           </Grid>
-          {/* <Grid item xs={5} md={5} className={classes.right}>
-            {suggestion.number_room !== 0 && suggestion.number_room! && (
-              <p>
-                {suggestion.number_room} {t('home:SearchAutocomplete:accommodation')}
-              </p>
-            )}
-          </Grid> */}
         </Grid>
       </MenuItem>
     );
@@ -284,6 +281,7 @@ const SearchAutoSuggestion: FC<IProps> = (props: IProps) => {
     getSuggestionValue,
     renderSuggestion
   };
+
   return (
     <Autosuggest
       {...autosuggestProps}
