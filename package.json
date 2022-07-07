@@ -47,7 +47,7 @@
     "lodash": "^4.17.15",
     "lodash.isequal": "^4.5.0",
     "mauerwerk": "^2.0.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "moment-range": "^4.0.2",
     "next": "^9.0.2",
     "next-compose-plugins": "^2.2.0",
