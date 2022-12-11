@@ -37,7 +37,7 @@
     "dotenv": "^8.0.0",
     "dotenv-webpack": "^1.7.0",
     "es6-promise": "^4.2.8",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-useragent": "^1.0.13",
     "formik": "^2.0.3",
     "google-map-react": "^1.1.4",
